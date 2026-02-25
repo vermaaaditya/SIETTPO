@@ -34,7 +34,8 @@ export function Navbar() {
 
           {/* Center text */}
           <div className="hidden flex-1 px-6 text-center md:block">
-            <p className="text-base font-medium leading-tight text-muted-foreground lg:text-lg">
+            <p className="text-base font-medium leading-tight text-muted-foreground lg:text-lg"
+             style={{ fontFamily: 'var(--font-tiro)', fontWeight: '400' }}>
               {'राज्य अभियांत्रिकी एवं प्रौद्योगिकी संस्थान, पंचकुला'}
             </p>
             <h1 className="font-serif text-xl font-bold leading-tight tracking-tight text-foreground lg:text-2xl">
