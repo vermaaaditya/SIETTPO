@@ -3,17 +3,12 @@ import { motion } from 'framer-motion'
 import Image from 'next/image'
 
 const galleryItems = [
-  { src: '/images/gallery/EDwise9.jpeg',  label: 'EDwise Guest Lecture',       span: 'sm:col-span-2 sm:row-span-2' },
-  { src: '/images/gallery/EDwise4.jpeg',  label: 'Speaker Presentation',       span: '' },
-  { src: '/images/gallery/EDwise8.jpeg',  label: 'EDwise Session',             span: '' },
-  { src: '/images/gallery/EDwise1.jpeg',  label: 'Students Attending',         span: '' },
-  { src: '/images/gallery/EDwise2.jpeg',  label: 'Students at Conference Hall', span: '' },
-  { src: '/images/gallery/EDwise11.jpeg', label: 'Attentive Audience',         span: 'sm:col-span-2' },
-  { src: '/images/gallery/EDwise5.jpeg',  label: 'Faculty & Speaker',          span: '' },
-  { src: '/images/gallery/EDwise6.jpeg',  label: 'Faculty with Guests',        span: '' },
-  { src: '/images/gallery/EDwise10.jpeg', label: 'Faculty & EDwise Team',      span: '' },
-  { src: '/images/gallery/EDwise3.jpeg',  label: 'Interactive Session',        span: '' },
-  { src: '/images/gallery/EDwise7.jpeg',  label: 'Student Q&A',                span: '' },
+  { src: '/images/gallery/EDwise9.jpeg',  label: 'EDwise Guest Lecture — Full House',  span: 'sm:col-span-2 sm:row-span-2' },
+  { src: '/images/gallery/EDwise4.jpeg',  label: 'Speaker Presentation',               span: '' },
+  { src: '/images/gallery/EDwise8.jpeg',  label: 'EDwise Session',                     span: '' },
+  { src: '/images/gallery/EDwise11.jpeg', label: 'Students Attending',                 span: '' },
+  { src: '/images/gallery/EDwise3.jpeg',  label: 'Interactive Round Table Session',    span: '' },
+  { src: '/images/gallery/EDwise5.jpeg',  label: 'Faculty with EDwise Team',           span: 'sm:col-span-2' },
 ]
 
 export function GallerySection() {
