@@ -1,16 +1,19 @@
 'use client'
 import { motion } from 'framer-motion'
-import { ImageIcon } from 'lucide-react'
+import Image from 'next/image'
 
 const galleryItems = [
-  { label: 'Placement Drive', size: '600 x 400', span: 'sm:col-span-2 sm:row-span-2' },
-  { label: 'Placement Drive 2025', size: '300 x 300', span: '' },
-  { label: 'Tech Fest', size: '300 x 300', span: '' },
-  { label: 'Workshop Session', size: '300 x 200', span: '' },
-  { label: 'Annual Day', size: '300 x 200', span: '' },
-  { label: 'Sports Meet', size: '300 x 200', span: 'sm:col-span-2' },
-  { label: 'Guest Lecture', size: '300 x 300', span: '' },
-  { label: 'Student Council', size: '300 x 300', span: '' },
+  { src: '/images/gallery/EDwise9.jpeg',  label: 'EDwise Guest Lecture',       span: 'sm:col-span-2 sm:row-span-2' },
+  { src: '/images/gallery/EDwise4.jpeg',  label: 'Speaker Presentation',       span: '' },
+  { src: '/images/gallery/EDwise8.jpeg',  label: 'EDwise Session',             span: '' },
+  { src: '/images/gallery/EDwise1.jpeg',  label: 'Students Attending',         span: '' },
+  { src: '/images/gallery/EDwise2.jpeg',  label: 'Students at Conference Hall', span: '' },
+  { src: '/images/gallery/EDwise11.jpeg', label: 'Attentive Audience',         span: 'sm:col-span-2' },
+  { src: '/images/gallery/EDwise5.jpeg',  label: 'Faculty & Speaker',          span: '' },
+  { src: '/images/gallery/EDwise6.jpeg',  label: 'Faculty with Guests',        span: '' },
+  { src: '/images/gallery/EDwise10.jpeg', label: 'Faculty & EDwise Team',      span: '' },
+  { src: '/images/gallery/EDwise3.jpeg',  label: 'Interactive Session',        span: '' },
+  { src: '/images/gallery/EDwise7.jpeg',  label: 'Student Q&A',                span: '' },
 ]
 
 export function GallerySection() {
@@ -34,23 +37,27 @@ export function GallerySection() {
             A glimpse into the events, drives, and activities at SIET Panchkula.
           </p>
         </motion.div>
+
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4">
           {galleryItems.map((item, i) => (
             <motion.div
-              key={item.label}
-              className={`group relative flex items-center justify-center overflow-hidden rounded-xl border border-border bg-muted/40 transition-all duration-300 hover:border-primary/20 hover:shadow-md ${item.span}`}
-              style={{ minHeight: item.span.includes('row-span-2') ? 'auto' : '180px' }}
+              key={item.src}
+              className={`group relative overflow-hidden rounded-xl border border-border bg-muted/40 transition-all duration-300 hover:border-primary/20 hover:shadow-md ${item.span}`}
+              style={{ minHeight: item.span.includes('row-span-2') ? '360px' : '180px' }}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.06 }}
             >
-              <div className={`flex w-full flex-col items-center justify-center gap-2 py-12 text-muted-foreground/30 ${item.span.includes('row-span-2') ? 'py-24' : ''}`}>
-                <ImageIcon className="h-10 w-10" strokeWidth={1} />
-                <span className="text-xs font-medium">{item.size}</span>
-              </div>
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-foreground/60 to-transparent p-3 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                <p className="text-xs font-medium text-background">{item.label}</p>
+              <Image
+                src={item.src}
+                alt={item.label}
+                fill
+                className="object-cover transition-transform duration-500 group-hover:scale-105"
+                sizes="(max-width: 640px) 50vw, 25vw"
+              />
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent p-3 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                <p className="text-xs font-medium text-white">{item.label}</p>
               </div>
             </motion.div>
           ))}
