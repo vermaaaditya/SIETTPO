@@ -41,7 +41,7 @@ export function HeroSection() {
         >
           <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-border shadow-lg">
             <Image
-              src="/images/siet1(1).jpg"
+              src="/images/siet-campus.jpg"
               alt="SIET Panchkula Campus Building"
               fill
               className="object-cover"
