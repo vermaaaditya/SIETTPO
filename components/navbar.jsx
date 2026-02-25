@@ -38,7 +38,7 @@ export function Navbar() {
              style={{ fontFamily: 'var(--font-tiro)', fontWeight: '400' }}>
               {'राज्य अभियांत्रिकी एवं प्रौद्योगिकी संस्थान, पंचकुला'}
             </p>
-            <h1 className="font-serif text-xl font-bold leading-tight tracking-tight text-foreground lg:text-2xl">
+            <h1 className="text-xl font-extrabold leading-tight tracking-tight text-foreground lg:text-2xl"     style={{ fontFamily: 'var(--font-poppins)', fontWeight: '800' }}>
               State Institute of Engineering & Technology, Panchkula
             </h1>
             <p className="mt-0.5 text-xs text-muted-foreground lg:text-sm">
