@@ -1,5 +1,5 @@
 'use client'
-import { ImageIcon } from 'lucide-react'
+import Image from 'next/image'
 import { GradientButton } from '@/components/ui/gradient-button'
 import { DotScreenShader } from '@/components/ui/dot-shader-background'
 import { motion } from 'framer-motion'
@@ -32,18 +32,22 @@ export function HeroSection() {
             <GradientButton variant="variant">Curriculum</GradientButton>
           </div>
         </motion.div>
+
         <motion.div
           className="flex-1"
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.7, delay: 0.2, ease: 'easeOut' }}
         >
-          <div className="relative flex aspect-[4/3] items-center justify-center overflow-hidden rounded-2xl border border-border bg-muted/50 shadow-lg">
-            <div className="flex flex-col items-center gap-3 text-muted-foreground/40">
-              <ImageIcon className="h-16 w-16" strokeWidth={1} />
-              <span className="text-sm font-medium">Campus Hero Image</span>
-              <span className="text-xs">640 x 440</span>
-            </div>
+          <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-border shadow-lg">
+            <Image
+              src="/images/siet1(1).jpg"
+              alt="SIET Panchkula Campus Building"
+              fill
+              className="object-cover"
+              priority
+              sizes="(max-width: 768px) 100vw, 50vw"
+            />
             <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-primary/80 to-transparent p-6">
               <p className="text-sm font-medium text-primary-foreground/90">SIET Panchkula - Shaping Next-Gen Engineers</p>
             </div>
