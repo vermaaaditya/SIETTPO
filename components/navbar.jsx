@@ -19,26 +19,32 @@ export function Navbar() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-xl">
       {/* Top banner */}
-      <div className="border-b border-border/30 bg-muted/50">
-        <div className="mx-auto flex items-center justify-between px-6 py-3 lg:px-10">
+      <div className="border-b border-border/30 bg-white">
+        <div className="mx-auto flex items-center justify-between px-6 py-2 lg:px-10">
+
           {/* SIET Logo */}
           <div className="flex shrink-0 items-center">
             <Image
               src="/images/siet-logo.png"
               alt="SIET Panchkula Logo"
-              width={80}
-              height={80}
-              className="h-16 w-auto object-contain lg:h-20"
+              width={250}
+              height={250}
+              className="h-20 w-auto object-contain lg:h-24"
             />
           </div>
 
           {/* Center text */}
           <div className="hidden flex-1 px-6 text-center md:block">
-            <p className="text-base font-medium leading-tight text-muted-foreground lg:text-lg"
-             style={{ fontFamily: 'var(--font-tiro)', fontWeight: '400' }}>
+            <p
+              className="text-lg font-bold leading-tight text-foreground lg:text-xl"
+              style={{ fontFamily: 'var(--font-tiro)' }}
+            >
               {'राज्य अभियांत्रिकी एवं प्रौद्योगिकी संस्थान, पंचकुला'}
             </p>
-            <h1 className="text-xl font-extrabold leading-tight tracking-tight text-foreground lg:text-2xl"     style={{ fontFamily: 'var(--font-poppins)', fontWeight: '800' }}>
+            <h1
+              className="text-xl font-extrabold leading-tight tracking-tight text-foreground lg:text-2xl"
+              style={{ fontFamily: 'var(--font-poppins)', fontWeight: '800' }}
+            >
               State Institute of Engineering & Technology, Panchkula
             </h1>
             <p className="mt-0.5 text-xs text-muted-foreground lg:text-sm">
@@ -46,9 +52,16 @@ export function Navbar() {
             </p>
           </div>
 
-          {/* Haryana emblem placeholder */}
-          <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full border border-border bg-muted lg:h-20 lg:w-20">
-            <span className="text-xs font-bold text-muted-foreground lg:text-sm">HRY</span>
+          {/* Haryana Emblem */}
+          <div className="flex shrink-0 items-center">
+            <Image
+              src="/images/haryana-sarkar.png"
+              alt="Haryana Government Emblem"
+              width={236}
+              height={300}
+              className="h-20 w-auto object-contain lg:h-24"
+              style={{ maxWidth: '75px' }}
+            />
           </div>
         </div>
       </div>
