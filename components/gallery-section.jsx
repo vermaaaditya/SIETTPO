@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import Image from 'next/image'
 
 const galleryItems = [
-  { src: '/images/gallery/EDwise9.jpeg',  label: 'EDwise Guest Lecture — Full House',  span: 'sm:col-span-2 sm:row-span-2' },
+  { src: '/images/gallery/EDwise7.jpeg',  label: 'EDwise Guest Lecture — Full House',  span: 'sm:col-span-2 sm:row-span-2' },
   { src: '/images/gallery/EDwise4.jpeg',  label: 'Speaker Presentation',               span: '' },
   { src: '/images/gallery/EDwise8.jpeg',  label: 'EDwise Session',                     span: '' },
   { src: '/images/gallery/EDwise11.jpeg', label: 'Students Attending',                 span: '' },
