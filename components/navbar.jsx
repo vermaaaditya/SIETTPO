@@ -20,7 +20,7 @@ export function Navbar() {
     <header className="fixed top-0 left-0 right-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-xl">
       {/* Top banner */}
       <div className="border-b border-border/30 bg-white">
-        <div className="mx-auto flex items-center justify-between px-6 py-2 lg:px-10">
+        <div className="mx-auto flex items-center justify-between px-3 py-2 sm:px-6 lg:px-10">
 
           {/* SIET Logo */}
           <div className="flex shrink-0 items-center">
@@ -29,25 +29,25 @@ export function Navbar() {
               alt="SIET Panchkula Logo"
               width={250}
               height={250}
-              className="h-20 w-auto object-contain lg:h-24"
+              className="h-12 w-auto object-contain sm:h-16 lg:h-24"
             />
           </div>
 
-          {/* Center text */}
-          <div className="hidden flex-1 px-6 text-center md:block">
+          {/* Center text — visible on ALL screen sizes */}
+          <div className="flex flex-1 flex-col px-2 text-center sm:px-6">
             <p
-              className="text-lg font-bold leading-tight text-foreground lg:text-xl"
+              className="text-[10px] font-bold leading-tight text-foreground sm:text-base lg:text-xl"
               style={{ fontFamily: 'var(--font-tiro)' }}
             >
               {'राज्य अभियांत्रिकी एवं प्रौद्योगिकी संस्थान, पंचकुला'}
             </p>
             <h1
-              className="text-xl font-extrabold leading-tight tracking-tight text-foreground lg:text-2xl"
+              className="text-[10px] font-extrabold leading-tight tracking-tight text-foreground sm:text-lg lg:text-2xl"
               style={{ fontFamily: 'var(--font-poppins)', fontWeight: '800' }}
             >
               State Institute of Engineering & Technology, Panchkula
             </h1>
-            <p className="mt-0.5 text-xs text-muted-foreground lg:text-sm">
+            <p className="mt-0.5 hidden text-xs text-muted-foreground sm:block lg:text-sm">
               Approved by AICTE, New Delhi and Affiliated to Kurukshetra University, Kurukshetra
             </p>
           </div>
@@ -59,7 +59,7 @@ export function Navbar() {
               alt="Haryana Government Emblem"
               width={236}
               height={300}
-              className="h-20 w-auto object-contain lg:h-24"
+              className="h-12 w-auto object-contain sm:h-16 lg:h-24"
               style={{ maxWidth: '75px' }}
             />
           </div>
@@ -101,11 +101,6 @@ export function Navbar() {
       {mobileOpen && (
         <div className="border-t border-border bg-background/95 backdrop-blur-xl md:hidden">
           <div className="flex flex-col gap-4 px-6 py-4">
-            {/* Mobile college name */}
-            <div className="border-b border-border pb-3">
-              <p className="text-sm font-semibold text-foreground">State Institute of Engineering & Technology</p>
-              <p className="text-xs text-muted-foreground">Panchkula, Haryana</p>
-            </div>
             {navLinks.map((link) => (
               <Link
                 key={link.label}
