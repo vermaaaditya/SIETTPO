@@ -8,7 +8,7 @@ const galleryItems = [
   { src: '/images/gallery/EDwise8.jpeg',  label: 'EDwise Session',                     span: '' },
   { src: '/images/gallery/EDwise11.jpeg', label: 'Students Attending',                 span: '' },
   { src: '/images/gallery/EDwise3.jpeg',  label: 'Interactive Round Table Session',    span: '' },
-  { src: '/images/gallery/EDwise5.jpeg',  label: 'Faculty with EDwise Team',           span: 'sm:col-span-2' },
+  { src: '/images/gallery/EDwise5.jpeg',  label: 'Dr. Divya with EDwise Team',           span: 'sm:col-span-2' },
 ]
 
 export function GallerySection() {
