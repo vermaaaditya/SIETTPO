@@ -34,11 +34,11 @@ export function HeroSection() {
         </motion.div>
 
         <motion.div
-          className="flex-1 order-first lg:order-last"
+          className="w-full lg:flex-1 order-first lg:order-last"
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.7, delay: 0.2, ease: 'easeOut' }}
-        >
+          >
           <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-border shadow-lg">
             <Image
               src="/images/siet-campus.jpg"
