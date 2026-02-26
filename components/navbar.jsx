@@ -69,7 +69,7 @@ export function Navbar() {
       {/* Navigation bar */}
       <nav className="mx-auto flex items-center justify-between px-6 py-2.5 lg:px-10">
         <Link href="#" className="flex items-center gap-2 md:hidden">
-          <span className="text-sm font-bold tracking-tight text-foreground">SIET TPO</span>
+          <span className="text-sm font-bold tracking-tight text-foreground">Training and placement cell</span>
         </Link>
 
         <div className="hidden items-center gap-8 md:flex">
