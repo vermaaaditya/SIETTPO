@@ -50,9 +50,9 @@ export function Footer() {
                 </a>
               </li>
               <li>
-                <a href="tel:+911234567890" className="footer-contact-link">
+                <a href="tel:+919253289394" className="footer-contact-link">
                   <Phone className="icon" />
-                  +91 123 456 7890
+                  +91 92532 89394 (Divya Singla)
                 </a>
               </li>
             </ul>

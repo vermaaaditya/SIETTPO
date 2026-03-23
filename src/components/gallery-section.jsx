@@ -24,7 +24,7 @@ export function GallerySection() {
             Highlights
           </p>
           <h2 className="gallery-title">
-            TPO Events
+            Events
           </h2>
           <p className="gallery-description">
             A glimpse into the events, drives, and activities at SIET Panchkula.
