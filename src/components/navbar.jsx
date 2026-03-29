@@ -106,7 +106,7 @@ export function Navbar() {
           ))}
         </div>
         <div className="navbar-buttons">
-          <GradientButton className="px-5 py-2.5 text-sm" onClick={() => scrollTo('contact')}>For Recruiters</GradientButton>
+          <GradientButton className="px-5 py-2.5 text-sm" onClick={() => scrollTo('recruit-cta')}>For Recruiters</GradientButton>
           <GradientButton variant="variant" className="px-5 py-2.5 text-sm" onClick={() => navigate('/login')}>Student Login</GradientButton>
         </div>
         <button
@@ -132,7 +132,7 @@ export function Navbar() {
             </a>
           ))}
           <div className="navbar-mobile-menu-actions">
-            <GradientButton className="w-full" onClick={() => { scrollTo('contact'); setMobileOpen(false) }}>For Recruiters</GradientButton>
+            <GradientButton className="w-full" onClick={() => { scrollTo('recruit-cta'); setMobileOpen(false) }}>For Recruiters</GradientButton>
             <GradientButton variant="variant" className="w-full" onClick={() => { navigate('/login'); setMobileOpen(false) }}>Student Login</GradientButton>
           </div>
         </div>

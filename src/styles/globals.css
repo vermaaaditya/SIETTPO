@@ -1216,7 +1216,8 @@ input:focus, textarea:focus, select:focus { outline: none; box-shadow: 0 0 0 2px
 }
 @media (min-width:768px) { .cta-title { font-size:2.25rem; } }
 .cta-description { margin-top:1rem; font-size:1.125rem; line-height:1.75rem; color:rgba(245,240,232,0.7); }
-.cta-button-wrapper { margin-top:2rem; display:flex; justify-content:center; }
+.cta-button-wrapper { margin-top:2rem; display:flex; justify-content:center; gap:1rem; flex-wrap:wrap; }
+.cta-link { text-decoration:none; }
 
 /* ═══════════════════════════════════════
    FOOTER — Dark navy with gold accents

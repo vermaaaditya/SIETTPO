@@ -8,6 +8,7 @@ import { BatchSection } from './components/batch-section'
 import { TrainingPipelineSection } from './components/training-pipeline-section'
 import { GuidelinesSection } from './components/guidelines-section'
 import { GallerySection } from './components/gallery-section'
+import { CtaSection } from './components/cta-section'
 import { TeamSection } from './components/team-section'
 import { Footer } from './components/footer'
 import StudentLogin from './pages/StudentLogin'
@@ -24,6 +25,7 @@ function Home() {
       <TrainingPipelineSection />
       <GuidelinesSection />
       <GallerySection />
+      <CtaSection />
       <TeamSection />
       <Footer />
     </main>
