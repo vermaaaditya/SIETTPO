@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
 import { GradientButton } from './ui/gradient-button'
 
@@ -19,6 +20,7 @@ function scrollTo(id) {
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const navigate = useNavigate()
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 10)
@@ -105,7 +107,7 @@ export function Navbar() {
         </div>
         <div className="navbar-buttons">
           <GradientButton className="px-5 py-2.5 text-sm" onClick={() => scrollTo('contact')}>For Recruiters</GradientButton>
-          <GradientButton variant="variant" className="px-5 py-2.5 text-sm" onClick={() => scrollTo('contact')}>Student Login</GradientButton>
+          <GradientButton variant="variant" className="px-5 py-2.5 text-sm" onClick={() => navigate('/login')}>Student Login</GradientButton>
         </div>
         <button
           className="navbar-mobile-toggle"
@@ -131,7 +133,7 @@ export function Navbar() {
           ))}
           <div className="navbar-mobile-menu-actions">
             <GradientButton className="w-full" onClick={() => { scrollTo('contact'); setMobileOpen(false) }}>For Recruiters</GradientButton>
-            <GradientButton variant="variant" className="w-full" onClick={() => { scrollTo('contact'); setMobileOpen(false) }}>Student Login</GradientButton>
+            <GradientButton variant="variant" className="w-full" onClick={() => { navigate('/login'); setMobileOpen(false) }}>Student Login</GradientButton>
           </div>
         </div>
       )}

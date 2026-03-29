@@ -1,3 +1,4 @@
+import { Routes, Route } from 'react-router-dom'
 import { Navbar } from './components/navbar'
 import { HeroSection } from './components/hero-section'
 import { SkillsMarquee } from './components/skills-marquee'
@@ -9,8 +10,9 @@ import { GuidelinesSection } from './components/guidelines-section'
 import { GallerySection } from './components/gallery-section'
 import { TeamSection } from './components/team-section'
 import { Footer } from './components/footer'
+import StudentLogin from './pages/StudentLogin'
 
-export default function App() {
+function Home() {
   return (
     <main>
       <Navbar />
@@ -25,5 +27,14 @@ export default function App() {
       <TeamSection />
       <Footer />
     </main>
+  )
+}
+
+export default function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/login" element={<StudentLogin />} />
+    </Routes>
   )
 }
