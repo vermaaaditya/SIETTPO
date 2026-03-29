@@ -1,4 +1,4 @@
-import { Mail, Phone, Linkedin, Twitter } from 'lucide-react'
+import { Mail, Phone } from 'lucide-react'
 
 const quickLinks = [
   { label: 'Home', href: '#' },
@@ -31,7 +31,7 @@ export function Footer() {
             <ul className="footer-links">
               {quickLinks.map((link) => (
                 <li key={link.label}>
-                  <a href={link.href} className="footer-links">
+                  <a href={link.href}>
                     {link.label}
                   </a>
                 </li>
@@ -56,19 +56,11 @@ export function Footer() {
                 </a>
               </li>
             </ul>
-            <div className="footer-social">
-              <a href="#" className="footer-social-link" aria-label="LinkedIn">
-                <Linkedin className="icon" />
-              </a>
-              <a href="#" className="footer-social-link" aria-label="Twitter">
-                <Twitter className="icon" />
-              </a>
-            </div>
           </div>
         </div>
         <div className="footer-separator">
           <p>
-            2026 SIET Panchkula. Training & Placement Office. All rights reserved.
+            &copy; 2026 SIET Panchkula. Training & Placement Office. All rights reserved.
           </p>
         </div>
       </div>

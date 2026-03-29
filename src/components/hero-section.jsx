@@ -78,8 +78,8 @@ export function HeroSection() {
         </div>
 
         <div className="hero-buttons">
-          <GradientButton>For Recruiters</GradientButton>
-          <GradientButton variant="variant">Download Brochure</GradientButton>
+          <GradientButton onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}>For Recruiters</GradientButton>
+          <GradientButton variant="variant" onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}>Download Brochure</GradientButton>
         </div>
       </div>
     </section>

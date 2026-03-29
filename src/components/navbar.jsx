@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
 import { GradientButton } from './ui/gradient-button'
 
@@ -12,11 +13,23 @@ const navLinks = [
   { label: 'Contact', href: '#contact' },
 ]
 
+function scrollTo(id) {
+  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+}
+
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 10)
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   return (
-    <header className="navbar">
+    <header className={`navbar${scrolled ? ' navbar-scrolled' : ''}`}>
       <div className="navbar-header">
 
                 {/* LEFT LOGO — increased size, added min-width so it doesn't collapse */}
@@ -93,8 +106,8 @@ export function Navbar() {
           ))}
         </div>
         <div className="navbar-buttons">
-          <GradientButton className="px-5 py-2.5 text-sm">For Recruiters</GradientButton>
-          <GradientButton variant="variant" className="px-5 py-2.5 text-sm">Student Login</GradientButton>
+          <GradientButton className="px-5 py-2.5 text-sm" onClick={() => scrollTo('contact')}>For Recruiters</GradientButton>
+          <GradientButton variant="variant" className="px-5 py-2.5 text-sm" onClick={() => navigate('/login')}>Student Login</GradientButton>
         </div>
         <button
           className="navbar-mobile-toggle"
@@ -104,6 +117,26 @@ export function Navbar() {
           {mobileOpen ? <X className="h-6 w-6" style={{color:'var(--gold)'}} /> : <Menu className="h-6 w-6" style={{color:'var(--gold)'}} />}
         </button>
       </nav>
+
+      {/* Mobile dropdown menu */}
+      {mobileOpen && (
+        <div className="navbar-mobile-menu">
+          {navLinks.map((link) => (
+            <a
+              key={link.label}
+              href={link.href}
+              className="navbar-mobile-menu-link"
+              onClick={() => setMobileOpen(false)}
+            >
+              {link.label}
+            </a>
+          ))}
+          <div className="navbar-mobile-menu-actions">
+            <GradientButton className="w-full" onClick={() => { scrollTo('contact'); setMobileOpen(false) }}>For Recruiters</GradientButton>
+            <GradientButton variant="variant" className="w-full" onClick={() => { navigate('/login'); setMobileOpen(false) }}>Student Login</GradientButton>
+          </div>
+        </div>
+      )}
     </header>
   )
 }
