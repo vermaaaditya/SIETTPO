@@ -63,7 +63,7 @@ export function HeroSection() {
 
         <div className="hero-stats">
           <div className="hero-stat">
-            <AnimatedCounter end={1200} suffix="+" />
+            <AnimatedCounter end={300} suffix="+" />
             <span className="hero-stat-label">Total Students</span>
           </div>
           <div className="hero-stat-divider" />
@@ -73,7 +73,7 @@ export function HeroSection() {
           </div>
           <div className="hero-stat-divider" />
           <div className="hero-stat">
-            <AnimatedCounter end={14} suffix="+" />
+            <AnimatedCounter end={5} suffix="+" />
             <span className="hero-stat-label">Years of Excellence</span>
           </div>
         </div>

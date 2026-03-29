@@ -68,7 +68,7 @@ export function BatchSection() {
           transition={{ duration: 0.5 }}
         >
           <span className="section-label">Current Cohort</span>
-          <h2 className="section-title">Meet the Batch of 2025–29</h2>
+          <h2 className="section-title">Institute Demographics and skill sets</h2>
         </motion.div>
 
         <div className="batch-grid-3">

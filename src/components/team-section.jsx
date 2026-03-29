@@ -6,7 +6,7 @@ import { Mail, Phone, Linkedin } from 'lucide-react'
    Dated: 02.02.2026
    ───────────────────────────────────────────── */
 const tpo = {
-  name: 'Prof. Divya Singla',
+  name: 'Dr. Divya Singla',
   role: 'TPC Coordinator',
   email: 'sietpkl@gmail.com',
   phone: '0172-2929871',
