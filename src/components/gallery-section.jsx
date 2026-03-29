@@ -54,9 +54,9 @@ const events = [
     cat: 'Campus',
     cover: '/images/siet-campus.jpg',
     images: [
-      { src: '/images/siet-campus.jpg',      caption: 'SIET Panchkula — Main Academic Block' },
-      { src: '/images/gallery/Campus/campus-1.jpeg', caption: 'SIET Panchkula Campus' },
-      { src: '/images/gallery/Campus/campus-2.jpeg', caption: 'SIET Panchkula Campus Highlights' },
+      { src: '/images/siet-campus.jpg',    caption: 'SIET Panchkula — Main Academic Block' },
+      { src: '/images/campus-hero.jpg',    caption: 'Campus View' },
+      { src: '/images/campus-library.jpg', caption: 'Central Library — Knowledge Hub' },
     ],
   },
 ]
