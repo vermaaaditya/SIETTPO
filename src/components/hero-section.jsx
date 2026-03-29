@@ -54,11 +54,10 @@ export function HeroSection() {
         </span>
         <h2 className="hero-branding">Training &amp; Placement Cell</h2>
         <h1 className="hero-headline">
-          Engineering Futures,<br />
-          <span className="hero-headline-accent">Building Careers.</span>
+          Your Career Starts Here
         </h1>
         <p className="hero-subtext">
-          Connecting SIET Panchkula's finest engineering talent with industry-leading organizations across India and beyond.
+          Dedicated to helping SIET students land the right opportunities through skill development and direct recruiter engagement.
         </p>
 
         <div className="hero-stats">

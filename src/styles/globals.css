@@ -444,7 +444,7 @@ input:focus, textarea:focus, select:focus { outline: none; box-shadow: 0 0 0 2px
 }
 .hero-overlay {
   position:absolute; inset:0;
-  background:linear-gradient(180deg, rgba(0,0,0,0.4) 0%, rgba(10,22,40,0.75) 100%);
+  background: rgba(0, 0, 0, 0.55);
 }
 .hero-grid-texture {
   position:absolute; inset:0;
@@ -465,7 +465,7 @@ input:focus, textarea:focus, select:focus { outline: none; box-shadow: 0 0 0 2px
   font-size:0.8rem; font-weight:700;
   text-transform:uppercase;
   letter-spacing:0.2em;
-  color:var(--gold);
+  color:var(--parchment);
   margin-bottom:0.5rem;
 }
 .hero-branding {
@@ -487,7 +487,7 @@ input:focus, textarea:focus, select:focus { outline: none; box-shadow: 0 0 0 2px
 @media (min-width:768px) { .hero-headline { font-size:3.5rem; } }
 @media (min-width:1024px) { .hero-headline { font-size:4.5rem; } }
 .hero-headline-accent {
-  color:var(--gold);
+  color:var(--parchment);
   font-style:italic;
 }
 .hero-subtext {
@@ -511,7 +511,7 @@ input:focus, textarea:focus, select:focus { outline: none; box-shadow: 0 0 0 2px
 .hero-stat-number {
   font-family:var(--font-headline);
   font-size:2.5rem;
-  color:var(--gold);
+  color:var(--parchment);
 }
 .hero-stat-label {
   font-family:var(--font-body);
