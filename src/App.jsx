@@ -26,7 +26,7 @@ function Home() {
       <BatchSection />
       <TrainingPipelineSection />
       <GuidelinesSection />
-      <InfrastructureSection />
+      {/* <InfrastructureSection /> */}
       <GallerySection />
       <CtaSection />
       <TeamSection />

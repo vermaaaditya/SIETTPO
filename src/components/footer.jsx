@@ -3,7 +3,6 @@ import { Mail, Phone } from 'lucide-react'
 const quickLinks = [
   { label: 'Home', href: '#' },
   { label: 'Academics', href: '#batch' },
-  { label: 'Infrastructure', href: '#infrastructure' },
   { label: 'Gallery', href: '#gallery' },
   { label: 'Contact', href: '#contact' },
 ]
@@ -58,9 +57,20 @@ export function Footer() {
             </ul>
           </div>
         </div>
+        <div className="footer-map-section">
+          <h3 className="footer-heading">Find Us</h3>
+          <iframe
+            className="footer-map"
+            src="https://www.google.com/maps?q=State+Institute+of+Engineering+%26+Technology+Panchkula+Haryana&output=embed"
+            title="SIET Panchkula Location"
+            loading="lazy"
+            allowFullScreen
+            referrerPolicy="no-referrer-when-downgrade"
+          />
+        </div>
         <div className="footer-separator">
           <p>
-            &copy; 2026 SIET Panchkula. Training & Placement Office. All rights reserved.
+            &copy; 2026 SIET Panchkula. Training &amp; Placement Office. All rights reserved.
           </p>
         </div>
       </div>
