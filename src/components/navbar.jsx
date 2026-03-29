@@ -7,8 +7,8 @@ const navLinks = [
   { label: 'About', href: '#messages' },
   { label: 'Why SIET', href: '#why-recruit' },
   { label: 'Batch 2025', href: '#batch' },
-  { label: 'Team', href: '#team' },
   { label: 'Gallery', href: '#gallery' },
+  { label: 'Team', href: '#team' },
   { label: 'Contact', href: '#contact' },
 ]
 
