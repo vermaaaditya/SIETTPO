@@ -61,7 +61,7 @@ export function Footer() {
           <h3 className="footer-heading">Find Us</h3>
           <iframe
             className="footer-map"
-            src="https://www.google.com/maps?q=State+Institute+of+Engineering+%26+Technology+Panchkula+Haryana&output=embed"
+            src="https://maps.google.com/maps?q=MV5J%2B9Q2%2C+Sector+26%2C+Panchkula+Extension%2C+Panchkula%2C+Haryana+134116&z=16&output=embed"
             title="SIET Panchkula Location"
             loading="lazy"
             allowFullScreen
