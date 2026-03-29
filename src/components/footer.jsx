@@ -2,7 +2,7 @@ import { Mail, Phone } from 'lucide-react'
 
 const quickLinks = [
   { label: 'Home', href: '#' },
-  { label: 'Academics', href: '#academics' },
+  { label: 'Academics', href: '#batch' },
   { label: 'Infrastructure', href: '#infrastructure' },
   { label: 'Gallery', href: '#gallery' },
   { label: 'Contact', href: '#contact' },

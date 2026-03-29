@@ -825,7 +825,7 @@ input:focus, textarea:focus, select:focus { outline: none; box-shadow: 0 0 0 2px
   top:1rem; right:1rem;
   font-family:var(--font-headline);
   font-size:2rem;
-  color:rgba(201,146,42,0.12);
+  color:white;
   line-height:1;
 }
 .pipeline-card-icon {
