@@ -49,7 +49,7 @@ export function GuidelinesSection() {
             <p className="guidelines-tab-text">
               {t.bodyText}
             </p>
-            <GradientButton variant="variant" onClick={() => navigate('/tpo-guidelines-pdf')}>
+            <GradientButton variant="secondary" onClick={() => navigate('/tpo-guidelines-pdf')}>
               <FileText className="guidelines-btn-icon" /> {t.guidelinesPdf}
             </GradientButton>
           </div>

@@ -16,18 +16,27 @@ export default function PdfEmbedPage() {
   const location = useLocation()
 
   const config = useMemo(
-    () => pdfConfig[location.pathname] || pdfConfig['/recruitment-process-pdf'],
+    () => pdfConfig[location.pathname],
     [location.pathname],
   )
+
+  if (!config) {
+    return (
+      <main className="pdf-page">
+        <div className="container">
+          <div className="pdf-page-header">
+            <h1 className="pdf-page-title">PDF Not Found</h1>
+          </div>
+        </div>
+      </main>
+    )
+  }
 
   return (
     <main className="pdf-page">
       <div className="container">
         <div className="pdf-page-header">
           <h1 className="pdf-page-title">{config.title}</h1>
-          <p className="pdf-page-subtitle">
-            Replace <code>{config.src}</code> with your final merged PDF file.
-          </p>
         </div>
 
         <div className="pdf-embed-wrapper">
@@ -36,6 +45,7 @@ export default function PdfEmbedPage() {
             title={config.title}
             className="pdf-embed"
             loading="lazy"
+            sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
           />
         </div>
       </div>

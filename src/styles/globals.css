@@ -1310,13 +1310,11 @@ input:focus, textarea:focus, select:focus { outline: none; box-shadow: 0 0 0 2px
 .footer-social-link { color:rgba(245,240,232,0.5); text-decoration:none; transition:color 0.2s; }
 .footer-social-link:hover { color:var(--gold); }
 .footer-social-link .icon { height:1.25rem; width:1.25rem; }
-.footer-map-section { margin-top:2.5rem; margin-left:-1.5rem; margin-right:-1.5rem; }
 .footer-map-section {
+  margin-top:2.5rem;
   display:flex;
   flex-direction:column;
   align-items:center;
-  margin-left:0;
-  margin-right:0;
 }
 .footer-map {
   width:min(360px, 100%);
