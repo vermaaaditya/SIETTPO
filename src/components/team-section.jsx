@@ -9,7 +9,7 @@ import { translations } from '../translations'
    ───────────────────────────────────────────── */
 const tpo = {
   name: 'Dr. Divya Singla',
-  email: 'sietpkl@gmail.com',
+  email: 'tpo@sietpanchkula.ac.in',
   phone: '+91 92532 89394',
 }
 
@@ -88,7 +88,7 @@ export function TeamSection() {
           transition={{ duration: 0.5 }}
         >
           <div className="team-tpo-photo-wrapper">
-            <div className="team-tpo-placeholder">TPC</div>
+            <div className="team-tpo-placeholder">TPO</div>
           </div>
           <div className="team-tpo-info">
             <h3 className="team-tpo-name">{tpo.name}</h3>

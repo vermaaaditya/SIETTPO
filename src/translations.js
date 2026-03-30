@@ -22,19 +22,13 @@ export const translations = {
     },
     message: {
       sectionLabel: 'Leadership',
-      sectionTitle: 'Messages from the Desk',
+      sectionTitle: "From the TPO Head's Desk",
       readMore: 'Read More',
       readLess: 'Read Less',
       members: [
         {
-          name: 'Prof. Anil Kumar',
-          designation: 'Director-Principal, SIET Panchkula',
-          message:
-            'Our institution has continually strived to bridge the gap between academic excellence and industry expectations. The Training and Placement Cell embodies this vision by providing students with rigorous skill development, exposure to cutting-edge technologies, and meaningful interactions with leading recruiters. We take immense pride in our graduates who are making their mark across diverse sectors, and we remain firmly committed to nurturing the engineers of tomorrow with integrity, innovation, and impact.',
-        },
-        {
           name: 'Dr. Divya Singla',
-          designation: 'TPC Coordinator, SIET Panchkula',
+          designation: 'TPO Head, SIET Panchkula',
           message:
             'The Training and Placement Cell at SIET is dedicated to facilitating a seamless transition from campus to the corporate ecosystem. We organize industry guest lectures, mock interview sessions, technical bootcamps, and aptitude workshops throughout the academic year. Our partnerships with leading organizations ensure our students are not only job-ready but also equipped to lead in their respective domains. We invite recruiters to explore the exceptional potential of our student body, shaped by rigorous training and a culture of innovation.',
         },
@@ -127,7 +121,7 @@ export const translations = {
     },
     guidelines: {
       sectionLabel: 'Recruitment Process',
-      sectionTitle: 'TPC Guidelines',
+      sectionTitle: 'TPO Guidelines',
       steps: [
         { label: 'Register', desc: 'Company registers with TPC' },
         { label: 'Shortlist', desc: 'Students screened & shortlisted' },
@@ -137,7 +131,7 @@ export const translations = {
       bodyText:
         'The Training & Placement Cell follows a structured recruitment policy to ensure a smooth and transparent hiring process. Companies are requested to share the Job Description beforehand. Pre-placement talks, online/offline tests, and interviews are facilitated on campus. Our team ensures end-to-end coordination — from scheduling to offer rollout.',
       recruitmentPdf: 'Recruitment Process PDF',
-      guidelinesPdf: 'TPC Guidelines PDF',
+      guidelinesPdf: 'TPO Guidelines PDF',
     },
     infrastructure: {
       headerLabel: 'Campus Facilities',
@@ -199,7 +193,7 @@ export const translations = {
       sectionLabel: 'The People Behind It',
       sectionTitle: 'Training & Placement Committee',
       sectionSubtitle: 'Constituted under Memo No. SIET-PKL/2026/536, dated 02.02.2026',
-      tpoRole: 'TPC Coordinator',
+      tpoRole: 'TPO Head',
       designations: [
         'Student Placement Head',
         'Deputy Placement Head',
@@ -271,19 +265,13 @@ export const translations = {
     },
     message: {
       sectionLabel: 'नेतृत्व',
-      sectionTitle: 'डेस्क से संदेश',
+      sectionTitle: 'TPO प्रमुख के डेस्क से संदेश',
       readMore: 'और पढ़ें',
       readLess: 'कम पढ़ें',
       members: [
         {
-          name: 'प्रो. अनिल कुमार',
-          designation: 'निदेशक-प्राचार्य, SIET पंचकुला',
-          message:
-            'हमारा संस्थान लगातार शैक्षणिक उत्कृष्टता और उद्योग की अपेक्षाओं के बीच की खाई को पाटने का प्रयास करता रहा है। प्रशिक्षण एवं प्लेसमेंट सेल इस दृष्टिकोण को मूर्त रूप देता है — छात्रों को कठोर कौशल विकास, अत्याधुनिक प्रौद्योगिकियों से परिचय और अग्रणी भर्तीकर्ताओं के साथ सार्थक संवाद का अवसर प्रदान करके। हमें गर्व है कि हमारे स्नातक विविध क्षेत्रों में अपनी पहचान बना रहे हैं, और हम ईमानदारी, नवाचार और प्रभाव के साथ कल के इंजीनियरों को तराशने के लिए दृढ़संकल्प हैं।',
-        },
-        {
           name: 'डॉ. दिव्या सिंगला',
-          designation: 'TPC समन्वयक, SIET पंचकुला',
+          designation: 'TPO प्रमुख, SIET पंचकुला',
           message:
             'SIET का प्रशिक्षण एवं प्लेसमेंट सेल कैंपस से कॉर्पोरेट जगत में सहज परिवर्तन सुनिश्चित करने के लिए समर्पित है। हम पूरे शैक्षणिक वर्ष में उद्योग गेस्ट लेक्चर, मॉक इंटरव्यू सत्र, तकनीकी बूटकैंप और अभिक्षमता कार्यशालाएँ आयोजित करते हैं। अग्रणी संगठनों के साथ हमारी साझेदारी यह सुनिश्चित करती है कि हमारे छात्र न केवल नौकरी के लिए तैयार हों, बल्कि अपने-अपने क्षेत्रों में नेतृत्व करने में भी सक्षम हों। हम भर्तीकर्ताओं को आमंत्रित करते हैं कि वे हमारे छात्रों की असाधारण प्रतिभा का अनुभव करें।',
         },
@@ -376,7 +364,7 @@ export const translations = {
     },
     guidelines: {
       sectionLabel: 'भर्ती प्रक्रिया',
-      sectionTitle: 'TPC दिशानिर्देश',
+      sectionTitle: 'TPO दिशानिर्देश',
       steps: [
         { label: 'पंजीकरण', desc: 'कंपनी TPC के साथ पंजीकरण करती है' },
         { label: 'शॉर्टलिस्ट', desc: 'छात्रों की छंटाई और शॉर्टलिस्टिंग' },
@@ -386,7 +374,7 @@ export const translations = {
       bodyText:
         'प्रशिक्षण एवं प्लेसमेंट सेल एक सुचारु और पारदर्शी भर्ती प्रक्रिया सुनिश्चित करने के लिए एक संरचित नीति का पालन करता है। कंपनियों से अनुरोध है कि वे पहले से जॉब डिस्क्रिप्शन साझा करें। प्री-प्लेसमेंट वार्ता, ऑनलाइन/ऑफलाइन परीक्षण और साक्षात्कार परिसर में आयोजित किए जाते हैं। हमारी टीम शेड्यूलिंग से ऑफर रोलआउट तक संपूर्ण समन्वय सुनिश्चित करती है।',
       recruitmentPdf: 'भर्ती प्रक्रिया PDF',
-      guidelinesPdf: 'TPC दिशानिर्देश PDF',
+      guidelinesPdf: 'TPO दिशानिर्देश PDF',
     },
     infrastructure: {
       headerLabel: 'परिसर सुविधाएँ',
@@ -448,7 +436,7 @@ export const translations = {
       sectionLabel: 'इसके पीछे के लोग',
       sectionTitle: 'प्रशिक्षण एवं प्लेसमेंट समिति',
       sectionSubtitle: 'ज्ञापन संख्या SIET-PKL/2026/536, दिनांक 02.02.2026 के अंतर्गत गठित',
-      tpoRole: 'TPC समन्वयक',
+      tpoRole: 'TPO प्रमुख',
       designations: [
         'छात्र प्लेसमेंट प्रमुख',
         'उप प्लेसमेंट प्रमुख',

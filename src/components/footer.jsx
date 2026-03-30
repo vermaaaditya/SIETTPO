@@ -51,7 +51,7 @@ export function Footer() {
               <li>
                 <a href="tel:+919253289394" className="footer-contact-link">
                   <Phone className="icon" />
-                  +91 92532 89394 (Divya Singla)
+                  +91 92532 89394 (Dr. Divya Singla)
                 </a>
               </li>
             </ul>

@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion'
 import { FileText, ClipboardList, UserCheck, Briefcase, CheckCircle } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
 import { GradientButton } from './ui/gradient-button'
+import { AnimatedTabs } from './ui/animated-tabs'
 import { useLanguage } from '../contexts/LanguageContext'
 import { translations } from '../translations'
 
@@ -9,6 +11,52 @@ const stepIcons = [ClipboardList, UserCheck, Briefcase, CheckCircle]
 export function GuidelinesSection() {
   const { lang } = useLanguage()
   const t = translations[lang].guidelines
+  const navigate = useNavigate()
+
+  const tabs = [
+    {
+      id: 'recruitment-process',
+      label: t.recruitmentPdf,
+      content: (
+        <div className="guidelines-tab-content">
+          <img
+            src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=1600&auto=format&fit=crop"
+            alt={t.recruitmentPdf}
+            className="guidelines-tab-image"
+          />
+          <div className="guidelines-tab-copy">
+            <p className="guidelines-tab-text">
+              {t.bodyText}
+            </p>
+            <GradientButton onClick={() => navigate('/recruitment-process-pdf')}>
+              <FileText className="guidelines-btn-icon" /> {t.recruitmentPdf}
+            </GradientButton>
+          </div>
+        </div>
+      ),
+    },
+    {
+      id: 'tpo-guidelines',
+      label: t.guidelinesPdf,
+      content: (
+        <div className="guidelines-tab-content">
+          <img
+            src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1600&auto=format&fit=crop"
+            alt={t.guidelinesPdf}
+            className="guidelines-tab-image"
+          />
+          <div className="guidelines-tab-copy">
+            <p className="guidelines-tab-text">
+              {t.bodyText}
+            </p>
+            <GradientButton variant="variant" onClick={() => navigate('/tpo-guidelines-pdf')}>
+              <FileText className="guidelines-btn-icon" /> {t.guidelinesPdf}
+            </GradientButton>
+          </div>
+        </div>
+      ),
+    },
+  ]
 
   return (
     <section className="guidelines-section">
@@ -55,15 +103,7 @@ export function GuidelinesSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          <p className="guidelines-text">{t.bodyText}</p>
-          <div className="guidelines-buttons">
-            <GradientButton>
-              <FileText className="guidelines-btn-icon" /> {t.recruitmentPdf}
-            </GradientButton>
-            <GradientButton variant="variant">
-              <FileText className="guidelines-btn-icon" /> {t.guidelinesPdf}
-            </GradientButton>
-          </div>
+          <AnimatedTabs tabs={tabs} className="guidelines-animated-tabs" />
         </motion.div>
       </div>
     </section>

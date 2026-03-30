@@ -28,25 +28,16 @@ export function WhyRecruitSection() {
           {t.cards.map((card, i) => {
             const Icon = icons[i]
             return (
-              <motion.div
+              <div
                 key={card.title}
                 className="why-recruit-card"
-                initial={{ opacity: 0, scale: 0.9, y: 30 }}
-                whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ 
-                  type: "spring",
-                  stiffness: 100,
-                  damping: 15,
-                  delay: i * 0.1 
-                }}
               >
                 <div className="why-recruit-card-icon">
                   <Icon />
                 </div>
                 <h3 className="why-recruit-card-title">{card.title}</h3>
                 <p className="why-recruit-card-desc">{card.description}</p>
-              </motion.div>
+              </div>
             )
           })}
         </div>
