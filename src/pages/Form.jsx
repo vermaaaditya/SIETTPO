@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { ArrowLeft } from 'lucide-react'
@@ -9,6 +9,10 @@ import { useLanguage } from '../contexts/LanguageContext'
 export default function Form() {
   const { lang } = useLanguage()
   const [formData, setFormData] = useState({})
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
 
   const handleChange = (e) => {
     setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }))
