@@ -29,8 +29,12 @@ export const translations = {
         {
           name: 'Dr. Divya Singla',
           designation: 'TPO Head, SIET Panchkula',
-          message:
-            'The Training and Placement Cell at SIET is dedicated to facilitating a seamless transition from campus to the corporate ecosystem. We organize industry guest lectures, mock interview sessions, technical bootcamps, and aptitude workshops throughout the academic year. Our partnerships with leading organizations ensure our students are not only job-ready but also equipped to lead in their respective domains. We invite recruiters to explore the exceptional potential of our student body, shaped by rigorous training and a culture of innovation.',
+          message: [
+            'The Training & Placement Office (TPO) is dedicated to facilitating the professional growth and career development of students by providing structured opportunities for internships and final placements. The office serves as a vital interface between the institution and industry, ensuring that students are well-prepared to meet evolving professional demands.',
+            'We strongly encourage students to actively pursue internship opportunities, as they are integral to gaining practical exposure and enhancing employability. Students who secure internships are required to inform the Training & Placement Office for proper documentation and further institutional support.',
+            'The TPO provides comprehensive assistance in areas such as resume development, interview preparation, career guidance, and coordination with reputed organisations for recruitment activities.',
+            'Students are advised to remain proactive, disciplined, and engaged in all placement-related initiatives to maximise their career prospects. We extend our best wishes to all students for a successful and rewarding professional journey.',
+          ],
         },
       ],
     },
@@ -272,8 +276,9 @@ export const translations = {
         {
           name: 'डॉ. दिव्या सिंगला',
           designation: 'TPO प्रमुख, SIET पंचकुला',
-          message:
+          message: [
             'SIET का प्रशिक्षण एवं प्लेसमेंट सेल कैंपस से कॉर्पोरेट जगत में सहज परिवर्तन सुनिश्चित करने के लिए समर्पित है। हम पूरे शैक्षणिक वर्ष में उद्योग गेस्ट लेक्चर, मॉक इंटरव्यू सत्र, तकनीकी बूटकैंप और अभिक्षमता कार्यशालाएँ आयोजित करते हैं। अग्रणी संगठनों के साथ हमारी साझेदारी यह सुनिश्चित करती है कि हमारे छात्र न केवल नौकरी के लिए तैयार हों, बल्कि अपने-अपने क्षेत्रों में नेतृत्व करने में भी सक्षम हों। हम भर्तीकर्ताओं को आमंत्रित करते हैं कि वे हमारे छात्रों की असाधारण प्रतिभा का अनुभव करें।',
+          ],
         },
       ],
     },

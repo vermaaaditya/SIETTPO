@@ -1,37 +1,5 @@
-import { useState } from 'react'
-import { ChevronDown, ChevronUp } from 'lucide-react'
 import { useLanguage } from '../contexts/LanguageContext'
 import { translations } from '../translations'
-
-function MessageCard({ name, designation, photo, message, readMore, readLess }) {
-  const [expanded, setExpanded] = useState(false)
-  const preview = message.slice(0, 220)
-
-  return (
-    <div className="message-card">
-      <div className="message-card-photo-wrapper">
-        <img src={photo} alt={name} className="message-card-photo" />
-      </div>
-      <div className="message-card-body">
-        <h3 className="message-card-name">{name}</h3>
-        <p className="message-card-designation">{designation}</p>
-        <p className="message-card-text">
-          {expanded ? message : `${preview}…`}
-        </p>
-        <button
-          className="message-toggle"
-          onClick={() => setExpanded(!expanded)}
-        >
-          {expanded ? (
-            <>{readLess} <ChevronUp className="message-toggle-icon" /></>
-          ) : (
-            <>{readMore} <ChevronDown className="message-toggle-icon" /></>
-          )}
-        </button>
-      </div>
-    </div>
-  )
-}
 
 export function MessageSection() {
   const { lang } = useLanguage()
@@ -39,25 +7,28 @@ export function MessageSection() {
 
   return (
     <section id="messages" className="message-section">
-      <div className="container">
+      <div className="message-hero-inner">
         <div className="section-header">
           <span className="section-label">{t.sectionLabel}</span>
           <h2 className="section-title">{t.sectionTitle}</h2>
         </div>
 
-        <div className="message-grid">
-          {t.members.map((member) => (
-            <MessageCard
-              key={member.name}
-              name={member.name}
-              designation={member.designation}
-              photo="/placeholder-user.jpg"
-              message={member.message}
-              readMore={t.readMore}
-              readLess={t.readLess}
-            />
-          ))}
-        </div>
+        {t.members.map((member) => (
+          <blockquote key={member.name} className="message-hero-quote">
+            <span className="message-hero-deco" aria-hidden="true">&ldquo;</span>
+            <div className="message-hero-photo-wrapper">
+              <img src="/placeholder-user.jpg" alt={member.name} className="message-hero-photo" />
+            </div>
+            {(Array.isArray(member.message) ? member.message : [member.message]).map((para, i) => (
+              <p key={i} className="message-hero-text">{para}</p>
+            ))}
+            <span className="message-hero-deco message-hero-deco--close" aria-hidden="true">&rdquo;</span>
+            <footer className="message-hero-attribution">
+              <span className="message-hero-name">{member.name}</span>
+              <span className="message-hero-designation">{member.designation}</span>
+            </footer>
+          </blockquote>
+        ))}
       </div>
     </section>
   )
