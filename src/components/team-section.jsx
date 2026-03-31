@@ -88,7 +88,7 @@ export function TeamSection() {
           transition={{ duration: 0.5 }}
         >
           <div className="team-tpo-photo-wrapper">
-            <div className="team-tpo-placeholder">TPC</div>
+            <img src="/images/dr-divya-singla.jpg" alt="Photo of Dr. Divya Singla, TPO Head" className="team-tpo-photo" />
           </div>
           <div className="team-tpo-info">
             <h3 className="team-tpo-name">{tpo.name}</h3>
