@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
 import { GradientButton } from './ui/gradient-button'
 import { useLanguage } from '../contexts/LanguageContext'
 import { translations } from '../translations'
@@ -27,9 +28,9 @@ export function CtaSection() {
           {t.description}
         </p>
         <div className="cta-button-wrapper">
-          <a href="mailto:tpo@sietpanchkula.ac.in" className="cta-link">
+          <Link to="/inquiry-form" className="cta-link">
             <GradientButton>{t.applyToHire}</GradientButton>
-          </a>
+          </Link>
           <GradientButton variant="variant" onClick={() => scrollTo('contact')}>
             {t.contactUs}
           </GradientButton>

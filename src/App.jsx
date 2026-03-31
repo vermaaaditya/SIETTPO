@@ -17,6 +17,7 @@ import StudentLogin from './pages/StudentLogin'
 import PdfViewer from './pages/PdfViewer'
 import PlacementBrochure from './pages/PlacementBrochure'
 import GuidelinesViewer from './pages/GuidelinesViewer'
+import Form from './pages/Form'
 
 function Home() {
   return (
@@ -47,6 +48,7 @@ export default function App() {
       <Route path="/pdf-viewer" element={<PdfViewer />} />
       <Route path="/placement-brochure" element={<PlacementBrochure />} />
       <Route path="/guidelines" element={<GuidelinesViewer />} />
+      <Route path="/inquiry-form" element={<Form />} />
     </Routes>
   )
 }
