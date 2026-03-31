@@ -15,28 +15,28 @@ const AnimatedTabs = ({
 
   return (
     <div className={cn("w-full max-w-lg flex flex-col gap-y-1", className)}>
-      <div className="flex gap-2 flex-wrap bg-[#11111198] bg-opacity-50 backdrop-blur-sm p-1 rounded-xl">
+      <div className="flex gap-2 flex-wrap bg-surface-container-low p-1 rounded-lg border border-border">
         {tabs.map((tab) => (
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
             className={cn(
-              "relative px-3 py-1.5 text-sm font-medium rounded-lg text-white outline-none transition-colors"
+              "relative px-3 py-1.5 text-sm font-medium rounded-lg text-muted-foreground outline-none transition-colors"
             )}
           >
             {activeTab === tab.id && (
               <motion.div
                 layoutId="active-tab"
-                className="absolute inset-0 bg-[#111111d1] bg-opacity-50 shadow-[0_0_20px_rgba(0,0,0,0.2)] backdrop-blur-sm !rounded-lg"
+                className="absolute inset-0 bg-gold shadow-sm !rounded-lg"
                 transition={{ type: "spring", duration: 0.6 }}
               />
             )}
-            <span className="relative z-10">{tab.label}</span>
+            <span className={cn("relative z-10", activeTab === tab.id && "text-ink font-bold")}>{tab.label}</span>
           </button>
         ))}
       </div>
 
-      <div className="p-4 bg-[#11111198] shadow-[0_0_20px_rgba(0,0,0,0.2)] text-white bg-opacity-50 backdrop-blur-sm rounded-xl border min-h-60 h-full">
+      <div className="p-4 bg-surface-container-lowest shadow-sm text-foreground rounded-lg border border-border min-h-60 h-full">
         {tabs.map(
           (tab) =>
             activeTab === tab.id && (

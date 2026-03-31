@@ -3,12 +3,14 @@ import { FileText, ClipboardList, UserCheck, Briefcase, CheckCircle } from 'luci
 import { GradientButton } from './ui/gradient-button'
 import { useLanguage } from '../contexts/LanguageContext'
 import { translations } from '../translations'
+import { useNavigate } from 'react-router-dom'
 
 const stepIcons = [ClipboardList, UserCheck, Briefcase, CheckCircle]
 
 export function GuidelinesSection() {
   const { lang } = useLanguage()
   const t = translations[lang].guidelines
+  const navigate = useNavigate()
 
   return (
     <section className="guidelines-section">
@@ -57,10 +59,10 @@ export function GuidelinesSection() {
         >
           <p className="guidelines-text">{t.bodyText}</p>
           <div className="guidelines-buttons">
-            <GradientButton>
+            <GradientButton onClick={() => navigate('/pdf-viewer?type=brochure')}>
               <FileText className="guidelines-btn-icon" /> {t.recruitmentPdf}
             </GradientButton>
-            <GradientButton variant="variant">
+            <GradientButton variant="variant" onClick={() => navigate('/pdf-viewer?type=guidelines')}>
               <FileText className="guidelines-btn-icon" /> {t.guidelinesPdf}
             </GradientButton>
           </div>

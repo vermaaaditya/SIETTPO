@@ -14,6 +14,7 @@ import { CtaSection } from './components/cta-section'
 import { TeamSection } from './components/team-section'
 import { Footer } from './components/footer'
 import StudentLogin from './pages/StudentLogin'
+import PdfViewer from './pages/PdfViewer'
 
 function Home() {
   return (
@@ -41,6 +42,7 @@ export default function App() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<StudentLogin />} />
+      <Route path="/pdf-viewer" element={<PdfViewer />} />
     </Routes>
   )
 }
