@@ -11,7 +11,11 @@ export default function Form() {
   const [formData, setFormData] = useState({})
 
   useEffect(() => {
-    window.scrollTo(0, 0)
+    const frame = requestAnimationFrame(() => {
+      window.scrollTo(0, 0)
+    })
+
+    return () => cancelAnimationFrame(frame)
   }, [])
 
   const handleChange = (e) => {
