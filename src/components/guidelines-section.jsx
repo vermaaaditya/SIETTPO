@@ -13,7 +13,7 @@ export function GuidelinesSection() {
   const navigate = useNavigate()
 
   return (
-    <section className="guidelines-section">
+    <section id="placement-brochure-section" className="guidelines-section">
       <div className="container">
         <motion.div
           className="section-header"
@@ -62,9 +62,9 @@ export function GuidelinesSection() {
             <GradientButton onClick={() => navigate('/placement-brochure')}>
               <FileText className="guidelines-btn-icon" /> {t.recruitmentPdf}
             </GradientButton>
-            <GradientButton variant="variant" onClick={() => navigate('/guidelines')}>
+            {/* <GradientButton variant="variant" onClick={() => navigate('/guidelines')}>
               <FileText className="guidelines-btn-icon" /> {t.guidelinesPdf}
-            </GradientButton>
+            </GradientButton> */}
           </div>
         </motion.div>
       </div>

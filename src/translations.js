@@ -125,7 +125,7 @@ export const translations = {
     },
     guidelines: {
       sectionLabel: 'Recruitment Process',
-      sectionTitle: 'TPC Guidelines',
+      sectionTitle: 'Placement Brochure',
       steps: [
         { label: 'Register', desc: 'Company registers with TPC' },
         { label: 'Shortlist', desc: 'Students screened & shortlisted' },
@@ -134,7 +134,7 @@ export const translations = {
       ],
       bodyText:
         'The Training & Placement Cell follows a structured recruitment policy to ensure a smooth and transparent hiring process. Companies are requested to share the Job Description beforehand. Pre-placement talks, online/offline tests, and interviews are facilitated on campus. Our team ensures end-to-end coordination — from scheduling to offer rollout.',
-      recruitmentPdf: 'Recruitment Process PDF',
+      recruitmentPdf: 'Placement Brochure',
       guidelinesPdf: 'TPC Guidelines PDF',
     },
     infrastructure: {
@@ -369,7 +369,7 @@ export const translations = {
     },
     guidelines: {
       sectionLabel: 'भर्ती प्रक्रिया',
-      sectionTitle: 'TPC दिशानिर्देश',
+      sectionTitle: 'प्लेसमेंट ब्रोशर',
       steps: [
         { label: 'पंजीकरण', desc: 'कंपनी TPC के साथ पंजीकरण करती है' },
         { label: 'शॉर्टलिस्ट', desc: 'छात्रों की छंटाई और शॉर्टलिस्टिंग' },
@@ -378,7 +378,7 @@ export const translations = {
       ],
       bodyText:
         'प्रशिक्षण एवं प्लेसमेंट सेल एक सुचारु और पारदर्शी भर्ती प्रक्रिया सुनिश्चित करने के लिए एक संरचित नीति का पालन करता है। कंपनियों से अनुरोध है कि वे पहले से जॉब डिस्क्रिप्शन साझा करें। प्री-प्लेसमेंट वार्ता, ऑनलाइन/ऑफलाइन परीक्षण और साक्षात्कार परिसर में आयोजित किए जाते हैं। हमारी टीम शेड्यूलिंग से ऑफर रोलआउट तक संपूर्ण समन्वय सुनिश्चित करती है।',
-      recruitmentPdf: 'भर्ती प्रक्रिया PDF',
+      recruitmentPdf: 'प्लेसमेंट ब्रोशर',
       guidelinesPdf: 'TPC दिशानिर्देश PDF',
     },
     infrastructure: {

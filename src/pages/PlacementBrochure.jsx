@@ -11,7 +11,7 @@ export default function PlacementBrochure() {
 
   const handleDownload = () => {
     const link = document.createElement('a')
-    link.href = '/pdfs/placement-brochure.pdf'
+    link.href = '/pdfs/brochure.pdf'
     link.download = 'SIET_Placement_Brochure_2024.pdf'
     document.body.appendChild(link)
     link.click()
@@ -47,7 +47,7 @@ export default function PlacementBrochure() {
       <main className="container mx-auto px-4 py-6">
         <div className="bg-surface-container-lowest border border-border shadow-lg rounded-lg overflow-hidden">
           <iframe
-            src="/pdfs/placement-brochure.pdf"
+            src="/pdfs/brochure.pdf"
             className="w-full border-0"
             style={{ height: 'calc(100vh - 140px)', minHeight: '600px' }}
             title="Placement Brochure PDF"

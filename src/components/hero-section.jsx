@@ -86,7 +86,7 @@ export function HeroSection() {
 
         <div className="hero-buttons">
           <GradientButton onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}>{t.forRecruiters}</GradientButton>
-          <GradientButton variant="variant" onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}>{t.downloadBrochure}</GradientButton>
+          <GradientButton variant="variant" onClick={() => document.getElementById('placement-brochure-section')?.scrollIntoView({ behavior: 'smooth' })}>{t.downloadBrochure}</GradientButton>
         </div>
       </div>
     </section>
