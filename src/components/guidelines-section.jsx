@@ -59,10 +59,10 @@ export function GuidelinesSection() {
         >
           <p className="guidelines-text">{t.bodyText}</p>
           <div className="guidelines-buttons">
-            <GradientButton onClick={() => navigate('/pdf-viewer?type=brochure')}>
+            <GradientButton onClick={() => navigate('/placement-brochure')}>
               <FileText className="guidelines-btn-icon" /> {t.recruitmentPdf}
             </GradientButton>
-            <GradientButton variant="variant" onClick={() => navigate('/pdf-viewer?type=guidelines')}>
+            <GradientButton variant="variant" onClick={() => navigate('/guidelines')}>
               <FileText className="guidelines-btn-icon" /> {t.guidelinesPdf}
             </GradientButton>
           </div>

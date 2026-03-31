@@ -15,6 +15,8 @@ import { TeamSection } from './components/team-section'
 import { Footer } from './components/footer'
 import StudentLogin from './pages/StudentLogin'
 import PdfViewer from './pages/PdfViewer'
+import PlacementBrochure from './pages/PlacementBrochure'
+import GuidelinesViewer from './pages/GuidelinesViewer'
 
 function Home() {
   return (
@@ -43,6 +45,8 @@ export default function App() {
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<StudentLogin />} />
       <Route path="/pdf-viewer" element={<PdfViewer />} />
+      <Route path="/placement-brochure" element={<PlacementBrochure />} />
+      <Route path="/guidelines" element={<GuidelinesViewer />} />
     </Routes>
   )
 }
