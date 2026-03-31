@@ -13,7 +13,7 @@ export function GuidelinesSection() {
   const navigate = useNavigate()
 
   return (
-    <section id="placement-brochure-section" className="guidelines-section">
+    <section id="brochure-section" className="guidelines-section">
       <div className="container">
         <motion.div
           className="section-header"
