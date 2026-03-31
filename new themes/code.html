@@ -3,7 +3,7 @@
 <html class="light" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Placement Brochure 2024 | The Academic Curator</title>
+<title>TPC Guidelines - The Academic Curator</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=DM+Serif+Display&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
@@ -76,223 +76,186 @@
 <style>
       .material-symbols-outlined {
         font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        display: inline-block;
-        line-height: 1;
-        text-transform: none;
-        letter-spacing: normal;
-        word-wrap: normal;
-        white-space: nowrap;
-        direction: ltr;
       }
-      .glass-panel {
+      .glass-header {
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
       }
-      .gold-gradient {
-        background: linear-gradient(135deg, #7e5700 0%, #ffc256 100%);
-      }
       .pdf-shadow {
-        box-shadow: 0 32px 64px -16px rgba(15, 28, 45, 0.15);
+        box-shadow: 0 16px 32px -8px rgba(15, 28, 45, 0.12);
       }
     </style>
 </head>
 <body class="bg-surface font-body text-on-surface antialiased">
-<!-- TopNavBar (Shared Component) -->
+<!-- Top Navigation Bar -->
 <header class="fixed top-0 w-full z-50 bg-slate-50/80 dark:bg-[#0A1628]/80 backdrop-blur-xl border-b border-[#0A1628]/10 dark:border-white/10 shadow-sm dark:shadow-none">
 <div class="flex justify-between items-center h-16 px-8 max-w-full">
 <div class="flex items-center gap-8">
 <span class="text-xl font-bold tracking-tighter text-[#0A1628] dark:text-white">The Academic Curator</span>
-<nav class="hidden md:flex gap-6 font-['Inter'] font-medium tracking-tight">
-<a class="text-[#0A1628]/60 dark:text-white/60 hover:text-[#C9922A] transition-colors duration-300" href="#">Guidelines</a>
-<a class="text-[#C9922A] border-b-2 border-[#C9922A] pb-1" href="#">Brochure</a>
-<a class="text-[#0A1628]/60 dark:text-white/60 hover:text-[#C9922A] transition-colors duration-300" href="#">Archive</a>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-[#C9922A] border-b-2 border-[#C9922A] pb-1 font-['Inter'] font-medium tracking-tight hover:text-[#C9922A] transition-colors duration-300" href="#">Guidelines</a>
+<a class="text-[#0A1628]/60 dark:text-white/60 font-['Inter'] font-medium tracking-tight hover:text-[#C9922A] transition-colors duration-300" href="#">Brochure</a>
+<a class="text-[#0A1628]/60 dark:text-white/60 font-['Inter'] font-medium tracking-tight hover:text-[#C9922A] transition-colors duration-300" href="#">Archive</a>
 </nav>
 </div>
 <div class="flex items-center gap-4">
-<div class="flex gap-2">
-<button class="p-2 text-[#0A1628]/60 hover:text-[#C9922A] scale-95 active:opacity-80 transition-transform">
-<span class="material-symbols-outlined">share</span>
+<div class="flex gap-2 mr-4">
+<button class="p-2 text-[#0A1628]/60 hover:text-[#C9922A] transition-colors">
+<span class="material-symbols-outlined" data-icon="share">share</span>
 </button>
-<button class="p-2 text-[#0A1628]/60 hover:text-[#C9922A] scale-95 active:opacity-80 transition-transform">
-<span class="material-symbols-outlined">print</span>
+<button class="p-2 text-[#0A1628]/60 hover:text-[#C9922A] transition-colors">
+<span class="material-symbols-outlined" data-icon="print">print</span>
 </button>
 </div>
-<button class="bg-[#C9922A] text-white px-5 py-2 rounded-full font-medium text-sm gold-gradient shadow-lg scale-95 active:opacity-80 transition-all">
+<button class="bg-gradient-to-r from-secondary to-secondary-container text-on-secondary px-6 py-2 rounded-full font-medium shadow-sm scale-95 active:opacity-80 transition-transform flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="download">download</span>
                     Download PDF
                 </button>
 </div>
 </div>
 </header>
-<main class="pt-24 pb-20 px-6 max-w-7xl mx-auto flex flex-col lg:flex-row gap-12">
-<!-- Left Sidebar: Meta & Info -->
-<aside class="w-full lg:w-1/3 flex flex-col gap-10">
-<!-- Breadcrumb / Back Navigation -->
-<div class="flex items-center gap-2 group cursor-pointer w-fit">
-<span class="material-symbols-outlined text-secondary text-lg group-hover:-translate-x-1 transition-transform">arrow_back</span>
-<span class="font-label font-semibold tracking-wider text-on-surface-variant text-[0.6875rem] uppercase">Back to Dashboard</span>
+<main class="pt-24 pb-16 px-6 md:px-12 max-w-7xl mx-auto">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+<div class="max-w-2xl">
+<button class="group flex items-center gap-2 text-on-primary-container hover:text-secondary transition-colors mb-4">
+<span class="material-symbols-outlined text-base" data-icon="arrow_back">arrow_back</span>
+<span class="text-sm font-semibold tracking-wide">BACK TO DASHBOARD</span>
+</button>
+<h1 class="text-4xl md:text-5xl font-serif text-primary-container leading-tight mb-4">Training &amp; Placement Cell <span class="text-secondary italic">Guidelines 2024-25</span></h1>
+<p class="text-on-surface-variant text-lg max-w-xl">A comprehensive framework governing the code of conduct, eligibility criteria, and operational procedures for campus recruitment cycles.</p>
 </div>
-<div class="space-y-6">
-<div class="space-y-2">
-<span class="font-label text-secondary font-bold text-[0.6875rem] tracking-[0.1em] uppercase">Academic Session 2024-25</span>
-<h1 class="font-serif text-5xl text-primary-container leading-tight">Corporate Relations &amp; Placement Brochure</h1>
-</div>
-<p class="text-on-surface-variant leading-relaxed text-lg font-light">
-                    A comprehensive guide to the institutional excellence, technical prowess, and professional aptitude of our graduating cohorts. Designed for recruiters seeking the next generation of industry leaders.
-                </p>
-<!-- Stats Section in Bento Style -->
-<div class="grid grid-cols-2 gap-4 pt-4">
-<div class="bg-surface-container-low p-6 rounded-xl border-b-2 border-transparent hover:border-secondary transition-all">
-<span class="block font-serif text-3xl text-secondary">94%</span>
-<span class="block font-label text-[0.625rem] text-on-primary-container font-bold uppercase tracking-widest mt-1">Placement Rate</span>
-</div>
-<div class="bg-surface-container-low p-6 rounded-xl border-b-2 border-transparent hover:border-secondary transition-all">
-<span class="block font-serif text-3xl text-secondary">500+</span>
-<span class="block font-label text-[0.625rem] text-on-primary-container font-bold uppercase tracking-widest mt-1">Partner Firms</span>
-</div>
-</div>
-<div class="pt-8 border-t border-outline-variant/20">
-<h3 class="font-label text-xs font-bold text-primary-container mb-4 uppercase tracking-widest">Document Details</h3>
-<ul class="space-y-4">
-<li class="flex items-center gap-3">
-<span class="material-symbols-outlined text-secondary-fixed-dim bg-primary-container p-2 rounded-lg text-lg">calendar_today</span>
-<div>
-<p class="text-[0.6875rem] text-on-surface-variant font-medium">Last Updated</p>
-<p class="text-sm font-semibold text-primary-container">October 12, 2023</p>
-</div>
-</li>
-<li class="flex items-center gap-3">
-<span class="material-symbols-outlined text-secondary-fixed-dim bg-primary-container p-2 rounded-lg text-lg">description</span>
-<div>
-<p class="text-[0.6875rem] text-on-surface-variant font-medium">File Size / Format</p>
-<p class="text-sm font-semibold text-primary-container">14.2 MB • Interactive PDF</p>
-</div>
-</li>
-</ul>
-</div>
-</div>
-<!-- CTA Action -->
-<div class="flex flex-col gap-3 pt-4">
-<button class="gold-gradient text-on-secondary w-full py-4 rounded-full font-bold shadow-xl hover:shadow-secondary/20 transition-all flex items-center justify-center gap-2">
-<span class="material-symbols-outlined">download</span>
-                    Download for Offline Reading
-                </button>
-<button class="border border-secondary text-secondary w-full py-4 rounded-full font-bold hover:bg-secondary/5 transition-all">
-                    Request Hard Copy
-                </button>
-</div>
-</aside>
-<!-- Right Side: PDF Viewer Placeholder -->
-<section class="flex-1">
-<div class="relative group">
-<!-- Decorative background glow -->
-<div class="absolute -inset-4 bg-secondary-container/10 blur-3xl rounded-full opacity-50"></div>
-<!-- Main Viewer Container -->
-<div class="relative bg-surface-container-lowest pdf-shadow rounded-xl overflow-hidden min-h-[800px] flex flex-col border border-outline-variant/10">
-<!-- Viewer Toolbar -->
-<div class="bg-primary-container h-14 flex items-center justify-between px-6 text-white/80">
 <div class="flex items-center gap-4">
-<span class="material-symbols-outlined cursor-pointer hover:text-secondary">menu</span>
-<span class="text-xs font-label tracking-widest font-semibold uppercase">Preview Mode • Page 1 of 42</span>
+<div class="bg-surface-container p-4 rounded-xl flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-white flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined" data-icon="verified_user" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+</div>
+<div>
+<p class="text-[0.6875rem] font-bold tracking-widest text-on-primary-container uppercase">REVISION STATUS</p>
+<p class="font-bold text-primary-container">v4.2.0 Final</p>
+</div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+<!-- PDF Viewer Mockup -->
+<div class="lg:col-span-8">
+<div class="bg-surface-container-high rounded-2xl p-4 md:p-8 min-h-[800px] flex flex-col items-center pdf-shadow relative overflow-hidden">
+<!-- PDF Controls Bar -->
+<div class="w-full bg-primary-container/90 backdrop-blur-md rounded-lg p-3 mb-8 flex justify-between items-center text-white/90">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined cursor-pointer hover:text-secondary" data-icon="menu">menu</span>
+<span class="text-sm font-medium">TPC_Guidelines_2024.pdf</span>
 </div>
 <div class="flex items-center gap-6">
-<div class="flex items-center gap-3 bg-white/10 px-3 py-1 rounded-md text-xs">
-<span class="material-symbols-outlined text-sm cursor-pointer hover:text-secondary">remove</span>
-<span class="font-bold">100%</span>
-<span class="material-symbols-outlined text-sm cursor-pointer hover:text-secondary">add</span>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined cursor-pointer text-sm" data-icon="remove">remove</span>
+<span class="text-xs bg-white/10 px-3 py-1 rounded">125%</span>
+<span class="material-symbols-outlined cursor-pointer text-sm" data-icon="add">add</span>
 </div>
-<span class="material-symbols-outlined cursor-pointer hover:text-secondary">fullscreen</span>
-</div>
-</div>
-<!-- PDF Content Canvas -->
-<div class="flex-1 bg-surface-dim/30 p-12 overflow-y-auto flex justify-center">
-<div class="w-full max-w-[600px] aspect-[1/1.414] bg-white shadow-2xl relative overflow-hidden">
-<!-- Brochure Cover Visual -->
-<div class="absolute inset-0 bg-[#0A1628]">
-<img class="w-full h-full object-cover opacity-40" data-alt="majestic high-angle shot of a grand university campus with classical architecture and green courtyards during sunset" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDDaKWdq8GxgqQygFLYwOj9tra2s1pjR2ixPtjrwy6aAoIzfuETIZDnZxXyCPKjZlAeRa-o_T5K-rsLa_t495I0183JmRXnAHstcgMRGwdW6Keue1ho1EF0y2aWIUETOltJhBtGYxqdbqL0cGoTSK8C94nrI89pdqV8bPZWPJgAjvlp_P3w56TFkFfeLV0HtDOfCULxZvwId9zi91vq-CtBDTDA6tdSqzqrCmAkBWCF0v6QCZHOypEHPUGOk95NpIYXAu0GGQ5HPRd-"/>
-<div class="absolute inset-0 bg-gradient-to-t from-[#0A1628] via-[#0A1628]/20 to-transparent"></div>
-<div class="absolute inset-0 p-16 flex flex-col justify-end">
-<div class="w-16 h-1 bg-secondary mb-8"></div>
-<h2 class="font-serif text-5xl text-white mb-4">The Talent <br/><span class="text-secondary italic">Blueprint</span></h2>
-<p class="text-white/60 font-label tracking-[0.2em] text-xs uppercase font-bold">Official Placement Brochure 2024</p>
-</div>
-<!-- Institutional Seal (Decorative) -->
-<div class="absolute top-12 right-12 w-24 h-24 border border-white/20 rounded-full flex items-center justify-center">
-<span class="material-symbols-outlined text-white/30 text-4xl">account_balance</span>
+<div class="h-4 w-[1px] bg-white/20"></div>
+<span class="text-xs">Page 1 / 24</span>
 </div>
 </div>
+<!-- PDF Content Placeholder -->
+<div class="w-full max-w-2xl bg-white shadow-2xl aspect-[1/1.414] p-16 flex flex-col items-center text-center">
+<div class="w-24 h-24 mb-12">
+<img alt="Institutional Seal" class="w-full h-full object-contain opacity-80" data-alt="Official gold embossed institutional seal of SIET Panchkula on white parchment paper, elegant minimalist academic branding" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUw-RbXh3NKm4cbuAr4832pGJHR-Zv0adD60uRssRUrwBs9QkVluLFA5dp5yleLpZGhi4CqZ117IHexeQreA-EJ4tYtfMt1GHtazEaF2RWBZVihg30Q5iUSCQG8F7eeLkrHq7Px0U6M7IPBJb3a2Geu7YuuiU0SrQWAbtsQVeYrG7S-AJlPZyWdLnAX-Fdw0yKCyZ1EvzbW-ZCJA75sSjI72mhQGHLAgKbz63l1DniMSd--QPPLpy7HkcD4X1KCVBaAYd0v1WB6kF0"/>
+</div>
+<h2 class="font-serif text-3xl text-[#0A1628] mb-2">State Institute of Engineering &amp; Technology</h2>
+<p class="text-sm tracking-[0.2em] text-[#C9922A] font-bold mb-12">PANCHKULA, HARYANA</p>
+<div class="w-16 h-1 bg-[#C9922A] mb-12"></div>
+<h3 class="text-5xl font-bold tracking-tighter text-[#0A1628] mb-6">PLACEMENT<br/>POLICY &amp;<br/>GUIDELINES</h3>
+<p class="text-on-surface-variant font-medium mb-24">Academic Session 2024 - 2025</p>
+<div class="mt-auto pt-12 border-t border-outline-variant/30 w-full text-xs text-on-surface-variant/60 uppercase tracking-widest">
+                            CONFIDENTIAL • FOR INTERNAL CIRCULATION ONLY
+                        </div>
+</div>
+<!-- Subtle Gradient Overlays for "Depth" -->
+<div class="absolute inset-0 pointer-events-none bg-gradient-to-b from-transparent via-transparent to-[#0A1628]/5"></div>
 </div>
 </div>
-<!-- Overlay for Preview Only (Upsell) -->
-<div class="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-primary-container to-transparent flex items-center justify-center pb-8 px-6">
-<div class="glass-panel bg-white/10 p-6 rounded-2xl border border-white/20 flex items-center justify-between w-full max-w-2xl">
-<div class="flex items-center gap-4">
-<span class="material-symbols-outlined text-secondary-fixed-dim text-3xl">lock_open</span>
+<!-- Sidebar Info -->
+<div class="lg:col-span-4 space-y-8">
+<!-- Quick Summary Bento Card -->
+<div class="bg-white rounded-2xl p-8 border border-outline-variant/10 shadow-sm">
+<h4 class="text-[0.6875rem] font-bold tracking-widest text-secondary uppercase mb-6">EXECUTIVE SUMMARY</h4>
+<div class="space-y-6">
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-secondary" data-icon="rule" style="font-variation-settings: 'FILL' 1;">rule</span>
 <div>
-<p class="text-white font-bold text-sm">Access All 42 Pages</p>
-<p class="text-white/60 text-xs">Unlock detailed department statistics and recruiter lists.</p>
+<h5 class="font-bold text-primary-container text-sm">Eligibility Criteria</h5>
+<p class="text-xs text-on-surface-variant leading-relaxed mt-1">Minimum 6.5 CGPA with no active backlogs at the time of recruitment process.</p>
 </div>
 </div>
-<button class="bg-secondary px-6 py-2 rounded-full text-white font-bold text-sm hover:bg-secondary-container hover:text-on-secondary-container transition-all">
-                                Download Now
-                            </button>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-secondary" data-icon="notifications_active" style="font-variation-settings: 'FILL' 1;">notifications_active</span>
+<div>
+<h5 class="font-bold text-primary-container text-sm">One Job Policy</h5>
+<p class="text-xs text-on-surface-variant leading-relaxed mt-1">Students securing an offer are barred from subsequent drives, with "Dream Offer" exceptions.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-secondary" data-icon="gavel" style="font-variation-settings: 'FILL' 1;">gavel</span>
+<div>
+<h5 class="font-bold text-primary-container text-sm">Code of Conduct</h5>
+<p class="text-xs text-on-surface-variant leading-relaxed mt-1">Mandatory formal attire and 100% attendance in pre-placement talks (PPT).</p>
 </div>
 </div>
 </div>
 </div>
-</section>
+<!-- Timeline / Version History -->
+<div class="bg-primary-container text-white rounded-2xl p-8 overflow-hidden relative">
+<!-- Glassy Background Detail -->
+<div class="absolute -right-8 -top-8 w-32 h-32 bg-secondary/20 rounded-full blur-3xl"></div>
+<h4 class="text-[0.6875rem] font-bold tracking-widest text-secondary-fixed-dim uppercase mb-6">DOCUMENT TIMELINE</h4>
+<div class="space-y-6 relative">
+<div class="absolute left-[11px] top-2 bottom-2 w-[1px] bg-white/10"></div>
+<div class="flex gap-6 relative">
+<div class="w-6 h-6 rounded-full bg-secondary border-4 border-primary-container z-10"></div>
+<div>
+<p class="text-xs font-bold text-white">August 12, 2024</p>
+<p class="text-[10px] text-white/50">Current Version Released</p>
+</div>
+</div>
+<div class="flex gap-6 relative">
+<div class="w-6 h-6 rounded-full bg-white/20 border-4 border-primary-container z-10"></div>
+<div>
+<p class="text-xs font-bold text-white/80">July 28, 2024</p>
+<p class="text-[10px] text-white/50">Stakeholder Review</p>
+</div>
+</div>
+<div class="flex gap-6 relative">
+<div class="w-6 h-6 rounded-full bg-white/20 border-4 border-primary-container z-10"></div>
+<div>
+<p class="text-xs font-bold text-white/80">June 15, 2024</p>
+<p class="text-[10px] text-white/50">Initial Draft Proposed</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Direct Action -->
+<div class="bg-surface-container-low rounded-2xl p-8 text-center">
+<p class="text-sm text-on-surface-variant mb-4 italic">Need clarification on specific clauses?</p>
+<button class="w-full py-3 rounded-full border border-secondary text-secondary font-bold text-sm hover:bg-secondary hover:text-on-secondary transition-all">
+                        Inquire with TPC Office
+                    </button>
+</div>
+</div>
+</div>
 </main>
-<!-- SideNavBar (Shared Component Reference - Positioned for context but hidden on mobile) -->
-<div class="hidden xl:flex fixed left-0 top-0 h-full w-72 bg-[#0A1628] flex-col py-6 shadow-2xl z-[60] -translate-x-full group-hover:translate-x-0 transition-transform duration-500 hover:translate-x-0">
-<div class="px-8 mb-10 flex flex-col gap-1">
-<span class="text-lg font-serif italic text-[#C9922A]">TPC Portal</span>
-<span class="text-[0.625rem] font-label text-white/40 uppercase tracking-widest">Career Services</span>
+<!-- Footer Information -->
+<footer class="bg-white border-t border-outline-variant/10 py-12 px-8">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+<div class="flex items-center gap-4">
+<img alt="Mini Logo" class="w-8 h-8 opacity-50" data-alt="Small elegant crest logo, minimalist style in navy and gold colors" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBi12JLvkcDkQ15mwHH9t6aKcvbbZI05RVPFmVuUGzNr7rj1-El1PjAIwEt44UVnnPfZldhc2ofYTxMjC59UAKA6kbDX5YTUBsWSmEqsCn3DMlS83qEqMNvRpQVVGOfKaLQs-KlYmW7SYDv1kHz7BLS4BOQ1VPR_vS1kEDB6buvq54SHyun-tbn7c-ps7G8EBrxOIE36pAm6rkyWdPOiGDenZVVXM-2jdP6Fwk-LWa4XjwAccVSgMCpMfgRNDaz6uSqOTunYdjtR1TJ"/>
+<p class="text-xs text-on-surface-variant/60 font-medium tracking-tight">© 2024 SIET Panchkula Career Services. All Rights Reserved.</p>
 </div>
-<nav class="flex-1 flex flex-col">
-<a class="flex items-center gap-4 px-8 py-4 text-white/70 hover:bg-white/5 hover:text-white transition-all" href="#">
-<span class="material-symbols-outlined">dashboard</span>
-<span class="font-['Inter'] antialiased">Placement Portal</span>
-</a>
-<a class="flex items-center gap-4 px-8 py-4 text-white/70 hover:bg-white/5 hover:text-white transition-all" href="#">
-<span class="material-symbols-outlined">description</span>
-<span class="font-['Inter'] antialiased">TPC Guidelines</span>
-</a>
-<a class="flex items-center gap-4 px-8 py-4 bg-white/10 text-[#C9922A] rounded-r-full font-bold" href="#">
-<span class="material-symbols-outlined">menu_book</span>
-<span class="font-['Inter'] antialiased">Brochure 2024</span>
-</a>
-<a class="flex items-center gap-4 px-8 py-4 text-white/70 hover:bg-white/5 hover:text-white transition-all" href="#">
-<span class="material-symbols-outlined">group</span>
-<span class="font-['Inter'] antialiased">Recruiter List</span>
-</a>
-</nav>
-<div class="px-6 mt-auto">
-<div class="bg-gradient-to-r from-transparent via-white/5 to-transparent h-[1px] mb-6"></div>
-<button class="w-full bg-white/10 text-white py-3 rounded-xl font-medium text-sm mb-6 hover:bg-white/20 transition-all">
-                Contact Office
-            </button>
-<a class="flex items-center gap-4 px-8 py-4 text-white/70 hover:text-white transition-all" href="#">
-<span class="material-symbols-outlined">settings</span>
-<span class="font-['Inter']">Settings</span>
-</a>
+<div class="flex gap-8">
+<a class="text-xs font-bold tracking-widest text-on-primary-container hover:text-secondary transition-colors uppercase" href="#">PRIVACY POLICY</a>
+<a class="text-xs font-bold tracking-widest text-on-primary-container hover:text-secondary transition-colors uppercase" href="#">SUPPORT CENTER</a>
+<a class="text-xs font-bold tracking-widest text-on-primary-container hover:text-secondary transition-colors uppercase" href="#">LEGAL DISCLOSURE</a>
 </div>
 </div>
-<!-- Mobile Navigation (Bottom) -->
-<div class="md:hidden fixed bottom-0 left-0 right-0 bg-white shadow-2xl z-50 flex justify-around items-center h-16 border-t border-outline-variant/10 px-6">
-<div class="flex flex-col items-center gap-1 text-on-surface-variant">
-<span class="material-symbols-outlined">dashboard</span>
-<span class="text-[10px] font-bold">Portal</span>
-</div>
-<div class="flex flex-col items-center gap-1 text-secondary">
-<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">menu_book</span>
-<span class="text-[10px] font-bold">Brochure</span>
-</div>
-<div class="flex flex-col items-center gap-1 text-on-surface-variant">
-<span class="material-symbols-outlined">group</span>
-<span class="text-[10px] font-bold">Recruiters</span>
-</div>
-<div class="flex flex-col items-center gap-1 text-on-surface-variant">
-<span class="material-symbols-outlined">person</span>
-<span class="text-[10px] font-bold">Profile</span>
-</div>
-</div>
+</footer>
 </body></html>
