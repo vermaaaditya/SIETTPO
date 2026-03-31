@@ -570,7 +570,8 @@ input:focus, textarea:focus, select:focus { outline: none; box-shadow: 0 0 0 2px
   margin-bottom:3.5rem;
 }
 .message-hero-inner {
-  max-width:780px;
+  width:85%;
+  max-width:1200px;
   margin:0 auto;
 }
 .message-hero-quote {
