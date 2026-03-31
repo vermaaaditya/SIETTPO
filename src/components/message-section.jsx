@@ -19,7 +19,9 @@ export function MessageSection() {
             <div className="message-hero-photo-wrapper">
               <img src="/placeholder-user.jpg" alt={member.name} className="message-hero-photo" />
             </div>
-            <p className="message-hero-text">{member.message}</p>
+            {(Array.isArray(member.message) ? member.message : [member.message]).map((para, i) => (
+              <p key={i} className="message-hero-text">{para}</p>
+            ))}
             <span className="message-hero-deco message-hero-deco--close" aria-hidden="true">&rdquo;</span>
             <footer className="message-hero-attribution">
               <span className="message-hero-name">{member.name}</span>
