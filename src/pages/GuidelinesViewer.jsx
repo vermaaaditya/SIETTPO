@@ -31,10 +31,10 @@ export default function GuidelinesViewer() {
               <ArrowLeft className="w-4 h-4" />
               Back
             </button>
-            <h1 className="text-lg md:text-xl font-headline text-parchment">TPC Guidelines</h1>
+            <h1 className="text-2xl md:text-3xl font-headline text-parchment text-left flex-1">TPC Guidelines</h1>
             <button
               onClick={handleDownload}
-              className="inline-flex items-center gap-2 bg-gold hover:bg-gold/90 text-ink px-4 py-2 rounded font-medium transition-colors"
+              className="gradient-button inline-flex items-center gap-2"
             >
               <Download className="w-4 h-4" />
               Download
