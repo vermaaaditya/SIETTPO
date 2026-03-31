@@ -26,7 +26,7 @@ export default function GuidelinesViewer() {
           <div className="flex items-center justify-between gap-4">
             <button
               onClick={() => navigate('/')}
-              className="inline-flex items-center gap-2 text-parchment hover:text-gold transition-colors text-sm font-bold uppercase tracking-wider"
+              className="gradient-button variant inline-flex items-center gap-2"
             >
               <ArrowLeft className="w-4 h-4" />
               Back
