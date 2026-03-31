@@ -56,17 +56,17 @@ export function Footer() {
               </li>
             </ul>
           </div>
-        </div>
-        <div className="footer-map-section">
-          <h3 className="footer-heading">{t.findUs}</h3>
-          <iframe
-            className="footer-map"
-            src="https://maps.google.com/maps?q=MV5J%2B9Q2%2C+Sector+26%2C+Panchkula+Extension%2C+Panchkula%2C+Haryana+134116&z=16&output=embed"
-            title="SIET Panchkula Location"
-            loading="lazy"
-            allowFullScreen
-            referrerPolicy="no-referrer-when-downgrade"
-          />
+          <div className="footer-col">
+            <h3 className="footer-heading">{t.findUs}</h3>
+            <iframe
+              className="footer-map"
+              src="https://maps.google.com/maps?q=MV5J%2B9Q2%2C+Sector+26%2C+Panchkula+Extension%2C+Panchkula%2C+Haryana+134116&z=16&output=embed"
+              title="SIET Panchkula Location"
+              loading="lazy"
+              allowFullScreen
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+          </div>
         </div>
       </div>
       <div className="footer-separator">
