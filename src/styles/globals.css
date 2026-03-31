@@ -597,12 +597,13 @@ input:focus, textarea:focus, select:focus { outline: none; box-shadow: 0 0 0 2px
 }
 .message-hero-photo-wrapper {
   float:left;
-  width:148px;
-  height:185px;
+  width:180px;
+  height:180px;
   margin:0 2rem 1rem 0;
   overflow:hidden;
   background:var(--surface-container-low);
   border:1px solid rgba(10,22,40,0.1);
+  border-radius:0.5rem;
 }
 .message-hero-photo {
   width:100%;

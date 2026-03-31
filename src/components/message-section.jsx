@@ -17,7 +17,7 @@ export function MessageSection() {
           <blockquote key={member.name} className="message-hero-quote">
             <span className="message-hero-deco" aria-hidden="true">&ldquo;</span>
             <div className="message-hero-photo-wrapper">
-              <img src="/placeholder-user.jpg" alt={member.name} className="message-hero-photo" />
+              <img src="/images/dr-divya-singla.jpg" alt={member.name} className="message-hero-photo" />
             </div>
             {(Array.isArray(member.message) ? member.message : [member.message]).map((para, i) => (
               <p key={i} className="message-hero-text">{para}</p>
