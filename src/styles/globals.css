@@ -401,6 +401,9 @@ input:focus, textarea:focus, select:focus { outline: none; box-shadow: 0 0 0 2px
   padding: 0.5rem 0;
   position: relative;
   transition:color 0.2s;
+  background: none;
+  border: none;
+  cursor: pointer;
 }
 .navbar-link::after {
   content:'';
