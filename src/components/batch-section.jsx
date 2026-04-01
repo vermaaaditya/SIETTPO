@@ -8,11 +8,11 @@ const maxStudents = 60
 const totalStudents = 180
 
 const skills = [
-  'Web Development', 'AI / ML', 'Data Structures & Algorithms', 'Embedded Systems',
+  'Web Development', 'AI & Machine Learning', 'Data Structures & Algorithms', 'Embedded Systems',
   'Python', 'Java', 'Cloud Computing (AWS)',
-  'IoT & Sensors', 'React & Frontend', 'SQL & Databases', 'C / C++',
+  'IoT & Sensors', 'React & Frontend', 'SQL & Databases', 'C/C++',
   'Mobile App Development', 'Robotics',
-  'Machine Learning', 'Cybersecurity', 'UI/UX Design', 'Node.js & Backend',
+  'Cybersecurity', 'UI/UX Design', 'Node.js & Backend',
 ]
 
 const malePercent = 68
@@ -167,6 +167,16 @@ export function BatchSection() {
             ))}
           </div>
         </motion.div>
+
+        <motion.p
+          className="batch-micro-text"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
+          Focused on building strong fundamentals, practical exposure, and industry-relevant skills.
+        </motion.p>
       </div>
     </section>
   )

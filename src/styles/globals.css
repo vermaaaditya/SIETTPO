@@ -864,6 +864,15 @@ input:focus, textarea:focus, select:focus { outline: none; box-shadow: 0 0 0 2px
   color: var(--muted-foreground);
 }
 
+.batch-micro-text {
+  text-align: center;
+  font-size: 0.82rem;
+  color: var(--muted-foreground);
+  margin-top: 1.5rem;
+  letter-spacing: 0.01em;
+  opacity: 0.75;
+}
+
 /* ═══════════════════════════════════════
    TRAINING PIPELINE — Numbered steps
    ═══════════════════════════════════════ */
