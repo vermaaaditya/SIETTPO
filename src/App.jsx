@@ -11,8 +11,6 @@ import { GallerySection } from './components/gallery-section'
 import { CtaSection } from './components/cta-section'
 import { TeamSection } from './components/team-section'
 import { Footer } from './components/footer'
-import { useLanguage } from './contexts/LanguageContext'
-import { translations } from './translations'
 import StudentLogin from './pages/StudentLogin'
 import PdfViewer from './pages/PdfViewer'
 import PlacementBrochure from './pages/PlacementBrochure'
@@ -98,28 +96,7 @@ function TeamPage() {
 }
 
 function ContactPage() {
-  const { lang } = useLanguage()
-  const t = translations[lang].contactPage
-
-  return (
-    <main>
-      <Navbar />
-      <section className="py-20 bg-parchment">
-        <div className="container text-center">
-          <span className="section-label">{t.label}</span>
-          <h2 className="section-title">{t.title}</h2>
-          <p className="section-subtitle">{t.subtitle}</p>
-          <div className="mt-8">
-            <a href="mailto:tpo@sietpanchkula.ac.in" className="gradient-button inline-flex items-center">
-              {t.emailCta}
-            </a>
-          </div>
-        </div>
-      </section>
-      <Footer />
-      <Chatbot />
-    </main>
-  )
+  return <Form />
 }
 
 export default function App() {

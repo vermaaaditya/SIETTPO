@@ -19,10 +19,11 @@ export function Navbar() {
   const navLinks = [
     { label: t.links[0], type: 'route', value: '/' },
     { label: t.links[1], type: 'route', value: '/events' },
-    { label: t.links[2], type: 'route', value: '/code-of-conduct' },
-    { label: t.links[3], type: 'route', value: '/batch-2025' },
-    { label: t.links[4], type: 'route', value: '/team' },
-    { label: t.links[5], type: 'route', value: '/contact-us' },
+    { label: t.links[2], type: 'route', value: '/placement-brochure' },
+    { label: t.links[3], type: 'route', value: '/code-of-conduct' },
+    { label: t.links[4], type: 'route', value: '/batch-2025' },
+    { label: t.links[5], type: 'route', value: '/team' },
+    { label: t.links[6], type: 'route', value: '/contact-us' },
   ]
 
   useEffect(() => {
@@ -61,8 +62,8 @@ export function Navbar() {
             className="leading-tight"
             style={{
               fontFamily: 'var(--font-headline)',
-              fontSize: 'clamp(0.75rem, 1.5vw, 1.1rem)',
-              fontWeight: '400',
+              fontSize: 'clamp(1.05rem, 2vw, 1.65rem)',
+              fontWeight: '500',
               color: 'var(--ink)',
             }}
           >
@@ -74,7 +75,7 @@ export function Navbar() {
             className="leading-tight"
             style={{
               fontFamily: 'var(--font-headline)',
-              fontSize: 'clamp(0.85rem, 2vw, 1.35rem)',
+              fontSize: 'clamp(1.05rem, 2vw, 1.65rem)',
               fontWeight: '700',
               letterSpacing: '-0.01em',
               lineHeight: '1.2',

@@ -4,7 +4,7 @@ export const translations = {
       affiliation:
         'Approved by AICTE, New Delhi and Affiliated to Kurukshetra University, Kurukshetra',
       mobileLabel: 'Training and placement cell',
-      links: ['Home', 'Events', 'Code of Conduct', 'Batch 2025', 'Team', 'Contact Us'],
+      links: ['Home', 'Events', 'Brochure', 'Code of Conduct', 'Batch 2025', 'Team', 'Contact Us'],
       forRecruiters: 'For Recruiters',
       studentLogin: 'Student Login',
     },
@@ -368,7 +368,7 @@ export const translations = {
       affiliation:
         'AICTE, नई दिल्ली द्वारा अनुमोदित एवं कुरुक्षेत्र विश्वविद्यालय, कुरुक्षेत्र से संबद्ध',
       mobileLabel: 'प्रशिक्षण एवं प्लेसमेंट सेल',
-      links: ['होम', 'इवेंट्स', 'आचार संहिता', 'बैच 2025', 'टीम', 'संपर्क करें'],
+      links: ['होम', 'इवेंट्स', 'ब्रोशर', 'आचार संहिता', 'बैच 2025', 'टीम', 'संपर्क करें'],
       forRecruiters: 'भर्तीकर्ताओं के लिए',
       studentLogin: 'छात्र लॉगिन',
     },

@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ArrowLeft, Download } from 'lucide-react'
+import { Navbar } from '../components/navbar'
 
 export default function PlacementBrochure() {
   const navigate = useNavigate()
@@ -19,41 +20,48 @@ export default function PlacementBrochure() {
   }
 
   return (
-    <div className="min-h-screen bg-parchment">
-      {/* Simple Header */}
-      <header className="bg-ink border-b border-border sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between gap-4">
-            <button
-              onClick={() => navigate('/')}
-              className="gradient-button inline-flex items-center gap-2"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              Back
-            </button>
-            <h1 className="text-2xl md:text-3xl font-headline text-parchment text-left flex-1">Placement Brochure</h1>
-            <button
-              onClick={handleDownload}
-              className="gradient-button inline-flex items-center gap-2"
-            >
-              <Download className="w-4 h-4" />
-              Download
-            </button>
+    <>
+      <Navbar />
+      <section className="coc-page-section">
+        <div className="container">
+          <div className="section-header">
+            <span className="section-label">Placement Brochure</span>
+            <h2 className="section-title">Placement Brochure 2026–27</h2>
+            <p className="section-subtitle">
+              Bridging the Gap Between Academic Excellence and Industrial Innovation.
+            </p>
+            <p className="section-subtitle max-w-4xl mx-auto">
+              Explore our comprehensive guide to campus recruitment, featuring batch demographics, department highlights, and the technological landscape of our institution.
+            </p>
+          </div>
+
+          <div className="coc-panel coc-preview bg-surface-container-lowest border border-border shadow-lg rounded-lg p-4 md:p-6">
+            <div className="coc-preview-head">
+              <button
+                onClick={() => navigate('/')}
+                className="gradient-button inline-flex items-center gap-2"
+              >
+                <ArrowLeft className="w-4 h-4" />
+                Back
+              </button>
+              <button
+                onClick={handleDownload}
+                className="gradient-button inline-flex items-center gap-2"
+              >
+                <Download className="w-4 h-4" />
+                Download
+              </button>
+            </div>
+            <div className="coc-preview-frame-wrap mt-4">
+              <iframe
+                src="/pdfs/brochure.pdf"
+                className="coc-preview-frame"
+                title="Placement Brochure PDF"
+              />
+            </div>
           </div>
         </div>
-      </header>
-
-      {/* PDF Embed */}
-      <main className="container mx-auto px-4 py-6">
-        <div className="bg-surface-container-lowest border border-border shadow-lg rounded-lg overflow-hidden">
-          <iframe
-            src="/pdfs/brochure.pdf"
-            className="w-full border-0"
-            style={{ height: 'calc(100vh - 140px)', minHeight: '600px' }}
-            title="Placement Brochure PDF"
-          />
-        </div>
-      </main>
-    </div>
+      </section>
+    </>
   )
 }
