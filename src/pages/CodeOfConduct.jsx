@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ArrowLeft, Download } from 'lucide-react'
 import { useLanguage } from '../contexts/LanguageContext'
@@ -8,6 +8,7 @@ export default function CodeOfConduct() {
   const navigate = useNavigate()
   const { lang } = useLanguage()
   const t = translations[lang].codeOfConduct
+  const [activeTab, setActiveTab] = useState('codeOfConduct')
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -35,25 +36,61 @@ export default function CodeOfConduct() {
               {t.back}
             </button>
             <h1 className="text-2xl md:text-3xl font-headline text-parchment text-left flex-1">{t.title}</h1>
-            <button
-              onClick={handleDownload}
-              className="gradient-button inline-flex items-center gap-2"
-            >
-              <Download className="w-4 h-4" />
-              {t.downloadPdf}
-            </button>
+            {activeTab === 'codeOfConduct' && (
+              <button
+                onClick={handleDownload}
+                className="gradient-button inline-flex items-center gap-2"
+              >
+                <Download className="w-4 h-4" />
+                {t.downloadPdf}
+              </button>
+            )}
           </div>
         </div>
       </header>
 
       <main className="container mx-auto px-4 py-8">
-        <div className="bg-surface-container-lowest border border-border shadow-lg rounded-lg p-6 md:p-10 space-y-6">
-          {t.sections.map((section) => (
-            <section key={section.heading}>
-              <h2 className="text-2xl font-headline mb-2">{section.heading}</h2>
-              <p className="text-muted-foreground">{section.body}</p>
-            </section>
+        <div className="coc-tabs">
+          {t.tabs.map((tab) => (
+            <button
+              key={tab.key}
+              onClick={() => setActiveTab(tab.key)}
+              className={`coc-tab ${activeTab === tab.key ? 'coc-tab-active' : ''}`}
+            >
+              {tab.label}
+            </button>
           ))}
+        </div>
+
+        <div className="coc-panel bg-surface-container-lowest border border-border shadow-lg rounded-lg p-6 md:p-10">
+          {activeTab === 'codeOfConduct' && (
+            <div className="space-y-6">
+              {t.sections.map((section) => (
+                <section key={section.heading}>
+                  <h2 className="text-2xl font-headline mb-2">{section.heading}</h2>
+                  <p className="text-muted-foreground">{section.body}</p>
+                </section>
+              ))}
+            </div>
+          )}
+
+          {activeTab === 'declaration' && (
+            <section>
+              <h2 className="text-2xl font-headline mb-3">{t.declaration.title}</h2>
+              <p className="text-muted-foreground whitespace-pre-line">{t.declaration.body}</p>
+            </section>
+          )}
+
+          {activeTab === 'resumeTemplate' && (
+            <section>
+              <h2 className="text-2xl font-headline mb-3">{t.resumeTemplate.title}</h2>
+              <ul className="coc-points">
+                {t.resumeTemplate.points.map((point) => (
+                  <li key={point}>{point}</li>
+                ))}
+              </ul>
+            </section>
+          )}
         </div>
       </main>
     </div>

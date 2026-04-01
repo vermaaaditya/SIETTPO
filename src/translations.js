@@ -248,6 +248,11 @@ export const translations = {
       title: 'Code of Conduct',
       back: 'Back',
       downloadPdf: 'Download PDF',
+      tabs: [
+        { key: 'codeOfConduct', label: 'Code of Conduct' },
+        { key: 'declaration', label: 'Declaration' },
+        { key: 'resumeTemplate', label: 'Resume Template' },
+      ],
       sections: [
         {
           heading: 'Professional Conduct',
@@ -270,6 +275,21 @@ export const translations = {
           body: 'Any misconduct, disruptive behavior, or violation of institutional norms during placement events can lead to disciplinary action.',
         },
       ],
+      declaration: {
+        title: 'Declaration',
+        body:
+          'I hereby confirm that all information submitted to the Training & Placement Office is true and accurate to the best of my knowledge. I understand that any discrepancy or misconduct may lead to disciplinary action and disqualification from placement opportunities.',
+      },
+      resumeTemplate: {
+        title: 'Resume Template Guidelines',
+        points: [
+          'Keep the resume to one page with clear section headings.',
+          'Include academics, technical skills, projects, internships, and achievements.',
+          'Use measurable impact in bullet points wherever possible.',
+          'Ensure there are no spelling or grammatical errors before submission.',
+          'Submit the final resume in PDF format with a professional filename.',
+        ],
+      },
     },
     contactPage: {
       label: 'Contact',
@@ -525,6 +545,11 @@ export const translations = {
       title: 'आचार संहिता',
       back: 'वापस',
       downloadPdf: 'PDF डाउनलोड करें',
+      tabs: [
+        { key: 'codeOfConduct', label: 'आचार संहिता' },
+        { key: 'declaration', label: 'घोषणा' },
+        { key: 'resumeTemplate', label: 'रिज़्यूमे टेम्पलेट' },
+      ],
       sections: [
         {
           heading: 'व्यावसायिक आचरण',
@@ -547,6 +572,21 @@ export const translations = {
           body: 'प्लेसमेंट कार्यक्रमों के दौरान किसी भी प्रकार का दुराचार, अव्यवस्थित व्यवहार या संस्थागत नियमों का उल्लंघन अनुशासनात्मक कार्रवाई का कारण बन सकता है।',
         },
       ],
+      declaration: {
+        title: 'घोषणा',
+        body:
+          'मैं पुष्टि करता/करती हूँ कि प्रशिक्षण एवं प्लेसमेंट कार्यालय को दी गई सभी जानकारी मेरे ज्ञान के अनुसार सही है। किसी भी प्रकार की गलत जानकारी या अनुशासनहीनता की स्थिति में मेरे विरुद्ध अनुशासनात्मक कार्रवाई की जा सकती है और प्लेसमेंट अवसरों से अयोग्यता हो सकती है।',
+      },
+      resumeTemplate: {
+        title: 'रिज़्यूमे टेम्पलेट दिशा-निर्देश',
+        points: [
+          'रिज़्यूमे एक पेज का रखें और अनुभाग शीर्षक स्पष्ट हों।',
+          'शैक्षणिक विवरण, तकनीकी कौशल, प्रोजेक्ट, इंटर्नशिप और उपलब्धियाँ शामिल करें।',
+          'जहाँ संभव हो, बुलेट पॉइंट्स में मापनीय प्रभाव लिखें।',
+          'सबमिशन से पहले वर्तनी और व्याकरण त्रुटियाँ अवश्य जांचें।',
+          'अंतिम रिज़्यूमे PDF प्रारूप में और पेशेवर फ़ाइल नाम के साथ जमा करें।',
+        ],
+      },
     },
     contactPage: {
       label: 'संपर्क',

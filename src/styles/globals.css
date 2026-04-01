@@ -1258,6 +1258,14 @@ input:focus, textarea:focus, select:focus { outline: none; box-shadow: 0 0 0 2px
 .cta-description { margin-top:1rem; font-size:1.125rem; line-height:1.75rem; color:var(--muted-foreground); }
 .cta-button-wrapper { margin-top:2rem; display:flex; justify-content:center; gap:1rem; flex-wrap:wrap; }
 .cta-link { text-decoration:none; }
+.cta-section .gradient-button.variant {
+  color:var(--ink);
+  border-color:rgba(10,22,40,0.25);
+}
+.cta-section .gradient-button.variant:hover {
+  color:var(--gold);
+  border-color:var(--gold);
+}
 
 /* ═══════════════════════════════════════
    FOOTER — Dark navy with gold accents
@@ -2310,4 +2318,49 @@ input:focus, textarea:focus, select:focus { outline: none; box-shadow: 0 0 0 2px
   text-align: center;
   padding: 8px 0;
   font-size: 0.9rem;
+}
+
+/* ═══════════════════════════════════════
+   CODE OF CONDUCT PAGE TABS
+   ═══════════════════════════════════════ */
+.coc-tabs {
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:0.5rem;
+  margin-bottom:1.5rem;
+}
+.coc-tab {
+  font-family:var(--font-body);
+  font-size:0.78rem;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:0.08em;
+  padding:0.55rem 1.1rem;
+  background:transparent;
+  border:1px solid rgba(10,22,40,0.15);
+  color:var(--muted-foreground);
+  cursor:pointer;
+  transition:all 0.25s ease;
+}
+.coc-tab:hover {
+  border-color:var(--gold);
+  color:var(--gold);
+}
+.coc-tab-active {
+  background:var(--gold);
+  color:var(--ink);
+  border-color:var(--gold);
+}
+.coc-panel {
+  max-width:72rem;
+  margin:0 auto;
+}
+.coc-points {
+  margin:0;
+  padding-left:1.2rem;
+  display:grid;
+  gap:0.5rem;
+  color:var(--muted-foreground);
+  line-height:1.7;
 }
