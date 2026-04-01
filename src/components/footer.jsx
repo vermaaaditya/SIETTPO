@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { useLanguage } from '../contexts/LanguageContext'
 import { translations } from '../translations'
 
-const quickLinkSectionIds = ['', 'batch', 'gallery', 'contact']
+const quickLinkRoutes = ['/', '/events', '/code-of-conduct', '/batch-2025', '/team', '/contact-us']
 
 export function Footer() {
   const location = useLocation()
@@ -11,19 +11,16 @@ export function Footer() {
   const { lang } = useLanguage()
   const t = translations[lang].footer
 
-  const handleSectionClick = (sectionId) => {
-    const target = sectionId || 'top'
-
-    if (location.pathname !== '/') {
-      navigate('/', { state: { scrollTo: target } })
-      return
-    }
-
-    if (target === 'top') {
+  const handleSectionClick = (route) => {
+    if (route === '/') {
+      if (location.pathname !== '/') {
+        navigate('/')
+        return
+      }
       window.scrollTo({ top: 0, behavior: 'smooth' })
       return
     }
-    document.getElementById(target)?.scrollIntoView({ behavior: 'smooth' })
+    navigate(route)
   }
 
   return (
@@ -50,7 +47,7 @@ export function Footer() {
                 <li key={label}>
                   <button
                     type="button"
-                    onClick={() => handleSectionClick(quickLinkSectionIds[i])}
+                    onClick={() => handleSectionClick(quickLinkRoutes[i])}
                   >
                     {label}
                   </button>

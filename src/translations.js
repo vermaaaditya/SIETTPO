@@ -4,7 +4,7 @@ export const translations = {
       affiliation:
         'Approved by AICTE, New Delhi and Affiliated to Kurukshetra University, Kurukshetra',
       mobileLabel: 'Training and placement cell',
-      links: ['Home', 'About', 'Why SIET', 'Batch 2025', 'Gallery', 'Team', 'Contact'],
+      links: ['Home', 'Events', 'Code of Conduct', 'Batch 2025', 'Team', 'Contact Us'],
       forRecruiters: 'For Recruiters',
       studentLogin: 'Student Login',
     },
@@ -216,7 +216,7 @@ export const translations = {
       quickLinks: 'Quick Links',
       contactTpo: 'Contact TPO',
       findUs: 'Find Us',
-      links: ['Home', 'Academics', 'Gallery', 'Contact'],
+      links: ['Home', 'Events', 'Code of Conduct', 'Batch 2025', 'Team', 'Contact Us'],
       copyright: '© 2026 SIET Panchkula. Training & Placement Office. All rights reserved.',
     },
     login: {
@@ -254,7 +254,7 @@ export const translations = {
       affiliation:
         'AICTE, नई दिल्ली द्वारा अनुमोदित एवं कुरुक्षेत्र विश्वविद्यालय, कुरुक्षेत्र से संबद्ध',
       mobileLabel: 'प्रशिक्षण एवं प्लेसमेंट सेल',
-      links: ['होम', 'परिचय', 'SIET क्यों?', 'बैच 2025', 'गैलरी', 'टीम', 'संपर्क'],
+      links: ['होम', 'इवेंट्स', 'आचार संहिता', 'बैच 2025', 'टीम', 'संपर्क करें'],
       forRecruiters: 'भर्तीकर्ताओं के लिए',
       studentLogin: 'छात्र लॉगिन',
     },
@@ -463,7 +463,7 @@ export const translations = {
       quickLinks: 'त्वरित लिंक',
       contactTpo: 'TPO से संपर्क करें',
       findUs: 'हमें खोजें',
-      links: ['होम', 'शैक्षणिक', 'गैलरी', 'संपर्क'],
+      links: ['होम', 'इवेंट्स', 'आचार संहिता', 'बैच 2025', 'टीम', 'संपर्क करें'],
       copyright:
         '© 2026 SIET पंचकुला। प्रशिक्षण एवं प्लेसमेंट कार्यालय। सर्वाधिकार सुरक्षित।',
     },
