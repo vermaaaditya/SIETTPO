@@ -247,6 +247,39 @@ export const translations = {
       contactNotice: 'Contact the TPO at',
       orCall: 'or call',
     },
+    codeOfConduct: {
+      title: 'Code of Conduct',
+      back: 'Back',
+      downloadPdf: 'Download PDF',
+      sections: [
+        {
+          heading: 'Professional Conduct',
+          body: 'Students must maintain professionalism in all interactions with recruiters, faculty, and peers during placement activities.',
+        },
+        {
+          heading: 'Communication & Attendance',
+          body: 'Registered students are expected to attend all pre-placement talks, tests, interviews, and official TPO communications on time unless formally exempted.',
+        },
+        {
+          heading: 'Honesty & Compliance',
+          body: 'Any false information in resumes, forms, or interviews is strictly prohibited and may result in disqualification from placement processes.',
+        },
+        {
+          heading: 'Offer Ethics',
+          body: 'Once an offer is accepted as per institute policy, students must honor the commitment and follow all TPO rules regarding further participation.',
+        },
+        {
+          heading: 'Discipline',
+          body: 'Any misconduct, disruptive behavior, or violation of institutional norms during placement events can lead to disciplinary action.',
+        },
+      ],
+    },
+    contactPage: {
+      label: 'Contact',
+      title: 'Contact Us',
+      subtitle: 'Reach out to the Training & Placement Office.',
+      emailCta: 'Email TPO',
+    },
   },
 
   hi: {
@@ -493,6 +526,39 @@ export const translations = {
       needHelp: 'सहायता चाहिए?',
       contactNotice: 'TPO से संपर्क करें',
       orCall: 'या कॉल करें',
+    },
+    codeOfConduct: {
+      title: 'आचार संहिता',
+      back: 'वापस',
+      downloadPdf: 'PDF डाउनलोड करें',
+      sections: [
+        {
+          heading: 'व्यावसायिक आचरण',
+          body: 'प्लेसमेंट गतिविधियों के दौरान छात्रों को भर्तीकर्ताओं, संकाय और साथियों के साथ सभी संवादों में पेशेवर व्यवहार बनाए रखना आवश्यक है।',
+        },
+        {
+          heading: 'संचार एवं उपस्थिति',
+          body: 'पंजीकृत छात्रों से अपेक्षा है कि वे सभी प्री-प्लेसमेंट टॉक्स, टेस्ट, इंटरव्यू और TPO की आधिकारिक सूचनाओं में समय पर भाग लें, जब तक औपचारिक छूट न दी गई हो।',
+        },
+        {
+          heading: 'ईमानदारी एवं अनुपालन',
+          body: 'रिज़्यूमे, फॉर्म या इंटरव्यू में किसी भी प्रकार की गलत जानकारी सख्त वर्जित है और इससे प्लेसमेंट प्रक्रियाओं से अयोग्यता हो सकती है।',
+        },
+        {
+          heading: 'ऑफर नैतिकता',
+          body: 'संस्थान की नीति के अनुसार ऑफर स्वीकार करने के बाद, छात्र उस प्रतिबद्धता का पालन करें और आगे की भागीदारी संबंधी TPO नियमों का सम्मान करें।',
+        },
+        {
+          heading: 'अनुशासन',
+          body: 'प्लेसमेंट कार्यक्रमों के दौरान किसी भी प्रकार का दुराचार, अव्यवस्थित व्यवहार या संस्थागत नियमों का उल्लंघन अनुशासनात्मक कार्रवाई का कारण बन सकता है।',
+        },
+      ],
+    },
+    contactPage: {
+      label: 'संपर्क',
+      title: 'संपर्क करें',
+      subtitle: 'प्रशिक्षण एवं प्लेसमेंट कार्यालय से संपर्क करें।',
+      emailCta: 'TPO को ईमेल करें',
     },
   },
 }

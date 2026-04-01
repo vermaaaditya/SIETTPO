@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
 import { GradientButton } from './ui/gradient-button'
 import { useLanguage } from '../contexts/LanguageContext'
@@ -12,7 +12,6 @@ function scrollTo(id) {
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
-  const location = useLocation()
   const navigate = useNavigate()
   const { lang, toggleLang } = useLanguage()
   const t = translations[lang].navbar
@@ -34,21 +33,11 @@ export function Navbar() {
   }, [])
 
   const navigateToLink = (link) => {
-    if (link.type === 'route') {
-      navigate(link.value)
-      return
-    }
+    navigate(link.value)
+  }
 
-    const target = link.value || 'top'
-    if (location.pathname !== '/') {
-      navigate('/', { state: { scrollTo: target } })
-      return
-    }
-    if (target === 'top') {
-      window.scrollTo({ top: 0, behavior: 'smooth' })
-      return
-    }
-    scrollTo(target)
+  const getLinkHref = (link) => {
+    return link.value
   }
 
   return (
@@ -126,7 +115,7 @@ export function Navbar() {
             <a
               key={link.label}
               className="navbar-link"
-               href={link.type === 'route' ? link.value : (link.value ? `/#${link.value}` : '/#top')}
+               href={getLinkHref(link)}
                onClick={(event) => {
                  event.preventDefault()
                  navigateToLink(link)
@@ -168,7 +157,7 @@ export function Navbar() {
             <a
               key={link.label}
               className="navbar-mobile-menu-link"
-               href={link.type === 'route' ? link.value : (link.value ? `/#${link.value}` : '/#top')}
+               href={getLinkHref(link)}
                onClick={(event) => {
                  event.preventDefault()
                  navigateToLink(link)
