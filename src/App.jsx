@@ -75,7 +75,7 @@ function CodeOfConductPage() {
 
 function BatchPage() {
   return (
-    <main>
+    <main className="page-with-navbar-offset">
       <Navbar />
       <BatchSection />
       <Footer />
@@ -86,7 +86,7 @@ function BatchPage() {
 
 function TeamPage() {
   return (
-    <main>
+    <main className="page-with-navbar-offset">
       <Navbar />
       <TeamSection />
       <Footer />

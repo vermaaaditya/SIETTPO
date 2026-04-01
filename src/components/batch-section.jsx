@@ -148,6 +148,25 @@ export function BatchSection() {
             </div>
           </motion.div>
         </div>
+
+        <motion.div
+          className="batch-insights-card"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+        >
+          <h3 className="batch-card-heading">{t.recruiterSnapshotTitle}</h3>
+          <p className="batch-insights-lead">{t.recruiterSnapshotLead}</p>
+          <div className="batch-insights-grid">
+            {t.recruiterHighlights.map((item) => (
+              <div key={item.title} className="batch-insight-item">
+                <h4 className="batch-insight-title">{item.title}</h4>
+                <p className="batch-insight-desc">{item.description}</p>
+              </div>
+            ))}
+          </div>
+        </motion.div>
       </div>
     </section>
   )

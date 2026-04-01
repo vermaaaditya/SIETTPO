@@ -82,6 +82,9 @@ export const translations = {
       branchStrength: 'Branch-wise Strength',
       genderRatio: 'Gender Ratio',
       topSkills: 'Top Skills Across the Batch',
+      recruiterSnapshotTitle: 'Recruiter Snapshot',
+      recruiterSnapshotLead:
+        'Built in a style familiar to top IIT/NIT placement pages, this snapshot highlights classroom depth, project maturity, and interview readiness for Batch 2025.',
       studentsLabel: 'Students',
       male: 'Male',
       female: 'Female',
@@ -89,6 +92,28 @@ export const translations = {
         'Computer Science & Engineering (AI & ML)',
         'Computer Science & Engineering (Cyber Security)',
         'Robotics & Automation',
+      ],
+      recruiterHighlights: [
+        {
+          title: 'Practice-First Academic Rigour',
+          description:
+            'Semester-wise outcomes are aligned with coding, systems, and data foundations, ensuring graduates can ramp up quickly across software and product teams.',
+        },
+        {
+          title: 'Project and Product Orientation',
+          description:
+            'Students regularly build deployable solutions through clubs, mini-projects, and capstones, strengthening ownership, collaboration, and engineering discipline.',
+        },
+        {
+          title: 'Assessment and Placement Preparedness',
+          description:
+            'Structured aptitude, communication, DSA drills, and mock interview cycles mirror real hiring funnels to improve shortlist-to-offer conversion.',
+        },
+        {
+          title: 'Industry-Facing Skill Mix',
+          description:
+            'The cohort blends AI/ML, cybersecurity, full-stack, and automation capabilities, giving recruiters flexible talent options for diverse technology roles.',
+        },
       ],
     },
     pipeline: {
@@ -443,6 +468,9 @@ export const translations = {
       branchStrength: 'शाखा-वार संख्या',
       genderRatio: 'लिंग अनुपात',
       topSkills: 'बैच के शीर्ष कौशल',
+      recruiterSnapshotTitle: 'रिक्रूटर स्नैपशॉट',
+      recruiterSnapshotLead:
+        'IIT/NIT प्लेसमेंट पेज की पेशेवर शैली से प्रेरित यह संक्षिप्त प्रोफ़ाइल बैच 2025 की अकादमिक गहराई, प्रोजेक्ट क्षमता और इंटरव्यू तैयारी को दर्शाती है।',
       studentsLabel: 'छात्र',
       male: 'पुरुष',
       female: 'महिला',
@@ -450,6 +478,28 @@ export const translations = {
         'कंप्यूटर विज्ञान एवं अभियांत्रिकी (AI & ML)',
         'कंप्यूटर विज्ञान एवं अभियांत्रिकी (साइबर सुरक्षा)',
         'रोबोटिक्स एवं स्वचालन',
+      ],
+      recruiterHighlights: [
+        {
+          title: 'प्रैक्टिस-फर्स्ट अकादमिक सख्ती',
+          description:
+            'सेमेस्टर-आधारित सीखने के परिणाम कोडिंग, सिस्टम और डेटा की मजबूत नींव से जुड़े हैं, जिससे छात्र सॉफ्टवेयर व प्रोडक्ट टीमों में तेजी से योगदान दे पाते हैं।',
+        },
+        {
+          title: 'प्रोजेक्ट और प्रोडक्ट उन्मुखता',
+          description:
+            'क्लब गतिविधियों, मिनी-प्रोजेक्ट और कैपस्टोन के माध्यम से छात्र नियमित रूप से डिप्लॉय करने योग्य समाधान बनाते हैं, जिससे ओनरशिप और टीमवर्क मजबूत होता है।',
+        },
+        {
+          title: 'असेसमेंट और प्लेसमेंट तैयारी',
+          description:
+            'संरचित अभिक्षमता, संचार, DSA अभ्यास और मॉक इंटरव्यू चक्र वास्तविक भर्ती प्रक्रिया जैसा अनुभव देते हैं और चयन दर बेहतर बनाते हैं।',
+        },
+        {
+          title: 'इंडस्ट्री-फेसिंग स्किल मिश्रण',
+          description:
+            'यह बैच AI/ML, साइबर सुरक्षा, फुल-स्टैक और ऑटोमेशन कौशल का संतुलित संयोजन प्रस्तुत करता है, जिससे विविध टेक भूमिकाओं के लिए भर्ती आसान होती है।',
+        },
       ],
     },
     pipeline: {

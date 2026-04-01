@@ -711,6 +711,14 @@ input:focus, textarea:focus, select:focus { outline: none; box-shadow: 0 0 0 2px
   background:var(--surface-container-low);
   padding:5rem 0;
 }
+.page-with-navbar-offset {
+  padding-top: 10.5rem;
+}
+@media (max-width: 767px) {
+  .page-with-navbar-offset {
+    padding-top: 9rem;
+  }
+}
 .batch-grid-3 {
   display:grid;
   gap:1.5rem;
@@ -815,6 +823,45 @@ input:focus, textarea:focus, select:focus { outline: none; box-shadow: 0 0 0 2px
   border-color:rgba(201,146,42,0.4);
   background:rgba(201,146,42,0.06);
   color:var(--ink);
+}
+.batch-insights-card {
+  margin-top: 2rem;
+  background: var(--surface-container-lowest);
+  padding: 2rem;
+  box-shadow: 0 4px 16px rgba(10,22,40,0.04);
+}
+.batch-insights-lead {
+  margin-bottom: 1.25rem;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--muted-foreground);
+}
+.batch-insights-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 768px) {
+  .batch-insights-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+.batch-insight-item {
+  padding: 1rem 1rem 0.9rem;
+  background: var(--surface-container-low);
+  border-left: 3px solid rgba(201,146,42,0.45);
+}
+.batch-insight-title {
+  margin-bottom: 0.35rem;
+  font-family: var(--font-headline);
+  font-size: 1rem;
+  color: var(--foreground);
+}
+.batch-insight-desc {
+  margin: 0;
+  font-size: 0.86rem;
+  line-height: 1.65;
+  color: var(--muted-foreground);
 }
 
 /* ═══════════════════════════════════════
