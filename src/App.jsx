@@ -64,6 +64,17 @@ function EventsPage() {
   )
 }
 
+function CodeOfConductPage() {
+  return (
+    <main>
+      <Navbar />
+      <CodeOfConduct />
+      <Footer />
+      <Chatbot />
+    </main>
+  )
+}
+
 function BatchPage() {
   return (
     <main>
@@ -116,7 +127,7 @@ export default function App() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/events" element={<EventsPage />} />
-      <Route path="/code-of-conduct" element={<CodeOfConduct />} />
+      <Route path="/code-of-conduct" element={<CodeOfConductPage />} />
       <Route path="/batch-2025" element={<BatchPage />} />
       <Route path="/team" element={<TeamPage />} />
       <Route path="/contact-us" element={<ContactPage />} />

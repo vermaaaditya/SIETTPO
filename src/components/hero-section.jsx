@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { GradientButton } from './ui/gradient-button'
 import { useLanguage } from '../contexts/LanguageContext'
 import { translations } from '../translations'
@@ -40,6 +41,7 @@ function AnimatedCounter({ end, duration = 2000, suffix = '' }) {
 export function HeroSection() {
   const { lang } = useLanguage()
   const t = translations[lang].hero
+  const navigate = useNavigate()
 
   return (
     <section className="hero-section">
@@ -84,7 +86,7 @@ export function HeroSection() {
 
         <div className="hero-buttons">
           <GradientButton onClick={() => document.getElementById('recruit-cta')?.scrollIntoView({ behavior: 'smooth' })}>{t.forRecruiters}</GradientButton>
-          <GradientButton variant="variant" onClick={() => document.getElementById('brochure-section')?.scrollIntoView({ behavior: 'smooth' })}>{t.downloadBrochure}</GradientButton>
+          <GradientButton variant="variant" onClick={() => navigate('/placement-brochure')}>{t.downloadBrochure}</GradientButton>
         </div>
       </div>
     </section>

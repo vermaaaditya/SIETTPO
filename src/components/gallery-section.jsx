@@ -38,12 +38,14 @@ const eventImages = [
     ],
   },
   {
-    cat: 'Campus',
-    cover: '/images/siet-campus.jpg',
+    cat: 'Events',
+    cover: '/images/gallery/gfg/gfg1.jpeg',
     images: [
-      { src: '/images/siet-campus.jpg',            caption: 'SIET Panchkula — Main Academic Block' },
-      { src: '/images/siet-panchkula-building.jpg', caption: 'SIET Panchkula Campus' },
-      { src: '/images/siet2.webp',                  caption: 'SIET Panchkula Campus Highlights' },
+      { src: '/images/gallery/gfg/gfg1.jpeg', caption: 'GFG expert lecture session underway' },
+      { src: '/images/gallery/gfg/gfg2.jpeg', caption: 'Students attending the GFG session' },
+      { src: '/images/gallery/gfg/gfg3.jpeg', caption: 'Hands-on guidance during the lecture' },
+      { src: '/images/gallery/gfg/gfg4.jpeg', caption: 'Interactive Q&A with the expert speaker' },
+      { src: '/images/gallery/gfg/gfg5.jpeg', caption: 'Group moments from the GFG event' },
     ],
   },
 ]
@@ -134,16 +136,9 @@ function Lightbox({ event, onClose }) {
 
 /* ─── Gallery Section ─── */
 export function GallerySection() {
-  const [active, setActive] = useState('all')
   const [lightboxIndex, setLightboxIndex] = useState(null)
   const { lang } = useLanguage()
   const t = translations[lang].gallery
-
-  const categories = [
-    { key: 'all', label: t.filterAll },
-    { key: 'Events', label: t.filterEvents },
-    { key: 'Campus', label: t.filterCampus },
-  ]
 
   const events = eventImages.map((e, i) => ({
     ...e,
@@ -153,8 +148,6 @@ export function GallerySection() {
     date: t.events[i].date,
     location: t.events[i].location,
   }))
-
-  const filtered = active === 'all' ? events : events.filter(e => e.cat === active)
 
   return (
     <section id="gallery" className="gallery-section">
@@ -171,65 +164,45 @@ export function GallerySection() {
           <p className="section-subtitle">{t.sectionSubtitle}</p>
         </motion.div>
 
-        {/* Custom Tab Navigation */}
-        <div className="gallery-tabs-container" style={{ display: 'flex', justifyContent: 'center', marginBottom: '3rem' }}>
-          <div className="gallery-tabs">
-            {categories.map((cat) => (
-              <button
-                key={cat.key}
-                onClick={() => setActive(cat.key)}
-                className={`gallery-tab ${active === cat.key ? 'gallery-tab-active' : ''}`}
-              >
-                {cat.label}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Event Cards with Custom Transition */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={active}
-            className="event-cards-grid"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.4, ease: 'easeInOut' }}
-          >
-            {filtered.map((event, i) => (
-              <motion.div
-                key={event.title}
-                className="event-card"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: i * 0.1 }}
-              >
-                <div className="event-card-image-wrap" onClick={() => setLightboxIndex(events.indexOf(event))}>
-                  <img src={event.cover} alt={event.title} className="event-card-image" />
-                  <div className="event-card-image-count">{event.images.length} {t.photosLabel}</div>
-                </div>
-                <div className="event-card-body">
-                  <h3 className="event-card-title">{event.title}</h3>
-                  <p className="event-card-subtitle">{event.subtitle}</p>
-                  <p className="event-card-desc">{event.description}</p>
-                  <div className="event-card-meta">
-                    {event.date && (
-                      <span className="event-card-meta-item">
-                        <Calendar className="event-card-meta-icon" /> {event.date}
-                      </span>
-                    )}
+        <motion.div
+          className="event-cards-grid"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, ease: 'easeInOut' }}
+        >
+          {events.map((event, i) => (
+            <motion.div
+              key={event.title}
+              className="event-card"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: i * 0.1 }}
+            >
+              <div className="event-card-image-wrap" onClick={() => setLightboxIndex(i)}>
+                <img src={event.cover} alt={event.title} className="event-card-image" />
+                <div className="event-card-image-count">{event.images.length} {t.photosLabel}</div>
+              </div>
+              <div className="event-card-body">
+                <h3 className="event-card-title">{event.title}</h3>
+                <p className="event-card-subtitle">{event.subtitle}</p>
+                <p className="event-card-desc">{event.description}</p>
+                <div className="event-card-meta">
+                  {event.date && (
                     <span className="event-card-meta-item">
-                      <MapPin className="event-card-meta-icon" /> {event.location}
+                      <Calendar className="event-card-meta-icon" /> {event.date}
                     </span>
-                  </div>
-                  <button className="event-card-link" onClick={() => setLightboxIndex(events.indexOf(event))}>
-                    {t.viewGallery}
-                  </button>
+                  )}
+                  <span className="event-card-meta-item">
+                    <MapPin className="event-card-meta-icon" /> {event.location}
+                  </span>
                 </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </AnimatePresence>
+                <button className="event-card-link" onClick={() => setLightboxIndex(i)}>
+                  {t.viewGallery}
+                </button>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
 
       {/* Lightbox */}
