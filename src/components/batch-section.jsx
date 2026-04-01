@@ -25,31 +25,32 @@ function PieChart({ studentsLabel }) {
   const femaleArc = (femalePercent / 100) * c
 
   return (
-    <svg viewBox="0 0 140 140" className="batch-pie-svg">
-      {/* Female slice */}
-      <circle
-        cx="70" cy="70" r={r}
-        fill="none"
-        stroke="var(--gold)"
-        strokeWidth="28"
-        strokeDasharray={`${femaleArc} ${c}`}
-        strokeDashoffset="0"
-        transform="rotate(-90 70 70)"
-      />
-      {/* Male slice */}
-      <circle
-        cx="70" cy="70" r={r}
-        fill="none"
-        stroke="var(--ink)"
-        strokeWidth="28"
-        strokeDasharray={`${maleArc} ${c}`}
-        strokeDashoffset={`-${femaleArc}`}
-        transform="rotate(-90 70 70)"
-      />
-      {/* Center label */}
-      <text x="70" y="66" textAnchor="middle" className="batch-pie-total">{totalStudents}</text>
-      <text x="70" y="82" textAnchor="middle" className="batch-pie-label">{studentsLabel}</text>
-    </svg>
+    <div className="batch-pie-wrapper">
+      <svg viewBox="0 0 140 140" className="batch-pie-svg">
+        {/* Female slice */}
+        <circle
+          cx="70" cy="70" r={r}
+          fill="none"
+          stroke="var(--gold)"
+          strokeWidth="28"
+          strokeDasharray={`${femaleArc} ${c}`}
+          strokeDashoffset="0"
+          transform="rotate(-90 70 70)"
+        />
+        {/* Male slice */}
+        <circle
+          cx="70" cy="70" r={r}
+          fill="none"
+          stroke="var(--ink)"
+          strokeWidth="28"
+          strokeDasharray={`${maleArc} ${c}`}
+          strokeDashoffset={`-${femaleArc}`}
+          transform="rotate(-90 70 70)"
+        />
+      </svg>
+      <p className="batch-pie-total-text">{totalStudents}</p>
+      <p className="batch-pie-label-text">{studentsLabel}</p>
+    </div>
   )
 }
 
