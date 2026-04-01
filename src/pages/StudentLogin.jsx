@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { ArrowLeft, Eye, EyeOff, AlertCircle, CheckCircle2 } from 'lucide-react'
@@ -8,27 +8,49 @@ import { translations } from '../translations'
 const statsValues = ['300+', '3', '5+']
 
 export default function StudentLogin() {
-  const [form, setForm] = useState({ rollNumber: '', password: '' })
+  const [form, setForm] = useState({ rollNumber: '', password: '', confirmPassword: '' })
   const [showPassword, setShowPassword] = useState(false)
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const [remember, setRemember] = useState(false)
   const [status, setStatus] = useState(null) // null | 'loading' | 'error' | 'success'
+  const [errorType, setErrorType] = useState(null) // null | 'required' | 'mismatch'
+  const submitTimeoutRef = useRef(null)
   const { lang } = useLanguage()
   const t = translations[lang].login
 
+  useEffect(() => () => {
+    if (submitTimeoutRef.current) {
+      clearTimeout(submitTimeoutRef.current)
+    }
+  }, [])
+
   function handleChange(e) {
     setForm(prev => ({ ...prev, [e.target.name]: e.target.value }))
-    if (status === 'error') setStatus(null)
+    if (status === 'error') {
+      setStatus(null)
+      setErrorType(null)
+    }
   }
 
   function handleSubmit(e) {
     e.preventDefault()
-    if (!form.rollNumber.trim() || !form.password.trim()) {
+    if (!form.rollNumber.trim() || !form.password.trim() || !form.confirmPassword.trim()) {
+      setErrorType('required')
       setStatus('error')
       return
     }
+    if (form.password !== form.confirmPassword) {
+      setErrorType('mismatch')
+      setStatus('error')
+      return
+    }
+    setErrorType(null)
     setStatus('loading')
-    // Placeholder — replace with real auth when backend is ready
-    setTimeout(() => setStatus('error'), 1200)
+    // Placeholder — replace with real signup API call when backend is ready
+    submitTimeoutRef.current = setTimeout(() => {
+      setStatus('success')
+      setForm({ rollNumber: '', password: '', confirmPassword: '' })
+    }, 1200)
   }
 
   return (
@@ -103,7 +125,7 @@ export default function StudentLogin() {
               style={{ marginBottom: '1.25rem' }}
             >
               <AlertCircle />
-              {t.errorMsg}
+              {errorType === 'mismatch' ? t.passwordMismatchMsg : t.errorMsg}
             </motion.div>
           )}
           {status === 'success' && (
@@ -143,7 +165,7 @@ export default function StudentLogin() {
                   type={showPassword ? 'text' : 'password'}
                   className="login-input"
                   placeholder={t.passwordPlaceholder}
-                  autoComplete="current-password"
+                  autoComplete="new-password"
                   value={form.password}
                   onChange={handleChange}
                 />
@@ -154,6 +176,30 @@ export default function StudentLogin() {
                   aria-label={showPassword ? 'Hide password' : 'Show password'}
                 >
                   {showPassword ? <EyeOff /> : <Eye />}
+                </button>
+              </div>
+            </div>
+
+            <div className="login-field">
+              <label htmlFor="confirmPassword" className="login-label">{t.confirmPasswordLabel}</label>
+              <div className="login-input-wrap">
+                <input
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  type={showConfirmPassword ? 'text' : 'password'}
+                  className="login-input"
+                  placeholder={t.confirmPasswordPlaceholder}
+                  autoComplete="new-password"
+                  value={form.confirmPassword}
+                  onChange={handleChange}
+                />
+                <button
+                  type="button"
+                  className="login-eye-btn"
+                  onClick={() => setShowConfirmPassword(v => !v)}
+                  aria-label={showConfirmPassword ? 'Hide confirm password' : 'Show confirm password'}
+                >
+                  {showConfirmPassword ? <EyeOff /> : <Eye />}
                 </button>
               </div>
             </div>
@@ -175,7 +221,7 @@ export default function StudentLogin() {
               className="login-submit"
               disabled={status === 'loading'}
             >
-              {status === 'loading' ? t.signingIn : t.signIn}
+              {status === 'loading' ? t.signingUp : t.signUp}
             </button>
           </form>
 
