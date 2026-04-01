@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
 import { GradientButton } from './ui/gradient-button'
 import { useLanguage } from '../contexts/LanguageContext'
@@ -12,6 +12,7 @@ function scrollTo(id) {
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const location = useLocation()
   const navigate = useNavigate()
   const { lang, toggleLang } = useLanguage()
   const t = translations[lang].navbar
@@ -29,8 +30,25 @@ export function Navbar() {
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 10)
     window.addEventListener('scroll', handleScroll, { passive: true })
+    handleScroll()
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  const navigateToSection = (sectionId) => {
+    const target = sectionId || 'top'
+
+    if (location.pathname !== '/') {
+      navigate('/', { state: { scrollTo: target } })
+      return
+    }
+
+    if (target === 'top') {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+      return
+    }
+
+    scrollTo(target)
+  }
 
   return (
     <header className={`navbar${scrolled ? ' navbar-scrolled' : ''}`}>
@@ -99,7 +117,7 @@ export function Navbar() {
 
       {/* NAV BAR */}
       <nav className="navbar-nav">
-        <button type="button" className="md:hidden" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+        <button type="button" className="md:hidden" onClick={() => navigateToSection('')}>
           <span className="navbar-mobile-label">{t.mobileLabel}</span>
         </button>
         <div className="navbar-links">
@@ -108,13 +126,7 @@ export function Navbar() {
               key={link.label}
               type="button"
               className="navbar-link"
-              onClick={() => {
-                if (!link.sectionId) {
-                  window.scrollTo({ top: 0, behavior: 'smooth' })
-                  return
-                }
-                scrollTo(link.sectionId)
-              }}
+              onClick={() => navigateToSection(link.sectionId)}
             >
               {link.label}
             </button>
@@ -154,11 +166,7 @@ export function Navbar() {
               type="button"
               className="navbar-mobile-menu-link"
               onClick={() => {
-                if (!link.sectionId) {
-                  window.scrollTo({ top: 0, behavior: 'smooth' })
-                } else {
-                  scrollTo(link.sectionId)
-                }
+                navigateToSection(link.sectionId)
                 setMobileOpen(false)
               }}
             >

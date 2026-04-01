@@ -1,19 +1,29 @@
 import { Mail, Phone } from 'lucide-react'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { useLanguage } from '../contexts/LanguageContext'
 import { translations } from '../translations'
 
 const quickLinkSectionIds = ['', 'batch', 'gallery', 'contact']
 
 export function Footer() {
+  const location = useLocation()
+  const navigate = useNavigate()
   const { lang } = useLanguage()
   const t = translations[lang].footer
 
   const handleSectionClick = (sectionId) => {
-    if (!sectionId) {
+    const target = sectionId || 'top'
+
+    if (location.pathname !== '/') {
+      navigate('/', { state: { scrollTo: target } })
+      return
+    }
+
+    if (target === 'top') {
       window.scrollTo({ top: 0, behavior: 'smooth' })
       return
     }
-    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' })
+    document.getElementById(target)?.scrollIntoView({ behavior: 'smooth' })
   }
 
   return (

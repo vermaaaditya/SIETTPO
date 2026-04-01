@@ -1,4 +1,5 @@
-import { Routes, Route } from 'react-router-dom'
+import { useEffect } from 'react'
+import { Routes, Route, useLocation, useNavigate } from 'react-router-dom'
 import { Navbar } from './components/navbar'
 import Chatbot from './components/Chatbot'
 import { HeroSection } from './components/hero-section'
@@ -20,6 +21,24 @@ import GuidelinesViewer from './pages/GuidelinesViewer'
 import Form from './pages/Form'
 
 function Home() {
+  const location = useLocation()
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    const sectionId = location.state?.scrollTo
+    if (!sectionId) return
+
+    requestAnimationFrame(() => {
+      if (sectionId === 'top') {
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+      } else {
+        document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' })
+      }
+    })
+
+    navigate('/', { replace: true, state: {} })
+  }, [location.state, navigate])
+
   return (
     <main>
       <Navbar />

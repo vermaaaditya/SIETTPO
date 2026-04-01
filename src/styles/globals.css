@@ -1993,8 +1993,13 @@ input:focus, textarea:focus, select:focus { outline: none; box-shadow: 0 0 0 2px
   font-family: var(--font-body);
 }
 .inquiry-main {
-  padding-top: 7rem;
+  padding-top: 10.5rem;
   padding-bottom: 5rem;
+}
+@media (max-width: 767px) {
+  .inquiry-main {
+    padding-top: 9rem;
+  }
 }
 .inquiry-container {
   max-width: 80rem;
