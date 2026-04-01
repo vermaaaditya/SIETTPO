@@ -80,25 +80,27 @@ export default function CodeOfConduct() {
           )}
         </div>
 
-        <div className="coc-panel coc-preview bg-surface-container-lowest border border-border shadow-lg rounded-lg p-4 md:p-6">
-          <div className="coc-preview-head">
-            <h2 className="text-2xl font-headline mb-3">{t.previewTitle}</h2>
-            <button
-              onClick={handleDownload}
-              className="gradient-button inline-flex items-center gap-2"
-            >
-              <Download className="w-4 h-4" />
-              {t.downloadPdf}
-            </button>
+        {activeTab !== 'codeOfConduct' && (
+          <div className="coc-panel coc-preview bg-surface-container-lowest border border-border shadow-lg rounded-lg p-4 md:p-6">
+            <div className="coc-preview-head">
+              <h2 className="text-2xl font-headline mb-3">{t.previewTitle}</h2>
+              <button
+                onClick={handleDownload}
+                className="gradient-button inline-flex items-center gap-2"
+              >
+                <Download className="w-4 h-4" />
+                {t.downloadPdf}
+              </button>
+            </div>
+            <div className="coc-preview-frame-wrap">
+              <iframe
+                src={currentPreview}
+                className="coc-preview-frame"
+                title={`${t.tabs.find((tab) => tab.key === activeTab)?.label || t.title} PDF`}
+              />
+            </div>
           </div>
-          <div className="coc-preview-frame-wrap">
-            <iframe
-              src={currentPreview}
-              className="coc-preview-frame"
-              title={`${t.tabs.find((tab) => tab.key === activeTab)?.label || t.title} PDF`}
-            />
-          </div>
-        </div>
+        )}
       </div>
     </section>
   )
