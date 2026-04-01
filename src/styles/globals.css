@@ -2330,6 +2330,17 @@ input:focus, textarea:focus, select:focus { outline: none; box-shadow: 0 0 0 2px
   gap:0.5rem;
   margin-bottom:1.5rem;
 }
+.coc-page-section {
+  background:var(--parchment);
+  padding:16rem 0 5rem;
+}
+.coc-intro {
+  max-width:72rem;
+  margin:0 auto 1.75rem;
+}
+.coc-intro-text:last-child {
+  margin-bottom:0;
+}
 .coc-tab {
   font-family:var(--font-body);
   font-size:0.78rem;
@@ -2356,6 +2367,26 @@ input:focus, textarea:focus, select:focus { outline: none; box-shadow: 0 0 0 2px
   max-width:72rem;
   margin:0 auto;
 }
+.coc-preview {
+  margin-top:1.5rem;
+}
+.coc-preview-head {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+  flex-wrap:wrap;
+}
+.coc-preview-frame-wrap {
+  border:1px solid var(--border);
+  overflow:hidden;
+}
+.coc-preview-frame {
+  width:100%;
+  height:70vh;
+  min-height:420px;
+  border:0;
+}
 .coc-points {
   margin:0;
   padding-left:1.2rem;
@@ -2363,4 +2394,9 @@ input:focus, textarea:focus, select:focus { outline: none; box-shadow: 0 0 0 2px
   gap:0.5rem;
   color:var(--muted-foreground);
   line-height:1.7;
+}
+@media (max-width:767px) {
+  .coc-page-section {
+    padding:12rem 0 4rem;
+  }
 }

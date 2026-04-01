@@ -172,9 +172,9 @@ export const translations = {
         },
         {
           title: 'GFG Expert Lecture',
-          subtitle: 'GeeksforGeeks Campus Session',
+          subtitle: 'Founder & CEO Session — GeeksforGeeks',
           description:
-            'An expert-led GeeksforGeeks session focused on coding readiness, problem-solving strategy, and practical placement preparation for students.',
+            'A special session personally led by Mr. Sandeep Jain, Founder and CEO of GeeksforGeeks, focused on coding excellence, problem-solving strategy, and placement readiness.',
           date: '2026',
           location: 'SIET Panchkula',
         },
@@ -248,11 +248,73 @@ export const translations = {
       title: 'Code of Conduct',
       back: 'Back',
       downloadPdf: 'Download PDF',
+      intro: [
+        'The Code of Conduct establishes clear guidelines to promote integrity, professionalism, and responsibility among students, faculty, and staff. These guidelines are essential to ensure that all members of the institution maintain respectful conduct.',
+        'The Code promotes transparency, non-discrimination, and mutual respect within the academic community. In this way, everyone can contribute to a positive environment that supports personal growth and academic excellence.',
+        'The Code provides a clear definition of acceptable and unacceptable behaviour within the institution, ensuring that all individuals act ethically and maintain harmonious relationships.',
+      ],
       tabs: [
         { key: 'codeOfConduct', label: 'Code of Conduct' },
         { key: 'declaration', label: 'Declaration' },
         { key: 'resumeTemplate', label: 'Resume Template' },
       ],
+      rulesHeading: 'Rules And Regulations',
+      rules: [
+        {
+          heading: '1. Purpose',
+          body: 'The main aim of SIET is to create a positive environment where students can learn and grow, with a focus on academics, discipline, and overall development.',
+        },
+        {
+          heading: '2. General Conduct',
+          body: 'Students at SIET must respect faculty, staff, and peers. SIET does not tolerate any form of misconduct, harassment, or indiscipline.',
+        },
+        {
+          heading: '3. Academic Integrity',
+          body: 'Students must be honest in all their work. Cheating, plagiarism, and dishonesty are strictly prohibited. Students must attend classes regularly and maintain a minimum of 75% attendance.',
+        },
+        {
+          heading: '4. Anti-Ragging Policy',
+          body: 'Ragging is strictly prohibited at SIET. Any student found involved in ragging will face strict disciplinary action.',
+        },
+        {
+          heading: '5. Attendance & Academic Responsibility',
+          body: 'Students must attend lectures, labs, and tutorials regularly. Assignments must be submitted on time and students are expected to participate in academic activities.',
+        },
+        {
+          heading: '6. Use of Campus Facilities',
+          body: 'Students must use the library, laboratories, and sports facilities responsibly. Damage to SIET property will result in a fine or penalty.',
+        },
+        {
+          heading: '7. Discipline & Misconduct',
+          body: 'If a student breaks any rule, the Disciplinary Committee will take action. The committee may issue a warning, fine, suspension, or expulsion from SIET.',
+        },
+        {
+          heading: '8. Hostel Rules',
+          body: 'Students living in the hostel must follow established timings and keep their rooms clean. They must respect SIET property and not engage in prohibited activities.',
+        },
+        {
+          heading: '9. Digital & Social Media Ethics',
+          body: "Students must use digital platforms responsibly and must not post anything that can damage SIET's reputation.",
+        },
+        {
+          heading: '10. Equality & Inclusiveness',
+          body: 'SIET does not permit discrimination based on gender, religion, caste, or background. Students must foster an inclusive environment for all.',
+        },
+        {
+          heading: '11. Health & Safety',
+          body: 'Students must follow all safety rules within the institution. Harmful substances are strictly prohibited.',
+        },
+        {
+          heading: '12. Placement & Professional Conduct',
+          body: 'Students must behave professionally during the placement process and follow all guidelines provided by the Training & Placement Office.',
+        },
+      ],
+      previewTitle: 'PDF Preview',
+      previewMap: {
+        codeOfConduct: '/pdfs/code-of-conduct.pdf',
+        declaration: '/pdfs/code-of-conduct.pdf',
+        resumeTemplate: '/pdfs/brochure.pdf',
+      },
       sections: [
         {
           heading: 'Professional Conduct',
@@ -469,9 +531,9 @@ export const translations = {
         },
         {
           title: 'GFG विशेषज्ञ व्याख्यान',
-          subtitle: 'GeeksforGeeks कैंपस सत्र',
+          subtitle: 'संस्थापक एवं CEO सत्र — GeeksforGeeks',
           description:
-            'GeeksforGeeks द्वारा आयोजित विशेषज्ञ सत्र जिसमें कोडिंग तैयारी, समस्या-समाधान रणनीति और प्लेसमेंट उन्मुख व्यावहारिक मार्गदर्शन दिया गया।',
+            'GeeksforGeeks के संस्थापक एवं CEO श्री संदीप जैन द्वारा व्यक्तिगत रूप से आयोजित विशेष सत्र, जिसमें कोडिंग उत्कृष्टता, समस्या-समाधान रणनीति और प्लेसमेंट तैयारी पर औपचारिक मार्गदर्शन दिया गया।',
           date: '2026',
           location: 'SIET पंचकुला',
         },
@@ -545,11 +607,73 @@ export const translations = {
       title: 'आचार संहिता',
       back: 'वापस',
       downloadPdf: 'PDF डाउनलोड करें',
+      intro: [
+        'आचार संहिता छात्रों, संकाय और कर्मचारियों में ईमानदारी, व्यावसायिकता और जिम्मेदारी को बढ़ावा देने के लिए स्पष्ट दिशानिर्देश निर्धारित करती है। ये दिशानिर्देश आवश्यक हैं ताकि संस्थान के सभी सदस्य सम्मानजनक आचरण बनाए रखें।',
+        'यह संहिता शैक्षणिक समुदाय में पारदर्शिता, भेदभाव-रहित वातावरण और पारस्परिक सम्मान को प्रोत्साहित करती है। इस प्रकार प्रत्येक व्यक्ति व्यक्तिगत विकास और शैक्षणिक उत्कृष्टता के लिए सकारात्मक वातावरण में योगदान दे सकता है।',
+        'यह संहिता संस्थान में स्वीकार्य और अस्वीकार्य व्यवहार की स्पष्ट परिभाषा देती है, जिससे सभी व्यक्ति नैतिक रूप से कार्य करें और सौहार्दपूर्ण संबंध बनाए रखें।',
+      ],
       tabs: [
         { key: 'codeOfConduct', label: 'आचार संहिता' },
         { key: 'declaration', label: 'घोषणा' },
         { key: 'resumeTemplate', label: 'रिज़्यूमे टेम्पलेट' },
       ],
+      rulesHeading: 'नियम और विनियम',
+      rules: [
+        {
+          heading: '1. उद्देश्य',
+          body: 'SIET का मुख्य उद्देश्य ऐसा सकारात्मक वातावरण बनाना है जहाँ छात्र अकादमिक, अनुशासन और समग्र विकास पर ध्यान देते हुए सीख सकें और आगे बढ़ सकें।',
+        },
+        {
+          heading: '2. सामान्य आचरण',
+          body: 'SIET में छात्रों को संकाय, कर्मचारियों और साथियों का सम्मान करना चाहिए। संस्थान किसी भी प्रकार के दुराचार, उत्पीड़न या अनुशासनहीनता को स्वीकार नहीं करता।',
+        },
+        {
+          heading: '3. शैक्षणिक ईमानदारी',
+          body: 'छात्रों को अपने सभी कार्यों में ईमानदार रहना चाहिए। नकल, साहित्यिक चोरी और बेईमानी सख्त वर्जित है। छात्रों को नियमित उपस्थिति रखनी होगी और न्यूनतम 75% उपस्थिति बनाए रखनी होगी।',
+        },
+        {
+          heading: '4. एंटी-रैगिंग नीति',
+          body: 'SIET में रैगिंग पूर्णतः प्रतिबंधित है। रैगिंग में शामिल पाए जाने पर कड़ी अनुशासनात्मक कार्रवाई की जाएगी।',
+        },
+        {
+          heading: '5. उपस्थिति एवं शैक्षणिक जिम्मेदारी',
+          body: 'छात्रों को व्याख्यान, प्रयोगशाला और ट्यूटोरियल में नियमित रूप से उपस्थित होना चाहिए। असाइनमेंट समय पर जमा करना और शैक्षणिक गतिविधियों में भाग लेना अपेक्षित है।',
+        },
+        {
+          heading: '6. परिसर सुविधाओं का उपयोग',
+          body: 'छात्रों को पुस्तकालय, प्रयोगशाला और खेल सुविधाओं का जिम्मेदारी से उपयोग करना चाहिए। SIET की संपत्ति को नुकसान पहुँचाने पर जुर्माना या दंड लगाया जाएगा।',
+        },
+        {
+          heading: '7. अनुशासन एवं दुराचार',
+          body: 'यदि कोई छात्र नियम तोड़ता है तो अनुशासन समिति कार्रवाई करेगी। समिति चेतावनी, जुर्माना, निलंबन या निष्कासन का निर्णय ले सकती है।',
+        },
+        {
+          heading: '8. छात्रावास नियम',
+          body: 'छात्रावास में रहने वाले छात्रों को निर्धारित समय का पालन करना होगा और कमरे साफ रखने होंगे। उन्हें SIET संपत्ति का सम्मान करना चाहिए और प्रतिबंधित गतिविधियों से दूर रहना चाहिए।',
+        },
+        {
+          heading: '9. डिजिटल एवं सोशल मीडिया नैतिकता',
+          body: 'छात्रों को डिजिटल प्लेटफ़ॉर्म का जिम्मेदारी से उपयोग करना चाहिए और ऐसा कुछ पोस्ट नहीं करना चाहिए जिससे SIET की प्रतिष्ठा को नुकसान पहुँचे।',
+        },
+        {
+          heading: '10. समानता एवं समावेशन',
+          body: 'SIET लिंग, धर्म, जाति या पृष्ठभूमि के आधार पर किसी भी भेदभाव की अनुमति नहीं देता। छात्रों को सभी के लिए समावेशी वातावरण बनाना चाहिए।',
+        },
+        {
+          heading: '11. स्वास्थ्य एवं सुरक्षा',
+          body: 'छात्रों को संस्थान के सभी सुरक्षा नियमों का पालन करना चाहिए। हानिकारक पदार्थ सख्त रूप से प्रतिबंधित हैं।',
+        },
+        {
+          heading: '12. प्लेसमेंट एवं व्यावसायिक आचरण',
+          body: 'छात्रों को प्लेसमेंट प्रक्रिया के दौरान पेशेवर व्यवहार करना चाहिए और प्रशिक्षण एवं प्लेसमेंट कार्यालय द्वारा दिए गए सभी दिशानिर्देशों का पालन करना चाहिए।',
+        },
+      ],
+      previewTitle: 'PDF पूर्वावलोकन',
+      previewMap: {
+        codeOfConduct: '/pdfs/code-of-conduct.pdf',
+        declaration: '/pdfs/code-of-conduct.pdf',
+        resumeTemplate: '/pdfs/brochure.pdf',
+      },
       sections: [
         {
           heading: 'व्यावसायिक आचरण',
