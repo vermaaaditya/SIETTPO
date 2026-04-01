@@ -607,7 +607,7 @@ export const translations = {
     },
     codeOfConduct: {
       title: 'आचार संहिता',
-      label: 'Professional Guidelines',
+      label: 'व्यावसायिक दिशानिर्देश',
       back: 'वापस',
       downloadPdf: 'PDF डाउनलोड करें',
       intro: [
