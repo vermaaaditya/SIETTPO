@@ -773,18 +773,28 @@ input:focus, textarea:focus, select:focus { outline: none; box-shadow: 0 0 0 2px
 }
 
 /* Pie Chart */
-.batch-pie-svg { width:140px; height:140px; margin-bottom:1rem; }
-.batch-pie-total {
+.batch-pie-svg { width:140px; height:140px; display:block; }
+.batch-pie-wrapper {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  margin-bottom:1rem;
+}
+.batch-pie-total-text {
+  margin:0.5rem 0 0;
   font-family:var(--font-headline);
   font-size:1.5rem;
-  fill:var(--foreground);
+  color:var(--foreground);
+  text-align:center;
 }
-.batch-pie-label {
+.batch-pie-label-text {
+  margin:0.2rem 0 0;
   font-family:var(--font-body);
-  font-size:0.55rem;
-  fill:var(--muted-foreground);
+  font-size:0.72rem;
+  color:var(--muted-foreground);
   text-transform:uppercase;
   letter-spacing:0.08em;
+  text-align:center;
 }
 .batch-pie-legend {
   display:flex;
@@ -862,6 +872,15 @@ input:focus, textarea:focus, select:focus { outline: none; box-shadow: 0 0 0 2px
   font-size: 0.86rem;
   line-height: 1.65;
   color: var(--muted-foreground);
+}
+
+.batch-micro-text {
+  text-align: center;
+  font-size: 0.82rem;
+  color: var(--muted-foreground);
+  margin-top: 1.5rem;
+  letter-spacing: 0.01em;
+  opacity: 0.75;
 }
 
 /* ═══════════════════════════════════════

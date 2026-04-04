@@ -8,11 +8,11 @@ const maxStudents = 60
 const totalStudents = 180
 
 const skills = [
-  'Web Development', 'AI / ML', 'Data Structures & Algorithms', 'Embedded Systems',
+  'Web Development', 'AI & Machine Learning', 'Data Structures & Algorithms', 'Embedded Systems',
   'Python', 'Java', 'Cloud Computing (AWS)',
-  'IoT & Sensors', 'React & Frontend', 'SQL & Databases', 'C / C++',
+  'IoT & Sensors', 'React & Frontend', 'SQL & Databases', 'C/C++',
   'Mobile App Development', 'Robotics',
-  'Machine Learning', 'Cybersecurity', 'UI/UX Design', 'Node.js & Backend',
+  'Cybersecurity', 'UI/UX Design', 'Node.js & Backend',
 ]
 
 const malePercent = 68
@@ -25,31 +25,32 @@ function PieChart({ studentsLabel }) {
   const femaleArc = (femalePercent / 100) * c
 
   return (
-    <svg viewBox="0 0 140 140" className="batch-pie-svg">
-      {/* Female slice */}
-      <circle
-        cx="70" cy="70" r={r}
-        fill="none"
-        stroke="var(--gold)"
-        strokeWidth="28"
-        strokeDasharray={`${femaleArc} ${c}`}
-        strokeDashoffset="0"
-        transform="rotate(-90 70 70)"
-      />
-      {/* Male slice */}
-      <circle
-        cx="70" cy="70" r={r}
-        fill="none"
-        stroke="var(--ink)"
-        strokeWidth="28"
-        strokeDasharray={`${maleArc} ${c}`}
-        strokeDashoffset={`-${femaleArc}`}
-        transform="rotate(-90 70 70)"
-      />
-      {/* Center label */}
-      <text x="70" y="66" textAnchor="middle" className="batch-pie-total">{totalStudents}</text>
-      <text x="70" y="82" textAnchor="middle" className="batch-pie-label">{studentsLabel}</text>
-    </svg>
+    <div className="batch-pie-wrapper">
+      <svg viewBox="0 0 140 140" className="batch-pie-svg">
+        {/* Female slice */}
+        <circle
+          cx="70" cy="70" r={r}
+          fill="none"
+          stroke="var(--gold)"
+          strokeWidth="28"
+          strokeDasharray={`${femaleArc} ${c}`}
+          strokeDashoffset="0"
+          transform="rotate(-90 70 70)"
+        />
+        {/* Male slice */}
+        <circle
+          cx="70" cy="70" r={r}
+          fill="none"
+          stroke="var(--ink)"
+          strokeWidth="28"
+          strokeDasharray={`${maleArc} ${c}`}
+          strokeDashoffset={`-${femaleArc}`}
+          transform="rotate(-90 70 70)"
+        />
+      </svg>
+      <p className="batch-pie-total-text">{totalStudents}</p>
+      <p className="batch-pie-label-text">{studentsLabel}</p>
+    </div>
   )
 }
 
@@ -167,6 +168,16 @@ export function BatchSection() {
             ))}
           </div>
         </motion.div>
+
+        <motion.p
+          className="batch-micro-text"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
+          Focused on building strong fundamentals, practical exposure, and industry-relevant skills.
+        </motion.p>
       </div>
     </section>
   )

@@ -4,7 +4,7 @@ export const translations = {
       affiliation:
         'Approved by AICTE, New Delhi and Affiliated to Kurukshetra University, Kurukshetra',
       mobileLabel: 'Training and placement cell',
-      links: ['Home', 'Events', 'Brochure', 'Code of Conduct', 'Batch 2025', 'Team', 'Contact Us'],
+      links: ['Home', 'Events', 'Brochure', 'Code of Conduct', 'Current Cohort', 'Team', 'Contact Us'],
       forRecruiters: 'For Recruiters',
       studentLogin: 'Student Login',
     },
@@ -78,41 +78,41 @@ export const translations = {
     },
     batch: {
       sectionLabel: 'Current Cohort',
-      sectionTitle: 'Institute Demographics and skill sets',
+      sectionTitle: 'Cohort Profile: Demographics & Skill Sets',
       branchStrength: 'Branch-wise Strength',
       genderRatio: 'Gender Ratio',
-      topSkills: 'Top Skills Across the Batch',
-      recruiterSnapshotTitle: 'Recruiter Snapshot',
+      topSkills: 'Top Skills Across the Cohort',
+      recruiterSnapshotTitle: 'Talent Readiness Overview',
       recruiterSnapshotLead:
-        'Built in a style familiar to top IIT/NIT placement pages, this snapshot highlights classroom depth, project maturity, and interview readiness for Batch 2025.',
-      studentsLabel: 'Students',
+        'Designed to reflect strong academic grounding, practical exposure, and industry alignment.',
+      studentsLabel: 'Students (Current Cohort)',
       male: 'Male',
       female: 'Female',
       branches: [
-        'Computer Science & Engineering (AI & ML)',
-        'Computer Science & Engineering (Cyber Security)',
+        'Computer Science & Engineering (Artificial Intelligence & Machine Learning)',
+        'Computer Science & Engineering (Cybersecurity)',
         'Robotics & Automation',
       ],
       recruiterHighlights: [
         {
-          title: 'Practice-First Academic Rigour',
+          title: 'Practice-Oriented Academic Framework',
           description:
-            'Semester-wise outcomes are aligned with coding, systems, and data foundations, ensuring graduates can ramp up quickly across software and product teams.',
+            'Curriculum delivery emphasizes hands-on coding, systems thinking, and data-driven problem solving, ensuring strong conceptual clarity and application ability.',
         },
         {
-          title: 'Project and Product Orientation',
+          title: 'Project & Product Orientation',
           description:
-            'Students regularly build deployable solutions through clubs, mini-projects, and capstones, strengthening ownership, collaboration, and engineering discipline.',
+            'Students actively build deployable solutions through clubs, mini-projects, and capstone initiatives, fostering innovation, ownership, and real-world problem solving.',
         },
         {
-          title: 'Assessment and Placement Preparedness',
+          title: 'Assessment & Technical Preparedness',
           description:
-            'Structured aptitude, communication, DSA drills, and mock interview cycles mirror real hiring funnels to improve shortlist-to-offer conversion.',
+            'Structured training in aptitude, communication, and core technical domains ensures students are well-prepared for diverse evaluation processes.',
         },
         {
-          title: 'Industry-Facing Skill Mix',
+          title: 'Industry-Aligned Skill Ecosystem',
           description:
-            'The cohort blends AI/ML, cybersecurity, full-stack, and automation capabilities, giving recruiters flexible talent options for diverse technology roles.',
+            'The cohort is trained across high-demand domains including AI/ML, cybersecurity, full-stack development, and automation, aligned with evolving industry requirements.',
         },
       ],
     },
@@ -238,7 +238,7 @@ export const translations = {
       quickLinks: 'Quick Links',
       contactTpo: 'Contact TPO',
       findUs: 'Find Us',
-      links: ['Home', 'Events', 'Code of Conduct', 'Batch 2025', 'Team', 'Contact Us'],
+      links: ['Home', 'Events', 'Code of Conduct', 'Current Cohort', 'Team', 'Contact Us'],
       copyright: '© 2026 SIET Panchkula. Training & Placement Office. All rights reserved.',
     },
     login: {
@@ -393,7 +393,7 @@ export const translations = {
       affiliation:
         'AICTE, नई दिल्ली द्वारा अनुमोदित एवं कुरुक्षेत्र विश्वविद्यालय, कुरुक्षेत्र से संबद्ध',
       mobileLabel: 'प्रशिक्षण एवं प्लेसमेंट सेल',
-      links: ['होम', 'इवेंट्स', 'ब्रोशर', 'आचार संहिता', 'बैच 2025', 'टीम', 'संपर्क करें'],
+      links: ['होम', 'इवेंट्स', 'ब्रोशर', 'आचार संहिता', 'वर्तमान बैच', 'टीम', 'संपर्क करें'],
       forRecruiters: 'भर्तीकर्ताओं के लिए',
       studentLogin: 'छात्र लॉगिन',
     },
@@ -464,41 +464,41 @@ export const translations = {
     },
     batch: {
       sectionLabel: 'वर्तमान बैच',
-      sectionTitle: 'संस्थान की जनसांख्यिकी और कौशल',
+      sectionTitle: 'कोहोर्ट प्रोफाइल: जनसांख्यिकी एवं कौशल',
       branchStrength: 'शाखा-वार संख्या',
       genderRatio: 'लिंग अनुपात',
-      topSkills: 'बैच के शीर्ष कौशल',
-      recruiterSnapshotTitle: 'रिक्रूटर स्नैपशॉट',
+      topSkills: 'कोहोर्ट के शीर्ष कौशल',
+      recruiterSnapshotTitle: 'प्रतिभा तत्परता अवलोकन',
       recruiterSnapshotLead:
-        'IIT/NIT प्लेसमेंट पेज की पेशेवर शैली से प्रेरित यह संक्षिप्त प्रोफ़ाइल बैच 2025 की अकादमिक गहराई, प्रोजेक्ट क्षमता और इंटरव्यू तैयारी को दर्शाती है।',
-      studentsLabel: 'छात्र',
+        'मजबूत शैक्षणिक आधार, व्यावहारिक अनुभव और उद्योग संरेखण को दर्शाने के लिए तैयार किया गया।',
+      studentsLabel: 'छात्र (वर्तमान बैच)',
       male: 'पुरुष',
       female: 'महिला',
       branches: [
-        'कंप्यूटर विज्ञान एवं अभियांत्रिकी (AI & ML)',
+        'कंप्यूटर विज्ञान एवं अभियांत्रिकी (आर्टिफिशियल इंटेलिजेंस एवं मशीन लर्निंग)',
         'कंप्यूटर विज्ञान एवं अभियांत्रिकी (साइबर सुरक्षा)',
         'रोबोटिक्स एवं स्वचालन',
       ],
       recruiterHighlights: [
         {
-          title: 'प्रैक्टिस-फर्स्ट अकादमिक सख्ती',
+          title: 'प्रैक्टिस-उन्मुख शैक्षणिक ढाँचा',
           description:
-            'सेमेस्टर-आधारित सीखने के परिणाम कोडिंग, सिस्टम और डेटा की मजबूत नींव से जुड़े हैं, जिससे छात्र सॉफ्टवेयर व प्रोडक्ट टीमों में तेजी से योगदान दे पाते हैं।',
+            'पाठ्यक्रम में व्यावहारिक कोडिंग, सिस्टम थिंकिंग और डेटा-आधारित समस्या समाधान पर जोर दिया जाता है, जिससे मजबूत वैचारिक स्पष्टता और अनुप्रयोग क्षमता सुनिश्चित होती है।',
         },
         {
-          title: 'प्रोजेक्ट और प्रोडक्ट उन्मुखता',
+          title: 'प्रोजेक्ट एवं प्रोडक्ट उन्मुखता',
           description:
-            'क्लब गतिविधियों, मिनी-प्रोजेक्ट और कैपस्टोन के माध्यम से छात्र नियमित रूप से डिप्लॉय करने योग्य समाधान बनाते हैं, जिससे ओनरशिप और टीमवर्क मजबूत होता है।',
+            'क्लब, मिनी-प्रोजेक्ट और कैपस्टोन पहलों के माध्यम से छात्र सक्रिय रूप से डिप्लॉय करने योग्य समाधान बनाते हैं, जिससे नवाचार, स्वामित्व और वास्तविक समस्या समाधान को बढ़ावा मिलता है।',
         },
         {
-          title: 'असेसमेंट और प्लेसमेंट तैयारी',
+          title: 'मूल्यांकन एवं तकनीकी तैयारी',
           description:
-            'संरचित अभिक्षमता, संचार, DSA अभ्यास और मॉक इंटरव्यू चक्र वास्तविक भर्ती प्रक्रिया जैसा अनुभव देते हैं और चयन दर बेहतर बनाते हैं।',
+            'अभिक्षमता, संचार और मुख्य तकनीकी क्षेत्रों में संरचित प्रशिक्षण यह सुनिश्चित करता है कि छात्र विभिन्न मूल्यांकन प्रक्रियाओं के लिए भलीभाँति तैयार हों।',
         },
         {
-          title: 'इंडस्ट्री-फेसिंग स्किल मिश्रण',
+          title: 'उद्योग-संरेखित कौशल पारिस्थितिकी',
           description:
-            'यह बैच AI/ML, साइबर सुरक्षा, फुल-स्टैक और ऑटोमेशन कौशल का संतुलित संयोजन प्रस्तुत करता है, जिससे विविध टेक भूमिकाओं के लिए भर्ती आसान होती है।',
+            'कोहोर्ट को AI/ML, साइबर सुरक्षा, फुल-स्टैक डेवलपमेंट और ऑटोमेशन सहित उच्च-माँग वाले क्षेत्रों में प्रशिक्षित किया जाता है, जो उद्योग की बदलती जरूरतों के अनुरूप है।',
         },
       ],
     },
@@ -624,7 +624,7 @@ export const translations = {
       quickLinks: 'त्वरित लिंक',
       contactTpo: 'TPO से संपर्क करें',
       findUs: 'हमें खोजें',
-      links: ['होम', 'इवेंट्स', 'आचार संहिता', 'बैच 2025', 'टीम', 'संपर्क करें'],
+      links: ['होम', 'इवेंट्स', 'आचार संहिता', 'वर्तमान बैच', 'टीम', 'संपर्क करें'],
       copyright:
         '© 2026 SIET पंचकुला। प्रशिक्षण एवं प्लेसमेंट कार्यालय। सर्वाधिकार सुरक्षित।',
     },
