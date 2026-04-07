@@ -388,7 +388,7 @@ export default function StudentLogin() {
                     value={form.branch}
                     onChange={handleChange}
                   >
-                    <option value="">{t.branchPlaceholder}</option>
+                    <option value="" disabled>{t.branchPlaceholder}</option>
                     {t.branchOptions.map(option => (
                       <option key={option} value={option}>{option}</option>
                     ))}
