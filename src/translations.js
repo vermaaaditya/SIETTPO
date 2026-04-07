@@ -338,9 +338,8 @@ export const translations = {
       previewTitle: 'PDF Preview',
       previewMap: {
         codeOfConduct: '/pdfs/code-of-conduct.pdf',
-        // Declaration currently references the shared institutional policy PDF.
-        declaration: '/pdfs/code-of-conduct.pdf',
-        resumeTemplate: '/pdfs/brochure.pdf',
+        declaration: '/pdfs/declaration.pdf',
+        resumeTemplate: '/pdfs/resume template.pdf',
       },
       sections: [
         {
@@ -724,9 +723,8 @@ export const translations = {
       previewTitle: 'PDF पूर्वावलोकन',
       previewMap: {
         codeOfConduct: '/pdfs/code-of-conduct.pdf',
-        // घोषणा के लिए फिलहाल वही साझा संस्थागत नीति PDF प्रयुक्त है।
-        declaration: '/pdfs/code-of-conduct.pdf',
-        resumeTemplate: '/pdfs/brochure.pdf',
+        declaration: '/pdfs/declaration.pdf',
+        resumeTemplate: '/pdfs/resume template.pdf',
       },
       sections: [
         {
