@@ -15,7 +15,7 @@ const preferredCollegeEmailDomains = (env.VITE_COLLEGE_EMAIL_DOMAINS || '')
   .map(domain => domain.trim().toLowerCase())
   .filter(Boolean)
 const preferredCollegeEmailKeyword = (env.VITE_COLLEGE_EMAIL_KEYWORD || 'siet').trim().toLowerCase()
-const signupRequiredFields = ['fullName', 'signupEmail', 'signupPassword', 'confirmPassword', 'rollNumber', 'course', 'branch', 'batch']
+const signupRequiredFields = ['fullName', 'signupEmail', 'signupPassword', 'confirmPassword', 'rollNumber', 'branch', 'batch']
 const initialFormState = {
   fullName: '',
   signupEmail: '',
@@ -24,13 +24,12 @@ const initialFormState = {
   signupPassword: '',
   confirmPassword: '',
   rollNumber: '',
-  course: '',
   branch: '',
   batch: '',
 }
 
 export default function StudentLogin() {
-  const [mode, setMode] = useState('login')
+  const [mode, setMode] = useState('signup')
   const [form, setForm] = useState(initialFormState)
   const [showLoginPassword, setShowLoginPassword] = useState(false)
   const [showSignupPassword, setShowSignupPassword] = useState(false)
@@ -146,7 +145,6 @@ export default function StudentLogin() {
               signupPassword: '',
               confirmPassword: '',
               rollNumber: '',
-              course: '',
               branch: '',
               batch: '',
             }
@@ -382,29 +380,19 @@ export default function StudentLogin() {
                 </div>
 
                 <div className="login-field">
-                  <label htmlFor="course" className="login-label">{t.courseLabel}</label>
-                  <input
-                    id="course"
-                    name="course"
-                    type="text"
-                    className="login-input"
-                    placeholder={t.coursePlaceholder}
-                    value={form.course}
-                    onChange={handleChange}
-                  />
-                </div>
-
-                <div className="login-field">
                   <label htmlFor="branch" className="login-label">{t.branchLabel}</label>
-                  <input
+                  <select
                     id="branch"
                     name="branch"
-                    type="text"
                     className="login-input"
-                    placeholder={t.branchPlaceholder}
                     value={form.branch}
                     onChange={handleChange}
-                  />
+                  >
+                    <option value="">{t.branchPlaceholder}</option>
+                    {t.branchOptions.map(option => (
+                      <option key={option} value={option}>{option}</option>
+                    ))}
+                  </select>
                 </div>
 
                 <div className="login-field">
