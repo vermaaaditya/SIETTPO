@@ -191,8 +191,8 @@ export default function StudentLogin() {
             if (signOutError) {
               throw signOutError
             }
-          } catch {
-            console.error('Unable to sign out after profile mismatch.')
+          } catch (signOutError) {
+            console.error('Unable to sign out after profile mismatch:', signOutError)
             setStatus('error')
             setStatusMessage(t.profileNotFoundSignOutMsg)
             return
@@ -248,6 +248,14 @@ export default function StudentLogin() {
       )
 
       if (upsertError) {
+        try {
+          const { error: signOutError } = await supabase.auth.signOut()
+          if (signOutError) {
+            console.error('Unable to sign out after profile upsert failure:', signOutError)
+          }
+        } catch (signOutError) {
+          console.error('Unable to sign out after profile upsert failure:', signOutError)
+        }
         throw upsertError
       }
 

@@ -1,12 +1,11 @@
 import { createClient } from '@supabase/supabase-js'
 
-const env = typeof import.meta !== 'undefined' && import.meta.env ? import.meta.env : null
+const env = import.meta.env
 
-const supabaseUrl = env?.VITE_SUPABASE_URL
-const supabaseAnonKey = env?.VITE_SUPABASE_ANON_KEY
+const supabaseUrl = env.VITE_SUPABASE_URL
+const supabaseAnonKey = env.VITE_SUPABASE_ANON_KEY
 
 const missingEnv = [
-  env === null ? 'import.meta.env' : null,
   !supabaseUrl ? 'VITE_SUPABASE_URL' : null,
   !supabaseAnonKey ? 'VITE_SUPABASE_ANON_KEY' : null,
 ].filter(Boolean)
