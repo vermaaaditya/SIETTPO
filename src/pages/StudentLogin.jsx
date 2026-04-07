@@ -54,23 +54,35 @@ export default function StudentLogin() {
     setStatusMessage('')
   }
 
-  function normalizeAuthErrorMessage(errorMessage) {
-    if (!errorMessage) {
+  function normalizeAuthErrorMessage(error) {
+    if (!error) {
       return t.genericAuthErrorMsg
     }
 
+    const errorCode = String(error.code || '').toLowerCase()
+    const errorStatus = Number(error.status || 0)
+    const errorMessage = String(error.message || '')
     const normalized = errorMessage.toLowerCase()
-    if (normalized.includes('invalid login credentials')) {
+
+    if (errorCode === 'invalid_credentials' || normalized.includes('invalid login credentials')) {
       return t.invalidCredentialsMsg
     }
-    if (normalized.includes('already registered') || normalized.includes('user already registered')) {
-      return t.accountExistsMsg
-    }
-    if (normalized.includes('email not confirmed')) {
+    if (errorCode === 'email_not_confirmed' || normalized.includes('email not confirmed')) {
       return t.emailNotConfirmedMsg
     }
+    if (
+      errorCode === 'email_exists' ||
+      errorCode === 'user_already_exists' ||
+      normalized.includes('already registered') ||
+      normalized.includes('user already registered')
+    ) {
+      return t.accountExistsMsg
+    }
+    if (errorStatus >= 500) {
+      return t.genericAuthErrorMsg
+    }
 
-    return errorMessage
+    return errorMessage || t.genericAuthErrorMsg
   }
 
   function isValidEmail(value) {
@@ -160,7 +172,7 @@ export default function StudentLogin() {
 
         const userId = data.user?.id
         if (!userId) {
-          throw new Error(t.genericAuthErrorMsg)
+          throw new Error(t.authDataIncompleteMsg)
         }
 
         const { data: profile, error: profileError } = await supabase
@@ -174,9 +186,19 @@ export default function StudentLogin() {
         }
 
         if (!profile) {
+          try {
+            const { error: signOutError } = await supabase.auth.signOut()
+            if (signOutError) {
+              throw signOutError
+            }
+          } catch (_signOutError) {
+            setStatus('error')
+            setStatusMessage(t.profileNotFoundSignOutMsg)
+            return
+          }
+
           setStatus('error')
           setStatusMessage(t.profileNotFoundMsg)
-          await supabase.auth.signOut()
           return
         }
 
@@ -208,7 +230,7 @@ export default function StudentLogin() {
 
       const userId = data.user?.id
       if (!userId) {
-        throw new Error(t.genericAuthErrorMsg)
+        throw new Error(t.authDataIncompleteMsg)
       }
 
       const { error: upsertError } = await supabase.from('profiles').upsert(
@@ -243,7 +265,7 @@ export default function StudentLogin() {
       return
     } catch (error) {
       setStatus('error')
-      setStatusMessage(normalizeAuthErrorMessage(error?.message))
+      setStatusMessage(normalizeAuthErrorMessage(error))
     }
   }
 

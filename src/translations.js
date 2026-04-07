@@ -269,6 +269,9 @@ export const translations = {
       accountExistsMsg: 'An account with this email already exists. Please login instead.',
       emailNotConfirmedMsg: 'Please verify your email before logging in.',
       profileNotFoundMsg: 'Your profile is missing. Please contact the TPO team.',
+      profileNotFoundSignOutMsg:
+        'Your profile is missing and session reset failed. Please refresh and try again.',
+      authDataIncompleteMsg: 'Authentication succeeded but user data is incomplete. Please contact support.',
       genericAuthErrorMsg: 'Unable to continue right now. Please try again.',
       supabaseConfigMissingMsg: 'Authentication is not configured. Please contact the admin.',
       fullNameLabel: 'Full Name',
@@ -682,6 +685,9 @@ export const translations = {
       accountExistsMsg: 'इस ईमेल से खाता पहले से मौजूद है। कृपया लॉगिन करें।',
       emailNotConfirmedMsg: 'लॉगिन से पहले कृपया अपना ईमेल सत्यापित करें।',
       profileNotFoundMsg: 'आपका प्रोफाइल नहीं मिला। कृपया TPO टीम से संपर्क करें।',
+      profileNotFoundSignOutMsg:
+        'आपका प्रोफाइल नहीं मिला और सेशन रीसेट नहीं हो सका। कृपया पेज रिफ्रेश करके दोबारा प्रयास करें।',
+      authDataIncompleteMsg: 'ऑथेंटिकेशन सफल रहा, लेकिन यूज़र डेटा अधूरा है। कृपया सहायता से संपर्क करें।',
       genericAuthErrorMsg: 'अभी प्रक्रिया पूरी नहीं हो सकी। कृपया दोबारा प्रयास करें।',
       supabaseConfigMissingMsg: 'ऑथेंटिकेशन कॉन्फ़िगर नहीं है। कृपया एडमिन से संपर्क करें।',
       fullNameLabel: 'पूरा नाम',
