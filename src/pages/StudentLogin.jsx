@@ -6,14 +6,36 @@ import { useLanguage } from '../contexts/LanguageContext'
 import { translations } from '../translations'
 
 const statsValues = ['300+', '3', '5+']
+const env =
+  typeof import.meta !== 'undefined' && import.meta.env
+    ? import.meta.env
+    : {}
+const preferredCollegeEmailDomains = (env.VITE_COLLEGE_EMAIL_DOMAINS || '')
+  .split(',')
+  .map(domain => domain.trim().toLowerCase())
+  .filter(Boolean)
+const preferredCollegeEmailKeyword = (env.VITE_COLLEGE_EMAIL_KEYWORD || 'siet').trim().toLowerCase()
+const signupRequiredFields = ['fullName', 'signupEmail', 'signupPassword', 'confirmPassword', 'rollNumber', 'branch', 'batch']
+const initialFormState = {
+  fullName: '',
+  signupEmail: '',
+  loginEmail: '',
+  loginPassword: '',
+  signupPassword: '',
+  confirmPassword: '',
+  rollNumber: '',
+  branch: '',
+  batch: '',
+}
 
 export default function StudentLogin() {
-  const [form, setForm] = useState({ rollNumber: '', password: '', confirmPassword: '' })
-  const [showPassword, setShowPassword] = useState(false)
+  const [mode, setMode] = useState('register')
+  const [form, setForm] = useState(initialFormState)
+  const [showLoginPassword, setShowLoginPassword] = useState(false)
+  const [showSignupPassword, setShowSignupPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
-  const [remember, setRemember] = useState(false)
   const [status, setStatus] = useState(null) // null | 'loading' | 'error' | 'success'
-  const [errorType, setErrorType] = useState(null) // null | 'required' | 'mismatch'
+  const [statusMessage, setStatusMessage] = useState('')
   const submitTimeoutRef = useRef(null)
   const { lang } = useLanguage()
   const t = translations[lang].login
@@ -28,30 +50,122 @@ export default function StudentLogin() {
     setForm(prev => ({ ...prev, [e.target.name]: e.target.value }))
     if (status === 'error') {
       setStatus(null)
-      setErrorType(null)
+      setStatusMessage('')
     }
+  }
+
+  function handleModeChange(nextMode) {
+    setMode(nextMode)
+    setStatus(null)
+    setStatusMessage('')
+  }
+
+  function isValidEmail(value) {
+    const email = value.trim()
+    if (!email) {
+      return false
+    }
+    const input = document.createElement('input')
+    input.type = 'email'
+    input.value = email
+    return input.checkValidity()
+  }
+
+  function isPreferredCollegeEmail(value) {
+    const normalized = value.trim().toLowerCase()
+    const atIndex = normalized.lastIndexOf('@')
+    const domain = atIndex >= 0 ? normalized.slice(atIndex + 1) : ''
+    if (!domain) {
+      return false
+    }
+    if (preferredCollegeEmailDomains.length > 0) {
+      return preferredCollegeEmailDomains.some(preferredDomain =>
+        domain === preferredDomain || domain.endsWith(`.${preferredDomain}`)
+      )
+    }
+    return domain.includes(preferredCollegeEmailKeyword)
+  }
+
+  function getValidationError() {
+    if (mode === 'login') {
+      if (!form.loginEmail.trim() || !form.loginPassword.trim()) {
+        return t.errorRequiredMsg
+      }
+      if (!isValidEmail(form.loginEmail.trim())) {
+        return t.invalidEmailMsg
+      }
+      if (form.loginPassword.trim().length < 6) {
+        return t.passwordMinMsg
+      }
+      return null
+    }
+
+    if (signupRequiredFields.some(field => !form[field].trim())) {
+      return t.errorRequiredMsg
+    }
+    if (!isValidEmail(form.signupEmail.trim())) {
+      return t.invalidEmailMsg
+    }
+    if (form.signupPassword.trim().length < 6) {
+      return t.passwordMinMsg
+    }
+    if (form.signupPassword !== form.confirmPassword) {
+      return t.passwordMismatchMsg
+    }
+    return null
   }
 
   function handleSubmit(e) {
     e.preventDefault()
-    if (!form.rollNumber.trim() || !form.password.trim() || !form.confirmPassword.trim()) {
-      setErrorType('required')
+    if (submitTimeoutRef.current) {
+      clearTimeout(submitTimeoutRef.current)
+    }
+
+    const validationError = getValidationError()
+    if (validationError) {
       setStatus('error')
+      setStatusMessage(validationError)
       return
     }
-    if (form.password !== form.confirmPassword) {
-      setErrorType('mismatch')
-      setStatus('error')
-      return
-    }
-    setErrorType(null)
+
     setStatus('loading')
-    // Placeholder — replace with real signup API call when backend is ready
+    setStatusMessage('')
+
+    // TODO: replace timeout simulation with real auth API integration.
     submitTimeoutRef.current = setTimeout(() => {
       setStatus('success')
-      setForm({ rollNumber: '', password: '', confirmPassword: '' })
+      setStatusMessage(mode === 'login' ? t.loginSuccessMsg : t.signupSuccessMsg)
+      setForm(prev =>
+        mode === 'login'
+          ? { ...prev, loginEmail: '', loginPassword: '' }
+          : {
+              ...prev,
+              fullName: '',
+              signupEmail: '',
+              signupPassword: '',
+              confirmPassword: '',
+              rollNumber: '',
+              branch: '',
+              batch: '',
+            }
+      )
     }, 1200)
   }
+
+  const activeEmail = mode === 'login' ? form.loginEmail : form.signupEmail
+  const normalizedActiveEmail = activeEmail.trim()
+  const showEmailDomainHint =
+    normalizedActiveEmail && isValidEmail(normalizedActiveEmail) && !isPreferredCollegeEmail(normalizedActiveEmail)
+  const isPasswordVisible = mode === 'login' ? showLoginPassword : showSignupPassword
+  const passwordInputType = isPasswordVisible ? 'text' : 'password'
+  const submitButtonLabel =
+    status === 'loading'
+      ? mode === 'login'
+        ? t.loggingIn
+        : t.signingUp
+      : mode === 'login'
+        ? t.loginBtn
+        : t.signUpBtn
 
   return (
     <div className="login-page">
@@ -113,8 +227,29 @@ export default function StudentLogin() {
 
           {/* Heading */}
           <p className="login-eyebrow">{t.eyebrow}</p>
-          <h1 className="login-title">{t.title}</h1>
-          <p className="login-subtitle">{t.subtitle}</p>
+          <h1 className="login-title">{mode === 'login' ? t.loginTitle : t.signUpTitle}</h1>
+          <p className="login-subtitle">{mode === 'login' ? t.loginSubtitle : t.signUpSubtitle}</p>
+
+          <div className="login-mode-toggle" role="tablist" aria-label={t.modeToggleLabel}>
+            <button
+              type="button"
+              role="tab"
+              aria-selected={mode === 'login'}
+              className={`login-mode-btn ${mode === 'login' ? 'active' : ''}`}
+              onClick={() => handleModeChange('login')}
+            >
+              {t.loginTab}
+            </button>
+            <button
+              type="button"
+              role="tab"
+              aria-selected={mode === 'register'}
+              className={`login-mode-btn ${mode === 'register' ? 'active' : ''}`}
+              onClick={() => handleModeChange('register')}
+            >
+              {t.signUpTab}
+            </button>
+          </div>
 
           {/* Alert */}
           {status === 'error' && (
@@ -125,7 +260,7 @@ export default function StudentLogin() {
               style={{ marginBottom: '1.25rem' }}
             >
               <AlertCircle />
-              {errorType === 'mismatch' ? t.passwordMismatchMsg : t.errorMsg}
+              {statusMessage}
             </motion.div>
           )}
           {status === 'success' && (
@@ -136,92 +271,157 @@ export default function StudentLogin() {
               style={{ marginBottom: '1.25rem' }}
             >
               <CheckCircle2 />
-              {t.successMsg}
+              {statusMessage}
             </motion.div>
           )}
 
           {/* Form */}
           <form className="login-form" onSubmit={handleSubmit} noValidate>
             <div className="login-field">
-              <label htmlFor="rollNumber" className="login-label">{t.rollNumberLabel}</label>
+              <label htmlFor="email" className="login-label">{t.collegeEmailLabel}</label>
               <input
-                id="rollNumber"
-                name="rollNumber"
-                type="text"
+                id="email"
+                name={mode === 'login' ? 'loginEmail' : 'signupEmail'}
+                type="email"
                 className="login-input"
-                placeholder={t.rollNumberPlaceholder}
+                placeholder={t.collegeEmailPlaceholder}
                 autoComplete="username"
-                value={form.rollNumber}
+                value={mode === 'login' ? form.loginEmail : form.signupEmail}
                 onChange={handleChange}
               />
+              {showEmailDomainHint && <p className="login-hint">{t.preferredCollegeEmailMsg}</p>}
             </div>
+
+            {mode === 'register' && (
+              <div className="login-field">
+                <label htmlFor="fullName" className="login-label">{t.fullNameLabel}</label>
+                <input
+                  id="fullName"
+                  name="fullName"
+                  type="text"
+                  className="login-input"
+                  placeholder={t.fullNamePlaceholder}
+                  autoComplete="name"
+                  value={form.fullName}
+                  onChange={handleChange}
+                />
+              </div>
+            )}
 
             <div className="login-field">
               <label htmlFor="password" className="login-label">{t.passwordLabel}</label>
               <div className="login-input-wrap">
                 <input
                   id="password"
-                  name="password"
-                  type={showPassword ? 'text' : 'password'}
+                  name={mode === 'login' ? 'loginPassword' : 'signupPassword'}
+                  type={passwordInputType}
                   className="login-input"
                   placeholder={t.passwordPlaceholder}
-                  autoComplete="new-password"
-                  value={form.password}
+                  autoComplete={mode === 'login' ? 'current-password' : 'new-password'}
+                  value={mode === 'login' ? form.loginPassword : form.signupPassword}
                   onChange={handleChange}
                 />
                 <button
                   type="button"
                   className="login-eye-btn"
-                  onClick={() => setShowPassword(v => !v)}
-                  aria-label={showPassword ? 'Hide password' : 'Show password'}
+                  onClick={() =>
+                    mode === 'login'
+                      ? setShowLoginPassword(v => !v)
+                      : setShowSignupPassword(v => !v)
+                  }
+                  aria-label={
+                    isPasswordVisible
+                      ? t.hidePassword
+                      : t.showPassword
+                  }
                 >
-                  {showPassword ? <EyeOff /> : <Eye />}
+                  {isPasswordVisible ? <EyeOff /> : <Eye />}
                 </button>
               </div>
             </div>
 
-            <div className="login-field">
-              <label htmlFor="confirmPassword" className="login-label">{t.confirmPasswordLabel}</label>
-              <div className="login-input-wrap">
-                <input
-                  id="confirmPassword"
-                  name="confirmPassword"
-                  type={showConfirmPassword ? 'text' : 'password'}
-                  className="login-input"
-                  placeholder={t.confirmPasswordPlaceholder}
-                  autoComplete="new-password"
-                  value={form.confirmPassword}
-                  onChange={handleChange}
-                />
-                <button
-                  type="button"
-                  className="login-eye-btn"
-                  onClick={() => setShowConfirmPassword(v => !v)}
-                  aria-label={showConfirmPassword ? 'Hide confirm password' : 'Show confirm password'}
-                >
-                  {showConfirmPassword ? <EyeOff /> : <Eye />}
-                </button>
-              </div>
-            </div>
+            {mode === 'register' && (
+              <>
+                <div className="login-field">
+                  <label htmlFor="confirmPassword" className="login-label">{t.confirmPasswordLabel}</label>
+                  <div className="login-input-wrap">
+                    <input
+                      id="confirmPassword"
+                      name="confirmPassword"
+                      type={showConfirmPassword ? 'text' : 'password'}
+                      className="login-input"
+                      placeholder={t.confirmPasswordPlaceholder}
+                      autoComplete="new-password"
+                      value={form.confirmPassword}
+                      onChange={handleChange}
+                    />
+                    <button
+                      type="button"
+                      className="login-eye-btn"
+                      onClick={() => setShowConfirmPassword(v => !v)}
+                      aria-label={showConfirmPassword ? t.hidePassword : t.showPassword}
+                    >
+                      {showConfirmPassword ? <EyeOff /> : <Eye />}
+                    </button>
+                  </div>
+                </div>
 
-            <div className="login-row">
-              <label className="login-remember">
-                <input
-                  type="checkbox"
-                  checked={remember}
-                  onChange={e => setRemember(e.target.checked)}
-                />
-                {t.rememberMe}
-              </label>
-              <a href="#" className="login-forgot" onClick={e => e.preventDefault()}>{t.forgotPassword}</a>
-            </div>
+                <div className="login-field">
+                  <label htmlFor="rollNumber" className="login-label">{t.rollNumberLabel}</label>
+                  <input
+                    id="rollNumber"
+                    name="rollNumber"
+                    type="text"
+                    className="login-input"
+                    placeholder={t.rollNumberPlaceholder}
+                    value={form.rollNumber}
+                    onChange={handleChange}
+                  />
+                </div>
+
+                <div className="login-field">
+                  <label htmlFor="branch" className="login-label">{t.branchLabel}</label>
+                  <select
+                    id="branch"
+                    name="branch"
+                    className="login-input"
+                    value={form.branch}
+                    onChange={handleChange}
+                  >
+                    <option value="" disabled>{t.branchPlaceholder}</option>
+                    {t.branchOptions.map(option => (
+                      <option key={option} value={option}>{option}</option>
+                    ))}
+                  </select>
+                </div>
+
+                <div className="login-field">
+                  <label htmlFor="batch" className="login-label">{t.batchLabel}</label>
+                  <input
+                    id="batch"
+                    name="batch"
+                    type="text"
+                    className="login-input"
+                    placeholder={t.batchPlaceholder}
+                    value={form.batch}
+                    onChange={handleChange}
+                  />
+                </div>
+              </>
+            )}
+
+            {mode === 'login' && (
+              <div className="login-row login-row-end">
+                <a href="#" className="login-forgot" onClick={e => e.preventDefault()}>{t.forgotPassword}</a>
+              </div>
+            )}
 
             <button
               type="submit"
               className="login-submit"
               disabled={status === 'loading'}
             >
-              {status === 'loading' ? t.signingUp : t.signUp}
+              {submitButtonLabel}
             </button>
           </form>
 
