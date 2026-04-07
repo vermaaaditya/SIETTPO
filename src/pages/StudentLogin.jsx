@@ -233,7 +233,7 @@ export default function StudentLogin() {
             {t.contactNotice}{' '}
             <a href="mailto:tpo@sietpanchkula.ac.in">tpo@sietpanchkula.ac.in</a>
             {' '}{t.orCall}{' '}
-            <a href="tel:+919253289394">+91 92532 89394</a>.
+            <a href="tel:01722979887">0172-2979887</a>.
           </p>
         </motion.div>
       </div>

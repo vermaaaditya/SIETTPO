@@ -24,12 +24,12 @@ function getBotResponse(message) {
   if (lower.includes('course') || lower.includes('program'))
     return 'We offer B.Tech programs in:\n1. CSE (AI & ML)\n2. CSE (Cyber Security)\n3. Robotics & Automation'
   if (lower.includes('fee'))
-    return 'Fee details are updated annually. Please contact +91 92532 89394 or visit the Admissions section.'
+    return 'Fee details are updated annually. Please contact 0172-2979887 or visit the Admissions section.'
   if (lower.includes('contact'))
-    return '📍 Sector 26, Panchkula\n📞 +91 92532 89394\n📧 tpo@sietpanchkula.ac.in'
+    return '📍 Sector 26, Panchkula\n📞 0172-2979887\n📧 tpo@sietpanchkula.ac.in'
   if (lower.includes('hi') || lower.includes('hello'))
     return 'Hello! How can I assist you with SIET Panchkula?'
-  return 'Thanks for your query! For detailed information, please contact +91 92532 89394 or email tpo@sietpanchkula.ac.in.'
+  return 'Thanks for your query! For detailed information, please contact 0172-2979887 or email tpo@sietpanchkula.ac.in.'
 }
 
 const styles = {

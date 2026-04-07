@@ -10,7 +10,7 @@ import { translations } from '../translations'
 const tpo = {
   name: 'Dr. Divya Singla',
   email: 'tpo@sietpanchkula.ac.in',
-  phone: '+91 92532 89394',
+  phone: '0172-2979887',
 }
 
 const rolesData = [
