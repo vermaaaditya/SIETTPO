@@ -18,5 +18,6 @@ This folder contains the PR1 backend foundation for:
 
 - RLS is enabled on both tables.
 - Public form submission is allowed through insert policy on `recruitment_inquiries`.
-- Admin-only read/update/delete is gated by JWT claim `role = tpo_admin`.
+- Admin-only read/update/delete is gated by JWT app metadata claim `app_metadata.app_role = tpo_admin`.
 - Student profiles are self-service by `auth.uid() = profiles.id`.
+- Phone values in `recruitment_inquiries.phone` allow formatted input, but must contain 10 to 15 digits after stripping non-numeric characters.
