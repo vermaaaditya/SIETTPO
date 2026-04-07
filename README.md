@@ -15,6 +15,8 @@ It presents recruiter-focused information, student-facing pages, event galleries
 - Event gallery section
 - Bilingual interface (English/Hindi)
 - Student login interface (UI flow)
+- Student auth integration with Supabase (email/password)
+- Student profile persistence in `public.profiles`
 
 ## Tech Stack
 
@@ -22,6 +24,7 @@ It presents recruiter-focused information, student-facing pages, event galleries
 - Vite
 - React Router
 - Firebase (configured scaffold)
+- Supabase (auth + database)
 
 ## Run Locally
 
@@ -77,6 +80,20 @@ Required frontend env keys:
 
 - `VITE_SUPABASE_URL`
 - `VITE_SUPABASE_ANON_KEY`
+
+## Vercel + Supabase `.env` setup (for proper integration)
+
+1. In Supabase Dashboard → **Project Settings** → **API**, copy:
+   - **Project URL** → `VITE_SUPABASE_URL`
+   - **anon public key** → `VITE_SUPABASE_ANON_KEY`
+2. In Vercel Dashboard → your project → **Settings** → **Environment Variables**, add:
+   - `VITE_SUPABASE_URL` = your Supabase Project URL
+   - `VITE_SUPABASE_ANON_KEY` = your Supabase anon public key
+3. Select environments where needed (`Production`, `Preview`, `Development`) and save.
+4. Redeploy the Vercel project so the new variables are applied.
+5. (Important) In Supabase Auth settings, add your Vercel domain to:
+   - **Site URL**
+   - **Redirect URLs** (include preview URL pattern if used)
 
 ## Contributors
 

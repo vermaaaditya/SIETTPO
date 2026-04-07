@@ -1,9 +1,10 @@
-import { useEffect, useRef, useState } from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { ArrowLeft, Eye, EyeOff, AlertCircle, CheckCircle2 } from 'lucide-react'
 import { useLanguage } from '../contexts/LanguageContext'
 import { translations } from '../translations'
+import { supabase, supabaseEnvError } from '../lib/supabase'
 
 const statsValues = ['300+', '3', '5+']
 const env =
@@ -36,15 +37,8 @@ export default function StudentLogin() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const [status, setStatus] = useState(null) // null | 'loading' | 'error' | 'success'
   const [statusMessage, setStatusMessage] = useState('')
-  const submitTimeoutRef = useRef(null)
   const { lang } = useLanguage()
   const t = translations[lang].login
-
-  useEffect(() => () => {
-    if (submitTimeoutRef.current) {
-      clearTimeout(submitTimeoutRef.current)
-    }
-  }, [])
 
   function handleChange(e) {
     setForm(prev => ({ ...prev, [e.target.name]: e.target.value }))
@@ -58,6 +52,37 @@ export default function StudentLogin() {
     setMode(nextMode)
     setStatus(null)
     setStatusMessage('')
+  }
+
+  function normalizeAuthErrorMessage(error) {
+    if (!error) {
+      return t.genericAuthErrorMsg
+    }
+
+    const errorCode = String(error.code || '').toLowerCase()
+    const errorStatus = Number(error.status || 0)
+    const errorMessage = String(error.message || '')
+    const normalized = errorMessage.toLowerCase()
+
+    if (errorCode === 'invalid_credentials' || normalized.includes('invalid login credentials')) {
+      return t.invalidCredentialsMsg
+    }
+    if (errorCode === 'email_not_confirmed' || normalized.includes('email not confirmed')) {
+      return t.emailNotConfirmedMsg
+    }
+    if (
+      errorCode === 'email_exists' ||
+      errorCode === 'user_already_exists' ||
+      normalized.includes('already registered') ||
+      normalized.includes('user already registered')
+    ) {
+      return t.accountExistsMsg
+    }
+    if (errorStatus >= 500) {
+      return t.genericAuthErrorMsg
+    }
+
+    return errorMessage || t.genericAuthErrorMsg
   }
 
   function isValidEmail(value) {
@@ -115,11 +140,8 @@ export default function StudentLogin() {
     return null
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault()
-    if (submitTimeoutRef.current) {
-      clearTimeout(submitTimeoutRef.current)
-    }
 
     const validationError = getValidationError()
     if (validationError) {
@@ -128,28 +150,132 @@ export default function StudentLogin() {
       return
     }
 
+    if (!supabase) {
+      setStatus('error')
+      setStatusMessage(supabaseEnvError || t.supabaseConfigMissingMsg)
+      return
+    }
+
     setStatus('loading')
     setStatusMessage('')
 
-    // TODO: replace timeout simulation with real auth API integration.
-    submitTimeoutRef.current = setTimeout(() => {
-      setStatus('success')
-      setStatusMessage(mode === 'login' ? t.loginSuccessMsg : t.signupSuccessMsg)
-      setForm(prev =>
-        mode === 'login'
-          ? { ...prev, loginEmail: '', loginPassword: '' }
-          : {
-              ...prev,
-              fullName: '',
-              signupEmail: '',
-              signupPassword: '',
-              confirmPassword: '',
-              rollNumber: '',
-              branch: '',
-              batch: '',
+    try {
+      if (mode === 'login') {
+        const { data, error } = await supabase.auth.signInWithPassword({
+          email: form.loginEmail.trim().toLowerCase(),
+          password: form.loginPassword,
+        })
+
+        if (error) {
+          throw error
+        }
+
+        const userId = data.user?.id
+        if (!userId) {
+          throw new Error(t.authDataIncompleteMsg)
+        }
+
+        const { data: profile, error: profileError } = await supabase
+          .from('profiles')
+          .select('id')
+          .eq('id', userId)
+          .maybeSingle()
+
+        if (profileError) {
+          throw profileError
+        }
+
+        if (!profile) {
+          try {
+            const { error: signOutError } = await supabase.auth.signOut()
+            if (signOutError) {
+              throw signOutError
             }
+          } catch (signOutError) {
+            console.error('Unable to sign out after profile mismatch:', signOutError)
+            setStatus('error')
+            setStatusMessage(t.profileNotFoundSignOutMsg)
+            return
+          }
+
+          setStatus('error')
+          setStatusMessage(t.profileNotFoundMsg)
+          return
+        }
+
+        setStatus('success')
+        setStatusMessage(t.loginSuccessMsg)
+        setForm(prev => ({ ...prev, loginEmail: '', loginPassword: '' }))
+        return
+      }
+
+      const signupEmail = form.signupEmail.trim().toLowerCase()
+      const signupPayload = {
+        full_name: form.fullName.trim(),
+        roll_number: form.rollNumber.trim(),
+        branch: form.branch.trim(),
+        batch: form.batch.trim(),
+      }
+
+      const { data, error } = await supabase.auth.signUp({
+        email: signupEmail,
+        password: form.signupPassword,
+        options: {
+          data: signupPayload,
+        },
+      })
+
+      if (error) {
+        throw error
+      }
+
+      const userId = data.user?.id
+      if (!userId) {
+        throw new Error(t.authDataIncompleteMsg)
+      }
+
+      const { error: upsertError } = await supabase.from('profiles').upsert(
+        {
+          id: userId,
+          role: 'student',
+          full_name: signupPayload.full_name,
+          college_email: signupEmail,
+          roll_number: signupPayload.roll_number,
+          branch: signupPayload.branch,
+          batch: signupPayload.batch,
+        },
+        { onConflict: 'id' }
       )
-    }, 1200)
+
+      if (upsertError) {
+        try {
+          const { error: signOutError } = await supabase.auth.signOut()
+          if (signOutError) {
+            console.error('Unable to sign out after profile upsert failure:', signOutError)
+          }
+        } catch (signOutError) {
+          console.error('Unable to sign out after profile upsert failure:', signOutError)
+        }
+        throw upsertError
+      }
+
+      setStatus('success')
+      setStatusMessage(data.session ? t.signupSuccessMsg : t.signupVerifyEmailMsg)
+      setForm(prev => ({
+        ...prev,
+        fullName: '',
+        signupEmail: '',
+        signupPassword: '',
+        confirmPassword: '',
+        rollNumber: '',
+        branch: '',
+        batch: '',
+      }))
+      return
+    } catch (error) {
+      setStatus('error')
+      setStatusMessage(normalizeAuthErrorMessage(error))
+    }
   }
 
   const activeEmail = mode === 'login' ? form.loginEmail : form.signupEmail
