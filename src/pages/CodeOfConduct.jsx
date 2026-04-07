@@ -14,9 +14,15 @@ export default function CodeOfConduct() {
   }, [])
 
   const handleDownload = () => {
+    const downloadFilenameMap = {
+      codeOfConduct: 'SIET_Code_of_Conduct.pdf',
+      declaration: 'SIET_Declaration.pdf',
+      resumeTemplate: 'SIET_Resume_Template.pdf',
+    }
+
     const link = document.createElement('a')
     link.href = currentPreview
-    link.download = currentPreview.includes('brochure') ? 'SIET_Resume_Template.pdf' : 'SIET_Code_of_Conduct.pdf'
+    link.download = downloadFilenameMap[activeTab] || 'SIET_Document.pdf'
     document.body.appendChild(link)
     link.click()
     document.body.removeChild(link)
