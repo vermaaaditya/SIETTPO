@@ -29,7 +29,7 @@ const initialFormState = {
 }
 
 export default function StudentLogin() {
-  const [mode, setMode] = useState('signup')
+  const [mode, setMode] = useState('register')
   const [form, setForm] = useState(initialFormState)
   const [showLoginPassword, setShowLoginPassword] = useState(false)
   const [showSignupPassword, setShowSignupPassword] = useState(false)
@@ -243,9 +243,9 @@ export default function StudentLogin() {
             <button
               type="button"
               role="tab"
-              aria-selected={mode === 'signup'}
-              className={`login-mode-btn ${mode === 'signup' ? 'active' : ''}`}
-              onClick={() => handleModeChange('signup')}
+              aria-selected={mode === 'register'}
+              className={`login-mode-btn ${mode === 'register' ? 'active' : ''}`}
+              onClick={() => handleModeChange('register')}
             >
               {t.signUpTab}
             </button>
@@ -292,7 +292,7 @@ export default function StudentLogin() {
               {showEmailDomainHint && <p className="login-hint">{t.preferredCollegeEmailMsg}</p>}
             </div>
 
-            {mode === 'signup' && (
+            {mode === 'register' && (
               <div className="login-field">
                 <label htmlFor="fullName" className="login-label">{t.fullNameLabel}</label>
                 <input
@@ -340,7 +340,7 @@ export default function StudentLogin() {
               </div>
             </div>
 
-            {mode === 'signup' && (
+            {mode === 'register' && (
               <>
                 <div className="login-field">
                   <label htmlFor="confirmPassword" className="login-label">{t.confirmPasswordLabel}</label>
