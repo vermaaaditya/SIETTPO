@@ -339,7 +339,7 @@ export const translations = {
       previewMap: {
         codeOfConduct: '/pdfs/code-of-conduct.pdf',
         declaration: '/pdfs/declaration.pdf',
-        resumeTemplate: '/pdfs/resume template.pdf',
+        resumeTemplate: '/pdfs/resume-template.pdf',
       },
       sections: [
         {
@@ -724,7 +724,7 @@ export const translations = {
       previewMap: {
         codeOfConduct: '/pdfs/code-of-conduct.pdf',
         declaration: '/pdfs/declaration.pdf',
-        resumeTemplate: '/pdfs/resume template.pdf',
+        resumeTemplate: '/pdfs/resume-template.pdf',
       },
       sections: [
         {
