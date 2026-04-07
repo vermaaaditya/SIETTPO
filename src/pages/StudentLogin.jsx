@@ -163,7 +163,7 @@ export default function StudentLogin() {
       if (mode === 'login') {
         const { data, error } = await supabase.auth.signInWithPassword({
           email: form.loginEmail.trim().toLowerCase(),
-          password: form.loginPassword.trim(),
+          password: form.loginPassword,
         })
 
         if (error) {
@@ -191,7 +191,8 @@ export default function StudentLogin() {
             if (signOutError) {
               throw signOutError
             }
-          } catch (_signOutError) {
+          } catch {
+            console.error('Unable to sign out after profile mismatch.')
             setStatus('error')
             setStatusMessage(t.profileNotFoundSignOutMsg)
             return
@@ -218,7 +219,7 @@ export default function StudentLogin() {
 
       const { data, error } = await supabase.auth.signUp({
         email: signupEmail,
-        password: form.signupPassword.trim(),
+        password: form.signupPassword,
         options: {
           data: signupPayload,
         },
