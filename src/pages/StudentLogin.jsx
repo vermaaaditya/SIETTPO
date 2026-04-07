@@ -6,7 +6,15 @@ import { useLanguage } from '../contexts/LanguageContext'
 import { translations } from '../translations'
 
 const statsValues = ['300+', '3', '5+']
-const preferredCollegeEmailPattern = /@(?:[a-z0-9-]+\.)*siet[a-z0-9-]*\.[a-z.]+$/i
+const env =
+  typeof import.meta !== 'undefined' && import.meta.env
+    ? import.meta.env
+    : {}
+const preferredCollegeEmailDomains = (env.VITE_COLLEGE_EMAIL_DOMAINS || '')
+  .split(',')
+  .map(domain => domain.trim().toLowerCase())
+  .filter(Boolean)
+const preferredCollegeEmailKeyword = (env.VITE_COLLEGE_EMAIL_KEYWORD || 'siet').trim().toLowerCase()
 const initialFormState = {
   fullName: '',
   signupEmail: '',
@@ -53,11 +61,20 @@ export default function StudentLogin() {
   }
 
   function isValidEmail(value) {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
+    return /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(value)
   }
 
   function isPreferredCollegeEmail(value) {
-    return preferredCollegeEmailPattern.test(value)
+    const domain = value.trim().toLowerCase().split('@')[1]
+    if (!domain) {
+      return false
+    }
+    if (preferredCollegeEmailDomains.length > 0) {
+      return preferredCollegeEmailDomains.some(preferredDomain =>
+        domain === preferredDomain || domain.endsWith(`.${preferredDomain}`)
+      )
+    }
+    return domain.includes(preferredCollegeEmailKeyword)
   }
 
   function getValidationError() {
@@ -139,6 +156,16 @@ export default function StudentLogin() {
   const activeEmail = mode === 'login' ? form.loginEmail : form.signupEmail
   const showEmailDomainHint =
     activeEmail.trim() && isValidEmail(activeEmail.trim()) && !isPreferredCollegeEmail(activeEmail.trim())
+  const isPasswordVisible = mode === 'login' ? showLoginPassword : showSignupPassword
+  const passwordInputType = isPasswordVisible ? 'text' : 'password'
+  const submitButtonLabel =
+    status === 'loading'
+      ? mode === 'login'
+        ? t.loggingIn
+        : t.signingUp
+      : mode === 'login'
+        ? t.loginBtn
+        : t.signUpBtn
 
   return (
     <div className="login-page">
@@ -287,15 +314,7 @@ export default function StudentLogin() {
                 <input
                   id="password"
                   name={mode === 'login' ? 'loginPassword' : 'signupPassword'}
-                  type={
-                    mode === 'login'
-                      ? showLoginPassword
-                        ? 'text'
-                        : 'password'
-                      : showSignupPassword
-                        ? 'text'
-                        : 'password'
-                  }
+                  type={passwordInputType}
                   className="login-input"
                   placeholder={t.passwordPlaceholder}
                   autoComplete={mode === 'login' ? 'current-password' : 'new-password'}
@@ -311,12 +330,12 @@ export default function StudentLogin() {
                       : setShowSignupPassword(v => !v)
                   }
                   aria-label={
-                    (mode === 'login' ? showLoginPassword : showSignupPassword)
+                    isPasswordVisible
                       ? t.hidePassword
                       : t.showPassword
                   }
                 >
-                  {(mode === 'login' ? showLoginPassword : showSignupPassword) ? <EyeOff /> : <Eye />}
+                  {isPasswordVisible ? <EyeOff /> : <Eye />}
                 </button>
               </div>
             </div>
@@ -412,7 +431,7 @@ export default function StudentLogin() {
               className="login-submit"
               disabled={status === 'loading'}
             >
-              {status === 'loading' ? (mode === 'login' ? t.loggingIn : t.signingUp) : mode === 'login' ? t.loginBtn : t.signUpBtn}
+              {submitButtonLabel}
             </button>
           </form>
 
