@@ -30,6 +30,12 @@ npm install
 npm run dev
 ```
 
+Create local env:
+
+```bash
+cp .env.example .env.local
+```
+
 Build:
 
 ```bash
@@ -41,6 +47,7 @@ npm run build
 ```text
 SIETTPO/
 ├── public/          # Static assets (images, PDFs)
+├── supabase/        # SQL migrations for backend foundation
 ├── src/
 │   ├── components/  # UI and section components
 │   ├── contexts/    # Language context
@@ -51,6 +58,25 @@ SIETTPO/
 ├── index.html
 └── package.json
 ```
+
+## Supabase Backend Foundation (PR1)
+
+This repository includes the first Supabase backend foundation for:
+
+- Student account profile storage (insiders)
+- Recruitment inquiry storage from outsider recruiters
+- Future-ready role model with `tpo_admin`
+
+Included files:
+
+- `supabase/migrations/0001_initial_schema.sql` (schema + RLS policies)
+- `supabase/README.md` (how to apply migration)
+- `.env.example` (frontend env contract)
+
+Required frontend env keys:
+
+- `VITE_SUPABASE_URL`
+- `VITE_SUPABASE_ANON_KEY`
 
 ## Contributors
 
