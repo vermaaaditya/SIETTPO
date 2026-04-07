@@ -15,6 +15,7 @@ const preferredCollegeEmailDomains = (env.VITE_COLLEGE_EMAIL_DOMAINS || '')
   .map(domain => domain.trim().toLowerCase())
   .filter(Boolean)
 const preferredCollegeEmailKeyword = (env.VITE_COLLEGE_EMAIL_KEYWORD || 'siet').trim().toLowerCase()
+const signupRequiredFields = ['fullName', 'signupEmail', 'signupPassword', 'confirmPassword', 'rollNumber', 'course', 'branch', 'batch']
 const initialFormState = {
   fullName: '',
   signupEmail: '',
@@ -61,11 +62,20 @@ export default function StudentLogin() {
   }
 
   function isValidEmail(value) {
-    return /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(value)
+    const email = value.trim()
+    if (!email) {
+      return false
+    }
+    const input = document.createElement('input')
+    input.type = 'email'
+    input.value = email
+    return input.checkValidity()
   }
 
   function isPreferredCollegeEmail(value) {
-    const domain = value.trim().toLowerCase().split('@')[1]
+    const normalized = value.trim().toLowerCase()
+    const atIndex = normalized.lastIndexOf('@')
+    const domain = atIndex >= 0 ? normalized.slice(atIndex + 1) : ''
     if (!domain) {
       return false
     }
@@ -91,17 +101,7 @@ export default function StudentLogin() {
       return null
     }
 
-    const requiredSignupFields = [
-      form.fullName,
-      form.signupEmail,
-      form.signupPassword,
-      form.confirmPassword,
-      form.rollNumber,
-      form.course,
-      form.branch,
-      form.batch,
-    ]
-    if (requiredSignupFields.some(field => !field.trim())) {
+    if (signupRequiredFields.some(field => !form[field].trim())) {
       return t.errorRequiredMsg
     }
     if (!isValidEmail(form.signupEmail.trim())) {
@@ -132,6 +132,7 @@ export default function StudentLogin() {
     setStatus('loading')
     setStatusMessage('')
 
+    // TODO: replace timeout simulation with real auth API integration.
     submitTimeoutRef.current = setTimeout(() => {
       setStatus('success')
       setStatusMessage(mode === 'login' ? t.loginSuccessMsg : t.signupSuccessMsg)
@@ -154,8 +155,9 @@ export default function StudentLogin() {
   }
 
   const activeEmail = mode === 'login' ? form.loginEmail : form.signupEmail
+  const normalizedActiveEmail = activeEmail.trim()
   const showEmailDomainHint =
-    activeEmail.trim() && isValidEmail(activeEmail.trim()) && !isPreferredCollegeEmail(activeEmail.trim())
+    normalizedActiveEmail && isValidEmail(normalizedActiveEmail) && !isPreferredCollegeEmail(normalizedActiveEmail)
   const isPasswordVisible = mode === 'login' ? showLoginPassword : showSignupPassword
   const passwordInputType = isPasswordVisible ? 'text' : 'password'
   const submitButtonLabel =
