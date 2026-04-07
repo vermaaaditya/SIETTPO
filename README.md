@@ -54,4 +54,4 @@ SIETTPO/
 
 ## Contributors
 
-This project was worked on by **Manish, Nishith, Rishabh, Heemanshu, and you**.
+This project was worked on by **Manish, Nishith, Rishabh, Heemanshu, and Aaditya Verma**.
