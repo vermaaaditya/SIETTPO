@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { ArrowLeft, Eye, EyeOff, AlertCircle, CheckCircle2 } from 'lucide-react'
 import { useLanguage } from '../contexts/LanguageContext'
@@ -30,6 +30,7 @@ const initialFormState = {
 }
 
 export default function StudentLogin() {
+  const navigate = useNavigate()
   const [mode, setMode] = useState('register')
   const [form, setForm] = useState(initialFormState)
   const [showLoginPassword, setShowLoginPassword] = useState(false)
@@ -52,6 +53,13 @@ export default function StudentLogin() {
     setMode(nextMode)
     setStatus(null)
     setStatusMessage('')
+  }
+
+  function handleLoginSuccess() {
+    setStatus('success')
+    setStatusMessage(t.loginSuccessMsg)
+    setForm(prev => ({ ...prev, loginEmail: '', loginPassword: '' }))
+    navigate('/', { replace: true })
   }
 
   function normalizeAuthErrorMessage(error) {
@@ -227,9 +235,7 @@ export default function StudentLogin() {
               .upsert(profilePayloadFromMetadata, { onConflict: 'id' })
 
             if (!upsertMissingProfileError) {
-              setStatus('success')
-              setStatusMessage(t.loginSuccessMsg)
-              setForm(prev => ({ ...prev, loginEmail: '', loginPassword: '' }))
+              handleLoginSuccess()
               return
             }
 
@@ -272,9 +278,7 @@ export default function StudentLogin() {
           return
         }
 
-        setStatus('success')
-        setStatusMessage(t.loginSuccessMsg)
-        setForm(prev => ({ ...prev, loginEmail: '', loginPassword: '' }))
+        handleLoginSuccess()
         return
       }
 
