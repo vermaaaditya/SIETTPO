@@ -198,9 +198,11 @@ export default function StudentLogin() {
           throw new Error(t.authDataIncompleteMsg)
         }
 
+        const normalizedLoginEmail = form.loginEmail.trim().toLowerCase()
+
         const { data: profile, error: profileError } = await supabase
           .from('profiles')
-          .select('id')
+          .select('id, full_name, college_email')
           .eq('id', userId)
           .maybeSingle()
 
@@ -208,7 +210,15 @@ export default function StudentLogin() {
           throw profileError
         }
 
-        if (!profile) {
+        const hasProfileDetails =
+          profile &&
+          String(profile.full_name || '').trim() &&
+          String(profile.college_email || '').trim()
+        const isProfileEmailMatch =
+          hasProfileDetails &&
+          String(profile.college_email).trim().toLowerCase() === normalizedLoginEmail
+
+        if (!profile || !hasProfileDetails || !isProfileEmailMatch) {
           let profileCreationError = null
           const profilePayloadFromMetadata = buildProfilePayloadFromUser(data.user, form.loginEmail)
 
