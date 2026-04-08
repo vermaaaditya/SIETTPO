@@ -152,18 +152,21 @@ export default function Form() {
       additional_info: formData.additionalInfo.trim() || null,
       consent: formData.consent,
     }
+    const submitErrorMessage = lang === 'hi'
+      ? 'फॉर्म जमा नहीं हो सका। कृपया दोबारा प्रयास करें।'
+      : 'Unable to submit the form. Please try again.'
 
     try {
       const { error } = await supabase.from('recruitment_inquiries').insert(payload)
 
       if (error) {
         setStatus('error')
-        setStatusMessage(lang === 'hi' ? 'फॉर्म जमा नहीं हो सका। कृपया दोबारा प्रयास करें।' : 'Unable to submit the form. Please try again.')
+        setStatusMessage(submitErrorMessage)
         return
       }
     } catch {
       setStatus('error')
-      setStatusMessage(lang === 'hi' ? 'फॉर्म जमा नहीं हो सका। कृपया दोबारा प्रयास करें।' : 'Unable to submit the form. Please try again.')
+      setStatusMessage(submitErrorMessage)
       return
     }
 
