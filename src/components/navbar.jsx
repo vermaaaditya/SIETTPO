@@ -216,9 +216,9 @@ export function Navbar() {
             <span
               className="px-5 py-2.5 text-sm font-semibold"
               style={{ color: 'var(--ink)' }}
-              title={`Logged in as ${studentDisplayName}`}
+              title={`${t.loggedInAs} ${studentDisplayName}`}
             >
-              <span style={visuallyHiddenTextStyle}>Logged in as </span>
+              <span style={visuallyHiddenTextStyle}>{t.loggedInAs} </span>
               {studentDisplayName}
             </span>
           ) : (
@@ -269,9 +269,9 @@ export function Navbar() {
               <div
                 className="w-full text-center py-2.5 font-semibold"
                 style={{ color: 'var(--ink)' }}
-                title={`Logged in as ${studentDisplayName}`}
+                title={`${t.loggedInAs} ${studentDisplayName}`}
               >
-                <span style={visuallyHiddenTextStyle}>Logged in as </span>
+                <span style={visuallyHiddenTextStyle}>{t.loggedInAs} </span>
                 {studentDisplayName}
               </div>
             ) : (

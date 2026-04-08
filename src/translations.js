@@ -7,6 +7,7 @@ export const translations = {
       links: ['Home', 'Events', 'Brochure', 'Code of Conduct', 'Current Cohort', 'Team', 'Contact Us'],
       forRecruiters: 'For Recruiters',
       studentLogin: 'Student Login',
+      loggedInAs: 'Logged in as',
     },
     hero: {
       label: 'SIET Panchkula',
@@ -426,6 +427,7 @@ export const translations = {
       links: ['होम', 'इवेंट्स', 'ब्रोशर', 'आचार संहिता', 'वर्तमान बैच', 'टीम', 'संपर्क करें'],
       forRecruiters: 'भर्तीकर्ताओं के लिए',
       studentLogin: 'छात्र लॉगिन',
+      loggedInAs: 'लॉग-इन उपयोगकर्ता',
     },
     hero: {
       label: 'SIET पंचकुला',
