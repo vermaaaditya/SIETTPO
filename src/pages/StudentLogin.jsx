@@ -56,8 +56,6 @@ export default function StudentLogin() {
   }
 
   function handleLoginSuccess() {
-    setStatus('success')
-    setStatusMessage(t.loginSuccessMsg)
     setForm(prev => ({ ...prev, loginEmail: '', loginPassword: '' }))
     navigate('/', { replace: true })
   }
