@@ -210,13 +210,12 @@ export default function StudentLogin() {
           throw profileError
         }
 
-        const hasProfileDetails =
-          profile &&
-          String(profile.full_name || '').trim() &&
-          String(profile.college_email || '').trim()
+        const profileFullName = String(profile?.full_name || '').trim()
+        const normalizedProfileEmail = String(profile?.college_email || '').trim().toLowerCase()
+        const hasProfileDetails = profile && profileFullName && normalizedProfileEmail
         const isProfileEmailMatch =
           hasProfileDetails &&
-          String(profile.college_email || '').trim().toLowerCase() === normalizedLoginEmail
+          normalizedProfileEmail === normalizedLoginEmail
 
         if (!profile) {
           let profileCreationError = null

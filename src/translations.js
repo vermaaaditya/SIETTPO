@@ -427,7 +427,7 @@ export const translations = {
       links: ['होम', 'इवेंट्स', 'ब्रोशर', 'आचार संहिता', 'वर्तमान बैच', 'टीम', 'संपर्क करें'],
       forRecruiters: 'भर्तीकर्ताओं के लिए',
       studentLogin: 'छात्र लॉगिन',
-      loggedInAs: 'लॉग-इन उपयोगकर्ता',
+      loggedInAs: 'लॉग-इन हैं:',
     },
     hero: {
       label: 'SIET पंचकुला',

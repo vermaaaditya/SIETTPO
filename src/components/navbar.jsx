@@ -55,7 +55,7 @@ export function Navbar() {
 
     let active = true
 
-    const resolveDisplayName = async (user) => {
+    const fetchAndSetDisplayName = async (user) => {
       if (!user) {
         if (active) {
           setStudentDisplayName('')
@@ -78,6 +78,7 @@ export function Navbar() {
         profileFullName = String(profile.full_name).trim()
       }
 
+      // Support both full_name and fullName because older records may use either key.
       const metadata = user.user_metadata || {}
       const metadataName = String(metadata.full_name || metadata.fullName || '').trim()
       const fallbackEmailName = String(user.email || '').split('@')[0].trim()
@@ -90,13 +91,13 @@ export function Navbar() {
 
     const init = async () => {
       const { data } = await supabase.auth.getSession()
-      await resolveDisplayName(data?.session?.user || null)
+      await fetchAndSetDisplayName(data?.session?.user || null)
     }
 
     void init()
 
     const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
-      void resolveDisplayName(session?.user || null)
+      void fetchAndSetDisplayName(session?.user || null)
     })
 
     return () => {
