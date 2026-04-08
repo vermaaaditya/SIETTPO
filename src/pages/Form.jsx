@@ -24,10 +24,7 @@ const initialFormState = {
 }
 
 function isValidEmail(value) {
-  const input = document.createElement('input')
-  input.type = 'email'
-  input.value = value
-  return input.checkValidity()
+  return /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(value)
 }
 
 function isValidUrl(value) {
@@ -92,7 +89,7 @@ export default function Form() {
 
     const emailValue = formData.email.trim()
     const websiteValue = formData.website.trim()
-    const positionsValue = Number.parseInt(String(formData.positions), 10)
+    const positionsValue = Number.parseInt(formData.positions, 10)
 
     if (!Number.isInteger(positionsValue) || positionsValue < 1) {
       setStatus('error')
@@ -125,7 +122,7 @@ export default function Form() {
       company_size: formData.companySize.trim() || null,
       contact_name: formData.contactName.trim(),
       designation: formData.designation.trim(),
-      email: emailValue.toLowerCase(),
+      email: emailValue,
       phone: formData.phone.trim(),
       job_role: formData.role.trim(),
       positions: positionsValue,
