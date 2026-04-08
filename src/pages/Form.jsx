@@ -23,6 +23,8 @@ const initialFormState = {
   consent: false,
 }
 
+const HTTP_PROTOCOL_PATTERN = /^https?:\/\//i
+
 function isValidEmail(value) {
   return /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(value)
 }
@@ -30,7 +32,7 @@ function isValidEmail(value) {
 function isValidUrl(value) {
   if (!value) return true
   try {
-    const normalizedValue = /^https?:\/\//i.test(value) ? value : `https://${value}`
+    const normalizedValue = HTTP_PROTOCOL_PATTERN.test(value) ? value : `https://${value}`
     const parsedUrl = new URL(normalizedValue)
     return parsedUrl.protocol === 'http:' || parsedUrl.protocol === 'https:'
   } catch {
@@ -91,7 +93,7 @@ export default function Form() {
     const emailValue = formData.email.trim()
     const websiteRaw = formData.website.trim()
     const websiteValue = websiteRaw
-      ? (/^https?:\/\//i.test(websiteRaw) ? websiteRaw : `https://${websiteRaw}`)
+      ? (HTTP_PROTOCOL_PATTERN.test(websiteRaw) ? websiteRaw : `https://${websiteRaw}`)
       : ''
     const positionsRaw = String(formData.positions).trim()
     const positionsValue = Number.parseInt(positionsRaw, 10)
@@ -266,7 +268,7 @@ export default function Form() {
                   </label>
                   <input
                     className="inquiry-input"
-                    placeholder={lang === 'hi' ? 'https://www.example.com (उदा.)' : 'https://www.example.com (e.g.)'}
+                    placeholder={lang === 'hi' ? 'https://www.example.com (उदाहरण)' : 'https://www.example.com (e.g.)'}
                     type="text"
                     name="website"
                     value={formData.website}
