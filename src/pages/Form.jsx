@@ -90,6 +90,22 @@ export default function Form() {
     const emailValue = formData.email.trim()
     const websiteValue = formData.website.trim()
     const positionsValue = Number.parseInt(formData.positions, 10)
+    const requiredTextValues = [
+      formData.companyName.trim(),
+      formData.industry.trim(),
+      formData.contactName.trim(),
+      formData.designation.trim(),
+      emailValue,
+      formData.phone.trim(),
+      formData.role.trim(),
+    ]
+    const preferredBranches = formData.preferredBranches.map(branch => branch.trim()).filter(Boolean)
+
+    if (requiredTextValues.some(value => !value)) {
+      setStatus('error')
+      setStatusMessage(lang === 'hi' ? 'कृपया सभी आवश्यक फ़ील्ड भरें।' : 'Please fill all required fields.')
+      return
+    }
 
     if (!Number.isInteger(positionsValue) || positionsValue < 1) {
       setStatus('error')
@@ -126,7 +142,7 @@ export default function Form() {
       phone: formData.phone.trim(),
       job_role: formData.role.trim(),
       positions: positionsValue,
-      preferred_branches: formData.preferredBranches,
+      preferred_branches: preferredBranches,
       additional_info: formData.additionalInfo.trim() || null,
       consent: formData.consent,
     }
