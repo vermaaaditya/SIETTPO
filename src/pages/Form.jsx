@@ -23,6 +23,8 @@ const initialFormState = {
   consent: false,
 }
 
+const HTTP_PROTOCOL_PATTERN = /^https?:\/\//i
+
 function isValidEmail(value) {
   return /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(value)
 }
@@ -30,7 +32,8 @@ function isValidEmail(value) {
 function isValidUrl(value) {
   if (!value) return true
   try {
-    const parsedUrl = new URL(value)
+    const normalizedValue = HTTP_PROTOCOL_PATTERN.test(value) ? value : `https://${value}`
+    const parsedUrl = new URL(normalizedValue)
     return parsedUrl.protocol === 'http:' || parsedUrl.protocol === 'https:'
   } catch {
     return false
@@ -88,7 +91,10 @@ export default function Form() {
     setStatusMessage('')
 
     const emailValue = formData.email.trim()
-    const websiteValue = formData.website.trim()
+    const websiteRaw = formData.website.trim()
+    const websiteValue = websiteRaw
+      ? (HTTP_PROTOCOL_PATTERN.test(websiteRaw) ? websiteRaw : `https://${websiteRaw}`)
+      : ''
     const positionsRaw = String(formData.positions).trim()
     const positionsValue = Number.parseInt(positionsRaw, 10)
     const requiredTextValues = [
@@ -121,7 +127,7 @@ export default function Form() {
       return
     }
 
-    if (!isValidUrl(websiteValue)) {
+    if (!isValidUrl(websiteRaw)) {
       setStatus('error')
       setStatusMessage(lang === 'hi' ? 'कृपया वैध वेबसाइट URL दर्ज करें।' : 'Please enter a valid website URL.')
       return
@@ -148,12 +154,21 @@ export default function Form() {
       additional_info: formData.additionalInfo.trim() || null,
       consent: formData.consent,
     }
+    const submitErrorMessage = lang === 'hi'
+      ? 'फॉर्म जमा नहीं हो सका। कृपया दोबारा प्रयास करें।'
+      : 'Unable to submit the form. Please try again.'
 
-    const { error } = await supabase.from('recruitment_inquiries').insert(payload)
+    try {
+      const { error } = await supabase.from('recruitment_inquiries').insert(payload)
 
-    if (error) {
+      if (error) {
+        setStatus('error')
+        setStatusMessage(submitErrorMessage)
+        return
+      }
+    } catch {
       setStatus('error')
-      setStatusMessage(lang === 'hi' ? 'फॉर्म जमा नहीं हो सका। कृपया दोबारा प्रयास करें।' : 'Unable to submit the form. Please try again.')
+      setStatusMessage(submitErrorMessage)
       return
     }
 
@@ -253,8 +268,8 @@ export default function Form() {
                   </label>
                   <input
                     className="inquiry-input"
-                    placeholder={lang === 'hi' ? 'www.example.com' : 'www.example.com'}
-                    type="url"
+                    placeholder={lang === 'hi' ? 'https://www.example.com (उदाहरण)' : 'https://www.example.com (e.g.)'}
+                    type="text"
                     name="website"
                     value={formData.website}
                     onChange={handleChange}
