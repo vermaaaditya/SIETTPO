@@ -140,6 +140,29 @@ export default function StudentLogin() {
     return null
   }
 
+  function buildProfilePayloadFromUser(user, providedEmail = '') {
+    const metadata = user?.user_metadata || {}
+    const profilePayload = {
+      id: user?.id || '',
+      role: 'student',
+      full_name: String(metadata.full_name || metadata.fullName || '').trim(),
+      college_email: String(user?.email || providedEmail || '').trim().toLowerCase(),
+      roll_number: String(metadata.roll_number || metadata.rollNumber || '').trim(),
+      branch: String(metadata.branch || '').trim(),
+      batch: String(metadata.batch || '').trim(),
+    }
+
+    const hasRequiredFields =
+      profilePayload.id &&
+      profilePayload.full_name &&
+      profilePayload.college_email &&
+      profilePayload.roll_number &&
+      profilePayload.branch &&
+      profilePayload.batch
+
+    return hasRequiredFields ? profilePayload : null
+  }
+
   async function handleSubmit(e) {
     e.preventDefault()
 
@@ -186,6 +209,25 @@ export default function StudentLogin() {
         }
 
         if (!profile) {
+          let profileCreationError = null
+          const profilePayloadFromMetadata = buildProfilePayloadFromUser(data.user, form.loginEmail)
+
+          if (profilePayloadFromMetadata) {
+            const { error: upsertMissingProfileError } = await supabase
+              .from('profiles')
+              .upsert(profilePayloadFromMetadata, { onConflict: 'id' })
+
+            if (!upsertMissingProfileError) {
+              setStatus('success')
+              setStatusMessage(t.loginSuccessMsg)
+              setForm(prev => ({ ...prev, loginEmail: '', loginPassword: '' }))
+              return
+            }
+
+            profileCreationError = upsertMissingProfileError
+            console.error('Unable to create missing profile during login:', upsertMissingProfileError)
+          }
+
           try {
             const { error: signOutError } = await supabase.auth.signOut()
             if (signOutError) {
@@ -199,7 +241,7 @@ export default function StudentLogin() {
           }
 
           setStatus('error')
-          setStatusMessage(t.profileNotFoundMsg)
+          setStatusMessage(profileCreationError ? t.genericAuthErrorMsg : t.profileNotFoundMsg)
           return
         }
 
@@ -234,29 +276,31 @@ export default function StudentLogin() {
         throw new Error(t.authDataIncompleteMsg)
       }
 
-      const { error: upsertError } = await supabase.from('profiles').upsert(
-        {
-          id: userId,
-          role: 'student',
-          full_name: signupPayload.full_name,
-          college_email: signupEmail,
-          roll_number: signupPayload.roll_number,
-          branch: signupPayload.branch,
-          batch: signupPayload.batch,
-        },
-        { onConflict: 'id' }
-      )
+      if (data.session) {
+        const { error: upsertError } = await supabase.from('profiles').upsert(
+          {
+            id: userId,
+            role: 'student',
+            full_name: signupPayload.full_name,
+            college_email: signupEmail,
+            roll_number: signupPayload.roll_number,
+            branch: signupPayload.branch,
+            batch: signupPayload.batch,
+          },
+          { onConflict: 'id' }
+        )
 
-      if (upsertError) {
-        try {
-          const { error: signOutError } = await supabase.auth.signOut()
-          if (signOutError) {
+        if (upsertError) {
+          try {
+            const { error: signOutError } = await supabase.auth.signOut()
+            if (signOutError) {
+              console.error('Unable to sign out after profile upsert failure:', signOutError)
+            }
+          } catch (signOutError) {
             console.error('Unable to sign out after profile upsert failure:', signOutError)
           }
-        } catch (signOutError) {
-          console.error('Unable to sign out after profile upsert failure:', signOutError)
+          throw upsertError
         }
-        throw upsertError
       }
 
       setStatus('success')
