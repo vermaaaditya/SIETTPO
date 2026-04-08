@@ -140,13 +140,13 @@ export default function StudentLogin() {
     return null
   }
 
-  function buildProfilePayloadFromUser(user, fallbackEmail = '') {
+  function buildProfilePayloadFromUser(user, providedEmail = '') {
     const metadata = user?.user_metadata || {}
     const profilePayload = {
       id: user?.id || '',
       role: 'student',
       full_name: String(metadata.full_name || metadata.fullName || '').trim(),
-      college_email: String(user?.email || fallbackEmail || '').trim().toLowerCase(),
+      college_email: String(user?.email || providedEmail || '').trim().toLowerCase(),
       roll_number: String(metadata.roll_number || metadata.rollNumber || '').trim(),
       branch: String(metadata.branch || '').trim(),
       batch: String(metadata.batch || '').trim(),
@@ -209,12 +209,12 @@ export default function StudentLogin() {
         }
 
         if (!profile) {
-          const inferredProfilePayload = buildProfilePayloadFromUser(data.user, form.loginEmail)
+          const profilePayloadFromMetadata = buildProfilePayloadFromUser(data.user, form.loginEmail)
 
-          if (inferredProfilePayload) {
+          if (profilePayloadFromMetadata) {
             const { error: createProfileError } = await supabase
               .from('profiles')
-              .upsert(inferredProfilePayload, { onConflict: 'id' })
+              .upsert(profilePayloadFromMetadata, { onConflict: 'id' })
 
             if (!createProfileError) {
               setStatus('success')
