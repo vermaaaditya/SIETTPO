@@ -198,15 +198,24 @@ export default function StudentLogin() {
           throw new Error(t.authDataIncompleteMsg)
         }
 
+        const normalizedLoginEmail = form.loginEmail.trim().toLowerCase()
+
         const { data: profile, error: profileError } = await supabase
           .from('profiles')
-          .select('id')
+          .select('id, full_name, college_email')
           .eq('id', userId)
           .maybeSingle()
 
         if (profileError) {
           throw profileError
         }
+
+        const profileFullName = String(profile?.full_name || '').trim()
+        const normalizedProfileEmail = String(profile?.college_email || '').trim().toLowerCase()
+        const hasProfileDetails = profile && profileFullName && normalizedProfileEmail
+        const isProfileEmailMatch =
+          hasProfileDetails &&
+          normalizedProfileEmail === normalizedLoginEmail
 
         if (!profile) {
           let profileCreationError = null
@@ -242,6 +251,24 @@ export default function StudentLogin() {
 
           setStatus('error')
           setStatusMessage(profileCreationError ? t.genericAuthErrorMsg : t.profileNotFoundMsg)
+          return
+        }
+
+        if (!hasProfileDetails || !isProfileEmailMatch) {
+          try {
+            const { error: signOutError } = await supabase.auth.signOut()
+            if (signOutError) {
+              throw signOutError
+            }
+          } catch (signOutError) {
+            console.error('Unable to sign out after profile mismatch:', signOutError)
+            setStatus('error')
+            setStatusMessage(t.profileNotFoundSignOutMsg)
+            return
+          }
+
+          setStatus('error')
+          setStatusMessage(t.profileNotFoundMsg)
           return
         }
 

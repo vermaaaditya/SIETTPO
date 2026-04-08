@@ -4,14 +4,28 @@ import { Menu, X } from 'lucide-react'
 import { GradientButton } from './ui/gradient-button'
 import { useLanguage } from '../contexts/LanguageContext'
 import { translations } from '../translations'
+import { supabase } from '../lib/supabase'
 
 function scrollTo(id) {
   document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
 }
 
+const visuallyHiddenTextStyle = {
+  position: 'absolute',
+  width: '1px',
+  height: '1px',
+  padding: 0,
+  margin: '-1px',
+  overflow: 'hidden',
+  clip: 'rect(0, 0, 0, 0)',
+  whiteSpace: 'nowrap',
+  border: 0,
+}
+
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [studentDisplayName, setStudentDisplayName] = useState('')
   const navigate = useNavigate()
   const { lang, toggleLang } = useLanguage()
   const t = translations[lang].navbar
@@ -31,6 +45,65 @@ export function Navbar() {
     window.addEventListener('scroll', handleScroll, { passive: true })
     handleScroll()
     return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  useEffect(() => {
+    if (!supabase) {
+      setStudentDisplayName('')
+      return
+    }
+
+    let active = true
+
+    const fetchAndSetDisplayName = async (user) => {
+      if (!user) {
+        if (active) {
+          setStudentDisplayName('')
+        }
+        return
+      }
+
+      let profileFullName = ''
+      const { data: profile, error: profileError } = await supabase
+        .from('profiles')
+        .select('full_name')
+        .eq('id', user.id)
+        .maybeSingle()
+
+      if (profileError) {
+        console.error('Unable to fetch profile name for navbar:', profileError)
+      }
+
+      if (profile?.full_name) {
+        profileFullName = String(profile.full_name).trim()
+      }
+
+      // Support both full_name and fullName because older records may use either key.
+      const metadata = user.user_metadata || {}
+      const metadataName = String(metadata.full_name || metadata.fullName || '').trim()
+      const fallbackEmailName = String(user.email || '').split('@')[0].trim()
+      const nextDisplayName = profileFullName || metadataName || fallbackEmailName
+
+      if (active) {
+        setStudentDisplayName(nextDisplayName)
+      }
+    }
+
+    const init = async () => {
+      const { data } = await supabase.auth.getSession()
+      await fetchAndSetDisplayName(data?.session?.user || null)
+    }
+
+    void init()
+
+    const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
+      void fetchAndSetDisplayName(session?.user || null)
+    })
+
+    return () => {
+      active = false
+      authListener.subscription.unsubscribe()
+    }
   }, [])
 
   const navigateToLink = (link) => {
@@ -140,7 +213,18 @@ export function Navbar() {
             >अ</button>
           </div>
           <GradientButton className="px-5 py-2.5 text-sm" onClick={() => scrollTo('recruit-cta')}>{t.forRecruiters}</GradientButton>
-          <GradientButton variant="variant" className="px-5 py-2.5 text-sm" onClick={() => navigate('/login')}>{t.studentLogin}</GradientButton>
+          {studentDisplayName ? (
+            <span
+              className="px-5 py-2.5 text-sm font-semibold"
+              style={{ color: 'var(--ink)' }}
+              title={`${t.loggedInAs} ${studentDisplayName}`}
+            >
+              <span style={visuallyHiddenTextStyle}>{t.loggedInAs} </span>
+              {studentDisplayName}
+            </span>
+          ) : (
+            <GradientButton variant="variant" className="px-5 py-2.5 text-sm" onClick={() => navigate('/login')}>{t.studentLogin}</GradientButton>
+          )}
         </div>
         <button
           className="navbar-mobile-toggle"
@@ -182,7 +266,18 @@ export function Navbar() {
               >अ</button>
             </div>
             <GradientButton className="w-full" onClick={() => { scrollTo('recruit-cta'); setMobileOpen(false) }}>{t.forRecruiters}</GradientButton>
-            <GradientButton variant="variant" className="w-full" onClick={() => { navigate('/login'); setMobileOpen(false) }}>{t.studentLogin}</GradientButton>
+            {studentDisplayName ? (
+              <div
+                className="w-full text-center py-2.5 font-semibold"
+                style={{ color: 'var(--ink)' }}
+                title={`${t.loggedInAs} ${studentDisplayName}`}
+              >
+                <span style={visuallyHiddenTextStyle}>{t.loggedInAs} </span>
+                {studentDisplayName}
+              </div>
+            ) : (
+              <GradientButton variant="variant" className="w-full" onClick={() => { navigate('/login'); setMobileOpen(false) }}>{t.studentLogin}</GradientButton>
+            )}
           </div>
         </div>
       )}
