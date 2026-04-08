@@ -197,7 +197,12 @@ export function Navbar() {
           </div>
           <GradientButton className="px-5 py-2.5 text-sm" onClick={() => scrollTo('recruit-cta')}>{t.forRecruiters}</GradientButton>
           {studentDisplayName ? (
-            <span className="px-5 py-2.5 text-sm font-semibold" style={{ color: 'var(--ink)' }}>
+            <span
+              className="px-5 py-2.5 text-sm font-semibold"
+              style={{ color: 'var(--ink)' }}
+              aria-label={`Logged in as ${studentDisplayName}`}
+              title={`Logged in as ${studentDisplayName}`}
+            >
               {studentDisplayName}
             </span>
           ) : (
@@ -245,7 +250,12 @@ export function Navbar() {
             </div>
             <GradientButton className="w-full" onClick={() => { scrollTo('recruit-cta'); setMobileOpen(false) }}>{t.forRecruiters}</GradientButton>
             {studentDisplayName ? (
-              <div className="w-full text-center py-2.5 font-semibold" style={{ color: 'var(--ink)' }}>
+              <div
+                className="w-full text-center py-2.5 font-semibold"
+                style={{ color: 'var(--ink)' }}
+                aria-label={`Logged in as ${studentDisplayName}`}
+                title={`Logged in as ${studentDisplayName}`}
+              >
                 {studentDisplayName}
               </div>
             ) : (

@@ -216,7 +216,7 @@ export default function StudentLogin() {
           String(profile.college_email || '').trim()
         const isProfileEmailMatch =
           hasProfileDetails &&
-          String(profile.college_email).trim().toLowerCase() === normalizedLoginEmail
+          String(profile.college_email || '').trim().toLowerCase() === normalizedLoginEmail
 
         if (!profile || !hasProfileDetails || !isProfileEmailMatch) {
           let profileCreationError = null
