@@ -30,7 +30,8 @@ function isValidEmail(value) {
 function isValidUrl(value) {
   if (!value) return true
   try {
-    const parsedUrl = new URL(value)
+    const normalizedValue = /^https?:\/\//i.test(value) ? value : `https://${value}`
+    const parsedUrl = new URL(normalizedValue)
     return parsedUrl.protocol === 'http:' || parsedUrl.protocol === 'https:'
   } catch {
     return false
@@ -88,7 +89,10 @@ export default function Form() {
     setStatusMessage('')
 
     const emailValue = formData.email.trim()
-    const websiteValue = formData.website.trim()
+    const websiteRaw = formData.website.trim()
+    const websiteValue = websiteRaw
+      ? (/^https?:\/\//i.test(websiteRaw) ? websiteRaw : `https://${websiteRaw}`)
+      : ''
     const positionsRaw = String(formData.positions).trim()
     const positionsValue = Number.parseInt(positionsRaw, 10)
     const requiredTextValues = [
@@ -121,7 +125,7 @@ export default function Form() {
       return
     }
 
-    if (!isValidUrl(websiteValue)) {
+    if (!isValidUrl(websiteRaw)) {
       setStatus('error')
       setStatusMessage(lang === 'hi' ? 'कृपया वैध वेबसाइट URL दर्ज करें।' : 'Please enter a valid website URL.')
       return
@@ -149,9 +153,15 @@ export default function Form() {
       consent: formData.consent,
     }
 
-    const { error } = await supabase.from('recruitment_inquiries').insert(payload)
+    try {
+      const { error } = await supabase.from('recruitment_inquiries').insert(payload)
 
-    if (error) {
+      if (error) {
+        setStatus('error')
+        setStatusMessage(lang === 'hi' ? 'फॉर्म जमा नहीं हो सका। कृपया दोबारा प्रयास करें।' : 'Unable to submit the form. Please try again.')
+        return
+      }
+    } catch {
       setStatus('error')
       setStatusMessage(lang === 'hi' ? 'फॉर्म जमा नहीं हो सका। कृपया दोबारा प्रयास करें।' : 'Unable to submit the form. Please try again.')
       return
@@ -253,8 +263,8 @@ export default function Form() {
                   </label>
                   <input
                     className="inquiry-input"
-                    placeholder={lang === 'hi' ? 'www.example.com' : 'www.example.com'}
-                    type="url"
+                    placeholder={lang === 'hi' ? 'https://www.example.com' : 'https://www.example.com'}
+                    type="text"
                     name="website"
                     value={formData.website}
                     onChange={handleChange}
