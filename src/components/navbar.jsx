@@ -52,11 +52,15 @@ export function Navbar() {
       }
 
       let profileFullName = ''
-      const { data: profile } = await supabase
+      const { data: profile, error: profileError } = await supabase
         .from('profiles')
         .select('full_name')
         .eq('id', user.id)
         .maybeSingle()
+
+      if (profileError) {
+        console.error('Unable to fetch profile name for navbar:', profileError)
+      }
 
       if (profile?.full_name) {
         profileFullName = String(profile.full_name).trim()
@@ -200,7 +204,6 @@ export function Navbar() {
             <span
               className="px-5 py-2.5 text-sm font-semibold"
               style={{ color: 'var(--ink)' }}
-              aria-label={`Logged in as ${studentDisplayName}`}
               title={`Logged in as ${studentDisplayName}`}
             >
               {studentDisplayName}
@@ -253,7 +256,6 @@ export function Navbar() {
               <div
                 className="w-full text-center py-2.5 font-semibold"
                 style={{ color: 'var(--ink)' }}
-                aria-label={`Logged in as ${studentDisplayName}`}
                 title={`Logged in as ${studentDisplayName}`}
               >
                 {studentDisplayName}

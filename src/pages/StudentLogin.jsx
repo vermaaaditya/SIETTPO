@@ -218,7 +218,7 @@ export default function StudentLogin() {
           hasProfileDetails &&
           String(profile.college_email || '').trim().toLowerCase() === normalizedLoginEmail
 
-        if (!profile || !hasProfileDetails || !isProfileEmailMatch) {
+        if (!profile) {
           let profileCreationError = null
           const profilePayloadFromMetadata = buildProfilePayloadFromUser(data.user, form.loginEmail)
 
@@ -252,6 +252,24 @@ export default function StudentLogin() {
 
           setStatus('error')
           setStatusMessage(profileCreationError ? t.genericAuthErrorMsg : t.profileNotFoundMsg)
+          return
+        }
+
+        if (!hasProfileDetails || !isProfileEmailMatch) {
+          try {
+            const { error: signOutError } = await supabase.auth.signOut()
+            if (signOutError) {
+              throw signOutError
+            }
+          } catch (signOutError) {
+            console.error('Unable to sign out after profile mismatch:', signOutError)
+            setStatus('error')
+            setStatusMessage(t.profileNotFoundSignOutMsg)
+            return
+          }
+
+          setStatus('error')
+          setStatusMessage(t.profileNotFoundMsg)
           return
         }
 
