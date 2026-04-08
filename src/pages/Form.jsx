@@ -1,14 +1,47 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { ArrowLeft } from 'lucide-react'
+import { ArrowLeft, AlertCircle, CheckCircle2 } from 'lucide-react'
 import { Navbar } from '../components/navbar'
 import { Footer } from '../components/footer'
 import { useLanguage } from '../contexts/LanguageContext'
+import { supabase, supabaseEnvError } from '../lib/supabase'
+
+const initialFormState = {
+  companyName: '',
+  website: '',
+  industry: '',
+  companySize: '',
+  contactName: '',
+  designation: '',
+  email: '',
+  phone: '',
+  role: '',
+  positions: '',
+  preferredBranches: [],
+  additionalInfo: '',
+  consent: false,
+}
+
+function isValidEmail(value) {
+  return /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(value)
+}
+
+function isValidUrl(value) {
+  if (!value) return true
+  try {
+    const parsedUrl = new URL(value)
+    return parsedUrl.protocol === 'http:' || parsedUrl.protocol === 'https:'
+  } catch {
+    return false
+  }
+}
 
 export default function Form() {
   const { lang } = useLanguage()
-  const [formData, setFormData] = useState({})
+  const [formData, setFormData] = useState(initialFormState)
+  const [status, setStatus] = useState(null) // null | 'loading' | 'error' | 'success'
+  const [statusMessage, setStatusMessage] = useState('')
 
   useEffect(() => {
     const frame = requestAnimationFrame(() => {
@@ -19,14 +52,117 @@ export default function Form() {
   }, [])
 
   const handleChange = (e) => {
-    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }))
+    const { name, value, type, checked } = e.target
+
+    setFormData(prev => {
+      if (name === 'preferredBranches') {
+        const nextBranches = checked
+          ? [...prev.preferredBranches, value]
+          : prev.preferredBranches.filter(branch => branch !== value)
+        return { ...prev, preferredBranches: nextBranches }
+      }
+
+      if (name === 'consent') {
+        return { ...prev, consent: checked }
+      }
+
+      return { ...prev, [name]: type === 'checkbox' ? checked : value }
+    })
+
+    if (status === 'error' || status === 'success') {
+      setStatus(null)
+      setStatusMessage('')
+    }
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    // Handle form submission
-    console.log('Form submitted:', formData)
+
+    if (!supabase) {
+      setStatus('error')
+      setStatusMessage(supabaseEnvError || (lang === 'hi' ? 'Supabase कॉन्फ़िगरेशन गायब है।' : 'Missing Supabase configuration.'))
+      return
+    }
+
+    setStatus('loading')
+    setStatusMessage('')
+
+    const emailValue = formData.email.trim()
+    const websiteValue = formData.website.trim()
+    const positionsRaw = String(formData.positions).trim()
+    const positionsValue = Number.parseInt(positionsRaw, 10)
+    const requiredTextValues = [
+      formData.companyName.trim(),
+      formData.industry.trim(),
+      formData.contactName.trim(),
+      formData.designation.trim(),
+      emailValue,
+      formData.phone.trim(),
+      formData.role.trim(),
+      positionsRaw,
+    ]
+    const preferredBranches = formData.preferredBranches.map(branch => branch.trim()).filter(Boolean)
+
+    if (requiredTextValues.some(value => !value)) {
+      setStatus('error')
+      setStatusMessage(lang === 'hi' ? 'कृपया सभी आवश्यक फ़ील्ड भरें।' : 'Please fill all required fields.')
+      return
+    }
+
+    if (Number.isNaN(positionsValue) || positionsValue < 1) {
+      setStatus('error')
+      setStatusMessage(lang === 'hi' ? 'कृपया पदों की वैध संख्या दर्ज करें।' : 'Please enter a valid number of positions.')
+      return
+    }
+
+    if (!isValidEmail(emailValue)) {
+      setStatus('error')
+      setStatusMessage(lang === 'hi' ? 'कृपया वैध ईमेल पता दर्ज करें।' : 'Please enter a valid email address.')
+      return
+    }
+
+    if (!isValidUrl(websiteValue)) {
+      setStatus('error')
+      setStatusMessage(lang === 'hi' ? 'कृपया वैध वेबसाइट URL दर्ज करें।' : 'Please enter a valid website URL.')
+      return
+    }
+
+    if (!formData.consent) {
+      setStatus('error')
+      setStatusMessage(lang === 'hi' ? 'जारी रखने के लिए सहमति आवश्यक है।' : 'Consent is required to continue.')
+      return
+    }
+
+    const payload = {
+      company_name: formData.companyName.trim(),
+      website: websiteValue || null,
+      industry: formData.industry.trim(),
+      company_size: formData.companySize.trim() || null,
+      contact_name: formData.contactName.trim(),
+      designation: formData.designation.trim(),
+      email: emailValue,
+      phone: formData.phone.trim(),
+      job_role: formData.role.trim(),
+      positions: positionsValue,
+      preferred_branches: preferredBranches,
+      additional_info: formData.additionalInfo.trim() || null,
+      consent: formData.consent,
+    }
+
+    const { error } = await supabase.from('recruitment_inquiries').insert(payload)
+
+    if (error) {
+      setStatus('error')
+      setStatusMessage(lang === 'hi' ? 'फॉर्म जमा नहीं हो सका। कृपया दोबारा प्रयास करें।' : 'Unable to submit the form. Please try again.')
+      return
+    }
+
+    setStatus('success')
+    setStatusMessage(lang === 'hi' ? 'आपका आवेदन सफलतापूर्वक जमा हो गया है।' : 'Your application has been submitted successfully.')
+    setFormData(initialFormState)
   }
+
+  const statusAlertClass = status === 'error' ? 'inquiry-alert inquiry-alert-error' : 'inquiry-alert inquiry-alert-success'
 
   return (
     <div className="inquiry-page">
@@ -106,6 +242,7 @@ export default function Form() {
                     placeholder={lang === 'hi' ? 'कंपनी का नाम दर्ज करें' : 'Enter company name'}
                     type="text"
                     name="companyName"
+                    value={formData.companyName}
                     onChange={handleChange}
                     required
                   />
@@ -119,6 +256,7 @@ export default function Form() {
                     placeholder={lang === 'hi' ? 'www.example.com' : 'www.example.com'}
                     type="url"
                     name="website"
+                    value={formData.website}
                     onChange={handleChange}
                   />
                 </div>
@@ -129,6 +267,7 @@ export default function Form() {
                   <select
                     className="inquiry-input"
                     name="industry"
+                    value={formData.industry}
                     onChange={handleChange}
                     required
                   >
@@ -147,6 +286,7 @@ export default function Form() {
                   <select
                     className="inquiry-input"
                     name="companySize"
+                    value={formData.companySize}
                     onChange={handleChange}
                   >
                     <option value="">{lang === 'hi' ? 'चुनें' : 'Select'}</option>
@@ -184,6 +324,7 @@ export default function Form() {
                     placeholder={lang === 'hi' ? 'नाम दर्ज करें' : 'Enter your name'}
                     type="text"
                     name="contactName"
+                    value={formData.contactName}
                     onChange={handleChange}
                     required
                   />
@@ -197,6 +338,7 @@ export default function Form() {
                     placeholder={lang === 'hi' ? 'जैसे HR Manager' : 'e.g., HR Manager'}
                     type="text"
                     name="designation"
+                    value={formData.designation}
                     onChange={handleChange}
                     required
                   />
@@ -210,6 +352,7 @@ export default function Form() {
                     placeholder="email@example.com"
                     type="email"
                     name="email"
+                    value={formData.email}
                     onChange={handleChange}
                     required
                   />
@@ -223,6 +366,7 @@ export default function Form() {
                     placeholder="+91 XXXXX XXXXX"
                     type="tel"
                     name="phone"
+                    value={formData.phone}
                     onChange={handleChange}
                     required
                   />
@@ -256,6 +400,7 @@ export default function Form() {
                       placeholder={lang === 'hi' ? 'जैसे Software Engineer' : 'e.g., Software Engineer'}
                       type="text"
                       name="role"
+                      value={formData.role}
                       onChange={handleChange}
                       required
                     />
@@ -269,6 +414,7 @@ export default function Form() {
                       placeholder={lang === 'hi' ? 'संख्या दर्ज करें' : 'Enter number'}
                       type="number"
                       name="positions"
+                      value={formData.positions}
                       onChange={handleChange}
                       min="1"
                       required
@@ -287,7 +433,13 @@ export default function Form() {
                       lang === 'hi' ? 'सभी शाखाएँ' : 'All Branches'
                     ].map((branch, idx) => (
                       <label key={idx} className="inquiry-branch-option">
-                        <input type="checkbox" name={`branch-${idx}`} onChange={handleChange} />
+                        <input
+                          type="checkbox"
+                          name="preferredBranches"
+                          value={branch}
+                          checked={formData.preferredBranches.includes(branch)}
+                          onChange={handleChange}
+                        />
                         {branch}
                       </label>
                     ))}
@@ -301,6 +453,7 @@ export default function Form() {
                     className="inquiry-input inquiry-textarea"
                     placeholder={lang === 'hi' ? 'नौकरी विवरण, पात्रता मानदंड, वेतन सीमा, आदि।' : 'Job description, eligibility criteria, salary range, etc.'}
                     name="additionalInfo"
+                    value={formData.additionalInfo}
                     onChange={handleChange}
                     rows="5"
                   />
@@ -319,7 +472,10 @@ export default function Form() {
                 <input
                   className="inquiry-consent-check"
                   id="consent"
+                  name="consent"
                   type="checkbox"
+                  checked={formData.consent}
+                  onChange={handleChange}
                   required
                 />
                 <label className="inquiry-consent-label" htmlFor="consent">
@@ -332,9 +488,22 @@ export default function Form() {
               <button
                 className="inquiry-submit-btn"
                 type="submit"
+                disabled={status === 'loading'}
               >
-                {lang === 'hi' ? 'फॉर्म जमा करें' : 'Submit Application'}
+                {status === 'loading'
+                  ? (lang === 'hi' ? 'जमा किया जा रहा है...' : 'Submitting...')
+                  : (lang === 'hi' ? 'फॉर्म जमा करें' : 'Submit Application')
+                }
               </button>
+              {(status === 'error' || status === 'success') && (
+                <div
+                  className={statusAlertClass}
+                  style={{ marginTop: '1rem', justifyContent: 'center', maxWidth: '52rem', marginInline: 'auto' }}
+                >
+                  {status === 'error' ? <AlertCircle /> : <CheckCircle2 />}
+                  {statusMessage}
+                </div>
+              )}
               <p className="inquiry-submit-note">
                 {lang === 'hi'
                   ? 'हम 2-3 कार्य दिवसों के भीतर आपसे संपर्क करेंगे।'
