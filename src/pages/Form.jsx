@@ -266,7 +266,7 @@ export default function Form() {
                   </label>
                   <input
                     className="inquiry-input"
-                    placeholder="https://www.example.com"
+                    placeholder={lang === 'hi' ? 'https://www.example.com (उदा.)' : 'https://www.example.com'}
                     type="text"
                     name="website"
                     value={formData.website}
