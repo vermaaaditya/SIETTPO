@@ -10,6 +10,18 @@ function scrollTo(id) {
   document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
 }
 
+const visuallyHiddenTextStyle = {
+  position: 'absolute',
+  width: '1px',
+  height: '1px',
+  padding: 0,
+  margin: '-1px',
+  overflow: 'hidden',
+  clip: 'rect(0, 0, 0, 0)',
+  whiteSpace: 'nowrap',
+  border: 0,
+}
+
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
@@ -206,6 +218,7 @@ export function Navbar() {
               style={{ color: 'var(--ink)' }}
               title={`Logged in as ${studentDisplayName}`}
             >
+              <span style={visuallyHiddenTextStyle}>Logged in as </span>
               {studentDisplayName}
             </span>
           ) : (
@@ -258,6 +271,7 @@ export function Navbar() {
                 style={{ color: 'var(--ink)' }}
                 title={`Logged in as ${studentDisplayName}`}
               >
+                <span style={visuallyHiddenTextStyle}>Logged in as </span>
                 {studentDisplayName}
               </div>
             ) : (
