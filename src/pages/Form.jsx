@@ -107,7 +107,7 @@ export default function Form() {
       return
     }
 
-    if (!Number.isInteger(positionsValue) || positionsValue < 1) {
+    if (Number.isNaN(positionsValue) || positionsValue < 1) {
       setStatus('error')
       setStatusMessage(lang === 'hi' ? 'कृपया पदों की वैध संख्या दर्ज करें।' : 'Please enter a valid number of positions.')
       return
@@ -493,7 +493,7 @@ export default function Form() {
               </button>
               {(status === 'error' || status === 'success') && (
                 <div
-                  className={status === 'error' ? 'login-alert login-alert-error' : 'login-alert login-alert-success'}
+                  className={status === 'error' ? 'inquiry-alert inquiry-alert-error' : 'inquiry-alert inquiry-alert-success'}
                   style={{ marginTop: '1rem', justifyContent: 'center', maxWidth: '52rem', marginInline: 'auto' }}
                 >
                   {status === 'error' ? <AlertCircle /> : <CheckCircle2 />}
