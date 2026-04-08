@@ -23,6 +23,23 @@ const initialFormState = {
   consent: false,
 }
 
+function isValidEmail(value) {
+  const input = document.createElement('input')
+  input.type = 'email'
+  input.value = value
+  return input.checkValidity()
+}
+
+function isValidUrl(value) {
+  if (!value) return true
+  try {
+    new URL(value)
+    return true
+  } catch {
+    return false
+  }
+}
+
 export default function Form() {
   const { lang } = useLanguage()
   const [formData, setFormData] = useState(initialFormState)
@@ -73,17 +90,45 @@ export default function Form() {
     setStatus('loading')
     setStatusMessage('')
 
+    const emailValue = formData.email.trim()
+    const websiteValue = formData.website.trim()
+    const positionsValue = Number.parseInt(String(formData.positions), 10)
+
+    if (!Number.isInteger(positionsValue) || positionsValue < 1) {
+      setStatus('error')
+      setStatusMessage(lang === 'hi' ? 'कृपया पदों की वैध संख्या दर्ज करें।' : 'Please enter a valid number of positions.')
+      return
+    }
+
+    if (!isValidEmail(emailValue)) {
+      setStatus('error')
+      setStatusMessage(lang === 'hi' ? 'कृपया वैध ईमेल पता दर्ज करें।' : 'Please enter a valid email address.')
+      return
+    }
+
+    if (!isValidUrl(websiteValue)) {
+      setStatus('error')
+      setStatusMessage(lang === 'hi' ? 'कृपया वैध वेबसाइट URL दर्ज करें।' : 'Please enter a valid website URL.')
+      return
+    }
+
+    if (!formData.consent) {
+      setStatus('error')
+      setStatusMessage(lang === 'hi' ? 'जारी रखने के लिए सहमति आवश्यक है।' : 'Consent is required to continue.')
+      return
+    }
+
     const payload = {
       company_name: formData.companyName.trim(),
-      website: formData.website.trim() || null,
+      website: websiteValue || null,
       industry: formData.industry.trim(),
       company_size: formData.companySize.trim() || null,
       contact_name: formData.contactName.trim(),
       designation: formData.designation.trim(),
-      email: formData.email.trim().toLowerCase(),
+      email: emailValue.toLowerCase(),
       phone: formData.phone.trim(),
       job_role: formData.role.trim(),
-      positions: Number(formData.positions),
+      positions: positionsValue,
       preferred_branches: formData.preferredBranches,
       additional_info: formData.additionalInfo.trim() || null,
       consent: formData.consent,
