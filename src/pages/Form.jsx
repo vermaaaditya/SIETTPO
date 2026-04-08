@@ -30,8 +30,8 @@ function isValidEmail(value) {
 function isValidUrl(value) {
   if (!value) return true
   try {
-    new URL(value)
-    return true
+    const parsedUrl = new URL(value)
+    return parsedUrl.protocol === 'http:' || parsedUrl.protocol === 'https:'
   } catch {
     return false
   }
@@ -89,7 +89,8 @@ export default function Form() {
 
     const emailValue = formData.email.trim()
     const websiteValue = formData.website.trim()
-    const positionsValue = Number.parseInt(formData.positions, 10)
+    const positionsRaw = String(formData.positions).trim()
+    const positionsValue = Number.parseInt(positionsRaw, 10)
     const requiredTextValues = [
       formData.companyName.trim(),
       formData.industry.trim(),
@@ -98,6 +99,7 @@ export default function Form() {
       emailValue,
       formData.phone.trim(),
       formData.role.trim(),
+      positionsRaw,
     ]
     const preferredBranches = formData.preferredBranches.map(branch => branch.trim()).filter(Boolean)
 
@@ -159,6 +161,8 @@ export default function Form() {
     setStatusMessage(lang === 'hi' ? 'आपका आवेदन सफलतापूर्वक जमा हो गया है।' : 'Your application has been submitted successfully.')
     setFormData(initialFormState)
   }
+
+  const statusAlertClass = status === 'error' ? 'inquiry-alert inquiry-alert-error' : 'inquiry-alert inquiry-alert-success'
 
   return (
     <div className="inquiry-page">
@@ -493,7 +497,7 @@ export default function Form() {
               </button>
               {(status === 'error' || status === 'success') && (
                 <div
-                  className={status === 'error' ? 'inquiry-alert inquiry-alert-error' : 'inquiry-alert inquiry-alert-success'}
+                  className={statusAlertClass}
                   style={{ marginTop: '1rem', justifyContent: 'center', maxWidth: '52rem', marginInline: 'auto' }}
                 >
                   {status === 'error' ? <AlertCircle /> : <CheckCircle2 />}
