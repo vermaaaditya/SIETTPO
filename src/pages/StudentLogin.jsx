@@ -209,19 +209,23 @@ export default function StudentLogin() {
         }
 
         if (!profile) {
+          let profileCreationError = null
           const profilePayloadFromMetadata = buildProfilePayloadFromUser(data.user, form.loginEmail)
 
           if (profilePayloadFromMetadata) {
-            const { error: createProfileError } = await supabase
+            const { error: upsertMissingProfileError } = await supabase
               .from('profiles')
               .upsert(profilePayloadFromMetadata, { onConflict: 'id' })
 
-            if (!createProfileError) {
+            if (!upsertMissingProfileError) {
               setStatus('success')
               setStatusMessage(t.loginSuccessMsg)
               setForm(prev => ({ ...prev, loginEmail: '', loginPassword: '' }))
               return
             }
+
+            profileCreationError = upsertMissingProfileError
+            console.error('Unable to create missing profile during login:', upsertMissingProfileError)
           }
 
           try {
@@ -237,7 +241,7 @@ export default function StudentLogin() {
           }
 
           setStatus('error')
-          setStatusMessage(t.profileNotFoundMsg)
+          setStatusMessage(profileCreationError ? t.genericAuthErrorMsg : t.profileNotFoundMsg)
           return
         }
 
