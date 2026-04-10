@@ -50,7 +50,7 @@ const eventImages = [
   },
   {
     cat: 'POSH Seminar',
-    cover: '/images/gallery/POSH seminar/posh1.jpeg',
+    cover: '/images/gallery/POSH seminar/posh9.jpeg',
     images: [
       { src: '/images/gallery/POSH seminar/posh1.jpeg', caption: 'Breaking the silence — awareness begins here' },
       { src: '/images/gallery/POSH seminar/posh2.jpeg', caption: 'Every voice matters — standing together against harassment' },
