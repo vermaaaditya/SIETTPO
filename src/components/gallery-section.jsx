@@ -59,8 +59,8 @@ const eventImages = [
       { src: '/images/gallery/POSH seminar/posh5.jpeg', caption: 'Building a culture of dignity and inclusion' },
       { src: '/images/gallery/POSH seminar/posh6.jpeg', caption: 'Your rights, your protection — know the law' },
       { src: '/images/gallery/POSH seminar/posh7.jpeg', caption: 'Together we create an environment where everyone thrives' },
-      { src: '/images/gallery/POSH seminar/posh8.jpeg', caption: 'Shaping tomorrow's workplace with today's awareness' },
-      { src: '/images/gallery/POSH seminar/posh9.jpeg', caption: 'Respect is not optional — it's the foundation' },
+      { src: '/images/gallery/POSH seminar/posh8.jpeg', caption: "Shaping tomorrow's workplace with today's awareness" },
+      { src: '/images/gallery/POSH seminar/posh9.jpeg', caption: "Respect is not optional — it's the foundation" },
     ],
   },
 ]
