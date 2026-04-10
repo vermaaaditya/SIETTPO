@@ -50,12 +50,12 @@ const eventImages = [
   },
   {
     cat: 'Events',
-    cover: '/images/gallery/Campus/campus1.jpeg',
+    cover: '/images/gallery/POSH seminar/campus1.jpeg',
     images: [
-      { src: '/images/gallery/Campus/campus1.jpeg', caption: 'Campus event — moment 1' },
-      { src: '/images/gallery/Campus/campus2.jpeg', caption: 'Campus event — moment 2' },
-      { src: '/images/gallery/Campus/campus3.jpeg', caption: 'Campus event — moment 3' },
-      { src: '/images/gallery/Campus/campus4.jpeg', caption: 'Campus event — moment 4' },
+      { src: '/images/gallery/POSH seminar/campus1.jpeg', caption: 'Campus event — moment 1' },
+      { src: '/images/gallery/POSH seminar/campus2.jpeg', caption: 'Campus event — moment 2' },
+      { src: '/images/gallery/POSH seminar/campus3.jpeg', caption: 'Campus event — moment 3' },
+      { src: '/images/gallery/POSH seminar/campus4.jpeg', caption: 'Campus event — moment 4' },
     ],
   },
 ]
