@@ -48,6 +48,16 @@ const eventImages = [
       { src: '/images/gallery/gfg/gfg5.jpeg', caption: 'Group moments from the GFG event' },
     ],
   },
+  {
+    cat: 'Events',
+    cover: '/images/gallery/Campus/campus1.jpeg',
+    images: [
+      { src: '/images/gallery/Campus/campus1.jpeg', caption: 'Campus event — moment 1' },
+      { src: '/images/gallery/Campus/campus2.jpeg', caption: 'Campus event — moment 2' },
+      { src: '/images/gallery/Campus/campus3.jpeg', caption: 'Campus event — moment 3' },
+      { src: '/images/gallery/Campus/campus4.jpeg', caption: 'Campus event — moment 4' },
+    ],
+  },
 ]
 
 /* ─── Lightbox Carousel ─── */
