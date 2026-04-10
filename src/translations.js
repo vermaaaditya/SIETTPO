@@ -204,6 +204,14 @@ export const translations = {
           date: '2026',
           location: 'SIET Panchkula',
         },
+        {
+          title: 'POSH Awareness Seminar',
+          subtitle: 'Prevention of Sexual Harassment at Workplace',
+          description:
+            'A dedicated awareness seminar on the Prevention of Sexual Harassment (POSH) Act, empowering students with knowledge of their rights, reporting mechanisms, and the importance of a safe and respectful workplace environment.',
+          date: '2026',
+          location: 'SIET Panchkula',
+        },
       ],
     },
     skills: {
@@ -618,6 +626,14 @@ export const translations = {
           subtitle: 'संस्थापक एवं CEO सत्र — GeeksforGeeks',
           description:
             'GeeksforGeeks के संस्थापक एवं CEO श्री संदीप जैन द्वारा व्यक्तिगत रूप से आयोजित विशेष सत्र, जिसमें कोडिंग उत्कृष्टता, समस्या-समाधान रणनीति और प्लेसमेंट तैयारी पर औपचारिक मार्गदर्शन दिया गया।',
+          date: '2026',
+          location: 'SIET पंचकुला',
+        },
+        {
+          title: 'POSH जागरूकता सेमिनार',
+          subtitle: 'कार्यस्थल पर यौन उत्पीड़न की रोकथाम',
+          description:
+            'POSH (कार्यस्थल पर यौन उत्पीड़न की रोकथाम) अधिनियम पर एक समर्पित जागरूकता सेमिनार, जिसमें छात्रों को उनके अधिकारों, शिकायत तंत्र और सुरक्षित एवं सम्मानजनक कार्यस्थल वातावरण के महत्व के बारे में जानकारी दी गई।',
           date: '2026',
           location: 'SIET पंचकुला',
         },
