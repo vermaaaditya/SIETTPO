@@ -118,13 +118,11 @@ export function Navbar() {
     <header className={`navbar${scrolled ? ' navbar-scrolled' : ''}`}>
       <div className="navbar-header">
 
-                {/* LEFT LOGO — increased size, added min-width so it doesn't collapse */}
-        <div className="navbar-header-left" style={{ minWidth: '90px', flexShrink: 0, display: 'flex', alignItems: 'center' }}>
+        <div className="navbar-header-left">
           <img
             src="/images/siet-logo.png"
             alt="SIET Panchkula Logo"
             className="object-contain"
-            style={{ height: '80px', width: 'auto', flexShrink: 0 }}
           />
         </div>
 
@@ -132,10 +130,9 @@ export function Navbar() {
         <div className="navbar-header-center">
           {/* Hindi name */}
           <p
-            className="leading-tight"
+            className="navbar-header-title-hindi leading-tight"
             style={{
               fontFamily: 'var(--font-headline)',
-              fontSize: 'clamp(1.05rem, 2vw, 1.65rem)',
               fontWeight: '500',
               color: 'var(--ink)',
             }}
@@ -145,10 +142,9 @@ export function Navbar() {
 
           {/* English name — bolder, larger, tighter tracking for authority */}
           <h1
-            className="leading-tight"
+            className="navbar-header-title-english leading-tight"
             style={{
               fontFamily: 'var(--font-headline)',
-              fontSize: 'clamp(1.05rem, 2vw, 1.65rem)',
               fontWeight: '700',
               letterSpacing: '-0.01em',
               lineHeight: '1.2',
@@ -161,20 +157,19 @@ export function Navbar() {
 
           {/* Affiliation line */}
           <p
-            className="mt-1 hidden sm:block"
-            style={{ fontSize: 'clamp(0.65rem, 1vw, 0.82rem)', color: 'var(--muted-foreground)', textTransform: 'uppercase', letterSpacing: '0.1em' }}
+            className="navbar-header-affiliation mt-1 hidden sm:block"
+            style={{ color: 'var(--muted-foreground)', textTransform: 'uppercase', letterSpacing: '0.1em' }}
           >
             {t.affiliation}
           </p>
         </div>
 
         {/* RIGHT EMBLEM */}
-        <div className="navbar-header-right" style={{ minWidth: '72px' }}>
+        <div className="navbar-header-right">
           <img
             src="/images/haryana-sarkar.png"
             alt="Haryana Government Emblem"
             className="object-contain"
-            style={{ height: '80px', width: 'auto', maxWidth: '80px' }}
           />
         </div>
       </div>
