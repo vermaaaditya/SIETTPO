@@ -430,7 +430,7 @@ export default function Form() {
                   <input
                     id="phone"
                     className="inquiry-input"
-                    placeholder="+91 XXXXX XXXXX"
+                    placeholder={lang === 'hi' ? '+91 XXXXX XXXXX या अंतरराष्ट्रीय नंबर' : '+91 XXXXX XXXXX or international format'}
                     type="tel"
                     name="phone"
                     value={formData.phone}
@@ -490,10 +490,10 @@ export default function Form() {
                     />
                   </div>
                 </div>
-                <div className="inquiry-field inquiry-field-branches">
-                  <p className="inquiry-label" id="preferredBranchesLabel">
+                <fieldset className="inquiry-field inquiry-field-branches border-0 m-0 p-0">
+                  <legend className="inquiry-label" id="preferredBranchesLabel">
                     {lang === 'hi' ? 'इच्छित शाखाएँ' : 'Preferred Branches'}
-                  </p>
+                  </legend>
                   <div className="inquiry-branch-grid">
                     {BRANCH_OPTIONS.map((branchOption) => (
                       <label key={branchOption.key} className="inquiry-branch-option" htmlFor={`preferredBranch-${branchOption.key}`}>
@@ -510,7 +510,7 @@ export default function Form() {
                       </label>
                     ))}
                   </div>
-                </div>
+                </fieldset>
                 <div className="inquiry-field">
                   <label className="inquiry-label" htmlFor="additionalInfo">
                     {lang === 'hi' ? 'अतिरिक्त जानकारी' : 'Additional Information'}

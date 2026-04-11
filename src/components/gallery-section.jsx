@@ -195,10 +195,9 @@ export function GallerySection() {
             >
               <button
                 type="button"
-                className="event-card-image-wrap"
+                className="event-card-image-wrap event-card-image-button"
                 onClick={() => setLightboxIndex(i)}
                 aria-label={`Open gallery for ${event.title}`}
-                style={{ border: 'none', padding: 0, background: 'none', width: '100%', textAlign: 'left', cursor: 'pointer' }}
               >
                 <img src={event.cover} alt={event.title} className="event-card-image" />
                 <div className="event-card-image-count">{event.images.length} {t.photosLabel}</div>
