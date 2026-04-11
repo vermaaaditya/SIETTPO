@@ -24,6 +24,28 @@ const initialFormState = {
 }
 
 const HTTP_PROTOCOL_PATTERN = /^https?:\/\//i
+const BRANCH_OPTIONS = [
+  {
+    key: 'cse_ai_ml',
+    value: 'CS (AI & ML)',
+    labels: { en: 'CS (AI & ML)', hi: 'CS (AI & ML)' },
+  },
+  {
+    key: 'cse_cyber_security',
+    value: 'CS (Cyber Security)',
+    labels: { en: 'CS (Cyber Security)', hi: 'CS (साइबर सुरक्षा)' },
+  },
+  {
+    key: 'robotics_automation',
+    value: 'Robotics & Automation',
+    labels: { en: 'Robotics & Automation', hi: 'रोबोटिक्स' },
+  },
+  {
+    key: 'all_branches',
+    value: 'All Branches',
+    labels: { en: 'All Branches', hi: 'सभी शाखाएँ' },
+  },
+]
 
 function isValidEmail(value) {
   return /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(value)
@@ -38,6 +60,15 @@ function isValidUrl(value) {
   } catch {
     return false
   }
+}
+
+function normalizePhoneDigits(value) {
+  return value.replace(/\D/g, '')
+}
+
+function isValidPhone(value) {
+  const digits = normalizePhoneDigits(value)
+  return digits.length >= 10 && digits.length <= 15
 }
 
 export default function Form() {
@@ -107,7 +138,10 @@ export default function Form() {
       formData.role.trim(),
       positionsRaw,
     ]
-    const preferredBranches = formData.preferredBranches.map(branch => branch.trim()).filter(Boolean)
+    const preferredBranchKeys = formData.preferredBranches.map(branch => branch.trim()).filter(Boolean)
+    const preferredBranches = preferredBranchKeys
+      .map((branchKey) => BRANCH_OPTIONS.find((option) => option.key === branchKey)?.value || null)
+      .filter(Boolean)
 
     if (requiredTextValues.some(value => !value)) {
       setStatus('error')
@@ -124,6 +158,16 @@ export default function Form() {
     if (!isValidEmail(emailValue)) {
       setStatus('error')
       setStatusMessage(lang === 'hi' ? 'कृपया वैध ईमेल पता दर्ज करें।' : 'Please enter a valid email address.')
+      return
+    }
+
+    if (!isValidPhone(formData.phone.trim())) {
+      setStatus('error')
+      setStatusMessage(
+        lang === 'hi'
+          ? 'कृपया 10 से 15 अंकों वाला वैध फोन नंबर दर्ज करें।'
+          : 'Please enter a valid phone number with 10 to 15 digits.'
+      )
       return
     }
 
@@ -249,10 +293,11 @@ export default function Form() {
               </div>
               <div className="inquiry-grid">
                 <div className="inquiry-field">
-                  <label className="inquiry-label">
+                  <label className="inquiry-label" htmlFor="companyName">
                     {lang === 'hi' ? 'कंपनी का नाम *' : 'Company Name *'}
                   </label>
                   <input
+                    id="companyName"
                     className="inquiry-input"
                     placeholder={lang === 'hi' ? 'कंपनी का नाम दर्ज करें' : 'Enter company name'}
                     type="text"
@@ -263,10 +308,11 @@ export default function Form() {
                   />
                 </div>
                 <div className="inquiry-field">
-                  <label className="inquiry-label">
+                  <label className="inquiry-label" htmlFor="website">
                     {lang === 'hi' ? 'वेबसाइट' : 'Website'}
                   </label>
                   <input
+                    id="website"
                     className="inquiry-input"
                     placeholder={lang === 'hi' ? 'https://www.example.com (उदाहरण)' : 'https://www.example.com (e.g.)'}
                     type="text"
@@ -276,10 +322,11 @@ export default function Form() {
                   />
                 </div>
                 <div className="inquiry-field">
-                  <label className="inquiry-label">
+                  <label className="inquiry-label" htmlFor="industry">
                     {lang === 'hi' ? 'उद्योग क्षेत्र *' : 'Industry Sector *'}
                   </label>
                   <select
+                    id="industry"
                     className="inquiry-input"
                     name="industry"
                     value={formData.industry}
@@ -295,10 +342,11 @@ export default function Form() {
                   </select>
                 </div>
                 <div className="inquiry-field">
-                  <label className="inquiry-label">
+                  <label className="inquiry-label" htmlFor="companySize">
                     {lang === 'hi' ? 'कंपनी का आकार' : 'Company Size'}
                   </label>
                   <select
+                    id="companySize"
                     className="inquiry-input"
                     name="companySize"
                     value={formData.companySize}
@@ -331,10 +379,11 @@ export default function Form() {
               </div>
               <div className="inquiry-grid">
                 <div className="inquiry-field">
-                  <label className="inquiry-label">
+                  <label className="inquiry-label" htmlFor="contactName">
                     {lang === 'hi' ? 'पूरा नाम *' : 'Full Name *'}
                   </label>
                   <input
+                    id="contactName"
                     className="inquiry-input"
                     placeholder={lang === 'hi' ? 'नाम दर्ज करें' : 'Enter your name'}
                     type="text"
@@ -345,10 +394,11 @@ export default function Form() {
                   />
                 </div>
                 <div className="inquiry-field">
-                  <label className="inquiry-label">
+                  <label className="inquiry-label" htmlFor="designation">
                     {lang === 'hi' ? 'पदनाम *' : 'Designation *'}
                   </label>
                   <input
+                    id="designation"
                     className="inquiry-input"
                     placeholder={lang === 'hi' ? 'जैसे HR Manager' : 'e.g., HR Manager'}
                     type="text"
@@ -359,10 +409,11 @@ export default function Form() {
                   />
                 </div>
                 <div className="inquiry-field">
-                  <label className="inquiry-label">
+                  <label className="inquiry-label" htmlFor="email">
                     {lang === 'hi' ? 'ईमेल *' : 'Email *'}
                   </label>
                   <input
+                    id="email"
                     className="inquiry-input"
                     placeholder="email@example.com"
                     type="email"
@@ -373,10 +424,11 @@ export default function Form() {
                   />
                 </div>
                 <div className="inquiry-field">
-                  <label className="inquiry-label">
+                  <label className="inquiry-label" htmlFor="phone">
                     {lang === 'hi' ? 'फोन नंबर *' : 'Phone Number *'}
                   </label>
                   <input
+                    id="phone"
                     className="inquiry-input"
                     placeholder="+91 XXXXX XXXXX"
                     type="tel"
@@ -407,10 +459,11 @@ export default function Form() {
               <div className="inquiry-card-stack">
                 <div className="inquiry-grid">
                   <div className="inquiry-field">
-                    <label className="inquiry-label">
+                    <label className="inquiry-label" htmlFor="role">
                       {lang === 'hi' ? 'भूमिका/पद *' : 'Role/Position *'}
                     </label>
                     <input
+                      id="role"
                       className="inquiry-input"
                       placeholder={lang === 'hi' ? 'जैसे Software Engineer' : 'e.g., Software Engineer'}
                       type="text"
@@ -421,10 +474,11 @@ export default function Form() {
                     />
                   </div>
                   <div className="inquiry-field">
-                    <label className="inquiry-label">
+                    <label className="inquiry-label" htmlFor="positions">
                       {lang === 'hi' ? 'रिक्तियों की संख्या *' : 'Number of Positions *'}
                     </label>
                     <input
+                      id="positions"
                       className="inquiry-input"
                       placeholder={lang === 'hi' ? 'संख्या दर्ज करें' : 'Enter number'}
                       type="number"
@@ -437,34 +491,32 @@ export default function Form() {
                   </div>
                 </div>
                 <div className="inquiry-field inquiry-field-branches">
-                  <label className="inquiry-label">
+                  <p className="inquiry-label" id="preferredBranchesLabel">
                     {lang === 'hi' ? 'इच्छित शाखाएँ' : 'Preferred Branches'}
-                  </label>
+                  </p>
                   <div className="inquiry-branch-grid">
-                    {[
-                      lang === 'hi' ? 'CS (AI & ML)' : 'CS (AI & ML)',
-                      lang === 'hi' ? 'CS (साइबर सुरक्षा)' : 'CS (Cyber Security)',
-                      lang === 'hi' ? 'रोबोटिक्स' : 'Robotics & Automation',
-                      lang === 'hi' ? 'सभी शाखाएँ' : 'All Branches'
-                    ].map((branch, idx) => (
-                      <label key={idx} className="inquiry-branch-option">
+                    {BRANCH_OPTIONS.map((branchOption) => (
+                      <label key={branchOption.key} className="inquiry-branch-option" htmlFor={`preferredBranch-${branchOption.key}`}>
                         <input
+                          id={`preferredBranch-${branchOption.key}`}
                           type="checkbox"
                           name="preferredBranches"
-                          value={branch}
-                          checked={formData.preferredBranches.includes(branch)}
+                          value={branchOption.key}
+                          aria-labelledby="preferredBranchesLabel"
+                          checked={formData.preferredBranches.includes(branchOption.key)}
                           onChange={handleChange}
                         />
-                        {branch}
+                        {branchOption.labels[lang]}
                       </label>
                     ))}
                   </div>
                 </div>
                 <div className="inquiry-field">
-                  <label className="inquiry-label">
+                  <label className="inquiry-label" htmlFor="additionalInfo">
                     {lang === 'hi' ? 'अतिरिक्त जानकारी' : 'Additional Information'}
                   </label>
                   <textarea
+                    id="additionalInfo"
                     className="inquiry-input inquiry-textarea"
                     placeholder={lang === 'hi' ? 'नौकरी विवरण, पात्रता मानदंड, वेतन सीमा, आदि।' : 'Job description, eligibility criteria, salary range, etc.'}
                     name="additionalInfo"

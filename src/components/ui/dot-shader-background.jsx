@@ -24,8 +24,8 @@ export function DotScreenShader({
       
       canvas.width = rect.width * dpr
       canvas.height = rect.height * dpr
-      
-      ctx.scale(dpr, dpr)
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
+      ctx.clearRect(0, 0, rect.width, rect.height)
       
       // Draw background
       ctx.fillStyle = bgColor

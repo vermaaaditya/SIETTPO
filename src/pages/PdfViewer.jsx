@@ -13,19 +13,18 @@ export default function PdfViewer() {
   }, [])
 
   const pdfConfig = {
-    brochure: {
-      title: 'Recruitment Brochure',
-      description: 'Download our comprehensive recruitment brochure to learn more about our placement process and opportunities.',
-      // PDF will be uploaded later, using placeholder for now
-      pdfUrl: '/pdfs/recruitment-brochure.pdf',
-      filename: 'SIET_Recruitment_Brochure.pdf'
-    },
-    guidelines: {
-      title: 'Recruitment Guidelines',
-      description: 'View our detailed recruitment guidelines for companies and recruiters.',
-      pdfUrl: '/pdfs/recruitment-guidelines.pdf',
-      filename: 'SIET_Recruitment_Guidelines.pdf'
-    }
+      brochure: {
+        title: 'Recruitment Brochure',
+        description: 'Download our comprehensive recruitment brochure to learn more about our placement process and opportunities.',
+        pdfUrl: '/pdfs/brochure.pdf',
+        filename: 'SIET_Recruitment_Brochure.pdf'
+      },
+      guidelines: {
+        title: 'Recruitment Guidelines',
+        description: 'View our detailed recruitment guidelines for companies and recruiters.',
+        pdfUrl: '/pdfs/code-of-conduct.pdf',
+        filename: 'SIET_Recruitment_Guidelines.pdf'
+      }
   }
 
   const currentPdf = pdfConfig[pdfType] || pdfConfig.brochure
@@ -89,22 +88,14 @@ export default function PdfViewer() {
               <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gold bg-opacity-10 flex items-center justify-center">
                 <ExternalLink className="w-8 h-8 text-gold" />
               </div>
-              <h2 className="text-xl font-headline text-foreground mb-2">
+              <h2 className="text-xl font-headline text-foreground mb-6">
                 PDF Preview
               </h2>
-              <p className="text-sm text-muted-foreground mb-6 max-w-md mx-auto">
-                The PDF will be displayed here once uploaded to <code className="px-1 py-0.5 bg-surface-container rounded text-xs">/public/pdfs/</code> directory.
-              </p>
-              {/* This iframe will display the PDF once it's uploaded */}
               <iframe
                 src={currentPdf.pdfUrl}
-                className="w-full border-0 hidden"
+                className="w-full border-0"
                 style={{ height: '85vh' }}
                 title={currentPdf.title}
-                onLoad={(e) => e.target.classList.remove('hidden')}
-                onError={(e) => {
-                  e.target.classList.add('hidden')
-                }}
               />
               <div className="flex gap-3 justify-center">
                 <GradientButton onClick={handleDownload}>
@@ -120,24 +111,6 @@ export default function PdfViewer() {
           </div>
         </div>
 
-        {/* Instructions for uploading PDFs */}
-        <div className="mt-8 p-6 bg-surface-container-low border border-border rounded-lg">
-          <h3 className="text-lg font-headline text-foreground mb-3 flex items-center gap-2">
-            <span className="w-2 h-2 bg-gold rounded-full"></span>
-            How to Upload PDFs
-          </h3>
-          <ol className="list-decimal list-inside space-y-2 text-sm text-muted-foreground">
-            <li>Create a <code className="px-1 py-0.5 bg-surface-container rounded text-xs">/public/pdfs/</code> directory in your project if it doesn't exist</li>
-            <li>Add your PDF files:
-              <ul className="list-disc list-inside ml-6 mt-1 space-y-1">
-                <li><code className="px-1 py-0.5 bg-surface-container rounded text-xs">recruitment-brochure.pdf</code></li>
-                <li><code className="px-1 py-0.5 bg-surface-container rounded text-xs">recruitment-guidelines.pdf</code></li>
-              </ul>
-            </li>
-            <li>The PDFs will be automatically served from the public directory</li>
-            <li>Once uploaded, the preview will display automatically</li>
-          </ol>
-        </div>
       </main>
     </div>
   )

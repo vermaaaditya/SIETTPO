@@ -4,6 +4,7 @@ import { ArrowLeft, Download } from 'lucide-react'
 
 export default function GuidelinesViewer() {
   const navigate = useNavigate()
+  const pdfUrl = '/pdfs/code-of-conduct.pdf'
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -11,7 +12,7 @@ export default function GuidelinesViewer() {
 
   const handleDownload = () => {
     const link = document.createElement('a')
-    link.href = '/pdfs/recruitment-guidelines.pdf'
+    link.href = pdfUrl
     link.download = 'SIET_TPC_Guidelines_2024.pdf'
     document.body.appendChild(link)
     link.click()
@@ -47,7 +48,7 @@ export default function GuidelinesViewer() {
       <main className="container mx-auto px-4 py-6">
         <div className="bg-surface-container-lowest border border-border shadow-lg rounded-lg overflow-hidden">
           <iframe
-            src="/pdfs/recruitment-guidelines.pdf"
+            src={pdfUrl}
             className="w-full border-0"
             style={{ height: 'calc(100vh - 140px)', minHeight: '600px' }}
             title="TPC Guidelines PDF"

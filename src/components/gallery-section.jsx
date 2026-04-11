@@ -193,10 +193,16 @@ export function GallerySection() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: i * 0.1 }}
             >
-              <div className="event-card-image-wrap" onClick={() => setLightboxIndex(i)}>
+              <button
+                type="button"
+                className="event-card-image-wrap"
+                onClick={() => setLightboxIndex(i)}
+                aria-label={`Open gallery for ${event.title}`}
+                style={{ border: 'none', padding: 0, background: 'none', width: '100%', textAlign: 'left', cursor: 'pointer' }}
+              >
                 <img src={event.cover} alt={event.title} className="event-card-image" />
                 <div className="event-card-image-count">{event.images.length} {t.photosLabel}</div>
-              </div>
+              </button>
               <div className="event-card-body">
                 <h3 className="event-card-title">{event.title}</h3>
                 <p className="event-card-subtitle">{event.subtitle}</p>

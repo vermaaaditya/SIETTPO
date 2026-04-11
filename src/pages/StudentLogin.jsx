@@ -349,6 +349,45 @@ export default function StudentLogin() {
     }
   }
 
+  async function handleForgotPassword(e) {
+    e.preventDefault()
+
+    if (!supabase) {
+      setStatus('error')
+      setStatusMessage(supabaseEnvError || t.supabaseConfigMissingMsg)
+      return
+    }
+
+    const email = form.loginEmail.trim().toLowerCase()
+    if (!isValidEmail(email)) {
+      setStatus('error')
+      setStatusMessage(t.forgotPasswordEmailRequiredMsg || t.invalidEmailMsg)
+      return
+    }
+
+    setStatus('loading')
+    setStatusMessage('')
+
+    try {
+      const { error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: `${window.location.origin}/login`,
+      })
+
+      if (error) {
+        throw error
+      }
+
+      setStatus('success')
+      setStatusMessage(
+        t.forgotPasswordEmailSentMsg ||
+          'Password reset link sent. Please check your email.'
+      )
+    } catch (error) {
+      setStatus('error')
+      setStatusMessage(normalizeAuthErrorMessage(error))
+    }
+  }
+
   const activeEmail = mode === 'login' ? form.loginEmail : form.signupEmail
   const normalizedActiveEmail = activeEmail.trim()
   const showEmailDomainHint =
@@ -609,7 +648,7 @@ export default function StudentLogin() {
 
             {mode === 'login' && (
               <div className="login-row login-row-end">
-                <a href="#" className="login-forgot" onClick={e => e.preventDefault()}>{t.forgotPassword}</a>
+                <a href="#" className="login-forgot" onClick={handleForgotPassword}>{t.forgotPassword}</a>
               </div>
             )}
 
