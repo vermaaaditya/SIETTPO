@@ -19,6 +19,7 @@ const QUICK_REPLIES = [
 
 function getBotResponse(message) {
   const lower = message.toLowerCase()
+  const hasGreeting = /\b(hi|hello|hey)\b/.test(lower)
   if (lower.includes('admission') || lower.includes('apply'))
     return 'Admissions for 2026-27 are now open! We offer B.Tech in CSE (AI & ML), CSE (Cyber Security), and Robotics. Apply through the State Counselling Portal.'
   if (lower.includes('course') || lower.includes('program'))
@@ -27,7 +28,7 @@ function getBotResponse(message) {
     return 'Fee details are updated annually. Please contact 0172-2979887 or visit the Admissions section.'
   if (lower.includes('contact'))
     return '📍 Sector 26, Panchkula\n📞 0172-2979887\n📧 tpo@sietpanchkula.ac.in'
-  if (lower.includes('hi') || lower.includes('hello'))
+  if (hasGreeting)
     return 'Hello! How can I assist you with SIET Panchkula?'
   return 'Thanks for your query! For detailed information, please contact 0172-2979887 or email tpo@sietpanchkula.ac.in.'
 }

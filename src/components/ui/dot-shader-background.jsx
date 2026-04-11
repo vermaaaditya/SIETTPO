@@ -17,15 +17,16 @@ export function DotScreenShader({
 
     const dpr = window.devicePixelRatio || 1
 
-    // Set canvas size
+      // Set canvas size and reset transform for current DPR
     const resizeCanvas = () => {
       const rect = canvas.parentElement?.getBoundingClientRect()
       if (!rect) return
       
       canvas.width = rect.width * dpr
       canvas.height = rect.height * dpr
-      
-      ctx.scale(dpr, dpr)
+      ctx.setTransform(1, 0, 0, 1, 0, 0)
+      ctx.clearRect(0, 0, canvas.width, canvas.height)
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
       
       // Draw background
       ctx.fillStyle = bgColor

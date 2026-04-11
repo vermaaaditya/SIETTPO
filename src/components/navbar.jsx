@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
 import { GradientButton } from './ui/gradient-button'
 import { useLanguage } from '../contexts/LanguageContext'
@@ -27,6 +27,7 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [studentDisplayName, setStudentDisplayName] = useState('')
   const navigate = useNavigate()
+  const location = useLocation()
   const { lang, toggleLang } = useLanguage()
   const t = translations[lang].navbar
 
@@ -108,6 +109,14 @@ export function Navbar() {
 
   const navigateToLink = (link) => {
     navigate(link.value)
+  }
+
+  const handleRecruiterClick = () => {
+    if (location.pathname === '/') {
+      scrollTo('recruit-cta')
+      return
+    }
+    navigate('/', { state: { scrollTo: 'recruit-cta' } })
   }
 
   const getLinkHref = (link) => {
@@ -207,7 +216,7 @@ export function Navbar() {
               title="हिंदी"
             >अ</button>
           </div>
-          <GradientButton className="px-5 py-2.5 text-sm" onClick={() => scrollTo('recruit-cta')}>{t.forRecruiters}</GradientButton>
+          <GradientButton className="px-5 py-2.5 text-sm" onClick={handleRecruiterClick}>{t.forRecruiters}</GradientButton>
           {studentDisplayName ? (
             <span
               className="px-5 py-2.5 text-sm font-semibold"
@@ -260,7 +269,7 @@ export function Navbar() {
                 title="हिंदी"
               >अ</button>
             </div>
-            <GradientButton className="w-full" onClick={() => { scrollTo('recruit-cta'); setMobileOpen(false) }}>{t.forRecruiters}</GradientButton>
+            <GradientButton className="w-full" onClick={() => { handleRecruiterClick(); setMobileOpen(false) }}>{t.forRecruiters}</GradientButton>
             {studentDisplayName ? (
               <div
                 className="w-full text-center py-2.5 font-semibold"
