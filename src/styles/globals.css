@@ -446,7 +446,7 @@ input:focus, textarea:focus, select:focus { outline: none; box-shadow: 0 0 0 2px
 }
 .navbar-buttons { display:none; align-items:center; gap:0.75rem; }
 @media (min-width:768px) { .navbar-buttons { display:flex; } }
-.navbar-mobile-toggle { display:flex; align-items:center; justify-content:center; }
+.navbar-mobile-toggle { display:flex; align-items:center; justify-content:center; margin-left:auto; }
 @media (min-width:768px) { .navbar-mobile-toggle { display:none; } }
 
 /* ═══════════════════════════════════════
