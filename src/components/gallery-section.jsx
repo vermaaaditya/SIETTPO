@@ -49,6 +49,16 @@ const eventImages = [
     ],
   },
   {
+    cat: 'Industrial Visit',
+    cover: '/images/gallery/Future Finders/FutureFinders1.jpeg',
+    images: [
+      { src: '/images/gallery/Future Finders/FutureFinders1.jpeg', caption: 'Students of SIET, Panchkula during the industrial visit to Future Finders, marking a day of learning, exposure, and collaboration.' },
+      { src: '/images/gallery/Future Finders/FutureFinders2.jpeg', caption: 'Students actively engaging in an interactive session, gaining insights into industry practices and career opportunities.' },
+      { src: '/images/gallery/Future Finders/FutureFinders3.jpeg', caption: 'A glimpse of students attentively participating and exploring real-world applications of their academic knowledge.' },
+      { src: '/images/gallery/Future Finders/FutureFinders4.jpeg', caption: 'An engaging discussion session where students interacted with professionals to understand practical industry workflows.' },
+    ],
+  },
+  {
     cat: 'POSH Seminar',
     cover: '/images/gallery/POSH seminar/posh9.jpeg',
     images: [

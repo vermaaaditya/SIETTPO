@@ -205,6 +205,14 @@ export const translations = {
           location: 'SIET Panchkula',
         },
         {
+          title: 'Industrial Visit — Future Finders',
+          subtitle: 'Industrial Visit',
+          description:
+            'The industrial visit to Future Finders provided students with valuable exposure to real-world industry practices, bridging the gap between academic learning and practical application. Through interactive sessions and on-ground insights, students gained a deeper understanding of professional environments, career pathways, and emerging industry trends.',
+          date: '2026',
+          location: 'Future Finders',
+        },
+        {
           title: 'POSH Awareness Seminar',
           subtitle: 'Prevention of Sexual Harassment at Workplace',
           description:
@@ -630,6 +638,14 @@ export const translations = {
             'GeeksforGeeks के संस्थापक एवं CEO श्री संदीप जैन द्वारा व्यक्तिगत रूप से आयोजित विशेष सत्र, जिसमें कोडिंग उत्कृष्टता, समस्या-समाधान रणनीति और प्लेसमेंट तैयारी पर औपचारिक मार्गदर्शन दिया गया।',
           date: '2026',
           location: 'SIET पंचकुला',
+        },
+        {
+          title: 'औद्योगिक भ्रमण — Future Finders',
+          subtitle: 'औद्योगिक भ्रमण',
+          description:
+            'Future Finders की औद्योगिक यात्रा ने छात्रों को वास्तविक उद्योग प्रथाओं से मूल्यवान परिचय प्रदान किया, जिससे शैक्षणिक अध्ययन और व्यावहारिक अनुप्रयोग के बीच की खाई को पाटा गया। इंटरैक्टिव सत्रों और ऑन-ग्राउंड अनुभवों के माध्यम से, छात्रों ने व्यावसायिक वातावरण, करियर पथों और उभरते उद्योग रुझानों की गहरी समझ हासिल की।',
+          date: '2026',
+          location: 'Future Finders',
         },
         {
           title: 'POSH जागरूकता सेमिनार',
