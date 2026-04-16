@@ -125,6 +125,22 @@ export function Navbar() {
 
   return (
     <header className={`navbar${scrolled ? ' navbar-scrolled' : ''}`}>
+      {/* Top utility bar — language toggle pinned to right */}
+      <div className="navbar-topbar">
+        <div className="lang-toggle" role="group" aria-label="Language toggle">
+          <button
+            className={`lang-toggle-btn${lang === 'en' ? ' lang-toggle-btn-active' : ''}`}
+            onClick={() => lang !== 'en' && toggleLang()}
+            title="English"
+          >A</button>
+          <button
+            className={`lang-toggle-btn${lang === 'hi' ? ' lang-toggle-btn-active' : ''}`}
+            onClick={() => lang !== 'hi' && toggleLang()}
+            title="हिंदी"
+          >अ</button>
+        </div>
+      </div>
+
       <div className="navbar-header">
 
         <div className="navbar-header-left">
@@ -204,18 +220,6 @@ export function Navbar() {
           ))}
         </div>
         <div className="navbar-buttons">
-          <div className="lang-toggle" role="group" aria-label="Language toggle">
-            <button
-              className={`lang-toggle-btn${lang === 'en' ? ' lang-toggle-btn-active' : ''}`}
-              onClick={() => lang !== 'en' && toggleLang()}
-              title="English"
-            >A</button>
-            <button
-              className={`lang-toggle-btn${lang === 'hi' ? ' lang-toggle-btn-active' : ''}`}
-              onClick={() => lang !== 'hi' && toggleLang()}
-              title="हिंदी"
-            >अ</button>
-          </div>
           <GradientButton className="px-5 py-2.5 text-sm" onClick={handleRecruiterClick}>{t.forRecruiters}</GradientButton>
           {studentDisplayName ? (
             <span

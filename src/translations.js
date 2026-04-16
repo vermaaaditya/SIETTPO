@@ -222,8 +222,27 @@ export const translations = {
         },
       ],
     },
+    updatesPanel: {
+      notifications: {
+        badge: 'ALRT',
+        title: 'Notifications',
+        viewAll: 'VIEW ALL NOTIFICATIONS ->',
+      },
+      notices: {
+        badge: 'NOTE',
+        title: 'Notices',
+        viewAll: 'VIEW ALL NOTICES ->',
+      },
+      placements: {
+        badge: 'PLAC',
+        title: 'Placement Updates',
+        viewAll: 'VIEW ALL PLACEMENTS ->',
+      },
+      noUpdates: 'No updates available',
+      noUpdatesDesc: 'This section will appear once official updates are added.',
+      newBadge: 'NEW',
+    },
     skills: {
-      header: 'Core Competencies & Technical Stack',
     },
     cta: {
       title: 'Ready to hire the future?',
@@ -656,6 +675,26 @@ export const translations = {
           location: 'SIET पंचकुला',
         },
       ],
+    },
+    updatesPanel: {
+      notifications: {
+        badge: 'ALRT',
+        title: 'सूचनाएँ',
+        viewAll: 'सभी सूचनाएँ देखें ->',
+      },
+      notices: {
+        badge: 'NOTE',
+        title: 'नोटिस',
+        viewAll: 'सभी नोटिस देखें ->',
+      },
+      placements: {
+        badge: 'PLAC',
+        title: 'प्लेसमेंट अपडेट',
+        viewAll: 'सभी प्लेसमेंट देखें ->',
+      },
+      noUpdates: 'कोई अपडेट उपलब्ध नहीं',
+      noUpdatesDesc: 'यह अनुभाग आधिकारिक अपडेट जोड़े जाने के बाद दिखाई देगा।',
+      newBadge: 'नया',
     },
     skills: {
       header: 'मुख्य दक्षताएँ एवं तकनीकी स्टैक',
