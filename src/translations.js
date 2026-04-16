@@ -224,7 +224,7 @@ export const translations = {
           title: 'Internship Letters',
           subtitle: 'Placements — SIET Panchkula',
           description:
-            'Students of SIET Panchkula receive internship offer letters from leading companies, marking a significant milestone in their professional journey and reflecting the institution\'s strong industry connect.',
+            'Students of SIET Panchkula receive internship offer letters from Future Finders, marking a significant milestone in their professional journey and reflecting the institution\'s strong industry connect.',
           date: '2026',
           location: 'SIET Panchkula',
         },
@@ -686,7 +686,7 @@ export const translations = {
           title: 'इंटर्नशिप ऑफर लेटर',
           subtitle: 'प्लेसमेंट — SIET पंचकुला',
           description:
-            'SIET पंचकुला के छात्रों को प्रमुख कंपनियों से इंटर्नशिप ऑफर लेटर प्राप्त हुए, जो उनकी व्यावसायिक यात्रा में एक महत्वपूर्ण उपलब्धि है और संस्थान के मजबूत उद्योग संबंध को दर्शाता है।',
+            'SIET पंचकुला के छात्रों को Future Finders से इंटर्नशिप ऑफर लेटर प्राप्त हुए, जो उनकी व्यावसायिक यात्रा में एक महत्वपूर्ण उपलब्धि है और संस्थान के मजबूत उद्योग संबंध को दर्शाता है।',
           date: '2026',
           location: 'SIET पंचकुला',
         },
