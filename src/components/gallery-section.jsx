@@ -73,6 +73,16 @@ const eventImages = [
       { src: '/images/gallery/POSH seminar/posh9.jpeg', caption: "Respect is not optional — it's the foundation" },
     ],
   },
+  {
+    cat: 'Placements',
+    cover: '/images/gallery/internship/internship2.jpeg',
+    images: [
+      { src: '/images/gallery/internship/internship1.jpeg', caption: 'Student receiving internship offer letter' },
+      { src: '/images/gallery/internship/internship2.jpeg', caption: 'Proud moment — internship letter in hand' },
+      { src: '/images/gallery/internship/internship3.jpeg', caption: 'Student with internship appointment letter' },
+      { src: '/images/gallery/internship/internship4.jpeg', caption: 'Another successful internship placement', objectPosition: '50% 30px' },
+    ],
+  },
 ]
 
 /* ─── Lightbox Carousel ─── */
@@ -125,6 +135,7 @@ function Lightbox({ event, onClose }) {
               src={slide.src}
               alt={slide.caption}
               className="lightbox-image"
+              style={slide.objectPosition ? { objectPosition: slide.objectPosition } : undefined}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}

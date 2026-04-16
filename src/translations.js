@@ -220,10 +220,37 @@ export const translations = {
           date: '2026',
           location: 'SIET Panchkula',
         },
+        {
+          title: 'Internship Letters',
+          subtitle: 'Placements — SIET Panchkula',
+          description:
+            'Students of SIET Panchkula receive internship offer letters from Future Finders, marking a significant milestone in their professional journey and reflecting the institution\'s strong industry connect.',
+          date: '2026',
+          location: 'SIET Panchkula',
+        },
       ],
     },
+    updatesPanel: {
+      notifications: {
+        badge: 'ALRT',
+        title: 'Notifications',
+        viewAll: 'VIEW ALL NOTIFICATIONS ->',
+      },
+      notices: {
+        badge: 'NOTE',
+        title: 'Notices',
+        viewAll: 'VIEW ALL NOTICES ->',
+      },
+      placements: {
+        badge: 'PLAC',
+        title: 'Placement Updates',
+        viewAll: 'VIEW ALL PLACEMENTS ->',
+      },
+      noUpdates: 'No updates available',
+      noUpdatesDesc: 'This section will appear once official updates are added.',
+      newBadge: 'NEW',
+    },
     skills: {
-      header: 'Core Competencies & Technical Stack',
     },
     cta: {
       title: 'Ready to hire the future?',
@@ -655,7 +682,35 @@ export const translations = {
           date: '2026',
           location: 'SIET पंचकुला',
         },
+        {
+          title: 'इंटर्नशिप ऑफर लेटर',
+          subtitle: 'प्लेसमेंट — SIET पंचकुला',
+          description:
+            'SIET पंचकुला के छात्रों को Future Finders से इंटर्नशिप ऑफर लेटर प्राप्त हुए, जो उनकी व्यावसायिक यात्रा में एक महत्वपूर्ण उपलब्धि है और संस्थान के मजबूत उद्योग संबंध को दर्शाता है।',
+          date: '2026',
+          location: 'SIET पंचकुला',
+        },
       ],
+    },
+    updatesPanel: {
+      notifications: {
+        badge: 'ALRT',
+        title: 'सूचनाएँ',
+        viewAll: 'सभी सूचनाएँ देखें ->',
+      },
+      notices: {
+        badge: 'NOTE',
+        title: 'नोटिस',
+        viewAll: 'सभी नोटिस देखें ->',
+      },
+      placements: {
+        badge: 'PLAC',
+        title: 'प्लेसमेंट अपडेट',
+        viewAll: 'सभी प्लेसमेंट देखें ->',
+      },
+      noUpdates: 'कोई अपडेट उपलब्ध नहीं',
+      noUpdatesDesc: 'यह अनुभाग आधिकारिक अपडेट जोड़े जाने के बाद दिखाई देगा।',
+      newBadge: 'नया',
     },
     skills: {
       header: 'मुख्य दक्षताएँ एवं तकनीकी स्टैक',
