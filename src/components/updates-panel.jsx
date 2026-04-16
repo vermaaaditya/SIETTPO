@@ -6,17 +6,17 @@ import { translations } from '../translations'
    an object to the relevant array below.
    ───────────────────────────────────────────── */
 const notifications = [
-  { title: 'Admission Open 2026-27', date: 'Jan 2026', isNew: true },
-  { title: 'Fee Structure B.Tech 2025', date: 'Jul 2025' },
-  { title: '12th Merit List', date: 'Aug 2025' },
-  { title: 'JEE Merit/Selection List', date: 'Aug 2025' },
+  { id: 'notif-1', title: 'Admission Open 2026-27', date: 'Jan 2026', isNew: true },
+  { id: 'notif-2', title: 'Fee Structure B.Tech 2025', date: 'Jul 2025' },
+  { id: 'notif-3', title: '12th Merit List', date: 'Aug 2025' },
+  { id: 'notif-4', title: 'JEE Merit/Selection List', date: 'Aug 2025' },
 ]
 
 const notices = [
-  { title: 'Notice PTM', date: 'Mar 2026' },
-  { title: 'Quiz Competition on Martyrdom Day', date: 'Mar 2026' },
-  { title: 'IIT Ropar Workshop Notice', date: 'Feb 2026' },
-  { title: 'Notice PTM', date: 'Mar 2026' },
+  { id: 'notice-1', title: 'Notice PTM — Term I', date: 'Mar 2026' },
+  { id: 'notice-2', title: 'Quiz Competition on Martyrdom Day', date: 'Mar 2026' },
+  { id: 'notice-3', title: 'IIT Ropar Workshop Notice', date: 'Feb 2026' },
+  { id: 'notice-4', title: 'Notice PTM — Term II', date: 'Mar 2026' },
 ]
 
 const placements = [
@@ -39,8 +39,8 @@ function PanelColumn({ badge, title, items, viewAllLabel, noUpdates, noUpdatesDe
           </div>
         ) : (
           <ul className="updates-list">
-            {items.map((item, i) => (
-              <li key={i} className="updates-item">
+            {items.map((item) => (
+              <li key={item.id} className="updates-item">
                 <div className="updates-item-top">
                   <span className="updates-item-title">{item.title}</span>
                   {item.isNew && <span className="updates-item-new">{newBadge}</span>}
