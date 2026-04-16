@@ -11,7 +11,8 @@ import { GallerySection } from './components/gallery-section'
 import { CtaSection } from './components/cta-section'
 import { TeamSection } from './components/team-section'
 import { Footer } from './components/footer'
-import { UpdatesPanel } from './components/updates-panel'
+// UpdatesPanel is kept for future use — import when needed:
+// import { UpdatesPanel } from './components/updates-panel'
 import StudentLogin from './pages/StudentLogin'
 import PdfViewer from './pages/PdfViewer'
 import PlacementBrochure from './pages/PlacementBrochure'
@@ -56,7 +57,6 @@ function EventsPage() {
   return (
     <main>
       <Navbar />
-      <UpdatesPanel />
       <GallerySection />
       <Footer />
       <Chatbot />
