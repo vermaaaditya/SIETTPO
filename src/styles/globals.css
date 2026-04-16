@@ -1539,6 +1539,7 @@ input:focus, textarea:focus, select:focus { outline: none; box-shadow: 0 0 0 2px
   width:100%;
   aspect-ratio:16/10;
   object-fit:cover;
+  object-position:top;
   display:block;
   transition:transform 0.5s;
 }
@@ -1666,6 +1667,7 @@ input:focus, textarea:focus, select:focus { outline: none; box-shadow: 0 0 0 2px
   width:100%;
   aspect-ratio:16/9;
   object-fit:cover;
+  object-position:top;
   display:block;
 }
 .lightbox-arrow {
