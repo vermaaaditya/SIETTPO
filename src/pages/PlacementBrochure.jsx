@@ -12,7 +12,7 @@ export default function PlacementBrochure() {
 
   const handleDownload = () => {
     const link = document.createElement('a')
-    link.href = '/pdfs/brochure.pdf'
+    link.href = '/pdfs/placement_brochure_final_v3.pdf'
     link.download = 'SIET_Placement_Brochure_2024.pdf'
     document.body.appendChild(link)
     link.click()
@@ -54,7 +54,7 @@ export default function PlacementBrochure() {
             </div>
             <div className="coc-preview-frame-wrap mt-4">
               <iframe
-                src="/pdfs/brochure.pdf"
+              src="/pdfs/placement_brochure_final_v3.pdf"
                 className="coc-preview-frame"
                 title="Placement Brochure PDF"
               />

@@ -16,7 +16,7 @@ export default function PdfViewer() {
       brochure: {
         title: 'Recruitment Brochure',
         description: 'Download our comprehensive recruitment brochure to learn more about our placement process and opportunities.',
-        pdfUrl: '/pdfs/brochure.pdf',
+        pdfUrl: '/pdfs/placement_brochure_final_v3.pdf',
         filename: 'SIET_Recruitment_Brochure.pdf'
       },
       guidelines: {
