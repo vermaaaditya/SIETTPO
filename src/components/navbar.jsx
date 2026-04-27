@@ -171,7 +171,7 @@ export function Navbar() {
             style={{
               fontFamily: 'var(--font-headline)',
               fontWeight: '700',
-              letterSpacing: '-0.01em',
+              letterSpacing: '0.05em',
               lineHeight: '1.2',
               color: 'var(--ink)',
               textTransform: 'uppercase',
