@@ -418,7 +418,7 @@ export default function StudentLogin() {
 
         {/* Brand */}
         <div className="login-left-brand">
-          <img src="/images/siet-logo.png" alt="SIET Panchkula" />
+          <img src="/images/newlogo.jpeg" alt="SIET Panchkula" />
           <div>
             <p className="login-left-brand-name">
               {t.brandName.split('\n').map((line, i) => (
