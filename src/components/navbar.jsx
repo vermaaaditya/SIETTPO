@@ -145,7 +145,7 @@ export function Navbar() {
 
         <div className="navbar-header-left">
           <img
-            src="/images/siet-logo.png"
+            src="/images/newlogo.jpeg"
             alt="SIET Panchkula Logo"
             className="object-contain"
           />
