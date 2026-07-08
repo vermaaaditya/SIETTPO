@@ -346,7 +346,7 @@ export default function StudentLogin() {
     activeEmail && isValidEmail(activeEmail) && !isPreferredCollegeEmail(activeEmail)
 
   return (
-    <div className="login-page flex min-h-screen bg-slate-950 font-sans text-slate-100 antialiased">
+    <div className="login-page flex min-h-screen bg-[#F5F0E8] font-sans text-slate-800 antialiased">
       {/* ── Left branding panel (hidden on mobile) ── */}
       <motion.div
         className="login-left relative hidden w-1/2 flex-col justify-between p-12 lg:flex"
@@ -396,7 +396,7 @@ export default function StudentLogin() {
       </motion.div>
 
       {/* ── Right form panel ── */}
-      <div className="login-right flex w-full flex-col justify-center px-6 py-12 lg:w-1/2 lg:px-16">
+      <div className="login-right flex w-full flex-col justify-center px-6 py-12 lg:w-1/2 lg:px-16 bg-[#F5F0E8]">
         <motion.div
           className="mx-auto w-full max-w-md"
           initial={{ opacity: 0, y: 24 }}
@@ -404,16 +404,16 @@ export default function StudentLogin() {
           transition={{ duration: 0.5, delay: 0.15, ease: [0.2, 0.9, 0.2, 1] }}
         >
           {/* Back link */}
-          <Link to="/" className="inline-flex items-center gap-2 text-sm font-semibold text-slate-400 hover:text-white transition-colors mb-6 group">
+          <Link to="/" className="inline-flex items-center gap-2 text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors mb-6 group">
             <ArrowLeft className="h-4 w-4 transform group-hover:-translate-x-1 transition-transform" /> {t.backToHome}
           </Link>
 
           {/* Heading */}
-          <p className="text-xs font-bold uppercase tracking-widest text-amber-500 mb-2">{t.eyebrow}</p>
-          <h1 className="text-3xl font-extrabold text-white tracking-tight">
+          <p className="text-xs font-bold uppercase tracking-widest text-amber-600 mb-2">{t.eyebrow}</p>
+          <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">
             {mode === 'login' ? t.loginTitle : 'Student Registration'}
           </h1>
-          <p className="text-sm text-slate-400 mt-1 mb-6">
+          <p className="text-sm text-slate-600 mt-1 mb-6">
             {mode === 'login'
               ? t.loginSubtitle
               : 'Create your account in just two simple steps.'}
@@ -421,11 +421,11 @@ export default function StudentLogin() {
 
           {/* Tab selector (Only visible if mode is login) */}
           {mode === 'login' && (
-            <div className="grid grid-cols-2 bg-slate-900 border border-slate-800 p-1 rounded-lg mb-6">
+            <div className="grid grid-cols-2 bg-slate-200/60 border border-slate-300 p-1 rounded-lg mb-6">
               <button
                 type="button"
                 className={`py-2 text-sm font-semibold rounded-md transition-all ${
-                  mode === 'login' ? 'bg-amber-500 text-slate-950 shadow-md' : 'text-slate-400 hover:text-white'
+                  mode === 'login' ? 'bg-amber-500 text-slate-950 shadow-sm' : 'text-slate-600 hover:text-slate-900'
                 }`}
                 onClick={() => handleModeChange('login')}
               >
@@ -434,7 +434,7 @@ export default function StudentLogin() {
               <button
                 type="button"
                 className={`py-2 text-sm font-semibold rounded-md transition-all ${
-                  mode === 'register' ? 'bg-amber-500 text-slate-950 shadow-md' : 'text-slate-400 hover:text-white'
+                  mode === 'register' ? 'bg-amber-500 text-slate-950 shadow-sm' : 'text-slate-600 hover:text-slate-900'
                 }`}
                 onClick={() => handleModeChange('register')}
               >
@@ -446,11 +446,11 @@ export default function StudentLogin() {
           {/* Registration Progress Indicator */}
           {mode === 'register' && (
             <div className="mb-8">
-              <div className="flex items-center justify-between text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">
+              <div className="flex items-center justify-between text-xs font-bold uppercase tracking-wider text-slate-600 mb-2">
                 <span>Step {step} of 2</span>
                 <span>{step === 1 ? 'Account Setup' : 'Academic Details'}</span>
               </div>
-              <div className="h-1.5 w-full bg-slate-900 rounded-full overflow-hidden border border-slate-800">
+              <div className="h-1.5 w-full bg-slate-200 rounded-full overflow-hidden border border-slate-300">
                 <div
                   className="h-full bg-amber-500 transition-all duration-300"
                   style={{ width: `${step * 50}%` }}
@@ -461,14 +461,14 @@ export default function StudentLogin() {
 
           {/* Alerts */}
           {status === 'error' && (
-            <div className="flex items-center gap-3 bg-red-950/50 border border-red-500/30 text-red-200 px-4 py-3 rounded-lg text-sm mb-6 animate-fadeIn">
-              <AlertCircle className="h-5 w-5 text-red-400 shrink-0" />
+            <div className="flex items-center gap-3 bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded-lg text-sm mb-6 animate-fadeIn">
+              <AlertCircle className="h-5 w-5 text-red-500 shrink-0" />
               <span>{statusMessage}</span>
             </div>
           )}
           {status === 'success' && (
-            <div className="flex items-center gap-3 bg-emerald-950/50 border border-emerald-500/30 text-emerald-200 px-4 py-3 rounded-lg text-sm mb-6 animate-fadeIn">
-              <CheckCircle2 className="h-5 w-5 text-emerald-400 shrink-0" />
+            <div className="flex items-center gap-3 bg-emerald-50 border border-emerald-200 text-emerald-800 px-4 py-3 rounded-lg text-sm mb-6 animate-fadeIn">
+              <CheckCircle2 className="h-5 w-5 text-emerald-500 shrink-0" />
               <span>{statusMessage}</span>
             </div>
           )}
@@ -477,58 +477,58 @@ export default function StudentLogin() {
           {mode === 'login' ? (
             <form onSubmit={handleLoginSubmit} className="space-y-4" noValidate>
               <div className="space-y-1">
-                <label htmlFor="loginEmail" className="text-sm font-semibold text-slate-300">College Email ID</label>
+                <label htmlFor="loginEmail" className="text-sm font-semibold text-slate-700">College Email ID</label>
                 <div className="relative">
-                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500" />
+                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
                   <input
                     id="loginEmail"
                     name="loginEmail"
                     type="email"
                     required
                     placeholder="name@sietpanchkula.ac.in"
-                    className="w-full bg-slate-900 border border-slate-800 rounded-lg py-2.5 pl-10 pr-4 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all"
+                    className="w-full bg-white border border-slate-300 rounded-lg py-2.5 pl-10 pr-4 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all"
                     value={form.loginEmail}
                     onChange={handleChange}
                   />
                 </div>
                 {errors.loginEmail && (
-                  <p className="text-xs text-red-500 font-medium mt-1">{errors.loginEmail}</p>
+                  <p className="text-xs text-red-600 font-medium mt-1">{errors.loginEmail}</p>
                 )}
               </div>
 
               <div className="space-y-1">
                 <div className="flex justify-between items-center">
-                  <label htmlFor="loginPassword" className="text-sm font-semibold text-slate-300">Password</label>
-                  <a href="#" className="text-xs text-amber-500 hover:text-amber-400 font-semibold transition-colors">Forgot password?</a>
+                  <label htmlFor="loginPassword" className="text-sm font-semibold text-slate-700">Password</label>
+                  <a href="#" className="text-xs text-amber-600 hover:text-amber-700 font-bold transition-colors">Forgot password?</a>
                 </div>
                 <div className="relative">
-                  <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500" />
+                  <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
                   <input
                     id="loginPassword"
                     name="loginPassword"
                     type={showLoginPassword ? 'text' : 'password'}
                     required
                     placeholder="••••••••"
-                    className="w-full bg-slate-900 border border-slate-800 rounded-lg py-2.5 pl-10 pr-12 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all"
+                    className="w-full bg-white border border-slate-300 rounded-lg py-2.5 pl-10 pr-12 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all"
                     value={form.loginPassword}
                     onChange={handleChange}
                   />
                   <button
                     type="button"
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-300 transition-colors"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors"
                     onClick={() => setShowLoginPassword(v => !v)}
                   >
                     {showLoginPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                   </button>
                 </div>
                 {errors.loginPassword && (
-                  <p className="text-xs text-red-500 font-medium mt-1">{errors.loginPassword}</p>
+                  <p className="text-xs text-red-600 font-medium mt-1">{errors.loginPassword}</p>
                 )}
               </div>
 
               <button
                 type="submit"
-                className="w-full bg-amber-500 hover:bg-amber-400 disabled:bg-amber-500/50 disabled:cursor-not-allowed text-slate-950 font-bold py-2.5 rounded-lg text-sm shadow-lg shadow-amber-500/10 hover:shadow-amber-500/20 hover:scale-[1.01] active:scale-[0.99] transition-all mt-6"
+                className="w-full bg-amber-500 hover:bg-amber-400 disabled:bg-amber-500/50 disabled:cursor-not-allowed text-slate-950 font-bold py-2.5 rounded-lg text-sm shadow-md shadow-amber-500/10 hover:shadow-amber-500/20 hover:scale-[1.01] active:scale-[0.99] transition-all mt-6"
                 disabled={status === 'loading'}
               >
                 {status === 'loading' ? 'Logging in...' : 'Login'}
@@ -548,46 +548,46 @@ export default function StudentLogin() {
                   >
                     {/* Full Name */}
                     <div className="space-y-1">
-                      <label htmlFor="fullName" className="text-sm font-semibold text-slate-300">Full Name *</label>
+                      <label htmlFor="fullName" className="text-sm font-semibold text-slate-700">Full Name *</label>
                       <div className="relative">
-                        <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500" />
+                        <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
                         <input
                           id="fullName"
                           name="fullName"
                           type="text"
                           required
                           placeholder="John Doe"
-                          className="w-full bg-slate-900 border border-slate-800 rounded-lg py-2.5 pl-10 pr-4 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all"
+                          className="w-full bg-white border border-slate-300 rounded-lg py-2.5 pl-10 pr-4 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all"
                           value={form.fullName}
                           onChange={handleChange}
                         />
                       </div>
                       {errors.fullName && (
-                        <p className="text-xs text-red-500 font-medium mt-1">{errors.fullName}</p>
+                        <p className="text-xs text-red-600 font-medium mt-1">{errors.fullName}</p>
                       )}
                     </div>
 
                     {/* Official Email */}
                     <div className="space-y-1">
-                      <label htmlFor="signupEmail" className="text-sm font-semibold text-slate-300">Official College Email *</label>
+                      <label htmlFor="signupEmail" className="text-sm font-semibold text-slate-700">Official College Email *</label>
                       <div className="relative">
-                        <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500" />
+                        <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
                         <input
                           id="signupEmail"
                           name="signupEmail"
                           type="email"
                           required
                           placeholder="name@sietpanchkula.ac.in"
-                          className="w-full bg-slate-900 border border-slate-800 rounded-lg py-2.5 pl-10 pr-4 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all"
+                          className="w-full bg-white border border-slate-300 rounded-lg py-2.5 pl-10 pr-4 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all"
                           value={form.signupEmail}
                           onChange={handleChange}
                         />
                       </div>
                       {errors.signupEmail && (
-                        <p className="text-xs text-red-500 font-medium mt-1">{errors.signupEmail}</p>
+                        <p className="text-xs text-red-600 font-medium mt-1">{errors.signupEmail}</p>
                       )}
                       {showEmailDomainHint && (
-                        <p className="text-xs text-amber-500 font-medium mt-1">
+                        <p className="text-xs text-amber-600 font-medium mt-1">
                           Use your institute email for safer access continuity.
                         </p>
                       )}
@@ -595,87 +595,96 @@ export default function StudentLogin() {
 
                     {/* Mobile Number */}
                     <div className="space-y-1">
-                      <label htmlFor="mobileNumber" className="text-sm font-semibold text-slate-300">Mobile Number *</label>
+                      <label htmlFor="mobileNumber" className="text-sm font-semibold text-slate-700">Mobile Number *</label>
                       <div className="relative">
-                        <Phone className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500" />
+                        <Phone className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
                         <input
                           id="mobileNumber"
                           name="mobileNumber"
                           type="tel"
                           required
                           placeholder="9876543210"
-                          className="w-full bg-slate-900 border border-slate-800 rounded-lg py-2.5 pl-10 pr-4 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all"
+                          className="w-full bg-white border border-slate-300 rounded-lg py-2.5 pl-10 pr-4 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all"
                           value={form.mobileNumber}
                           onChange={handleChange}
                         />
                       </div>
                       {errors.mobileNumber && (
-                        <p className="text-xs text-red-500 font-medium mt-1">{errors.mobileNumber}</p>
+                        <p className="text-xs text-red-600 font-medium mt-1">{errors.mobileNumber}</p>
                       )}
                     </div>
 
                     {/* Password */}
                     <div className="space-y-1">
-                      <label htmlFor="signupPassword" className="text-sm font-semibold text-slate-300">Password *</label>
+                      <label htmlFor="signupPassword" className="text-sm font-semibold text-slate-700">Password *</label>
                       <div className="relative">
-                        <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500" />
+                        <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
                         <input
                           id="signupPassword"
                           name="signupPassword"
                           type={showSignupPassword ? 'text' : 'password'}
                           required
                           placeholder="Minimum 8 characters"
-                          className="w-full bg-slate-900 border border-slate-800 rounded-lg py-2.5 pl-10 pr-12 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all"
+                          className="w-full bg-white border border-slate-300 rounded-lg py-2.5 pl-10 pr-12 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all"
                           value={form.signupPassword}
                           onChange={handleChange}
                         />
                         <button
                           type="button"
-                          className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-300 transition-colors"
+                          className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors"
                           onClick={() => setShowSignupPassword(v => !v)}
                         >
                           {showSignupPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                         </button>
                       </div>
                       {errors.signupPassword && (
-                        <p className="text-xs text-red-500 font-medium mt-1">{errors.signupPassword}</p>
+                        <p className="text-xs text-red-600 font-medium mt-1">{errors.signupPassword}</p>
                       )}
                     </div>
 
                     {/* Confirm Password */}
                     <div className="space-y-1">
-                      <label htmlFor="confirmPassword" className="text-sm font-semibold text-slate-300">Confirm Password *</label>
+                      <label htmlFor="confirmPassword" className="text-sm font-semibold text-slate-700">Confirm Password *</label>
                       <div className="relative">
-                        <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500" />
+                        <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
                         <input
                           id="confirmPassword"
                           name="confirmPassword"
                           type={showConfirmPassword ? 'text' : 'password'}
                           required
                           placeholder="Re-enter your password"
-                          className="w-full bg-slate-900 border border-slate-800 rounded-lg py-2.5 pl-10 pr-12 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all"
+                          className="w-full bg-white border border-slate-300 rounded-lg py-2.5 pl-10 pr-12 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all"
                           value={form.confirmPassword}
                           onChange={handleChange}
                         />
                         <button
                           type="button"
-                          className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-300 transition-colors"
+                          className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors"
                           onClick={() => setShowConfirmPassword(v => !v)}
                         >
                           {showConfirmPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                         </button>
                       </div>
                       {errors.confirmPassword && (
-                        <p className="text-xs text-red-500 font-medium mt-1">{errors.confirmPassword}</p>
+                        <p className="text-xs text-red-600 font-medium mt-1">{errors.confirmPassword}</p>
                       )}
                     </div>
 
-                    <button
-                      type="submit"
-                      className="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-2.5 rounded-lg text-sm shadow-lg shadow-amber-500/10 hover:shadow-amber-500/20 hover:scale-[1.01] active:scale-[0.99] transition-all mt-6"
-                    >
-                      Next Step
-                    </button>
+                    <div className="grid grid-cols-2 gap-4 mt-6">
+                      <button
+                        type="button"
+                        onClick={() => handleModeChange('login')}
+                        className="w-full bg-white hover:bg-slate-50 border border-slate-300 text-slate-700 font-bold py-2.5 rounded-lg text-sm transition-all"
+                      >
+                        Back to Login
+                      </button>
+                      <button
+                        type="submit"
+                        className="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-2.5 rounded-lg text-sm shadow-sm hover:scale-[1.01] active:scale-[0.99] transition-all"
+                      >
+                        Next Step
+                      </button>
+                    </div>
                   </motion.div>
                 ) : (
                   <motion.div
@@ -688,35 +697,35 @@ export default function StudentLogin() {
                   >
                     {/* University Roll Number */}
                     <div className="space-y-1">
-                      <label htmlFor="rollNumber" className="text-sm font-semibold text-slate-300">University Roll Number *</label>
+                      <label htmlFor="rollNumber" className="text-sm font-semibold text-slate-700">University Roll Number *</label>
                       <div className="relative">
-                        <Award className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500" />
+                        <Award className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
                         <input
                           id="rollNumber"
                           name="rollNumber"
                           type="text"
                           required
                           placeholder="e.g. 2101901"
-                          className="w-full bg-slate-900 border border-slate-800 rounded-lg py-2.5 pl-10 pr-4 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all"
+                          className="w-full bg-white border border-slate-300 rounded-lg py-2.5 pl-10 pr-4 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all"
                           value={form.rollNumber}
                           onChange={handleChange}
                         />
                       </div>
                       {errors.rollNumber && (
-                        <p className="text-xs text-red-500 font-medium mt-1">{errors.rollNumber}</p>
+                        <p className="text-xs text-red-600 font-medium mt-1">{errors.rollNumber}</p>
                       )}
                     </div>
 
                     {/* Course */}
                     <div className="space-y-1">
-                      <label htmlFor="course" className="text-sm font-semibold text-slate-300">Course *</label>
+                      <label htmlFor="course" className="text-sm font-semibold text-slate-700">Course *</label>
                       <div className="relative">
-                        <BookOpen className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500 pointer-events-none" />
+                        <BookOpen className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 pointer-events-none" />
                         <select
                           id="course"
                           name="course"
                           required
-                          className="w-full bg-slate-900 border border-slate-800 rounded-lg py-2.5 pl-10 pr-4 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all appearance-none"
+                          className="w-full bg-white border border-slate-300 rounded-lg py-2.5 pl-10 pr-4 text-sm text-slate-900 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all appearance-none"
                           value={form.course}
                           onChange={handleChange}
                         >
@@ -726,20 +735,20 @@ export default function StudentLogin() {
                         </select>
                       </div>
                       {errors.course && (
-                        <p className="text-xs text-red-500 font-medium mt-1">{errors.course}</p>
+                        <p className="text-xs text-red-600 font-medium mt-1">{errors.course}</p>
                       )}
                     </div>
 
                     {/* Branch */}
                     <div className="space-y-1">
-                      <label htmlFor="branch" className="text-sm font-semibold text-slate-300">Branch *</label>
+                      <label htmlFor="branch" className="text-sm font-semibold text-slate-700">Branch *</label>
                       <div className="relative">
-                        <BookOpen className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500 pointer-events-none" />
+                        <BookOpen className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 pointer-events-none" />
                         <select
                           id="branch"
                           name="branch"
                           required
-                          className="w-full bg-slate-900 border border-slate-800 rounded-lg py-2.5 pl-10 pr-4 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all appearance-none"
+                          className="w-full bg-white border border-slate-300 rounded-lg py-2.5 pl-10 pr-4 text-sm text-slate-900 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all appearance-none"
                           value={form.branch}
                           onChange={handleChange}
                         >
@@ -752,20 +761,20 @@ export default function StudentLogin() {
                         </select>
                       </div>
                       {errors.branch && (
-                        <p className="text-xs text-red-500 font-medium mt-1">{errors.branch}</p>
+                        <p className="text-xs text-red-600 font-medium mt-1">{errors.branch}</p>
                       )}
                     </div>
 
                     {/* Passing Year */}
                     <div className="space-y-1">
-                      <label htmlFor="passingYear" className="text-sm font-semibold text-slate-300">Passing Year *</label>
+                      <label htmlFor="passingYear" className="text-sm font-semibold text-slate-700">Passing Year *</label>
                       <div className="relative">
-                        <Award className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500 pointer-events-none" />
+                        <Award className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 pointer-events-none" />
                         <select
                           id="passingYear"
                           name="passingYear"
                           required
-                          className="w-full bg-slate-900 border border-slate-800 rounded-lg py-2.5 pl-10 pr-4 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all appearance-none"
+                          className="w-full bg-white border border-slate-300 rounded-lg py-2.5 pl-10 pr-4 text-sm text-slate-900 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all appearance-none"
                           value={form.passingYear}
                           onChange={handleChange}
                         >
@@ -777,15 +786,15 @@ export default function StudentLogin() {
                         </select>
                       </div>
                       {errors.passingYear && (
-                        <p className="text-xs text-red-500 font-medium mt-1">{errors.passingYear}</p>
+                        <p className="text-xs text-red-600 font-medium mt-1">{errors.passingYear}</p>
                       )}
                     </div>
 
                     {/* CGPA */}
                     <div className="space-y-1">
-                      <label htmlFor="cgpa" className="text-sm font-semibold text-slate-300">Current CGPA *</label>
+                      <label htmlFor="cgpa" className="text-sm font-semibold text-slate-700">Current CGPA *</label>
                       <div className="relative">
-                        <Award className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500" />
+                        <Award className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
                         <input
                           id="cgpa"
                           name="cgpa"
@@ -793,26 +802,26 @@ export default function StudentLogin() {
                           step="0.01"
                           required
                           placeholder="e.g. 8.5"
-                          className="w-full bg-slate-900 border border-slate-800 rounded-lg py-2.5 pl-10 pr-4 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all"
+                          className="w-full bg-white border border-slate-300 rounded-lg py-2.5 pl-10 pr-4 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all"
                           value={form.cgpa}
                           onChange={handleChange}
                         />
                       </div>
                       {errors.cgpa && (
-                        <p className="text-xs text-red-500 font-medium mt-1">{errors.cgpa}</p>
+                        <p className="text-xs text-red-600 font-medium mt-1">{errors.cgpa}</p>
                       )}
                     </div>
 
                     {/* Active Backlogs */}
                     <div className="space-y-1">
-                      <label htmlFor="backlogs" className="text-sm font-semibold text-slate-300">Active Backlogs *</label>
+                      <label htmlFor="backlogs" className="text-sm font-semibold text-slate-700">Active Backlogs *</label>
                       <div className="relative">
-                        <Award className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500 pointer-events-none" />
+                        <Award className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 pointer-events-none" />
                         <select
                           id="backlogs"
                           name="backlogs"
                           required
-                          className="w-full bg-slate-900 border border-slate-800 rounded-lg py-2.5 pl-10 pr-4 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all appearance-none"
+                          className="w-full bg-white border border-slate-300 rounded-lg py-2.5 pl-10 pr-4 text-sm text-slate-900 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all appearance-none"
                           value={form.backlogs}
                           onChange={handleChange}
                         >
@@ -824,14 +833,14 @@ export default function StudentLogin() {
                         </select>
                       </div>
                       {errors.backlogs && (
-                        <p className="text-xs text-red-500 font-medium mt-1">{errors.backlogs}</p>
+                        <p className="text-xs text-red-600 font-medium mt-1">{errors.backlogs}</p>
                       )}
                     </div>
 
                     {/* Percentage 10th & 12th */}
                     <div className="grid grid-cols-2 gap-4">
                       <div className="space-y-1">
-                        <label htmlFor="percentage10" className="text-sm font-semibold text-slate-300">10th Percentage *</label>
+                        <label htmlFor="percentage10" className="text-sm font-semibold text-slate-700">10th Percentage *</label>
                         <input
                           id="percentage10"
                           name="percentage10"
@@ -839,16 +848,16 @@ export default function StudentLogin() {
                           step="0.01"
                           required
                           placeholder="e.g. 91.5"
-                          className="w-full bg-slate-900 border border-slate-800 rounded-lg py-2.5 px-4 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all"
+                          className="w-full bg-white border border-slate-300 rounded-lg py-2.5 px-4 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all"
                           value={form.percentage10}
                           onChange={handleChange}
                         />
                         {errors.percentage10 && (
-                          <p className="text-xs text-red-500 font-medium mt-1">{errors.percentage10}</p>
+                          <p className="text-xs text-red-600 font-medium mt-1">{errors.percentage10}</p>
                         )}
                       </div>
                       <div className="space-y-1">
-                        <label htmlFor="percentage12" className="text-sm font-semibold text-slate-300">12th / Diploma *</label>
+                        <label htmlFor="percentage12" className="text-sm font-semibold text-slate-700">12th / Diploma *</label>
                         <input
                           id="percentage12"
                           name="percentage12"
@@ -856,89 +865,89 @@ export default function StudentLogin() {
                           step="0.01"
                           required
                           placeholder="e.g. 88.2"
-                          className="w-full bg-slate-900 border border-slate-800 rounded-lg py-2.5 px-4 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all"
+                          className="w-full bg-white border border-slate-300 rounded-lg py-2.5 px-4 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all"
                           value={form.percentage12}
                           onChange={handleChange}
                         />
                         {errors.percentage12 && (
-                          <p className="text-xs text-red-500 font-medium mt-1">{errors.percentage12}</p>
+                          <p className="text-xs text-red-600 font-medium mt-1">{errors.percentage12}</p>
                         )}
                       </div>
                     </div>
 
                     {/* Resume CV Link */}
                     <div className="space-y-1">
-                      <label htmlFor="resumeLink" className="text-sm font-semibold text-slate-300">Resume/CV Link *</label>
+                      <label htmlFor="resumeLink" className="text-sm font-semibold text-slate-700">Resume/CV Link *</label>
                       <div className="relative">
-                        <FileText className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500" />
+                        <FileText className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
                         <input
                           id="resumeLink"
                           name="resumeLink"
                           type="url"
                           required
                           placeholder="https://drive.google.com/..."
-                          className="w-full bg-slate-900 border border-slate-800 rounded-lg py-2.5 pl-10 pr-4 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all"
+                          className="w-full bg-white border border-slate-300 rounded-lg py-2.5 pl-10 pr-4 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all"
                           value={form.resumeLink}
                           onChange={handleChange}
                         />
                       </div>
                       {errors.resumeLink && (
-                        <p className="text-xs text-red-500 font-medium mt-1">{errors.resumeLink}</p>
+                        <p className="text-xs text-red-600 font-medium mt-1">{errors.resumeLink}</p>
                       )}
                     </div>
 
                     {/* LinkedIn & GitHub */}
                     <div className="space-y-4">
                       <div className="space-y-1">
-                        <label htmlFor="linkedinUrl" className="text-sm font-semibold text-slate-300">LinkedIn URL</label>
+                        <label htmlFor="linkedinUrl" className="text-sm font-semibold text-slate-700">LinkedIn URL</label>
                         <div className="relative">
-                          <Linkedin className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500" />
+                          <Linkedin className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
                           <input
                             id="linkedinUrl"
                             name="linkedinUrl"
                             type="url"
                             placeholder="https://linkedin.com/in/..."
-                            className="w-full bg-slate-900 border border-slate-800 rounded-lg py-2.5 pl-10 pr-4 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all"
+                            className="w-full bg-white border border-slate-300 rounded-lg py-2.5 pl-10 pr-4 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all"
                             value={form.linkedinUrl}
                             onChange={handleChange}
                           />
                         </div>
                         {errors.linkedinUrl && (
-                          <p className="text-xs text-red-500 font-medium mt-1">{errors.linkedinUrl}</p>
+                          <p className="text-xs text-red-600 font-medium mt-1">{errors.linkedinUrl}</p>
                         )}
                       </div>
 
                       <div className="space-y-1">
-                        <label htmlFor="githubUrl" className="text-sm font-semibold text-slate-300">GitHub URL</label>
+                        <label htmlFor="githubUrl" className="text-sm font-semibold text-slate-700">GitHub URL</label>
                         <div className="relative">
-                          <Github className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500" />
+                          <Github className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
                           <input
                             id="githubUrl"
                             name="githubUrl"
                             type="url"
                             placeholder="https://github.com/..."
-                            className="w-full bg-slate-900 border border-slate-800 rounded-lg py-2.5 pl-10 pr-4 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all"
+                            className="w-full bg-white border border-slate-300 rounded-lg py-2.5 pl-10 pr-4 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all"
                             value={form.githubUrl}
                             onChange={handleChange}
                           />
                         </div>
                         {errors.githubUrl && (
-                          <p className="text-xs text-red-500 font-medium mt-1">{errors.githubUrl}</p>
+                          <p className="text-xs text-red-600 font-medium mt-1">{errors.githubUrl}</p>
                         )}
                       </div>
                     </div>
 
                     {/* Key Technical Skills */}
                     <div className="space-y-1">
-                      <label htmlFor="skills" className="text-sm font-semibold text-slate-300">Key Technical Skills</label>
+                      <label htmlFor="skills" className="text-sm font-semibold text-slate-700">Key Technical Skills</label>
                       <div className="relative">
-                        <Cpu className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500" />
+                        <Cpu className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
                         <input
                           id="skills"
                           name="skills"
                           type="text"
                           placeholder="React, Node.js, Python (comma separated)"
-                          className="w-full bg-slate-900 border border-slate-800 rounded-lg py-2.5 pl-10 pr-4 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all"
+                          className="w-full bg-white border border-slate-300 rounded-lg py-2.5 pl-10 pr-4 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all"
                           value={form.skills}
                           onChange={handleChange}
                         />
@@ -950,14 +959,14 @@ export default function StudentLogin() {
                       <button
                         type="button"
                         onClick={handlePrevStep}
-                        className="w-full bg-slate-900 border border-slate-800 hover:bg-slate-800 text-slate-300 font-bold py-2.5 rounded-lg text-sm transition-all"
+                        className="w-full bg-white hover:bg-slate-50 border border-slate-300 text-slate-700 font-bold py-2.5 rounded-lg text-sm transition-all"
                       >
-                        Back
+                        Previous Step
                       </button>
                       <button
                         type="submit"
                         disabled={status === 'loading'}
-                        className="w-full bg-amber-500 hover:bg-amber-400 disabled:bg-amber-500/50 disabled:cursor-not-allowed text-slate-950 font-bold py-2.5 rounded-lg text-sm shadow-lg shadow-amber-500/10 hover:shadow-amber-500/20 transition-all"
+                        className="w-full bg-amber-500 hover:bg-amber-400 disabled:bg-amber-500/50 disabled:cursor-not-allowed text-slate-950 font-bold py-2.5 rounded-lg text-sm shadow-md hover:scale-[1.01] active:scale-[0.99] transition-all"
                       >
                         {status === 'loading' ? 'Submitting...' : 'Register'}
                       </button>
@@ -969,32 +978,32 @@ export default function StudentLogin() {
           )}
 
           {/* Toggle back to login/register */}
-          <div className="mt-8 text-center text-sm border-t border-slate-800/60 pt-6">
-            <span className="text-slate-400">
+          <div className="mt-8 text-center text-sm border-t border-slate-300 my-6 pt-6">
+            <span className="text-slate-600">
               {mode === 'login' ? "Don't have an account?" : 'Already registered?'}
             </span>{' '}
             <button
               type="button"
-              className="text-amber-500 hover:text-amber-400 font-bold transition-colors ml-1 focus:outline-none"
+              className="text-amber-600 hover:text-amber-700 font-bold transition-colors ml-1 focus:outline-none"
               onClick={() => handleModeChange(mode === 'login' ? 'register' : 'login')}
             >
               {mode === 'login' ? 'Register Now' : 'Back to Login'}
             </button>
           </div>
 
-          <div className="login-divider flex items-center gap-4 text-xs font-bold uppercase tracking-wider text-slate-600 my-6">
-            <div className="h-px flex-1 bg-slate-800/80" />
+          <div className="login-divider flex items-center gap-4 text-xs font-bold uppercase tracking-wider text-slate-500 my-6">
+            <div className="h-px flex-1 bg-slate-300" />
             <span>Need Help?</span>
-            <div className="h-px flex-1 bg-slate-800/80" />
+            <div className="h-px flex-1 bg-slate-300" />
           </div>
 
           <p className="login-notice text-center text-xs text-slate-500 leading-relaxed">
             Contact the TPO at{' '}
-            <a href="mailto:tpo@sietpanchkula.ac.in" className="text-amber-500/80 hover:text-amber-400 hover:underline transition-all">
+            <a href="mailto:tpo@sietpanchkula.ac.in" className="text-amber-600 hover:text-amber-700 hover:underline transition-all">
               tpo@sietpanchkula.ac.in
             </a>{' '}
             or call{' '}
-            <a href="tel:01722979887" className="text-amber-500/80 hover:text-amber-400 hover:underline transition-all">
+            <a href="tel:01722979887" className="text-amber-600 hover:text-amber-700 hover:underline transition-all">
               0172-2979887
             </a>.
           </p>
