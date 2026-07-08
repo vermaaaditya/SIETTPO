@@ -373,6 +373,11 @@ export default function StudentLogin() {
 
         {/* Headline */}
         <div className="login-left-content">
+          <img 
+            src="/images/newlogo.jpeg" 
+            alt="SIET Logo" 
+            className="w-16 h-16 object-cover rounded-lg mb-6 border border-amber-500/20 shadow-lg shadow-amber-500/5" 
+          />
           <h2 className="login-left-headline">
             {t.headline}
           </h2>
