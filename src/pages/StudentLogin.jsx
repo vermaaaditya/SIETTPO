@@ -762,11 +762,12 @@ export default function StudentLogin() {
                           onChange={handleChange}
                         >
                           <option value="" disabled>Select Branch</option>
-                          <option value="CSE">CSE</option>
-                          <option value="AI/ML">AI/ML</option>
-                          <option value="ECE">ECE</option>
-                          <option value="Civil">Civil</option>
-                          <option value="Mechanical">Mechanical</option>
+                          <option value="B.Tech. Computer Science & Engineering">B.Tech. Computer Science & Engineering</option>
+                          <option value="B.Tech. CSE (Cyber Security)">B.Tech. CSE (Cyber Security)</option>
+                          <option value="B.Tech. CSE (Artificial Intelligence & Machine Learning)">B.Tech. CSE (Artificial Intelligence & Machine Learning)</option>
+                          <option value="B.Tech. Robotics & Automation">B.Tech. Robotics & Automation</option>
+                          <option value="B.Tech. Electrical Engineering">B.Tech. Electrical Engineering</option>
+                          <option value="B.Tech. Electronics Engineering (VLSI Design)">B.Tech. Electronics Engineering (VLSI Design)</option>
                         </select>
                       </div>
                       {errors.branch && (
