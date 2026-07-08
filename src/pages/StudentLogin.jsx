@@ -99,14 +99,14 @@ export default function StudentLogin() {
   }
 
   function isValidEmail(value) {
-    const email = value.trim()
+    const email = value ? value.trim() : ''
     if (!email) return false
     const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/
     return emailRegex.test(email)
   }
 
   function isPreferredCollegeEmail(value) {
-    const normalized = value.trim().toLowerCase()
+    const normalized = value ? value.trim().toLowerCase() : ''
     const atIndex = normalized.lastIndexOf('@')
     const domain = atIndex >= 0 ? normalized.slice(atIndex + 1) : ''
     if (!domain) return false
@@ -121,17 +121,17 @@ export default function StudentLogin() {
   // Step 1 Validation
   function validateStep1() {
     const newErrors = {}
-    if (!form.fullName.trim()) {
+    if (!form.fullName || !form.fullName.trim()) {
       newErrors.fullName = 'Full Name is required'
     }
 
-    if (!form.signupEmail.trim()) {
+    if (!form.signupEmail || !form.signupEmail.trim()) {
       newErrors.signupEmail = 'Email is required'
     } else if (!isValidEmail(form.signupEmail)) {
       newErrors.signupEmail = 'Please enter a valid email address'
     }
 
-    if (!form.mobileNumber.trim()) {
+    if (!form.mobileNumber || !form.mobileNumber.trim()) {
       newErrors.mobileNumber = 'Mobile number is required'
     } else if (!/^\d{10}$/.test(form.mobileNumber.trim())) {
       newErrors.mobileNumber = 'Mobile number must be a 10-digit number'
@@ -156,7 +156,7 @@ export default function StudentLogin() {
   // Step 2 Validation
   function validateStep2() {
     const newErrors = {}
-    if (!form.rollNumber.trim()) {
+    if (!form.rollNumber || !form.rollNumber.trim()) {
       newErrors.rollNumber = 'University Roll Number is required'
     }
     if (!form.course) {
@@ -198,17 +198,17 @@ export default function StudentLogin() {
 
     const urlPattern = /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([\/\w .-]*)*\/?$/i
 
-    if (!form.resumeLink.trim()) {
+    if (!form.resumeLink || !form.resumeLink.trim()) {
       newErrors.resumeLink = 'Resume link is required'
     } else if (!urlPattern.test(form.resumeLink.trim())) {
       newErrors.resumeLink = 'Please enter a valid URL'
     }
 
-    if (form.linkedinUrl.trim() && !urlPattern.test(form.linkedinUrl.trim())) {
+    if (form.linkedinUrl && form.linkedinUrl.trim() && !urlPattern.test(form.linkedinUrl.trim())) {
       newErrors.linkedinUrl = 'Please enter a valid LinkedIn URL'
     }
 
-    if (form.githubUrl.trim() && !urlPattern.test(form.githubUrl.trim())) {
+    if (form.githubUrl && form.githubUrl.trim() && !urlPattern.test(form.githubUrl.trim())) {
       newErrors.githubUrl = 'Please enter a valid GitHub URL'
     }
 
@@ -232,7 +232,7 @@ export default function StudentLogin() {
   async function handleLoginSubmit(e) {
     e.preventDefault()
     const newErrors = {}
-    if (!form.loginEmail.trim()) {
+    if (!form.loginEmail || !form.loginEmail.trim()) {
       newErrors.loginEmail = 'Email is required'
     } else if (!isValidEmail(form.loginEmail)) {
       newErrors.loginEmail = 'Invalid email format'
@@ -314,7 +314,7 @@ export default function StudentLogin() {
       resumeLink: form.resumeLink.trim(),
       linkedinUrl: form.linkedinUrl.trim(),
       githubUrl: form.githubUrl.trim(),
-      skills: form.skills.split(',').map(s => s.trim()).filter(Boolean),
+      skills: form.skills ? form.skills.split(',').map(s => s.trim()).filter(Boolean) : [],
     }
 
     try {
@@ -708,7 +708,7 @@ export default function StudentLogin() {
                           type="text"
                           required
                           placeholder="e.g. 2101901"
-                          className="w-full bg-white border border-slate-300 rounded-lg py-2.5 pl-10 pr-4 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all"
+                          className="w-full bg-white border border-slate-300 rounded-lg py-2.5 pr-4 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all"
                           style={{ paddingLeft: '2.5rem' }}
                           value={form.rollNumber}
                           onChange={handleChange}
