@@ -486,7 +486,8 @@ export default function StudentLogin() {
                     type="email"
                     required
                     placeholder="name@sietpanchkula.ac.in"
-                    className="w-full bg-white border border-slate-300 rounded-lg py-2.5 pl-10 pr-4 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all"
+                    className="w-full bg-white border border-slate-300 rounded-lg py-2.5 pr-4 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all"
+                    style={{ paddingLeft: '2.5rem' }}
                     value={form.loginEmail}
                     onChange={handleChange}
                   />
@@ -509,7 +510,8 @@ export default function StudentLogin() {
                     type={showLoginPassword ? 'text' : 'password'}
                     required
                     placeholder="••••••••"
-                    className="w-full bg-white border border-slate-300 rounded-lg py-2.5 pl-10 pr-12 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all"
+                    className="w-full bg-white border border-slate-300 rounded-lg py-2.5 pr-12 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all"
+                    style={{ paddingLeft: '2.5rem', paddingRight: '2.75rem' }}
                     value={form.loginPassword}
                     onChange={handleChange}
                   />
@@ -557,7 +559,8 @@ export default function StudentLogin() {
                           type="text"
                           required
                           placeholder="John Doe"
-                          className="w-full bg-white border border-slate-300 rounded-lg py-2.5 pl-10 pr-4 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all"
+                          className="w-full bg-white border border-slate-300 rounded-lg py-2.5 pr-4 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all"
+                          style={{ paddingLeft: '2.5rem' }}
                           value={form.fullName}
                           onChange={handleChange}
                         />
@@ -578,7 +581,8 @@ export default function StudentLogin() {
                           type="email"
                           required
                           placeholder="name@sietpanchkula.ac.in"
-                          className="w-full bg-white border border-slate-300 rounded-lg py-2.5 pl-10 pr-4 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all"
+                          className="w-full bg-white border border-slate-300 rounded-lg py-2.5 pr-4 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all"
+                          style={{ paddingLeft: '2.5rem' }}
                           value={form.signupEmail}
                           onChange={handleChange}
                         />
@@ -604,7 +608,8 @@ export default function StudentLogin() {
                           type="tel"
                           required
                           placeholder="9876543210"
-                          className="w-full bg-white border border-slate-300 rounded-lg py-2.5 pl-10 pr-4 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all"
+                          className="w-full bg-white border border-slate-300 rounded-lg py-2.5 pr-4 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all"
+                          style={{ paddingLeft: '2.5rem' }}
                           value={form.mobileNumber}
                           onChange={handleChange}
                         />
@@ -625,7 +630,8 @@ export default function StudentLogin() {
                           type={showSignupPassword ? 'text' : 'password'}
                           required
                           placeholder="Minimum 8 characters"
-                          className="w-full bg-white border border-slate-300 rounded-lg py-2.5 pl-10 pr-12 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all"
+                          className="w-full bg-white border border-slate-300 rounded-lg py-2.5 pr-12 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all"
+                          style={{ paddingLeft: '2.5rem', paddingRight: '2.75rem' }}
                           value={form.signupPassword}
                           onChange={handleChange}
                         />
@@ -653,7 +659,8 @@ export default function StudentLogin() {
                           type={showConfirmPassword ? 'text' : 'password'}
                           required
                           placeholder="Re-enter your password"
-                          className="w-full bg-white border border-slate-300 rounded-lg py-2.5 pl-10 pr-12 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all"
+                          className="w-full bg-white border border-slate-300 rounded-lg py-2.5 pr-12 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all"
+                          style={{ paddingLeft: '2.5rem', paddingRight: '2.75rem' }}
                           value={form.confirmPassword}
                           onChange={handleChange}
                         />
@@ -676,7 +683,7 @@ export default function StudentLogin() {
                         onClick={() => handleModeChange('login')}
                         className="w-full bg-white hover:bg-slate-50 border border-slate-300 text-slate-700 font-bold py-2.5 rounded-lg text-sm transition-all"
                       >
-                        Back to Login
+                        Previous Step
                       </button>
                       <button
                         type="submit"
@@ -707,6 +714,7 @@ export default function StudentLogin() {
                           required
                           placeholder="e.g. 2101901"
                           className="w-full bg-white border border-slate-300 rounded-lg py-2.5 pl-10 pr-4 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all"
+                          style={{ paddingLeft: '2.5rem' }}
                           value={form.rollNumber}
                           onChange={handleChange}
                         />
@@ -725,7 +733,8 @@ export default function StudentLogin() {
                           id="course"
                           name="course"
                           required
-                          className="w-full bg-white border border-slate-300 rounded-lg py-2.5 pl-10 pr-4 text-sm text-slate-900 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all appearance-none"
+                          className="w-full bg-white border border-slate-300 rounded-lg py-2.5 pr-4 text-sm text-slate-900 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all appearance-none"
+                          style={{ paddingLeft: '2.5rem' }}
                           value={form.course}
                           onChange={handleChange}
                         >
@@ -748,7 +757,8 @@ export default function StudentLogin() {
                           id="branch"
                           name="branch"
                           required
-                          className="w-full bg-white border border-slate-300 rounded-lg py-2.5 pl-10 pr-4 text-sm text-slate-900 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all appearance-none"
+                          className="w-full bg-white border border-slate-300 rounded-lg py-2.5 pr-4 text-sm text-slate-900 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all appearance-none"
+                          style={{ paddingLeft: '2.5rem' }}
                           value={form.branch}
                           onChange={handleChange}
                         >
@@ -774,7 +784,8 @@ export default function StudentLogin() {
                           id="passingYear"
                           name="passingYear"
                           required
-                          className="w-full bg-white border border-slate-300 rounded-lg py-2.5 pl-10 pr-4 text-sm text-slate-900 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all appearance-none"
+                          className="w-full bg-white border border-slate-300 rounded-lg py-2.5 pr-4 text-sm text-slate-900 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all appearance-none"
+                          style={{ paddingLeft: '2.5rem' }}
                           value={form.passingYear}
                           onChange={handleChange}
                         >
@@ -803,6 +814,7 @@ export default function StudentLogin() {
                           required
                           placeholder="e.g. 8.5"
                           className="w-full bg-white border border-slate-300 rounded-lg py-2.5 pl-10 pr-4 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all"
+                          style={{ paddingLeft: '2.5rem' }}
                           value={form.cgpa}
                           onChange={handleChange}
                         />
@@ -821,7 +833,8 @@ export default function StudentLogin() {
                           id="backlogs"
                           name="backlogs"
                           required
-                          className="w-full bg-white border border-slate-300 rounded-lg py-2.5 pl-10 pr-4 text-sm text-slate-900 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all appearance-none"
+                          className="w-full bg-white border border-slate-300 rounded-lg py-2.5 pr-4 text-sm text-slate-900 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all appearance-none"
+                          style={{ paddingLeft: '2.5rem' }}
                           value={form.backlogs}
                           onChange={handleChange}
                         >
@@ -887,6 +900,7 @@ export default function StudentLogin() {
                           required
                           placeholder="https://drive.google.com/..."
                           className="w-full bg-white border border-slate-300 rounded-lg py-2.5 pl-10 pr-4 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all"
+                          style={{ paddingLeft: '2.5rem' }}
                           value={form.resumeLink}
                           onChange={handleChange}
                         />
@@ -908,6 +922,7 @@ export default function StudentLogin() {
                             type="url"
                             placeholder="https://linkedin.com/in/..."
                             className="w-full bg-white border border-slate-300 rounded-lg py-2.5 pl-10 pr-4 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all"
+                            style={{ paddingLeft: '2.5rem' }}
                             value={form.linkedinUrl}
                             onChange={handleChange}
                           />
@@ -927,6 +942,7 @@ export default function StudentLogin() {
                             type="url"
                             placeholder="https://github.com/..."
                             className="w-full bg-white border border-slate-300 rounded-lg py-2.5 pl-10 pr-4 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all"
+                            style={{ paddingLeft: '2.5rem' }}
                             value={form.githubUrl}
                             onChange={handleChange}
                           />
@@ -948,6 +964,7 @@ export default function StudentLogin() {
                           type="text"
                           placeholder="React, Node.js, Python (comma separated)"
                           className="w-full bg-white border border-slate-300 rounded-lg py-2.5 pl-10 pr-4 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all"
+                          style={{ paddingLeft: '2.5rem' }}
                           value={form.skills}
                           onChange={handleChange}
                         />
