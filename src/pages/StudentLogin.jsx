@@ -347,51 +347,46 @@ export default function StudentLogin() {
 
   return (
     <div className="login-page flex min-h-screen bg-[#F5F0E8] font-sans text-slate-800 antialiased">
-      {/* ── Left branding panel (hidden on mobile) ── */}
+      {/* ── Left branding panel ── */}
       <motion.div
-        className="login-left relative hidden w-1/2 flex-col justify-between p-12 lg:flex"
+        className="login-left"
         initial={{ opacity: 0, x: -30 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.6, ease: [0.2, 0.9, 0.2, 1] }}
       >
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-indigo-950/40 via-slate-950 to-slate-950 z-0" />
-        <div className="absolute inset-0 opacity-5 bg-[linear-gradient(to_right,#808080_1px,transparent_1px),linear-gradient(to_bottom,#808080_1px,transparent_1px)] bg-[size:24px_24px] z-0" />
+        <div className="login-left-grid" aria-hidden="true" />
+        <div className="login-left-glow" aria-hidden="true" />
+        <div className="login-left-glow-top" aria-hidden="true" />
 
-        {/* Brand Header */}
-        <div className="login-left-brand relative z-10 flex items-center gap-4">
-          <img src="/images/newlogo.jpeg" alt="SIET Panchkula" className="h-16 w-16 rounded-lg object-cover border border-amber-500/20 shadow-lg shadow-amber-500/5" />
+        {/* Brand */}
+        <div className="login-left-brand">
+          <img src="/images/newlogo.jpeg" alt="SIET Panchkula" />
           <div>
-            <h2 className="text-xl font-bold tracking-tight text-white leading-tight">
-              State Institute of Engineering<br />& Technology, Panchkula
-            </h2>
-            <p className="text-xs font-semibold uppercase tracking-widest text-amber-500 mt-1">Training & Placement Cell</p>
+            <p className="login-left-brand-name">
+              {t.brandName.split('\n').map((line, i) => (
+                <span key={i}>{line}{i === 0 && <br />}</span>
+              ))}
+            </p>
+            <p className="login-left-brand-sub">{t.brandSub}</p>
           </div>
         </div>
 
         {/* Headline */}
-        <div className="login-left-content relative z-10 my-auto max-w-lg">
-          <h1 className="text-4xl font-extrabold tracking-tight text-white lg:text-5xl leading-tight">
-            Your career starts here.
-          </h1>
-          <p className="mt-4 text-base text-slate-400 leading-relaxed">
-            Access your TPC portal to track placement drives, submit your profile, and stay updated on upcoming opportunities.
-          </p>
+        <div className="login-left-content">
+          <h2 className="login-left-headline">
+            {t.headline}
+          </h2>
+          <p className="login-left-desc">{t.desc}</p>
         </div>
 
         {/* Stats */}
-        <div className="login-left-stats relative z-10 grid grid-cols-3 gap-6 border-t border-slate-800/60 pt-8">
-          <div>
-            <p className="text-3xl font-extrabold text-white">300+</p>
-            <p className="text-xs uppercase tracking-wider text-slate-500 mt-1">Students</p>
-          </div>
-          <div>
-            <p className="text-3xl font-extrabold text-white">3</p>
-            <p className="text-xs uppercase tracking-wider text-slate-500 mt-1">Branches</p>
-          </div>
-          <div>
-            <p className="text-3xl font-extrabold text-white">5+</p>
-            <p className="text-xs uppercase tracking-wider text-slate-500 mt-1">Years</p>
-          </div>
+        <div className="login-left-stats">
+          {statsValues.map((value, i) => (
+            <div key={t.statsLabels[i]}>
+              <p className="login-left-stat-value">{value}</p>
+              <p className="login-left-stat-label">{t.statsLabels[i]}</p>
+            </div>
+          ))}
         </div>
       </motion.div>
 
