@@ -1,9 +1,10 @@
-﻿import { useState } from "react"
+import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth"
 import { doc, serverTimestamp, setDoc } from "firebase/firestore"
 import { ArrowLeft, ArrowRight, Eye, EyeOff, AlertCircle, CheckCircle2 } from "lucide-react"
 import { auth, db, firebaseEnvError } from "../lib/firebase"
+
 const ADMIN_EMAIL = "vermaaadityaff123@gmail.com"
 
 export default function StudentLogin() {
@@ -62,9 +63,17 @@ export default function StudentLogin() {
         const credential = await createUserWithEmailAndPassword(auth, email.trim().toLowerCase(), password)
         await updateProfile(credential.user, { displayName: fullName.trim() })
         await setDoc(doc(db, "students", credential.user.uid), {
-          fullName: fullName.trim(), email: email.trim().toLowerCase(), branch: "", batch: "",
-          skills: [], cgpa: null, phone: "", linkedin: "", resumeUrl: "",
-          createdAt: serverTimestamp(), updatedAt: serverTimestamp(),
+          fullName: fullName.trim(), 
+          email: email.trim().toLowerCase(), 
+          branch: "", 
+          batch: "",
+          skills: [], 
+          cgpa: null, 
+          phone: "", 
+          linkedin: "", 
+          resumeUrl: "",
+          createdAt: serverTimestamp(), 
+          updatedAt: serverTimestamp(),
         })
         setStatusMessage("Registration successful. Redirecting to your dashboard...")
       } else {
@@ -87,7 +96,10 @@ export default function StudentLogin() {
         <div className="login-left-glow-top" aria-hidden="true" />
         <div className="login-left-brand">
           <img src="/images/cleanersietlogo.png" alt="SIET Panchkula" />
-          <div><div className="login-left-brand-name">SIET PANCHKULA</div><div className="login-left-brand-sub">TRAINING &amp; PLACEMENT OFFICE</div></div>
+          <div>
+            <div className="login-left-brand-name">SIET PANCHKULA</div>
+            <div className="login-left-brand-sub">TRAINING &amp; PLACEMENT OFFICE</div>
+          </div>
         </div>
         <div className="login-left-content">
           <h1 className="login-left-headline">Training &amp; Placement <em>Office</em></h1>
@@ -97,22 +109,85 @@ export default function StudentLogin() {
 
       <section className="login-right">
         <div className="login-card">
-          <button className="login-back-link" type="button" onClick={() => navigate("/")}><ArrowLeft /> Return to portal</button>
-          <div className="login-title"><span>Training &amp; Placement Office</span><h2>{mode === "register" ? "Register" : "Log In"}</h2><p>{mode === "register" ? "Create a profile with your college email." : "Access your placement dashboard."}</p></div>
+          <button className="login-back-link" type="button" onClick={() => navigate("/")}>
+            <ArrowLeft /> Return to portal
+          </button>
+          
+          <div className="login-title">
+            <span className="login-eyebrow">Training &amp; Placement Office</span>
+            <h2>{mode === "register" ? "Register" : "Log In"}</h2>
+            <p className="login-subtitle">
+              {mode === "register" ? "Create a profile with your college email." : "Access your placement dashboard."}
+            </p>
+          </div>
+
           <div className="login-mode-toggle" role="tablist" aria-label="Authentication mode">
             <button type="button" className={`login-mode-btn ${mode === "login" ? "active" : ""}`} onClick={() => changeMode("login")}>Log In</button>
             <button type="button" className={`login-mode-btn ${mode === "register" ? "active" : ""}`} onClick={() => changeMode("register")}>Register</button>
           </div>
-          <form onSubmit={submit} noValidate>
-            {mode === "register" && <label className="login-field"><span>Full name</span><input value={fullName} onChange={e => setFullName(e.target.value)} placeholder="As printed on marksheet" autoComplete="name" /></label>}
-            <label className="login-field"><span>Institute email</span><input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="name@sietpanchkula.ac.in" autoComplete="email" /></label>
-            <label className="login-field"><span>{mode === "register" ? "Choose a password" : "Password"}</span><div className="login-password-wrap"><input type={showPassword ? "text" : "password"} value={password} onChange={e => setPassword(e.target.value)} placeholder={mode === "register" ? "Minimum 8 characters" : "Enter your password"} autoComplete={mode === "register" ? "new-password" : "current-password"} /><button type="button" aria-label={showPassword ? "Hide password" : "Show password"} onClick={() => setShowPassword(value => !value)}>{showPassword ? <EyeOff /> : <Eye />}</button></div></label>
-            {statusMessage && <p className={`login-status ${status}`} role="status">{status === "success" ? <CheckCircle2 /> : <AlertCircle />}{statusMessage}</p>}
-            <button className="login-submit" type="submit" disabled={status === "loading"}><span>{status === "loading" ? "Please wait..." : mode === "register" ? "Register" : "Log In"}</span><ArrowRight /></button>
+
+          <form onSubmit={submit} noValidate className="login-form">
+            {mode === "register" && (
+              <label className="login-field">
+                <span className="login-label">Full name</span>
+                <input 
+                  className="login-input"
+                  value={fullName} 
+                  onChange={e => setFullName(e.target.value)} 
+                  placeholder="As printed on marksheet" 
+                  autoComplete="name" 
+                />
+              </label>
+            )}
+
+            <label className="login-field">
+              <span className="login-label">Institute email</span>
+              <input 
+                className="login-input"
+                type="email" 
+                value={email} 
+                onChange={e => setEmail(e.target.value)} 
+                placeholder="name@sietpanchkula.ac.in" 
+                autoComplete="email" 
+              />
+            </label>
+
+            <label className="login-field">
+              <span className="login-label">{mode === "register" ? "Choose a password" : "Password"}</span>
+              <div className="login-input-wrap">
+                <input 
+                  className="login-input"
+                  type={showPassword ? "text" : "password"} 
+                  value={password} 
+                  onChange={e => setPassword(e.target.value)} 
+                  placeholder={mode === "register" ? "Minimum 8 characters" : "Enter your password"} 
+                  autoComplete={mode === "register" ? "new-password" : "current-password"} 
+                />
+                <button 
+                  type="button" 
+                  className="login-eye-btn"
+                  aria-label={showPassword ? "Hide password" : "Show password"} 
+                  onClick={() => setShowPassword(value => !value)}
+                >
+                  {showPassword ? <EyeOff /> : <Eye />}
+                </button>
+              </div>
+            </label>
+
+            {statusMessage && (
+              <div className={`login-alert ${status === "error" ? "login-alert-error" : "login-alert-success"}`} role="status">
+                {status === "success" ? <CheckCircle2 /> : <AlertCircle />}
+                <span>{statusMessage}</span>
+              </div>
+            )}
+
+            <button className="login-submit" type="submit" disabled={status === "loading"}>
+              <span>{status === "loading" ? "Please wait..." : mode === "register" ? "Register" : "Log In"}</span>
+              <ArrowRight style={{ width: '1rem', height: '1rem' }} />
+            </button>
           </form>
         </div>
       </section>
     </div>
   )
 }
-

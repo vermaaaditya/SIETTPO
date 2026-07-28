@@ -2080,6 +2080,7 @@ input:focus, textarea:focus, select:focus { outline: none; box-shadow: 0 0 0 2px
 .login-forgot:hover { color: var(--ink); text-decoration: none; }
 
 .login-submit {
+  display: flex; align-items: center; justify-content: center; gap: 0.5rem;
   width: 100%; padding: 0.875rem 1.5rem;
   background: var(--gold); color: var(--ink); border: none;
   border-radius: 0.125rem; font-family: var(--font-body);
