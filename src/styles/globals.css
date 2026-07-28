@@ -3353,4 +3353,411 @@ input:focus, textarea:focus, select:focus { outline: none; box-shadow: 0 0 0 2px
   color: var(--ink);
 }
 
+/* ==========================================================================
+   STUDENT MULTI-STEP PROFILE FORM STYLES
+   ========================================================================== */
+
+.student-form-page {
+  min-height: 100vh;
+  background: var(--parchment);
+  color: var(--ink);
+  font-family: var(--font-body);
+  display: flex;
+  flex-direction: column;
+}
+
+.student-form-header {
+  padding: 1rem 2rem;
+}
+
+.form-db-brand {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.form-logo {
+  height: 2.75rem;
+  width: 2.75rem;
+  background: #fff;
+  padding: 2px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-logo img {
+  height: 100%;
+  width: auto;
+  object-fit: contain;
+}
+
+.form-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.85rem;
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 4px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.form-back:hover {
+  background: rgba(201,146,42,0.2);
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.form-stepper {
+  max-width: 900px;
+  width: 100%;
+  margin: 2.5rem auto 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+  position: relative;
+}
+
+.form-step {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  color: var(--muted-foreground);
+  opacity: 0.45;
+  transition: all 0.2s ease;
+}
+
+.form-step.active {
+  opacity: 1;
+  color: var(--ink);
+}
+
+.form-step span {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(10,22,40,0.1);
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.85rem;
+  transition: all 0.2s ease;
+}
+
+.form-step.active span {
+  background: var(--gold);
+  color: var(--ink);
+  box-shadow: 0 0 12px rgba(201,146,42,0.4);
+}
+
+.form-step strong {
+  font-size: 0.85rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.student-form-card {
+  max-width: 900px;
+  width: calc(100% - 2rem);
+  margin: 0 auto 3rem;
+  background: #fff;
+  border: 1px solid rgba(10,22,40,0.08);
+  border-radius: 8px;
+  padding: 2.5rem;
+  box-shadow: 0 4px 20px rgba(10,22,40,0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.student-form-heading h1 {
+  font-family: var(--font-headline);
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--ink);
+  margin: 0 0 0.35rem 0;
+}
+
+.student-form-heading p {
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.student-form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.25rem;
+}
+
+.student-form-grid.three {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.student-form-label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.student-form-label.full {
+  grid-column: 1 / -1;
+}
+
+.student-form-label span {
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink);
+}
+
+.student-form-label span em {
+  color: #dc2626;
+  font-style: normal;
+  margin-left: 2px;
+}
+
+.student-form-label input,
+.student-form-label select,
+.student-form-label textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid rgba(10,22,40,0.15);
+  border-radius: 4px;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  background: #fff;
+  color: var(--ink);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.student-form-label input:focus,
+.student-form-label select:focus,
+.student-form-label textarea:focus {
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(201,146,42,0.12);
+}
+
+.student-form-label textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+.student-form-highlight {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.25rem;
+  background: rgba(201,146,42,0.05);
+  padding: 1.25rem;
+  border-radius: 6px;
+  border: 1px dashed rgba(201,146,42,0.35);
+}
+
+.skill-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.skill-chips button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.4rem 0.8rem;
+  background: var(--gold);
+  color: var(--ink);
+  border: none;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.skill-chips button:hover {
+  transform: scale(1.05);
+}
+
+.upload-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.25rem;
+  margin-top: 0.75rem;
+}
+
+.upload-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 1.75rem 1rem;
+  border: 2px dashed rgba(10,22,40,0.15);
+  border-radius: 6px;
+  background: var(--surface-container-low);
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.upload-box:hover {
+  border-color: var(--gold);
+  background: rgba(201,146,42,0.04);
+}
+
+.upload-box input[type="file"] {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+}
+
+.upload-box svg {
+  color: var(--gold);
+  margin-bottom: 0.5rem;
+}
+
+.upload-box strong {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--ink);
+}
+
+.upload-box small {
+  font-size: 0.72rem;
+  color: var(--muted-foreground);
+  margin-top: 0.25rem;
+}
+
+.review-block {
+  background: var(--surface-container-low);
+  padding: 1.25rem 1.5rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  border: 1px solid rgba(10,22,40,0.06);
+}
+
+.review-block h3 {
+  font-size: 0.85rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink);
+  margin: 0 0 0.85rem 0;
+  border-bottom: 1px solid rgba(10,22,40,0.08);
+  padding-bottom: 0.5rem;
+}
+
+.review-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  margin-bottom: 0.6rem;
+}
+
+.review-item small {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted-foreground);
+}
+
+.review-item strong {
+  font-size: 0.875rem;
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.student-form-message {
+  padding: 0.75rem 1rem;
+  background: rgba(220,38,38,0.1);
+  color: #dc2626;
+  border: 1px solid rgba(220,38,38,0.2);
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.student-form-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(10,22,40,0.08);
+  margin-top: 1rem;
+}
+
+.form-secondary {
+  padding: 0.75rem 1.5rem;
+  background: transparent;
+  border: 1px solid rgba(10,22,40,0.2);
+  color: var(--ink);
+  border-radius: 4px;
+  font-weight: 800;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.form-secondary:hover {
+  background: rgba(10,22,40,0.05);
+  border-color: var(--ink);
+}
+
+.form-primary {
+  padding: 0.75rem 1.75rem;
+  background: var(--ink);
+  color: var(--parchment);
+  border: none;
+  border-radius: 4px;
+  font-weight: 800;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(10,22,40,0.15);
+  margin-left: auto;
+}
+
+.form-primary:hover {
+  background: var(--gold);
+  color: var(--ink);
+}
+
+@media (max-width: 640px) {
+  .form-stepper strong {
+    display: none;
+  }
+  .student-form-card {
+    padding: 1.5rem;
+  }
+}
+
+
 
