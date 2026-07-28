@@ -5,7 +5,9 @@ import { ArrowLeft, AlertCircle, CheckCircle2, Plus, X } from 'lucide-react'
 import { Navbar } from '../components/navbar'
 import { Footer } from '../components/footer'
 import { useLanguage } from '../contexts/LanguageContext'
-import { supabase, supabaseEnvError } from '../lib/supabase'
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore'
+import { db, firebaseEnvError } from '../lib/firebase'
+import { supabase } from '../lib/supabase'
 
 const initialFormState = {
   companyName: '',
@@ -169,9 +171,9 @@ export default function Form() {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    if (!supabase) {
+    if (!db && !supabase) {
       setStatus('error')
-      setStatusMessage(supabaseEnvError || (lang === 'hi' ? 'Supabase कॉन्फ़िगरेशन गायब है।' : 'Missing Supabase configuration.'))
+      setStatusMessage(firebaseEnvError || (lang === 'hi' ? 'डेटाबेस सेवा उपलब्ध नहीं है।' : 'Database service is unavailable.'))
       return
     }
 
@@ -250,40 +252,44 @@ export default function Form() {
 
     const payload = {
       company_name: formData.companyName.trim(),
+      companyName: formData.companyName.trim(),
       website: websiteValue || null,
       industry: formData.industry.trim(),
       company_size: formData.companySize.trim() || null,
+      companySize: formData.companySize.trim() || null,
       contact_name: formData.contactName.trim(),
+      contactName: formData.contactName.trim(),
       designation: formData.designation.trim(),
       email: emailValue,
       phone: formData.phone.trim(),
       job_role: formData.role.trim(),
+      jobRole: formData.role.trim(),
       positions: positionsValue,
       preferred_branches: preferredBranches,
+      preferredBranches: preferredBranches,
       required_skills: formData.requiredSkills,
+      requiredSkills: formData.requiredSkills,
       additional_info: additionalInfoCombined || null,
+      additionalInfo: additionalInfoCombined || null,
       consent: formData.consent,
+      created_at: new Date().toISOString(),
     }
+
     const submitErrorMessage = lang === 'hi'
       ? 'फॉर्म जमा नहीं हो सका। कृपया दोबारा प्रयास करें।'
       : 'Unable to submit the form. Please try again.'
 
     try {
-      let { error } = await supabase.from('recruitment_inquiries').insert(payload)
-
-      // Fallback if required_skills column is not present in Supabase table schema
-      if (error && error.message && error.message.includes('required_skills')) {
-        delete payload.required_skills
-        const retry = await supabase.from('recruitment_inquiries').insert(payload)
-        error = retry.error
+      if (db) {
+        await addDoc(collection(db, 'recruitment_inquiries'), {
+          ...payload,
+          createdAt: serverTimestamp()
+        })
+      } else if (supabase) {
+        await supabase.from('recruitment_inquiries').insert(payload)
       }
-
-      if (error) {
-        setStatus('error')
-        setStatusMessage(submitErrorMessage)
-        return
-      }
-    } catch {
+    } catch (err) {
+      console.error('Submission error:', err)
       setStatus('error')
       setStatusMessage(submitErrorMessage)
       return
@@ -303,11 +309,9 @@ export default function Form() {
       <main className="inquiry-main">
         {/* Hero Section */}
         <header className="inquiry-hero">
-          {/* Academic grid texture */}
           <div className="absolute inset-0 academic-grid pointer-events-none" aria-hidden="true" />
 
           <div className="inquiry-container inquiry-hero-inner">
-            {/* Back link */}
             <Link to="/" className="inquiry-back-link">
               <ArrowLeft />
               {lang === 'hi' ? 'होम पर वापस जाएँ' : 'Back to Home'}

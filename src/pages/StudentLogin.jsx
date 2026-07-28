@@ -72,16 +72,19 @@ export default function StudentLogin() {
           phone: "", 
           linkedin: "", 
           resumeUrl: "",
+          profileCompleted: false,
           createdAt: serverTimestamp(), 
           updatedAt: serverTimestamp(),
         })
-        setStatusMessage("Registration successful. Redirecting to your dashboard...")
+        setStatusMessage("Registration successful! Redirecting to complete your profile form...")
+        setStatus("success")
+        setTimeout(() => navigate(email.trim().toLowerCase() === ADMIN_EMAIL ? "/admin" : "/student-form"), 700)
       } else {
         await signInWithEmailAndPassword(auth, email.trim().toLowerCase(), password)
         setStatusMessage("Login successful. Redirecting to your dashboard...")
+        setStatus("success")
+        setTimeout(() => navigate(email.trim().toLowerCase() === ADMIN_EMAIL ? "/admin" : "/dashboard"), 700)
       }
-      setStatus("success")
-      setTimeout(() => navigate(email.trim().toLowerCase() === ADMIN_EMAIL ? "/admin" : "/dashboard"), 700)
     } catch (error) {
       setStatus("error")
       setStatusMessage(error.message || `${mode === "register" ? "Registration" : "Login"} failed. Please try again.`)

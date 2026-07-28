@@ -5,6 +5,7 @@ import { GradientButton } from './ui/gradient-button'
 import { useLanguage } from '../contexts/LanguageContext'
 import { translations } from '../translations'
 import { supabase } from '../lib/supabase'
+import { NewsMarquee } from './news-marquee'
 
 function scrollTo(id) {
   document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
@@ -14,7 +15,7 @@ const visuallyHiddenTextStyle = {
   position: 'absolute',
   width: '1px',
   height: '1px',
-  padding: 0,
+  padding: 10,
   margin: '-1px',
   overflow: 'hidden',
   clip: 'rect(0, 0, 0, 0)',
@@ -24,7 +25,6 @@ const visuallyHiddenTextStyle = {
 
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
   const [studentDisplayName, setStudentDisplayName] = useState('')
   const navigate = useNavigate()
   const location = useLocation()
@@ -40,13 +40,6 @@ export function Navbar() {
     { label: t.links[5], type: 'route', value: '/team' },
     { label: t.links[6], type: 'route', value: '/contact-us' },
   ]
-
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 10)
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    handleScroll()
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
 
   useEffect(() => {
     if (!supabase) {
@@ -124,171 +117,171 @@ export function Navbar() {
   }
 
   return (
-    <header className={`navbar${scrolled ? ' navbar-scrolled' : ''}`}>
-      {/* Top utility bar — language toggle pinned to right */}
-      <div className="navbar-topbar">
-        <div className="lang-toggle" role="group" aria-label="Language toggle">
-          <button
-            className={`lang-toggle-btn${lang === 'en' ? ' lang-toggle-btn-active' : ''}`}
-            onClick={() => lang !== 'en' && toggleLang()}
-            title="English"
-          >A</button>
-          <button
-            className={`lang-toggle-btn${lang === 'hi' ? ' lang-toggle-btn-active' : ''}`}
-            onClick={() => lang !== 'hi' && toggleLang()}
-            title="हिंदी"
-          >अ</button>
-        </div>
-      </div>
-
-      <div className="navbar-header">
-
-        <div className="navbar-header-left">
-          <img
-            src="/images/newlogo.jpeg"
-            alt="SIET Panchkula Logo"
-            className="object-contain"
-          />
+    <>
+      {/* Institutional header — normal flow, scrolls away */}
+      <header className="navbar-header-banner">
+        {/* Top utility bar — language toggle */}
+        <div className="navbar-topbar">
+          <div className="lang-toggle" role="group" aria-label="Language toggle">
+            <button
+              className={`lang-toggle-btn${lang === 'en' ? ' lang-toggle-btn-active' : ''}`}
+              onClick={() => lang !== 'en' && toggleLang()}
+              title="English"
+            >A</button>
+            <button
+              className={`lang-toggle-btn${lang === 'hi' ? ' lang-toggle-btn-active' : ''}`}
+              onClick={() => lang !== 'hi' && toggleLang()}
+              title="हिंदी"
+            >अ</button>
+          </div>
         </div>
 
-        {/* CENTER TEXT */}
-        <div className="navbar-header-center">
-          {/* Hindi name */}
-          <p
-            className="navbar-header-title-hindi leading-tight"
-            style={{
-              fontFamily: 'var(--font-headline)',
-              fontWeight: '500',
-              color: 'var(--ink)',
-            }}
-          >
-            राज्य अभियांत्रिकी एवं प्रौद्योगिकी संस्थान, पंचकुला
-          </p>
+        <div className="navbar-header">
+          <div className="navbar-header-left">
+            <img
+              src="/images/newlogo.jpeg"
+              alt="SIET Panchkula Logo"
+              className="object-contain"
+            />
+          </div>
 
-          {/* English name — bolder, larger, tighter tracking for authority */}
-          <h1
-            className="navbar-header-title-english leading-tight"
-            style={{
-              fontFamily: 'var(--font-headline)',
-              fontWeight: '700',
-              letterSpacing: '0.05em',
-              lineHeight: '1.2',
-              color: 'var(--ink)',
-              textTransform: 'uppercase',
-            }}
-          >
-            State Institute of Engineering &amp; Technology, Panchkula
-          </h1>
+          <div className="navbar-header-center">
+            <p
+              className="navbar-header-title-hindi leading-tight"
+              style={{
+                fontFamily: 'var(--font-headline)',
+                fontWeight: '500',
+                color: 'var(--ink)',
+              }}
+            >
+              राज्य अभियांत्रिकी एवं प्रौद्योगिकी संस्थान, पंचकुला
+            </p>
+            <h1
+              className="navbar-header-title-english leading-tight"
+              style={{
+                fontFamily: 'var(--font-headline)',
+                fontWeight: '700',
+                letterSpacing: '0.05em',
+                lineHeight: '1.2',
+                color: 'var(--ink)',
+                textTransform: 'uppercase',
+              }}
+            >
+              State Institute of Engineering &amp; Technology, Panchkula
+            </h1>
+            <p
+              className="navbar-header-affiliation mt-1 hidden sm:block"
+              style={{ color: 'var(--muted-foreground)', textTransform: 'uppercase', letterSpacing: '0.1em' }}
+            >
+              {t.affiliation}
+            </p>
+          </div>
 
-          {/* Affiliation line */}
-          <p
-            className="navbar-header-affiliation mt-1 hidden sm:block"
-            style={{ color: 'var(--muted-foreground)', textTransform: 'uppercase', letterSpacing: '0.1em' }}
-          >
-            {t.affiliation}
-          </p>
+          <div className="navbar-header-right">
+            <img
+              src="/images/haryana-sarkar.png"
+              alt="Haryana Government Emblem"
+              className="object-contain"
+            />
+          </div>
         </div>
+      </header>
 
-        {/* RIGHT EMBLEM */}
-        <div className="navbar-header-right">
-          <img
-            src="/images/haryana-sarkar.png"
-            alt="Haryana Government Emblem"
-            className="object-contain"
-          />
-        </div>
-      </div>
-
-      {/* NAV BAR */}
+      {/* Sticky navigation bar — pins to top on scroll */}
       <nav className="navbar-nav">
-        <button type="button" className="md:hidden" onClick={() => navigate('/')}>
-          <span className="navbar-mobile-label">{t.mobileLabel}</span>
-        </button>
-        <div className="navbar-links">
-          {navLinks.map((link) => (
-            <a
-              key={link.label}
-              className="navbar-link"
-               href={getLinkHref(link)}
-               onClick={(event) => {
-                 event.preventDefault()
-                 navigateToLink(link)
-               }}
-            >
-              {link.label}
-            </a>
-          ))}
-        </div>
-        <div className="navbar-buttons">
-          <GradientButton className="px-5 py-2.5 text-sm" onClick={handleRecruiterClick}>{t.forRecruiters}</GradientButton>
-          {studentDisplayName ? (
-            <span
-              className="px-5 py-2.5 text-sm font-semibold"
-              style={{ color: 'var(--ink)' }}
-              title={`${t.loggedInAs} ${studentDisplayName}`}
-            >
-              <span style={visuallyHiddenTextStyle}>{t.loggedInAs} </span>
-              {studentDisplayName}
-            </span>
-          ) : (
-            <GradientButton variant="variant" className="px-5 py-2.5 text-sm" onClick={() => navigate('/login')}>{t.studentLogin}</GradientButton>
-          )}
-        </div>
-        <button
-          className="navbar-mobile-toggle"
-          onClick={() => setMobileOpen(!mobileOpen)}
-          aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
-        >
-          {mobileOpen ? <X className="h-6 w-6" style={{color:'var(--gold)'}} /> : <Menu className="h-6 w-6" style={{color:'var(--gold)'}} />}
-        </button>
-      </nav>
-
-      {/* Mobile dropdown menu */}
-      {mobileOpen && (
-        <div className="navbar-mobile-menu">
-          {navLinks.map((link) => (
-            <a
-              key={link.label}
-              className="navbar-mobile-menu-link"
-               href={getLinkHref(link)}
-               onClick={(event) => {
-                 event.preventDefault()
-                 navigateToLink(link)
-                 setMobileOpen(false)
-               }}
-            >
-              {link.label}
-            </a>
-          ))}
-          <div className="navbar-mobile-menu-actions">
-            <div className="lang-toggle" role="group" aria-label="Language toggle">
-              <button
-                className={`lang-toggle-btn${lang === 'en' ? ' lang-toggle-btn-active' : ''}`}
-                onClick={() => lang !== 'en' && toggleLang()}
-                title="English"
-              >A</button>
-              <button
-                className={`lang-toggle-btn${lang === 'hi' ? ' lang-toggle-btn-active' : ''}`}
-                onClick={() => lang !== 'hi' && toggleLang()}
-                title="हिंदी"
-              >अ</button>
-            </div>
-            <GradientButton className="w-full" onClick={() => { handleRecruiterClick(); setMobileOpen(false) }}>{t.forRecruiters}</GradientButton>
+        <div className="navbar-nav-inner">
+          <button type="button" className="md:hidden" onClick={() => navigate('/')}>
+            <span className="navbar-mobile-label">{t.mobileLabel}</span>
+          </button>
+          <div className="navbar-links">
+            {navLinks.map((link) => (
+              <a
+                key={link.label}
+                className="navbar-link"
+                href={getLinkHref(link)}
+                onClick={(event) => {
+                  event.preventDefault()
+                  navigateToLink(link)
+                }}
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
+          <div className="navbar-buttons">
+            <GradientButton className="px-5 py-2.5 text-sm" onClick={handleRecruiterClick}>{t.forRecruiters}</GradientButton>
             {studentDisplayName ? (
-              <div
-                className="w-full text-center py-2.5 font-semibold"
+              <span
+                className="px-5 py-2.5 text-sm font-semibold"
                 style={{ color: 'var(--ink)' }}
                 title={`${t.loggedInAs} ${studentDisplayName}`}
               >
                 <span style={visuallyHiddenTextStyle}>{t.loggedInAs} </span>
                 {studentDisplayName}
-              </div>
+              </span>
             ) : (
-              <GradientButton variant="variant" className="w-full" onClick={() => { navigate('/login'); setMobileOpen(false) }}>{t.studentLogin}</GradientButton>
+              <GradientButton variant="variant" className="px-5 py-2.5 text-sm" onClick={() => navigate('/login')}>{t.studentLogin}</GradientButton>
             )}
           </div>
+          <button
+            className="navbar-mobile-toggle"
+            onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+          >
+            {mobileOpen ? <X className="h-6 w-6" style={{ color: 'var(--gold)' }} /> : <Menu className="h-6 w-6" style={{ color: 'var(--gold)' }} />}
+          </button>
         </div>
-      )}
-    </header>
+
+        {/* Mobile dropdown menu */}
+        {mobileOpen && (
+          <div className="navbar-mobile-menu">
+            {navLinks.map((link) => (
+              <a
+                key={link.label}
+                className="navbar-mobile-menu-link"
+                href={getLinkHref(link)}
+                onClick={(event) => {
+                  event.preventDefault()
+                  navigateToLink(link)
+                  setMobileOpen(false)
+                }}
+              >
+                {link.label}
+              </a>
+            ))}
+            <div className="navbar-mobile-menu-actions">
+              <div className="lang-toggle" role="group" aria-label="Language toggle">
+                <button
+                  className={`lang-toggle-btn${lang === 'en' ? ' lang-toggle-btn-active' : ''}`}
+                  onClick={() => lang !== 'en' && toggleLang()}
+                  title="English"
+                >A</button>
+                <button
+                  className={`lang-toggle-btn${lang === 'hi' ? ' lang-toggle-btn-active' : ''}`}
+                  onClick={() => lang !== 'hi' && toggleLang()}
+                  title="हिंदी"
+                >अ</button>
+              </div>
+              <GradientButton className="w-full" onClick={() => { handleRecruiterClick(); setMobileOpen(false) }}>{t.forRecruiters}</GradientButton>
+              {studentDisplayName ? (
+                <div
+                  className="w-full text-center py-2.5 font-semibold"
+                  style={{ color: 'var(--ink)' }}
+                  title={`${t.loggedInAs} ${studentDisplayName}`}
+                >
+                  <span style={visuallyHiddenTextStyle}>{t.loggedInAs} </span>
+                  {studentDisplayName}
+                </div>
+              ) : (
+                <GradientButton variant="variant" className="w-full" onClick={() => { navigate('/login'); setMobileOpen(false) }}>{t.studentLogin}</GradientButton>
+              )}
+            </div>
+          </div>
+        )}
+      </nav>
+
+      {/* <NewsMarquee /> */}
+    </>
   )
 }
+

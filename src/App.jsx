@@ -1,4 +1,4 @@
-﻿import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from './lib/firebase'
 import { Routes, Route, useLocation, useNavigate } from 'react-router-dom'
@@ -13,8 +13,6 @@ import { GallerySection } from './components/gallery-section'
 import { CtaSection } from './components/cta-section'
 import { TeamSection } from './components/team-section'
 import { Footer } from './components/footer'
-// UpdatesPanel is kept for future use â€” import when needed:
-// import { UpdatesPanel } from './components/updates-panel'
 import StudentLogin from './pages/StudentLogin'
 import PdfViewer from './pages/PdfViewer'
 import PlacementBrochure from './pages/PlacementBrochure'
@@ -24,6 +22,7 @@ import CodeOfConduct from './pages/CodeOfConduct'
 import StudentDashboard from './pages/StudentDashboard'
 import StudentProfileForm from './pages/StudentProfileForm'
 import AdminDashboard from './pages/AdminDashboard'
+
 const ADMIN_EMAIL = 'vermaaadityaff123@gmail.com'
 
 function AdminGate() {
@@ -72,7 +71,7 @@ function Home() {
 
 function EventsPage() {
   return (
-    <main>
+    <main className="page-with-navbar-offset">
       <Navbar />
       <GallerySection />
       <Footer />
@@ -83,7 +82,7 @@ function EventsPage() {
 
 function CodeOfConductPage() {
   return (
-    <main>
+    <main className="page-with-navbar-offset">
       <Navbar />
       <CodeOfConduct />
       <Footer />
@@ -177,7 +176,6 @@ function LoadingScreen({ onFinished }) {
         <div style={{ position: 'absolute', bottom: 0, left: 0, width: '12px', height: '12px', borderBottom: '2px solid var(--gold)', borderLeft: '2px solid var(--gold)' }} />
         <div style={{ position: 'absolute', bottom: 0, right: 0, width: '12px', height: '12px', borderBottom: '2px solid var(--gold)', borderRight: '2px solid var(--gold)' }} />
 
-        {/* Transparent logo directly on card */}
         <div style={{ width: '90px', height: '90px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           <img src="/images/cleanersietlogo.png" alt="SIET Logo" style={{ height: '100%', width: 'auto', objectFit: 'contain' }} />
         </div>
@@ -187,7 +185,6 @@ function LoadingScreen({ onFinished }) {
           <p style={{ margin: '0.25rem 0 0 0', fontSize: '0.75rem', fontWeight: 'bold', textTransform: 'uppercase', color: 'var(--gold)', letterSpacing: '0.12em' }}>Training &amp; Placement Office</p>
         </div>
 
-        {/* Finer gold progress bar moved upward inside the card */}
         <div 
           style={{ 
             width: '100%', 
@@ -232,13 +229,10 @@ export default function App() {
         <Route path="/guidelines" element={<GuidelinesViewer />} />
         <Route path="/inquiry-form" element={<Form />} />
         <Route path="/dashboard" element={<StudentDashboard />} />
-                <Route path="/student/dashboard" element={<StudentDashboard />} />
+        <Route path="/student/dashboard" element={<StudentDashboard />} />
         <Route path="/student-form" element={<StudentProfileForm />} />
         <Route path="/admin" element={<AdminGate />} />
       </Routes>
     </>
   )
 }
-
-
-

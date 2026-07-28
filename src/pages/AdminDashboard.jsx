@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Download, Users, Activity, CheckCircle, Search, Trash2, ExternalLink, FileSpreadsheet, LogOut, Building2, Briefcase, Code, Filter, Mail, Phone, Calendar, Layers } from 'lucide-react'
+import { collection, getDocs, deleteDoc, doc, query, orderBy } from 'firebase/firestore'
+import { db, firebaseEnvError } from '../lib/firebase'
 import { supabase } from '../lib/supabase'
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from 'recharts'
 import * as XLSX from 'xlsx'
@@ -47,12 +49,74 @@ export default function AdminDashboard({ handleLogout }) {
     async function fetchData() {
       setLoading(true)
       try {
-        if (!supabase) throw new Error("Admin data service is not configured.")
+        let finalStudents = []
+        let finalInquiries = []
 
-        // 1. Fetch Students
-        const { data: studentData, error: studentError } = await supabase.from("student_profiles").select("*")
-        if (studentError) throw studentError
-        const finalStudents = studentData || []
+        // 1. Try fetching from Firebase Firestore
+        if (db) {
+          try {
+            const studentSnap = await getDocs(collection(db, "students"))
+            finalStudents = studentSnap.docs.map(d => {
+              const data = d.data()
+              return {
+                id: d.id,
+                full_name: data.fullName || data.full_name || 'N/A',
+                email: data.email || 'N/A',
+                mobile_number: data.mobile_number || data.phone || 'N/A',
+                roll_number: data.rollNumber || data.roll_number || 'N/A',
+                branch: data.branch || 'N/A',
+                cgpa: data.cgpa || 'N/A',
+                backlogs: data.backlogs || 'No backlogs',
+                verification_status: data.verification_status || data.status || 'seeking',
+                father_name: data.father_name || data.fatherName || '',
+                mother_name: data.mother_name || data.motherName || '',
+                skills: Array.isArray(data.skills) ? data.skills.join(', ') : data.skills || '',
+                linkedin_url: data.linkedin_url || data.linkedin || '',
+                github_url: data.github_url || data.github || '',
+                portfolio_url: data.portfolio_url || data.portfolio || '',
+                created_at: data.createdAt?.toDate ? data.createdAt.toDate() : data.created_at || null
+              }
+            })
+
+            const inquirySnap = await getDocs(collection(db, "recruitment_inquiries"))
+            finalInquiries = inquirySnap.docs.map(d => {
+              const data = d.data()
+              return {
+                id: d.id,
+                company_name: data.companyName || data.company_name || 'N/A',
+                website: data.website || '',
+                industry: data.industry || 'N/A',
+                company_size: data.companySize || data.company_size || 'N/A',
+                contact_name: data.contactName || data.contact_name || 'N/A',
+                designation: data.designation || 'N/A',
+                email: data.email || 'N/A',
+                phone: data.phone || 'N/A',
+                job_role: data.jobRole || data.job_role || 'N/A',
+                positions: data.positions || 0,
+                preferred_branches: data.preferredBranches || data.preferred_branches || [],
+                required_skills: data.requiredSkills || data.required_skills || [],
+                additional_info: data.additionalInfo || data.additional_info || '',
+                status: data.status || 'new',
+                created_at: data.createdAt?.toDate ? data.createdAt.toDate() : data.created_at || null
+              }
+            })
+          } catch (fsErr) {
+            console.warn("Firestore fetch notice:", fsErr)
+          }
+        }
+
+        // 2. Fallback to Supabase if empty & configured
+        if (finalStudents.length === 0 && finalInquiries.length === 0 && supabase) {
+          const { data: studentData } = await supabase.from("student_profiles").select("*")
+          if (studentData) finalStudents = studentData
+
+          const { data: inquiryData } = await supabase
+            .from("recruitment_inquiries")
+            .select("*")
+            .order("created_at", { ascending: false })
+          if (inquiryData) finalInquiries = inquiryData
+        }
+
         setStudents(finalStudents)
         setFilteredStudents(finalStudents)
 
@@ -62,16 +126,8 @@ export default function AdminDashboard({ handleLogout }) {
         const pending = finalStudents.filter(s => s.verification_status === "seeking" || !s.verification_status).length
         setStats({ total, placed, pending, eligible })
 
-        // 2. Fetch Company Recruitment Inquiries
-        const { data: inquiryData, error: inquiryError } = await supabase
-          .from("recruitment_inquiries")
-          .select("*")
-          .order("created_at", { ascending: false })
-
-        if (!inquiryError && inquiryData) {
-          setInquiries(inquiryData)
-          setFilteredInquiries(inquiryData)
-        }
+        setInquiries(finalInquiries)
+        setFilteredInquiries(finalInquiries)
       } catch (err) {
         setError(err.message || "Unable to load administrative data.")
       } finally {
@@ -123,9 +179,10 @@ export default function AdminDashboard({ handleLogout }) {
   const handleDeleteStudent = async (id) => {
     if (!window.confirm("Are you sure you want to delete this student profile?")) return
     try {
-      if (supabase) {
-        const { error: deleteError } = await supabase.from('student_profiles').delete().eq('id', id)
-        if (deleteError) throw deleteError
+      if (db) {
+        await deleteDoc(doc(db, "students", id))
+      } else if (supabase) {
+        await supabase.from('student_profiles').delete().eq('id', id)
       }
       setStudents(prev => prev.filter(s => s.id !== id))
     } catch (err) {
@@ -136,9 +193,10 @@ export default function AdminDashboard({ handleLogout }) {
   const handleDeleteInquiry = async (id) => {
     if (!window.confirm("Are you sure you want to delete this company recruitment inquiry?")) return
     try {
-      if (supabase) {
-        const { error: deleteError } = await supabase.from('recruitment_inquiries').delete().eq('id', id)
-        if (deleteError) throw deleteError
+      if (db) {
+        await deleteDoc(doc(db, "recruitment_inquiries", id))
+      } else if (supabase) {
+        await supabase.from('recruitment_inquiries').delete().eq('id', id)
       }
       setInquiries(prev => prev.filter(i => i.id !== id))
     } catch (err) {
