@@ -23,13 +23,13 @@ export const translations = {
     },
     message: {
       sectionLabel: 'Leadership',
-      sectionTitle: 'From the TPO Head\'s Desk',
+      sectionTitle: "From the T&P Officer's Desk",
       readMore: 'Read More',
       readLess: 'Read Less',
       members: [
         {
           name: 'Dr. Divya Singla',
-          designation: 'TPO Head, SIET Panchkula',
+          designation: 'T&P Officer, SIET Panchkula',
           message: [
             'The Training & Placement Office (TPO) is dedicated to facilitating the professional growth and career development of students by providing structured opportunities for internships and final placements. The office serves as a vital interface between the institution and industry, ensuring that students are well-prepared to meet evolving professional demands.',
             'We strongly encourage students to actively pursue internship opportunities, as they are integral to gaining practical exposure and enhancing employability. Students who secure internships are required to inform the Training & Placement Office for proper documentation and further institutional support.',
@@ -90,9 +90,12 @@ export const translations = {
       male: 'Male',
       female: 'Female',
       branches: [
-        'Computer Science & Engineering (Artificial Intelligence & Machine Learning)',
-        'Computer Science & Engineering (Cybersecurity)',
+        'Computer Science and Engineering (Core)',
+        'CSE (AI & ML)',
+        'CSE (Cyber Security)',
         'Robotics & Automation',
+        'Electrical Engineering',
+        'Electronics Engineering (VLSI Design)',
       ],
       recruiterHighlights: [
         {
@@ -197,8 +200,8 @@ export const translations = {
           location: 'Conference Room, SIET Panchkula',
         },
         {
-          title: 'GFG Expert Lecture',
-          subtitle: 'Founder & CEO Session — GeeksforGeeks',
+          title: 'GeeksForGeeks Expert Lecture',
+          subtitle: 'Expert Lecture from Sandeep Jain',
           description:
             'A special session personally led by Mr. Sandeep Jain, Founder and CEO of GeeksforGeeks, focused on coding excellence, problem-solving strategy, and placement readiness.',
           date: '2026',
@@ -211,6 +214,30 @@ export const translations = {
             'The industrial visit to Future Finders provided students with valuable exposure to real-world industry practices, bridging the gap between academic learning and practical application. Through interactive sessions and on-ground insights, students gained a deeper understanding of professional environments, career pathways, and emerging industry trends.',
           date: '2026',
           location: 'Future Finders',
+        },
+        {
+          title: 'Industrial Visit — SCL Mohali',
+          subtitle: 'Semiconductor Laboratory Visit',
+          description:
+            'An enriching industrial exposure visit to Semiconductor Laboratory (SCL) Mohali, giving students deep insights into microelectronics fabrication, VLSI design, cleanroom protocols, and advanced semiconductor manufacturing.',
+          date: '2026',
+          location: 'SCL Mohali',
+        },
+        {
+          title: 'CodeQuotient Technical Workshop',
+          subtitle: 'Software Engineering & Skill Upskilling',
+          description:
+            'Interactive technical workshop and software talent screening drive led by CodeQuotient, focusing on full-stack web development, algorithmic problem solving, and industry placement preparation.',
+          date: '2026',
+          location: 'SIET Panchkula',
+        },
+        {
+          title: 'Industrial Visit — Vi Softech',
+          subtitle: 'Corporate Tech Exposure',
+          description:
+            'Industrial visit and tech interactive session at Vi Softech, introducing students to enterprise software architectures, agile product development workflows, and modern cloud deployment environments.',
+          date: '2026',
+          location: 'Vi Softech',
         },
         {
           title: 'POSH Awareness Seminar',
@@ -263,7 +290,7 @@ export const translations = {
       sectionLabel: 'The People Behind It',
       sectionTitle: 'Training & Placement Committee',
       sectionSubtitle: 'Constituted under Memo No. SIET-PKL/2026/536, dated 02.02.2026',
-      tpoRole: 'TPO Head',
+      tpoRole: 'T&P Officer',
       designations: [
         'Student Placement Head',
         'Deputy Placement Head',
@@ -488,13 +515,13 @@ export const translations = {
     },
     message: {
       sectionLabel: 'नेतृत्व',
-      sectionTitle: 'TPO प्रमुख के डेस्क से',
+      sectionTitle: 'टी एवं पी अधिकारी के डेस्क से',
       readMore: 'और पढ़ें',
       readLess: 'कम पढ़ें',
       members: [
         {
           name: 'डॉ. दिव्या सिंगला',
-          designation: 'TPO प्रमुख, SIET पंचकुला',
+          designation: 'टी एवं पी अधिकारी, SIET पंचकुला',
           message: [
             'SIET का प्रशिक्षण एवं प्लेसमेंट सेल कैंपस से कॉर्पोरेट जगत में सहज परिवर्तन सुनिश्चित करने के लिए समर्पित है। हम पूरे शैक्षणिक वर्ष में उद्योग गेस्ट लेक्चर, मॉक इंटरव्यू सत्र, तकनीकी बूटकैंप और अभिक्षमता कार्यशालाएँ आयोजित करते हैं। अग्रणी संगठनों के साथ हमारी साझेदारी यह सुनिश्चित करती है कि हमारे छात्र न केवल नौकरी के लिए तैयार हों, बल्कि अपने-अपने क्षेत्रों में नेतृत्व करने में भी सक्षम हों। हम भर्तीकर्ताओं को आमंत्रित करते हैं कि वे हमारे छात्रों की असाधारण प्रतिभा का अनुभव करें।',
           ],
@@ -552,9 +579,12 @@ export const translations = {
       male: 'पुरुष',
       female: 'महिला',
       branches: [
-        'कंप्यूटर विज्ञान एवं अभियांत्रिकी (आर्टिफिशियल इंटेलिजेंस एवं मशीन लर्निंग)',
-        'कंप्यूटर विज्ञान एवं अभियांत्रिकी (साइबर सुरक्षा)',
-        'रोबोटिक्स एवं स्वचालन',
+        'कंप्यूटर विज्ञान और इंजीनियरिंग (कोर)',
+        'सीएसई (एआई और एमएल)',
+        'सीएसई (साइबर सुरक्षा)',
+        'रोबोटिक्स और ऑटोमेशन',
+        'इलेक्ट्रिकल इंजीनियरिंग',
+        'इलेक्ट्रॉनिक्स इंजीनियरिंग (वीएलएसआई डिजाइन)',
       ],
       recruiterHighlights: [
         {
@@ -659,8 +689,8 @@ export const translations = {
           location: 'कॉन्फ्रेंस रूम, SIET पंचकुला',
         },
         {
-          title: 'GFG विशेषज्ञ व्याख्यान',
-          subtitle: 'संस्थापक एवं CEO सत्र — GeeksforGeeks',
+          title: 'GeeksForGeeks विशेषज्ञ व्याख्यान',
+          subtitle: 'संदीप जैन द्वारा विशेषज्ञ व्याख्यान',
           description:
             'GeeksforGeeks के संस्थापक एवं CEO श्री संदीप जैन द्वारा व्यक्तिगत रूप से आयोजित विशेष सत्र, जिसमें कोडिंग उत्कृष्टता, समस्या-समाधान रणनीति और प्लेसमेंट तैयारी पर औपचारिक मार्गदर्शन दिया गया।',
           date: '2026',
@@ -673,6 +703,30 @@ export const translations = {
             'Future Finders की औद्योगिक यात्रा ने छात्रों को वास्तविक उद्योग प्रथाओं से मूल्यवान परिचय प्रदान किया, जिससे शैक्षणिक अध्ययन और व्यावहारिक अनुप्रयोग के बीच की खाई को पाटा गया। इंटरैक्टिव सत्रों और ऑन-ग्राउंड अनुभवों के माध्यम से, छात्रों ने व्यावसायिक वातावरण, करियर पथों और उभरते उद्योग रुझानों की गहरी समझ हासिल की।',
           date: '2026',
           location: 'Future Finders',
+        },
+        {
+          title: 'औद्योगिक भ्रमण — SCL मोहाली',
+          subtitle: 'सेमीकंडक्टर प्रयोगशाला भ्रमण',
+          description:
+            'सेमीकंडक्टर लेबोरेटरी (SCL) मोहाली का एक समृद्ध औद्योगिक भ्रमण, जिसने छात्रों को माइक्रोइलेक्ट्रॉनिक्स फैब्रिकेशन्स, VLSI डिज़ाइन, क्लीनरूम प्रोटोकॉल और उन्नत सेमीकंडक्टर निर्माण की गहरी जानकारी दी।',
+          date: '2026',
+          location: 'SCL मोहाली',
+        },
+        {
+          title: 'CodeQuotient तकनीकी कार्यशाला',
+          subtitle: 'सॉफ्टवेयर इंजीनियरिंग एवं कौशल उन्नयन',
+          description:
+            'CodeQuotient द्वारा आयोजित इंटरैक्टिव तकनीकी कार्यशाला और प्रतिभा स्क्रीनिंग ड्राइव, जिसमें फुल-स्टैक डेवलपमेंट, एल्गोरिदमिक समस्या समाधान और प्लेसमेंट तैयारी पर ध्यान केंद्रित किया गया।',
+          date: '2026',
+          location: 'SIET पंचकुला',
+        },
+        {
+          title: 'औद्योगिक भ्रमण — Vi Softech',
+          subtitle: 'कॉर्पोरेट टेक अनुभव',
+          description:
+            'Vi Softech में औद्योगिक भ्रमण और तकनीकी इंटरैक्टिव सत्र, जिसने छात्रों को एंटरप्राइज सॉफ्टवेयर आर्किटेक्चर, एजाइल प्रोडक्ट डेवलपमेंट वर्कफ़्लो और क्लाउड डिप्लॉयमेंट वातावरण से परिचित कराया।',
+          date: '2026',
+          location: 'Vi Softech',
         },
         {
           title: 'POSH जागरूकता सेमिनार',
@@ -726,7 +780,7 @@ export const translations = {
       sectionLabel: 'इसके पीछे के लोग',
       sectionTitle: 'प्रशिक्षण एवं प्लेसमेंट समिति',
       sectionSubtitle: 'ज्ञापन संख्या SIET-PKL/2026/536, दिनांक 02.02.2026 के अंतर्गत गठित',
-      tpoRole: 'TPO प्रमुख',
+      tpoRole: 'टी एवं पी अधिकारी',
       designations: [
         'छात्र प्लेसमेंट प्रमुख',
         'उप प्लेसमेंट प्रमुख',

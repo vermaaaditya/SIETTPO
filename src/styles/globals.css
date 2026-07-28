@@ -643,6 +643,8 @@ input:focus, textarea:focus, select:focus { outline: none; box-shadow: 0 0 0 2px
   color:var(--foreground);
   font-style:italic;
   margin:0 0 1em;
+  text-align:justify;
+  text-justify:inter-word;
 }
 .message-hero-text:last-of-type {
   margin-bottom:0;

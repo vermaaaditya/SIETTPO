@@ -41,11 +41,11 @@ const eventImages = [
     cat: 'Events',
     cover: '/images/gallery/gfg/gfg1.jpeg',
     images: [
-      { src: '/images/gallery/gfg/gfg1.jpeg', caption: 'GFG expert lecture session underway' },
-      { src: '/images/gallery/gfg/gfg2.jpeg', caption: 'Students attending the GFG session' },
+      { src: '/images/gallery/gfg/gfg1.jpeg', caption: 'GeeksForGeeks expert lecture session underway' },
+      { src: '/images/gallery/gfg/gfg2.jpeg', caption: 'Students attending the GeeksForGeeks session' },
       { src: '/images/gallery/gfg/gfg3.jpeg', caption: 'Hands-on guidance during the lecture' },
       { src: '/images/gallery/gfg/gfg4.jpeg', caption: 'Interactive Q&A with the expert speaker' },
-      { src: '/images/gallery/gfg/gfg5.jpeg', caption: 'Group moments from the GFG event' },
+      { src: '/images/gallery/gfg/gfg5.jpeg', caption: 'Group moments from the GeeksForGeeks event' },
     ],
   },
   {
@@ -56,6 +56,32 @@ const eventImages = [
       { src: '/images/gallery/Future Finders/FutureFinders2.jpeg', caption: 'Students actively engaging in an interactive session, gaining insights into industry practices and career opportunities.' },
       { src: '/images/gallery/Future Finders/FutureFinders3.jpeg', caption: 'A glimpse of students attentively participating and exploring real-world applications of their academic knowledge.' },
       { src: '/images/gallery/Future Finders/FutureFinders4.jpeg', caption: 'An engaging discussion session where students interacted with professionals to understand practical industry workflows.' },
+    ],
+  },
+  {
+    cat: 'Industrial Visit',
+    cover: '/images/gallery/SCL Mohali/SCL1.jpeg',
+    images: [
+      { src: '/images/gallery/SCL Mohali/SCL1.jpeg', caption: 'Students of SIET Panchkula at Semiconductor Laboratory (SCL) Mohali' },
+      { src: '/images/gallery/SCL Mohali/SCL2.jpeg', caption: 'Group picture showcasing student enthusiasm during the SCL Mohali industrial tour' },
+    ],
+  },
+  {
+    cat: 'Events',
+    cover: '/images/gallery/CodeQuotient/CQ1.jpeg',
+    images: [
+      { src: '/images/gallery/CodeQuotient/CQ1.jpeg', caption: 'CodeQuotient session underway with engineering students' },
+      { src: '/images/gallery/CodeQuotient/CQ2.jpeg', caption: 'Hands-on coding guidance during CodeQuotient workshop' },
+      { src: '/images/gallery/CodeQuotient/CQ3.jpeg', caption: 'Interactive discussion on software development careers' },
+    ],
+  },
+  {
+    cat: 'Industrial Visit',
+    cover: '/images/gallery/Vi Softech/VI1.jpeg',
+    images: [
+      { src: '/images/gallery/Vi Softech/VI1.jpeg', caption: 'Students visiting Vi Softech corporate facility' },
+      { src: '/images/gallery/Vi Softech/VI2.jpeg', caption: 'Tech interaction session with Vi Softech development team' },
+      { src: '/images/gallery/Vi Softech/VI3.jpeg', caption: 'Commemorative photo of SIET Panchkula students at Vi Softech' },
     ],
   },
   {
@@ -75,8 +101,9 @@ const eventImages = [
   },
   {
     cat: 'Placements',
-    cover: '/images/gallery/internship/internship2.jpeg',
+    cover: '/images/gallery/internship/Thumbnail.jpeg',
     images: [
+      { src: '/images/gallery/internship/Thumbnail.jpeg', caption: 'SIET Panchkula Internship & Placement Offer Rollout' },
       { src: '/images/gallery/internship/internship1.jpeg', caption: 'Student receiving internship offer letter' },
       { src: '/images/gallery/internship/internship2.jpeg', caption: 'Proud moment — internship letter in hand' },
       { src: '/images/gallery/internship/internship3.jpeg', caption: 'Student with internship appointment letter' },

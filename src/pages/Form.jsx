@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { ArrowLeft, AlertCircle, CheckCircle2 } from 'lucide-react'
+import { ArrowLeft, AlertCircle, CheckCircle2, Plus, X } from 'lucide-react'
 import { Navbar } from '../components/navbar'
 import { Footer } from '../components/footer'
 import { useLanguage } from '../contexts/LanguageContext'
@@ -19,26 +19,44 @@ const initialFormState = {
   role: '',
   positions: '',
   preferredBranches: [],
+  requiredSkills: [],
+  skillsInput: '',
   additionalInfo: '',
   consent: false,
 }
 
 const HTTP_PROTOCOL_PATTERN = /^https?:\/\//i
+
 const BRANCH_OPTIONS = [
   {
+    key: 'cse_core',
+    value: 'Computer Science and Engineering (Core)',
+    labels: { en: 'Computer Science & Engg (Core)', hi: 'कंप्यूटर साइंस एंड इंजीनियरिंग (कोर)' },
+  },
+  {
     key: 'cse_ai_ml',
-    value: 'CS (AI & ML)',
-    labels: { en: 'CS (AI & ML)', hi: 'CS (AI & ML)' },
+    value: 'CSE (AI & ML)',
+    labels: { en: 'CSE (AI & ML)', hi: 'सीएसई (एआई और एमएल)' },
   },
   {
     key: 'cse_cyber_security',
-    value: 'CS (Cyber Security)',
-    labels: { en: 'CS (Cyber Security)', hi: 'CS (साइबर सुरक्षा)' },
+    value: 'CSE (Cyber Security)',
+    labels: { en: 'CSE (Cyber Security)', hi: 'सीएसई (साइबर सुरक्षा)' },
   },
   {
     key: 'robotics_automation',
     value: 'Robotics & Automation',
-    labels: { en: 'Robotics & Automation', hi: 'रोबोटिक्स' },
+    labels: { en: 'Robotics & Automation', hi: 'रोबोटिक्स एवं ऑटोमेशन' },
+  },
+  {
+    key: 'electrical',
+    value: 'Electrical Engineering',
+    labels: { en: 'Electrical Engineering', hi: 'इलेक्ट्रिकल इंजीनियरिंग' },
+  },
+  {
+    key: 'vlsi',
+    value: 'Electronics Engineering (VLSI Design)',
+    labels: { en: 'Electronics Engg (VLSI Design)', hi: 'इलेक्ट्रॉनिक्स (वीएलएसआई डिजाइन)' },
   },
   {
     key: 'all_branches',
@@ -107,6 +125,45 @@ export default function Form() {
       setStatus(null)
       setStatusMessage('')
     }
+  }
+
+  const handleAddSkill = (e) => {
+    if ((e.key === 'Enter' || e.key === ',') && formData.skillsInput.trim()) {
+      e.preventDefault()
+      const skill = formData.skillsInput.trim().replace(/,$/, '')
+      if (skill && !formData.requiredSkills.includes(skill)) {
+        setFormData(prev => ({
+          ...prev,
+          requiredSkills: [...prev.requiredSkills, skill],
+          skillsInput: ''
+        }))
+      } else {
+        setFormData(prev => ({ ...prev, skillsInput: '' }))
+      }
+    }
+  }
+
+  const handleAddSkillBtn = (e) => {
+    e.preventDefault()
+    if (formData.skillsInput.trim()) {
+      const skill = formData.skillsInput.trim().replace(/,$/, '')
+      if (skill && !formData.requiredSkills.includes(skill)) {
+        setFormData(prev => ({
+          ...prev,
+          requiredSkills: [...prev.requiredSkills, skill],
+          skillsInput: ''
+        }))
+      } else {
+        setFormData(prev => ({ ...prev, skillsInput: '' }))
+      }
+    }
+  }
+
+  const handleRemoveSkill = (skillToRemove) => {
+    setFormData(prev => ({
+      ...prev,
+      requiredSkills: prev.requiredSkills.filter(s => s !== skillToRemove)
+    }))
   }
 
   const handleSubmit = async (e) => {
@@ -183,6 +240,14 @@ export default function Form() {
       return
     }
 
+    let additionalInfoCombined = formData.additionalInfo.trim()
+    if (formData.requiredSkills.length > 0) {
+      const skillsText = `Required Skills / Stack: ${formData.requiredSkills.join(', ')}`
+      additionalInfoCombined = additionalInfoCombined
+        ? `${additionalInfoCombined}\n\n${skillsText}`
+        : skillsText
+    }
+
     const payload = {
       company_name: formData.companyName.trim(),
       website: websiteValue || null,
@@ -195,7 +260,8 @@ export default function Form() {
       job_role: formData.role.trim(),
       positions: positionsValue,
       preferred_branches: preferredBranches,
-      additional_info: formData.additionalInfo.trim() || null,
+      required_skills: formData.requiredSkills,
+      additional_info: additionalInfoCombined || null,
       consent: formData.consent,
     }
     const submitErrorMessage = lang === 'hi'
@@ -203,7 +269,14 @@ export default function Form() {
       : 'Unable to submit the form. Please try again.'
 
     try {
-      const { error } = await supabase.from('recruitment_inquiries').insert(payload)
+      let { error } = await supabase.from('recruitment_inquiries').insert(payload)
+
+      // Fallback if required_skills column is not present in Supabase table schema
+      if (error && error.message && error.message.includes('required_skills')) {
+        delete payload.required_skills
+        const retry = await supabase.from('recruitment_inquiries').insert(payload)
+        error = retry.error
+      }
 
       if (error) {
         setStatus('error')
@@ -490,13 +563,99 @@ export default function Form() {
                     />
                   </div>
                 </div>
+
+                {/* Skills Required Section */}
+                <div className="inquiry-field">
+                  <label className="inquiry-label" htmlFor="skillsInput">
+                    {lang === 'hi' ? 'आवश्यक कौशल एवं स्टैक' : 'Required Skills & Tech Stack'}
+                  </label>
+                  <div style={{ display: 'flex', gap: '0.5rem', width: '100%' }}>
+                    <input
+                      id="skillsInput"
+                      className="inquiry-input"
+                      placeholder={lang === 'hi' ? 'कौशल टाइप करें और Enter या Comma दबाएं (उदा. React, Python, AWS)' : 'Type skill & press Enter or Comma (e.g. React, Python, AWS)'}
+                      type="text"
+                      name="skillsInput"
+                      value={formData.skillsInput}
+                      onChange={(e) => setFormData(prev => ({ ...prev, skillsInput: e.target.value }))}
+                      onKeyDown={handleAddSkill}
+                    />
+                    <button
+                      type="button"
+                      onClick={handleAddSkillBtn}
+                      style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '0.35rem',
+                        padding: '0 1.25rem',
+                        background: 'var(--gold)',
+                        color: 'var(--ink)',
+                        border: 'none',
+                        borderRadius: '0.125rem',
+                        fontWeight: '700',
+                        fontSize: '0.8rem',
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.05em',
+                        cursor: 'pointer',
+                        whiteSpace: 'nowrap'
+                      }}
+                    >
+                      <Plus style={{ width: '1rem', height: '1rem' }} />
+                      {lang === 'hi' ? 'जोड़ें' : 'Add'}
+                    </button>
+                  </div>
+
+                  {formData.requiredSkills.length > 0 && (
+                    <div className="skill-chips" style={{ marginTop: '0.75rem', marginBottom: '0.25rem' }}>
+                      {formData.requiredSkills.map((skill) => (
+                        <button
+                          type="button"
+                          key={skill}
+                          onClick={() => handleRemoveSkill(skill)}
+                          title="Click to remove"
+                          style={{
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '0.35rem',
+                            padding: '0.45rem 0.85rem',
+                            border: '1px solid rgba(201,146,42,0.4)',
+                            background: 'rgba(201,146,42,0.08)',
+                            color: 'var(--ink)',
+                            fontSize: '0.82rem',
+                            fontWeight: '600',
+                            borderRadius: '4px',
+                            cursor: 'pointer',
+                            transition: 'all 0.2s ease'
+                          }}
+                        >
+                          <span>{skill}</span>
+                          <X style={{ width: '0.85rem', height: '0.85rem', color: '#dc2626' }} />
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
                 <fieldset className="inquiry-field inquiry-field-branches border-0 m-0 p-0">
-                  <legend className="inquiry-label" id="preferredBranchesLabel">
+                  <legend className="inquiry-label" id="preferredBranchesLabel" style={{ marginBottom: '0.6rem' }}>
                     {lang === 'hi' ? 'इच्छित शाखाएँ' : 'Preferred Branches'}
                   </legend>
-                  <div className="inquiry-branch-grid">
+                  <div className="inquiry-branch-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '0.65rem' }}>
                     {BRANCH_OPTIONS.map((branchOption) => (
-                      <label key={branchOption.key} className="inquiry-branch-option" htmlFor={`preferredBranch-${branchOption.key}`}>
+                      <label 
+                        key={branchOption.key} 
+                        className="inquiry-branch-option" 
+                        htmlFor={`preferredBranch-${branchOption.key}`}
+                        style={{
+                          width: '100%',
+                          boxSizing: 'border-box',
+                          padding: '0.6rem 0.85rem',
+                          borderRadius: '4px',
+                          border: formData.preferredBranches.includes(branchOption.key) ? '1px solid var(--gold)' : '1px solid rgba(10,22,40,0.12)',
+                          background: formData.preferredBranches.includes(branchOption.key) ? 'rgba(201,146,42,0.08)' : 'var(--surface-container-low)',
+                          transition: 'all 0.2s ease'
+                        }}
+                      >
                         <input
                           id={`preferredBranch-${branchOption.key}`}
                           type="checkbox"
@@ -506,7 +665,9 @@ export default function Form() {
                           checked={formData.preferredBranches.includes(branchOption.key)}
                           onChange={handleChange}
                         />
-                        {branchOption.labels[lang]}
+                        <span style={{ fontWeight: formData.preferredBranches.includes(branchOption.key) ? '700' : '500' }}>
+                          {branchOption.labels[lang]}
+                        </span>
                       </label>
                     ))}
                   </div>
