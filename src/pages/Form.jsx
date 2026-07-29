@@ -7,7 +7,6 @@ import { Footer } from '../components/footer'
 import { useLanguage } from '../contexts/LanguageContext'
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore'
 import { db, firebaseEnvError } from '../lib/firebase'
-import { supabase } from '../lib/supabase'
 
 const initialFormState = {
   companyName: '',
@@ -171,7 +170,7 @@ export default function Form() {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    if (!db && !supabase) {
+    if (!db) {
       setStatus('error')
       setStatusMessage(firebaseEnvError || (lang === 'hi' ? 'डेटाबेस सेवा उपलब्ध नहीं है।' : 'Database service is unavailable.'))
       return
@@ -280,14 +279,10 @@ export default function Form() {
       : 'Unable to submit the form. Please try again.'
 
     try {
-      if (db) {
-        await addDoc(collection(db, 'recruitment_inquiries'), {
-          ...payload,
-          createdAt: serverTimestamp()
-        })
-      } else if (supabase) {
-        await supabase.from('recruitment_inquiries').insert(payload)
-      }
+      await addDoc(collection(db, 'recruitment_inquiries'), {
+        ...payload,
+        createdAt: serverTimestamp()
+      })
     } catch (err) {
       console.error('Submission error:', err)
       setStatus('error')

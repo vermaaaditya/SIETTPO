@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react'
-import { Download, Users, Activity, CheckCircle, Search, Trash2, ExternalLink, FileSpreadsheet, LogOut, Building2, Briefcase, Code, Filter, Mail, Phone, Calendar, Layers } from 'lucide-react'
-import { collection, getDocs, deleteDoc, doc, query, orderBy } from 'firebase/firestore'
+import { Download, Users, Activity, CheckCircle, Search, Trash2, ExternalLink, FileSpreadsheet, LogOut, Building2, Briefcase, Code, Filter, Mail, Phone, Calendar, Layers, Eye, FileText, ImagePlus, X, ShieldCheck, FileCheck } from 'lucide-react'
+import { collection, getDocs, deleteDoc, updateDoc, doc, query, orderBy, serverTimestamp } from 'firebase/firestore'
 import { db, firebaseEnvError } from '../lib/firebase'
-import { supabase } from '../lib/supabase'
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from 'recharts'
 import * as XLSX from 'xlsx'
 
@@ -19,6 +18,8 @@ export default function AdminDashboard({ handleLogout }) {
   const [searchTerm, setSearchTerm] = useState("")
   const [branchFilter, setBranchFilter] = useState("")
   const [stats, setStats] = useState({ total: 0, placed: 0, pending: 0, eligible: 0 })
+  const [inspectingStudent, setInspectingStudent] = useState(null)
+  const [vaultDocuments, setVaultDocuments] = useState([])
 
   // Company Inquiries state
   const [inquiries, setInquiries] = useState([])
@@ -62,7 +63,7 @@ export default function AdminDashboard({ handleLogout }) {
                 id: d.id,
                 full_name: data.fullName || data.full_name || 'N/A',
                 email: data.email || 'N/A',
-                mobile_number: data.mobile_number || data.phone || 'N/A',
+                mobile_number: data.mobile_number || data.phone || data.mobile || 'N/A',
                 roll_number: data.rollNumber || data.roll_number || 'N/A',
                 branch: data.branch || 'N/A',
                 cgpa: data.cgpa || 'N/A',
@@ -74,6 +75,14 @@ export default function AdminDashboard({ handleLogout }) {
                 linkedin_url: data.linkedin_url || data.linkedin || '',
                 github_url: data.github_url || data.github || '',
                 portfolio_url: data.portfolio_url || data.portfolio || '',
+                resume_url: data.resumeUrl || data.resume_url || data.resume || '',
+                marksheet_url: data.marksheetUrl || data.marksheet_url || '',
+                photo_url: data.photoUrl || data.photo_url || data.photo || '',
+                personal_email: data.personalEmail || data.personal_email || '',
+                address: data.address || '',
+                percentage_10: data.percentage10 || data.percentage_10 || '',
+                percentage_12: data.percentage12 || data.percentage_12 || '',
+                graduation_year: data.graduationYear || data.passing_year || data.batch || '',
                 created_at: data.createdAt?.toDate ? data.createdAt.toDate() : data.created_at || null
               }
             })
@@ -100,21 +109,17 @@ export default function AdminDashboard({ handleLogout }) {
                 created_at: data.createdAt?.toDate ? data.createdAt.toDate() : data.created_at || null
               }
             })
+
+            try {
+              const vaultSnap = await getDocs(collection(db, "documents"))
+              setVaultDocuments(vaultSnap.docs.map(vDoc => ({ id: vDoc.id, ...vDoc.data() })))
+            } catch (vErr) {
+              console.warn("Vault documents fetch notice:", vErr)
+            }
           } catch (fsErr) {
-            console.warn("Firestore fetch notice:", fsErr)
+            console.error("Firestore admin fetch error:", fsErr)
+            setError(fsErr.message || "Failed to fetch records. Please check your Firestore security rules.")
           }
-        }
-
-        // 2. Fallback to Supabase if empty & configured
-        if (finalStudents.length === 0 && finalInquiries.length === 0 && supabase) {
-          const { data: studentData } = await supabase.from("student_profiles").select("*")
-          if (studentData) finalStudents = studentData
-
-          const { data: inquiryData } = await supabase
-            .from("recruitment_inquiries")
-            .select("*")
-            .order("created_at", { ascending: false })
-          if (inquiryData) finalInquiries = inquiryData
         }
 
         setStudents(finalStudents)
@@ -176,13 +181,29 @@ export default function AdminDashboard({ handleLogout }) {
     setFilteredInquiries(result)
   }, [inquirySearchTerm, industryFilter, inquiries])
 
+  const handleUpdateStudentStatus = async (studentId, newStatus) => {
+    try {
+      if (db) {
+        await updateDoc(doc(db, "students", studentId), {
+          verification_status: newStatus,
+          status: newStatus,
+          updatedAt: serverTimestamp()
+        })
+      }
+      setStudents(prev => prev.map(s => s.id === studentId ? { ...s, verification_status: newStatus } : s))
+      if (inspectingStudent && inspectingStudent.id === studentId) {
+        setInspectingStudent(prev => ({ ...prev, verification_status: newStatus }))
+      }
+    } catch (err) {
+      alert("Could not update status: " + err.message)
+    }
+  }
+
   const handleDeleteStudent = async (id) => {
     if (!window.confirm("Are you sure you want to delete this student profile?")) return
     try {
       if (db) {
         await deleteDoc(doc(db, "students", id))
-      } else if (supabase) {
-        await supabase.from('student_profiles').delete().eq('id', id)
       }
       setStudents(prev => prev.filter(s => s.id !== id))
     } catch (err) {
@@ -195,8 +216,6 @@ export default function AdminDashboard({ handleLogout }) {
     try {
       if (db) {
         await deleteDoc(doc(db, "recruitment_inquiries", id))
-      } else if (supabase) {
-        await supabase.from('recruitment_inquiries').delete().eq('id', id)
       }
       setInquiries(prev => prev.filter(i => i.id !== id))
     } catch (err) {
@@ -651,13 +670,13 @@ export default function AdminDashboard({ handleLogout }) {
                     <table className="db-table">
                       <thead>
                         <tr>
-                          <th className="db-th">Roll No.</th>
-                          <th className="db-th">Candidate</th>
-                          <th className="db-th">Contact Info</th>
-                          <th className="db-th">Academic Branch</th>
-                          <th className="db-th">CGPA / Backlogs</th>
-                          <th className="db-th">Status</th>
-                          <th className="db-th" style={{ textAlign: 'right' }}>Actions</th>
+                          <th className="db-th" style={{ minWidth: '110px' }}>Roll No.</th>
+                          <th className="db-th" style={{ minWidth: '150px' }}>Candidate</th>
+                          <th className="db-th" style={{ minWidth: '190px' }}>Contact Info</th>
+                          <th className="db-th" style={{ minWidth: '160px' }}>Academic Branch</th>
+                          <th className="db-th" style={{ minWidth: '120px' }}>CGPA / Backlogs</th>
+                          <th className="db-th" style={{ minWidth: '110px' }}>Status</th>
+                          <th className="db-th" style={{ textAlign: 'right', minWidth: '230px', whiteSpace: 'nowrap' }}>Actions</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -687,9 +706,9 @@ export default function AdminDashboard({ handleLogout }) {
                                     </span>
                                   </div>
                                 </td>
-                                <td className="db-td">
+                                <td className="db-td" style={{ wordBreak: 'break-all' }}>
                                   <div style={{ display: 'flex', flexDirection: 'column', fontSize: '0.8rem' }}>
-                                    <span style={{ display: 'block' }}>{student.email || 'N/A'}</span>
+                                    <span style={{ display: 'block', wordBreak: 'break-all', fontWeight: '600' }}>{student.email || 'N/A'}</span>
                                     <span style={{ color: 'var(--muted-foreground)', display: 'block', marginTop: '0.1rem' }}>{student.mobile_number || 'N/A'}</span>
                                   </div>
                                 </td>
@@ -707,10 +726,24 @@ export default function AdminDashboard({ handleLogout }) {
                                     {label}
                                   </span>
                                 </td>
-                                <td className="db-td" style={{ textAlign: 'right' }}>
-                                  <div className="db-actions">
+                                <td className="db-td" style={{ textAlign: 'right', whiteSpace: 'nowrap' }}>
+                                  <div className="db-actions" style={{ flexWrap: 'nowrap', justifyContent: 'flex-end' }}>
+                                    <button
+                                      type="button"
+                                      onClick={() => setInspectingStudent(student)}
+                                      className="db-action-btn"
+                                      style={{ background: 'var(--ink)', color: 'var(--gold)', borderColor: 'var(--gold)', gap: '0.4rem', padding: '0.4rem 0.75rem', fontSize: '0.75rem', fontWeight: '800', whiteSpace: 'nowrap', flexShrink: 0 }}
+                                      title="Inspect Student Documents & Profile"
+                                    >
+                                      <Eye style={{ width: '0.88rem', height: '0.88rem', flexShrink: 0 }} /> Inspect Files
+                                    </button>
+                                    {student.resume_url && (
+                                      <a href={student.resume_url} target="_blank" rel="noopener noreferrer" className="db-action-btn" title="View CV / Resume">
+                                        <FileText style={{ width: '0.875rem', height: '0.875rem', color: 'var(--gold)' }} />
+                                      </a>
+                                    )}
                                     {student.linkedin_url && (
-                                      <a href={student.linkedin_url} target="_blank" rel="noopener noreferrer" className="db-action-btn" title="View Profile">
+                                      <a href={student.linkedin_url} target="_blank" rel="noopener noreferrer" className="db-action-btn" title="View LinkedIn">
                                         <ExternalLink style={{ width: '0.875rem', height: '0.875rem' }} />
                                       </a>
                                     )}
@@ -1077,6 +1110,226 @@ export default function AdminDashboard({ handleLogout }) {
         )}
 
       </main>
+
+      {/* DOCUMENT INSPECTION MODAL */}
+      {inspectingStudent && (
+        <div 
+          style={{
+            position: 'fixed',
+            inset: 0,
+            zIndex: 9999,
+            background: 'rgba(10,22,40,0.75)',
+            backdropFilter: 'blur(6px)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '1.5rem'
+          }}
+          onClick={() => setInspectingStudent(null)}
+        >
+          <div 
+            style={{
+              background: 'var(--surface-container-lowest)',
+              border: '1px solid rgba(201,146,42,0.35)',
+              borderRadius: '8px',
+              maxWidth: '850px',
+              width: '100%',
+              maxHeight: '90vh',
+              overflowY: 'auto',
+              padding: '2rem',
+              boxShadow: '0 20px 50px rgba(10,22,40,0.35)',
+              position: 'relative'
+            }}
+            onClick={e => e.stopPropagation()}
+          >
+            {/* Modal Header */}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', borderBottom: '1px solid rgba(10,22,40,0.1)', paddingBottom: '1.25rem', marginBottom: '1.5rem', gap: '1rem', flexWrap: 'wrap' }}>
+              <div style={{ display: 'flex', gap: '1.25rem', alignItems: 'center' }}>
+                {inspectingStudent.photo_url ? (
+                  <img 
+                    src={inspectingStudent.photo_url} 
+                    alt={inspectingStudent.full_name} 
+                    style={{ width: '72px', height: '72px', borderRadius: '6px', objectFit: 'cover', border: '2px solid var(--gold)', boxShadow: '0 4px 12px rgba(10,22,40,0.15)' }} 
+                  />
+                ) : (
+                  <div style={{ width: '72px', height: '72px', borderRadius: '6px', background: 'var(--ink)', color: 'var(--gold)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: '800', fontSize: '1.65rem' }}>
+                    {inspectingStudent.full_name?.charAt(0) || 'S'}
+                  </div>
+                )}
+                <div>
+                  <h2 style={{ fontFamily: 'var(--font-headline)', fontSize: '1.5rem', margin: 0, color: 'var(--ink)' }}>{inspectingStudent.full_name}</h2>
+                  <p style={{ margin: '0.2rem 0 0', fontSize: '0.8rem', fontWeight: '700', color: 'var(--gold)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+                    Roll: {inspectingStudent.roll_number} · {inspectingStudent.branch}
+                  </p>
+                  <p style={{ margin: '0.2rem 0 0', fontSize: '0.75rem', color: 'var(--muted-foreground)' }}>
+                    F: {inspectingStudent.father_name || 'N/A'} · M: {inspectingStudent.mother_name || 'N/A'}
+                  </p>
+                </div>
+              </div>
+
+              <button 
+                type="button"
+                onClick={() => setInspectingStudent(null)}
+                style={{ background: 'transparent', border: 'none', cursor: 'pointer', padding: '0.5rem', color: 'var(--muted-foreground)' }}
+              >
+                <X size={22} />
+              </button>
+            </div>
+
+            {/* Profile Metrics Grid */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(170px, 1fr))', gap: '1rem', marginBottom: '1.75rem' }}>
+              <div style={{ padding: '0.85rem 1rem', background: 'var(--surface-container-low)', borderLeft: '3px solid var(--gold)', borderRadius: '4px' }}>
+                <span style={{ fontSize: '0.68rem', fontWeight: '700', textTransform: 'uppercase', color: 'var(--muted-foreground)', display: 'block' }}>B.Tech CGPA</span>
+                <strong style={{ fontSize: '1.15rem', color: 'var(--ink)' }}>{inspectingStudent.cgpa || 'N/A'}</strong>
+              </div>
+              <div style={{ padding: '0.85rem 1rem', background: 'var(--surface-container-low)', borderLeft: '3px solid var(--ink)', borderRadius: '4px' }}>
+                <span style={{ fontSize: '0.68rem', fontWeight: '700', textTransform: 'uppercase', color: 'var(--muted-foreground)', display: 'block' }}>10th / 12th %</span>
+                <strong style={{ fontSize: '0.95rem', color: 'var(--ink)' }}>{inspectingStudent.percentage_10 ? `${inspectingStudent.percentage_10}%` : 'N/A'} / {inspectingStudent.percentage_12 ? `${inspectingStudent.percentage_12}%` : 'N/A'}</strong>
+              </div>
+              <div style={{ padding: '0.85rem 1rem', background: 'var(--surface-container-low)', borderLeft: '3px solid #16a34a', borderRadius: '4px' }}>
+                <span style={{ fontSize: '0.68rem', fontWeight: '700', textTransform: 'uppercase', color: 'var(--muted-foreground)', display: 'block' }}>Backlogs</span>
+                <strong style={{ fontSize: '0.95rem', color: inspectingStudent.backlogs === 'No backlogs' ? '#16a34a' : '#dc2626' }}>{inspectingStudent.backlogs || 'No backlogs'}</strong>
+              </div>
+              <div style={{ padding: '0.85rem 1rem', background: 'var(--surface-container-low)', borderLeft: '3px solid #3b82f6', borderRadius: '4px', overflow: 'hidden' }}>
+                <span style={{ fontSize: '0.68rem', fontWeight: '700', textTransform: 'uppercase', color: 'var(--muted-foreground)', display: 'block' }}>Mobile & Email</span>
+                <strong style={{ fontSize: '0.8rem', color: 'var(--ink)', display: 'block' }}>{inspectingStudent.mobile_number}</strong>
+                <span style={{ fontSize: '0.7rem', color: 'var(--muted-foreground)', display: 'block', wordBreak: 'break-all', overflowWrap: 'anywhere' }}>{inspectingStudent.email}</span>
+              </div>
+            </div>
+
+            {/* UPLOADED DOCUMENTS & FILES SECTION */}
+            <div style={{ marginBottom: '1.75rem' }}>
+              <h3 style={{ fontFamily: 'var(--font-headline)', fontSize: '1.15rem', color: 'var(--ink)', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <FileText size={18} style={{ color: 'var(--gold)' }} />
+                Uploaded Student Files & Transcripts
+              </h3>
+
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(230px, 1fr))', gap: '1rem' }}>
+                {/* Resume Card */}
+                <div style={{ padding: '1rem', border: '1px solid rgba(10,22,40,0.12)', borderRadius: '6px', background: inspectingStudent.resume_url ? 'rgba(201,146,42,0.06)' : 'var(--surface-container-low)' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
+                    <strong style={{ fontSize: '0.85rem', color: 'var(--ink)' }}>CV / Resume (PDF)</strong>
+                    {inspectingStudent.resume_url ? <CheckCircle style={{ color: '#16a34a', width: '16px', height: '16px' }} /> : <span style={{ fontSize: '0.7rem', color: '#dc2626' }}>Not uploaded</span>}
+                  </div>
+                  {inspectingStudent.resume_url ? (
+                    <a 
+                      href={inspectingStudent.resume_url} 
+                      target="_blank" 
+                      rel="noreferrer"
+                      style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', padding: '0.45rem 0.85rem', background: 'var(--gold)', color: 'var(--ink)', fontWeight: '800', fontSize: '0.78rem', borderRadius: '4px', textDecoration: 'none', marginTop: '0.35rem' }}
+                    >
+                      <ExternalLink size={14} /> Open & Download CV
+                    </a>
+                  ) : (
+                    <p style={{ margin: 0, fontSize: '0.75rem', color: 'var(--muted-foreground)' }}>No resume uploaded yet.</p>
+                  )}
+                </div>
+
+                {/* Marksheet Card */}
+                <div style={{ padding: '1rem', border: '1px solid rgba(10,22,40,0.12)', borderRadius: '6px', background: inspectingStudent.marksheet_url ? 'rgba(201,146,42,0.06)' : 'var(--surface-container-low)' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
+                    <strong style={{ fontSize: '0.85rem', color: 'var(--ink)' }}>Latest Marksheet</strong>
+                    {inspectingStudent.marksheet_url ? <CheckCircle style={{ color: '#16a34a', width: '16px', height: '16px' }} /> : <span style={{ fontSize: '0.7rem', color: '#dc2626' }}>Not uploaded</span>}
+                  </div>
+                  {inspectingStudent.marksheet_url ? (
+                    <a 
+                      href={inspectingStudent.marksheet_url} 
+                      target="_blank" 
+                      rel="noreferrer"
+                      style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', padding: '0.45rem 0.85rem', background: 'var(--ink)', color: 'var(--parchment)', fontWeight: '800', fontSize: '0.78rem', borderRadius: '4px', textDecoration: 'none', marginTop: '0.35rem' }}
+                    >
+                      <ExternalLink size={14} /> View Marksheet
+                    </a>
+                  ) : (
+                    <p style={{ margin: 0, fontSize: '0.75rem', color: 'var(--muted-foreground)' }}>No marksheet uploaded yet.</p>
+                  )}
+                </div>
+
+                {/* Photo Card */}
+                <div style={{ padding: '1rem', border: '1px solid rgba(10,22,40,0.12)', borderRadius: '6px', background: inspectingStudent.photo_url ? 'rgba(201,146,42,0.06)' : 'var(--surface-container-low)' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
+                    <strong style={{ fontSize: '0.85rem', color: 'var(--ink)' }}>Professional Photo</strong>
+                    {inspectingStudent.photo_url ? <CheckCircle style={{ color: '#16a34a', width: '16px', height: '16px' }} /> : <span style={{ fontSize: '0.7rem', color: '#dc2626' }}>Not uploaded</span>}
+                  </div>
+                  {inspectingStudent.photo_url ? (
+                    <a 
+                      href={inspectingStudent.photo_url} 
+                      target="_blank" 
+                      rel="noreferrer"
+                      style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', padding: '0.45rem 0.85rem', background: 'var(--surface-container-high)', color: 'var(--ink)', fontWeight: '800', fontSize: '0.78rem', borderRadius: '4px', textDecoration: 'none', marginTop: '0.35rem' }}
+                    >
+                      <ImagePlus size={14} /> View Full Photo
+                    </a>
+                  ) : (
+                    <p style={{ margin: 0, fontSize: '0.75rem', color: 'var(--muted-foreground)' }}>No photo uploaded yet.</p>
+                  )}
+                </div>
+              </div>
+
+              {/* Document Vault Records */}
+              {vaultDocuments.filter(d => d.uid === inspectingStudent.id || d.email === inspectingStudent.email).length > 0 && (
+                <div style={{ marginTop: '1.25rem' }}>
+                  <strong style={{ fontSize: '0.82rem', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--gold)', display: 'block', marginBottom: '0.5rem' }}>
+                    Document Vault Records ({vaultDocuments.filter(d => d.uid === inspectingStudent.id || d.email === inspectingStudent.email).length})
+                  </strong>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                    {vaultDocuments.filter(d => d.uid === inspectingStudent.id || d.email === inspectingStudent.email).map(vDoc => (
+                      <div key={vDoc.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.65rem 0.85rem', background: 'var(--surface-container-low)', borderRadius: '4px', border: '1px solid rgba(10,22,40,0.06)' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                          <FileText size={15} style={{ color: 'var(--gold)' }} />
+                          <span style={{ fontSize: '0.8rem', fontWeight: '700' }}>{vDoc.name || vDoc.type}</span>
+                        </div>
+                        <a href={vDoc.fileUrl} target="_blank" rel="noreferrer" style={{ fontSize: '0.75rem', fontWeight: '700', color: 'var(--gold)', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.25rem' }}>
+                          <ExternalLink size={13} /> View Document
+                        </a>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Verification Status Controls */}
+            <div style={{ borderTop: '1px solid rgba(10,22,40,0.1)', paddingTop: '1.25rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
+              <div>
+                <span style={{ fontSize: '0.72rem', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--gold)', display: 'block', marginBottom: '0.4rem' }}>Update TPO Verification Status</span>
+                <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                  {['seeking', 'eligible', 'placed', 'not-eligible'].map(statusOpt => (
+                    <button
+                      key={statusOpt}
+                      type="button"
+                      onClick={() => handleUpdateStudentStatus(inspectingStudent.id, statusOpt)}
+                      style={{
+                        padding: '0.45rem 0.85rem',
+                        fontSize: '0.75rem',
+                        fontWeight: '800',
+                        textTransform: 'uppercase',
+                        borderRadius: '4px',
+                        border: inspectingStudent.verification_status === statusOpt ? '2px solid var(--gold)' : '1px solid rgba(10,22,40,0.15)',
+                        background: inspectingStudent.verification_status === statusOpt ? 'var(--gold)' : 'var(--surface-container-low)',
+                        color: inspectingStudent.verification_status === statusOpt ? 'var(--ink)' : 'var(--muted-foreground)',
+                        cursor: 'pointer',
+                        transition: 'all 0.2s ease'
+                      }}
+                    >
+                      {statusOpt}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <button 
+                type="button" 
+                onClick={() => setInspectingStudent(null)}
+                style={{ padding: '0.6rem 1.35rem', background: 'var(--ink)', color: 'var(--parchment)', border: 'none', borderRadius: '4px', fontWeight: '700', cursor: 'pointer', fontSize: '0.85rem' }}
+              >
+                Close Inspection
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
     </div>
   )
 }

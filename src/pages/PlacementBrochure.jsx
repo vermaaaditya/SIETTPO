@@ -20,7 +20,7 @@ export default function PlacementBrochure() {
   }
 
   return (
-    <>
+    <main className="page-with-navbar-offset">
       <Navbar />
       <section className="coc-page-section">
         <div className="container">
@@ -62,6 +62,6 @@ export default function PlacementBrochure() {
           </div>
         </div>
       </section>
-    </>
+    </main>
   )
 }

@@ -87,8 +87,17 @@ export function Footer() {
           </div>
         </div>
       </div>
-      <div className="footer-separator">
+      <div className="footer-separator" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.4rem', textAlign: 'center' }}>
         <p>{t.copyright}</p>
+        <p style={{ margin: 0, fontSize: '0.82rem' }}>
+          <a 
+            href="/developers" 
+            onClick={(e) => { e.preventDefault(); navigate('/developers') }}
+            style={{ color: 'var(--gold)', fontWeight: '700', textDecoration: 'none', transition: 'all 0.2s ease', display: 'inline-flex', alignItems: 'center', gap: '0.3rem' }}
+          >
+            Made by hardworking students of SIET with Love <span style={{ color: '#ef4444' }}>❤️</span>
+          </a>
+        </p>
       </div>
     </footer>
   )

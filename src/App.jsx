@@ -22,6 +22,7 @@ import CodeOfConduct from './pages/CodeOfConduct'
 import StudentDashboard from './pages/StudentDashboard'
 import StudentProfileForm from './pages/StudentProfileForm'
 import AdminDashboard from './pages/AdminDashboard'
+import Developers from './pages/Developers'
 
 const ADMIN_EMAIL = 'vermaaadityaff123@gmail.com'
 
@@ -231,6 +232,7 @@ export default function App() {
         <Route path="/dashboard" element={<StudentDashboard />} />
         <Route path="/student/dashboard" element={<StudentDashboard />} />
         <Route path="/student-form" element={<StudentProfileForm />} />
+        <Route path="/developers" element={<Developers />} />
         <Route path="/admin" element={<AdminGate />} />
       </Routes>
     </>

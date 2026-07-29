@@ -1,0 +1,61 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function owns(uid) {
+      return signedIn() && request.auth.uid == uid;
+    }
+
+    function isAdmin() {
+      return signedIn() && 
+        (request.auth.token.email.lower() == 'vermaaadityaff123@gmail.com' ||
+         request.auth.token.email.lower() == 'tpo@sietpanchkula.ac.in');
+    }
+
+    // Student Profiles (StudentProfileForm.jsx & StudentDashboard.jsx)
+    match /students/{studentId} {
+      allow read, create, update: if owns(studentId) || isAdmin();
+      allow delete: if isAdmin();
+    }
+
+    // Company Recruitment Inquiries (Form.jsx & AdminDashboard.jsx)
+    match /recruitment_inquiries/{inquiryId} {
+      allow create: if true; // Public submission from company recruiters
+      allow read, update, delete: if isAdmin();
+    }
+
+    // Student Document Vault (DocumentVault.jsx)
+    match /documents/{documentId} {
+      allow read, update: if (signedIn() && resource.data.uid == request.auth.uid) || isAdmin();
+      allow create: if signedIn() && request.resource.data.uid == request.auth.uid;
+      allow delete: if isAdmin();
+    }
+
+    // Drive Applications
+    match /applications/{applicationId} {
+      allow read, create, update: if (signedIn() && applicationId.matches(request.auth.uid + '_.*')) || isAdmin();
+      allow delete: if isAdmin();
+    }
+
+    // Events & Announcements
+    match /events/{eventId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /announcements/{announcementId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Default deny all other collections
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

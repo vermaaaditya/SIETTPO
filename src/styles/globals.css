@@ -69,6 +69,7 @@
   --space-4: 2.5rem;
   --heading-scale: 1.15;
   --transition-speed: 180ms;
+  --navbar-sticky-height: 3.75rem;
 }
 
 .dark {
@@ -95,8 +96,28 @@
 
 * { margin:0; padding:0; box-sizing:border-box; }
 html,body { height:100%; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; font-family:var(--font-body); }
-html { scroll-behavior:smooth; }
+html {
+  scroll-behavior:smooth;
+  scroll-padding-top: var(--navbar-sticky-height, 3.75rem);
+}
 body { background: var(--parchment); color:var(--foreground); }
+
+/* Ensure anchored section headings and labels remain visible below the sticky navbar */
+section[id],
+footer[id],
+.section[id],
+.hero-section,
+.message-section,
+.why-recruit-section,
+.pipeline-section,
+.batch-section,
+.gallery-section,
+.team-section,
+.cta-section,
+.coc-page-section,
+.inquiry-hero {
+  scroll-margin-top: var(--navbar-sticky-height, 3.75rem);
+}
 
 /* Typography */
 h1,h2,h3,h4 { font-family:var(--font-headline); color:var(--foreground); margin:0 0 var(--space-2) 0; line-height:1.1; }
@@ -488,7 +509,7 @@ input:focus, textarea:focus, select:focus { outline: none; box-shadow: 0 0 0 2px
 .hero-content-centered {
   position:relative; z-index:10;
   text-align:center;
-  padding:16rem 1.5rem 5rem;
+  padding:6.5rem 1.5rem 4.5rem;
   max-width:56rem;
   margin:0 auto;
 }
@@ -595,7 +616,7 @@ input:focus, textarea:focus, select:focus { outline: none; box-shadow: 0 0 0 2px
    ═══════════════════════════════════════ */
 .message-section {
   background:#f7f4ef;
-  padding:7rem 1.5rem;
+  padding:4.5rem 1.5rem;
   text-align:center;
 }
 .message-section .section-header {
@@ -694,7 +715,7 @@ input:focus, textarea:focus, select:focus { outline: none; box-shadow: 0 0 0 2px
 .why-recruit-section {
   background-color: var(--ink) !important;
   color: var(--parchment) !important;
-  padding:6rem 0;
+  padding:4.5rem 0;
   position:relative;
 }
 .why-recruit-section .section-title { color:var(--parchment) !important; }
@@ -741,12 +762,10 @@ input:focus, textarea:focus, select:focus { outline: none; box-shadow: 0 0 0 2px
    ═══════════════════════════════════════ */
 .batch-section {
   background:var(--surface-container-low);
-  padding:5rem 0;
+  padding:4.5rem 0;
 }
-/* page-with-navbar-offset: no longer needed since header is static (not fixed).
-   Keep the class as a no-op so existing markup doesn't break. */
 .page-with-navbar-offset {
-  /* intentionally empty — header is in normal document flow now */
+  min-height: 70vh;
 }
 .batch-grid-3 {
   display:grid;
@@ -986,7 +1005,7 @@ input:focus, textarea:focus, select:focus { outline: none; box-shadow: 0 0 0 2px
    ═══════════════════════════════════════ */
 .team-section {
   background:var(--parchment);
-  padding:5rem 0;
+  padding:4.5rem 0;
 }
 .team-tpo-card {
   display:flex; flex-direction:column;
@@ -1329,7 +1348,7 @@ input:focus, textarea:focus, select:focus { outline: none; box-shadow: 0 0 0 2px
 /* ═══════════════════════════════════════
    GALLERY
    ═══════════════════════════════════════ */
-.gallery-section { background-color:var(--parchment); padding:6rem 0; }
+.gallery-section { background-color:var(--parchment); padding:4.5rem 0; }
 .gallery-header { margin:0 auto 3.5rem; max-width:80rem; padding:0 1.5rem; text-align:center; }
 .gallery-header-label {
   margin-bottom:0.75rem;
@@ -1559,7 +1578,12 @@ input:focus, textarea:focus, select:focus { outline: none; box-shadow: 0 0 0 2px
    ═══════════════════════════════════════ */
 .gallery-section {
   background:var(--surface-container-low);
-  padding:16rem 0 5rem;
+  padding:4.5rem 0 5rem;
+}
+@media (max-width:767px) {
+  .gallery-section {
+    padding:3.5rem 0 4rem;
+  }
 }
 
 /* Event Cards Grid */
@@ -2175,13 +2199,8 @@ input:focus, textarea:focus, select:focus { outline: none; box-shadow: 0 0 0 2px
   font-family: var(--font-body);
 }
 .inquiry-main {
-  padding-top: 10.5rem;
+  padding-top: 0;
   padding-bottom: 5rem;
-}
-@media (max-width: 767px) {
-  .inquiry-main {
-    padding-top: 9rem;
-  }
 }
 .inquiry-container {
   max-width: 80rem;
@@ -2192,7 +2211,12 @@ input:focus, textarea:focus, select:focus { outline: none; box-shadow: 0 0 0 2px
   position: relative;
   background: var(--ink);
   overflow: hidden;
-  padding: 4rem 0;
+  padding: 4.5rem 0;
+}
+@media (max-width: 767px) {
+  .inquiry-hero {
+    padding: 3.5rem 0;
+  }
 }
 .inquiry-hero-inner {
   position: relative;
@@ -2559,7 +2583,7 @@ input:focus, textarea:focus, select:focus { outline: none; box-shadow: 0 0 0 2px
 }
 .coc-page-section {
   background:var(--parchment);
-  padding:16rem 0 5rem;
+  padding:4.5rem 0 5rem;
 }
 .coc-intro {
   max-width:72rem;
@@ -2624,7 +2648,7 @@ input:focus, textarea:focus, select:focus { outline: none; box-shadow: 0 0 0 2px
 }
 @media (max-width:767px) {
   .coc-page-section {
-    padding:12rem 0 4rem;
+    padding:3.5rem 0 4rem;
   }
 }
 
@@ -3445,11 +3469,14 @@ input:focus, textarea:focus, select:focus { outline: none; box-shadow: 0 0 0 2px
   align-items: center;
   justify-content: flex-end;
   gap: 0.5rem;
+  flex-wrap: nowrap;
+  white-space: nowrap;
 }
 
 .db-action-btn {
-  width: 2.1rem;
+  min-width: 2.1rem;
   height: 2.1rem;
+  padding: 0 0.6rem;
   border-radius: 4px;
   border: 1px solid rgba(10,22,40,0.12);
   background: #fff;
@@ -3458,6 +3485,8 @@ input:focus, textarea:focus, select:focus { outline: none; box-shadow: 0 0 0 2px
   justify-content: center;
   color: var(--ink);
   cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
   transition: all 0.15s ease;
 }
 
@@ -3509,7 +3538,9 @@ input:focus, textarea:focus, select:focus { outline: none; box-shadow: 0 0 0 2px
 }
 
 .student-form-header {
-  padding: 1rem 2rem;
+  padding: 1.1rem 2rem;
+  background: var(--ink);
+  border-bottom: 1px solid rgba(201, 146, 42, 0.25);
 }
 
 .form-db-brand {
@@ -3519,14 +3550,16 @@ input:focus, textarea:focus, select:focus { outline: none; box-shadow: 0 0 0 2px
 }
 
 .form-logo {
-  height: 2.75rem;
-  width: 2.75rem;
+  height: 2.85rem;
+  width: 2.85rem;
   background: #fff;
-  padding: 2px;
+  padding: 3px;
   border-radius: 4px;
   display: flex;
   align-items: center;
   justify-content: center;
+  border: 1px solid rgba(201, 146, 42, 0.35);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .form-logo img {
@@ -3535,14 +3568,33 @@ input:focus, textarea:focus, select:focus { outline: none; box-shadow: 0 0 0 2px
   object-fit: contain;
 }
 
+.form-brand-title {
+  color: var(--parchment) !important;
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: 1.3rem;
+  letter-spacing: 0.05em;
+  margin: 0;
+  line-height: 1.15;
+}
+
+.form-brand-sub {
+  color: var(--gold) !important;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin: 0.2rem 0 0 0;
+}
+
 .form-back {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
   padding: 0.5rem 0.85rem;
-  background: rgba(255,255,255,0.08);
+  background: rgba(255, 255, 255, 0.08);
   color: #fff;
-  border: 1px solid rgba(255,255,255,0.15);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 4px;
   font-size: 0.82rem;
   font-weight: 700;
@@ -3551,7 +3603,7 @@ input:focus, textarea:focus, select:focus { outline: none; box-shadow: 0 0 0 2px
 }
 
 .form-back:hover {
-  background: rgba(201,146,42,0.2);
+  background: rgba(201, 146, 42, 0.2);
   border-color: var(--gold);
   color: var(--gold);
 }
@@ -3567,13 +3619,44 @@ input:focus, textarea:focus, select:focus { outline: none; box-shadow: 0 0 0 2px
   position: relative;
 }
 
+/* Connecting track line behind stage numbers */
+.form-stepper-track {
+  position: absolute;
+  top: 17px;
+  left: 2.5rem;
+  right: 2.5rem;
+  height: 3px;
+  background: rgba(10, 22, 40, 0.12);
+  border-radius: 999px;
+  z-index: 0;
+}
+
+/* Active filled gold connecting line */
+.form-stepper-progress {
+  position: absolute;
+  top: 17px;
+  left: 2.5rem;
+  max-width: calc(100% - 5rem);
+  height: 3px;
+  background: var(--gold);
+  border-radius: 999px;
+  z-index: 0;
+  transition: width 0.35s ease;
+  box-shadow: 0 0 8px rgba(201, 146, 42, 0.5);
+}
+
 .form-step {
+  position: relative;
+  z-index: 1;
   display: flex;
   align-items: center;
   gap: 0.65rem;
   color: var(--muted-foreground);
-  opacity: 0.45;
-  transition: all 0.2s ease;
+  opacity: 0.5;
+  background: var(--parchment);
+  padding: 0 0.5rem;
+  border-radius: 999px;
+  transition: all 0.25s ease;
 }
 
 .form-step.active {
@@ -3585,20 +3668,28 @@ input:focus, textarea:focus, select:focus { outline: none; box-shadow: 0 0 0 2px
   width: 34px;
   height: 34px;
   border-radius: 50%;
-  background: rgba(10,22,40,0.1);
-  color: var(--ink);
+  background: var(--surface-container-high);
+  color: var(--muted-foreground);
+  border: 2px solid rgba(10, 22, 40, 0.12);
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 800;
   font-size: 0.85rem;
-  transition: all 0.2s ease;
+  transition: all 0.25s ease;
 }
 
 .form-step.active span {
   background: var(--gold);
   color: var(--ink);
-  box-shadow: 0 0 12px rgba(201,146,42,0.4);
+  border-color: var(--gold);
+  box-shadow: 0 0 12px rgba(201, 146, 42, 0.45);
+}
+
+.form-step.completed span {
+  background: var(--ink);
+  color: var(--parchment);
+  border-color: var(--ink);
 }
 
 .form-step strong {
@@ -3759,6 +3850,17 @@ input:focus, textarea:focus, select:focus { outline: none; box-shadow: 0 0 0 2px
 .upload-box:hover {
   border-color: var(--gold);
   background: rgba(201,146,42,0.04);
+}
+
+.upload-box.uploaded {
+  border-style: solid;
+  border-color: var(--gold);
+  background: rgba(201,146,42,0.06);
+}
+
+.upload-box.uploaded small {
+  color: #16a34a;
+  font-weight: 700;
 }
 
 .upload-box input[type="file"] {

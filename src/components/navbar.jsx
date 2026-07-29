@@ -4,7 +4,9 @@ import { Menu, X } from 'lucide-react'
 import { GradientButton } from './ui/gradient-button'
 import { useLanguage } from '../contexts/LanguageContext'
 import { translations } from '../translations'
-import { supabase } from '../lib/supabase'
+import { auth, db } from '../lib/firebase'
+import { onAuthStateChanged } from 'firebase/auth'
+import { doc, getDoc } from 'firebase/firestore'
 import { NewsMarquee } from './news-marquee'
 
 function scrollTo(id) {
@@ -42,61 +44,40 @@ export function Navbar() {
   ]
 
   useEffect(() => {
-    if (!supabase) {
+    if (!auth) {
       setStudentDisplayName('')
       return
     }
 
     let active = true
 
-    const fetchAndSetDisplayName = async (user) => {
-      if (!user) {
-        if (active) {
-          setStudentDisplayName('')
-        }
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+      if (!currentUser) {
+        if (active) setStudentDisplayName('')
         return
       }
 
-      let profileFullName = ''
-      const { data: profile, error: profileError } = await supabase
-        .from('profiles')
-        .select('full_name')
-        .eq('id', user.id)
-        .maybeSingle()
-
-      if (profileError) {
-        console.error('Unable to fetch profile name for navbar:', profileError)
+      let displayName = currentUser.displayName || ''
+      if (!displayName && db) {
+        try {
+          const studentDoc = await getDoc(doc(db, "students", currentUser.uid))
+          if (studentDoc.exists() && studentDoc.data().fullName) {
+            displayName = studentDoc.data().fullName
+          }
+        } catch (err) {
+          console.error("Unable to fetch student profile for navbar:", err)
+        }
       }
 
-      if (profile?.full_name) {
-        profileFullName = String(profile.full_name).trim()
-      }
-
-      // Support both full_name and fullName because older records may use either key.
-      const metadata = user.user_metadata || {}
-      const metadataName = String(metadata.full_name || metadata.fullName || '').trim()
-      const fallbackEmailName = String(user.email || '').split('@')[0].trim()
-      const nextDisplayName = profileFullName || metadataName || fallbackEmailName
-
+      const fallbackName = (currentUser.email || '').split('@')[0]
       if (active) {
-        setStudentDisplayName(nextDisplayName)
+        setStudentDisplayName(displayName || fallbackName)
       }
-    }
-
-    const init = async () => {
-      const { data } = await supabase.auth.getSession()
-      await fetchAndSetDisplayName(data?.session?.user || null)
-    }
-
-    void init()
-
-    const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
-      void fetchAndSetDisplayName(session?.user || null)
     })
 
     return () => {
       active = false
-      authListener.subscription.unsubscribe()
+      unsubscribe()
     }
   }, [])
 
