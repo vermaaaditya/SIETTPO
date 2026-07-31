@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, lazy, Suspense } from 'react'
 import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from './lib/firebase'
 import { Routes, Route, useLocation, useNavigate } from 'react-router-dom'
@@ -13,16 +13,16 @@ import { GallerySection } from './components/gallery-section'
 import { CtaSection } from './components/cta-section'
 import { TeamSection } from './components/team-section'
 import { Footer } from './components/footer'
-import StudentLogin from './pages/StudentLogin'
-import PdfViewer from './pages/PdfViewer'
-import PlacementBrochure from './pages/PlacementBrochure'
-import GuidelinesViewer from './pages/GuidelinesViewer'
-import Form from './pages/Form'
-import CodeOfConduct from './pages/CodeOfConduct'
-import StudentDashboard from './pages/StudentDashboard'
-import StudentProfileForm from './pages/StudentProfileForm'
-import AdminDashboard from './pages/AdminDashboard'
-import Developers from './pages/Developers'
+const StudentLogin = lazy(() => import('./pages/StudentLogin'))
+const PdfViewer = lazy(() => import('./pages/PdfViewer'))
+const PlacementBrochure = lazy(() => import('./pages/PlacementBrochure'))
+const GuidelinesViewer = lazy(() => import('./pages/GuidelinesViewer'))
+const Form = lazy(() => import('./pages/Form'))
+const CodeOfConduct = lazy(() => import('./pages/CodeOfConduct'))
+const StudentDashboard = lazy(() => import('./pages/StudentDashboard'))
+const StudentProfileForm = lazy(() => import('./pages/StudentProfileForm'))
+const AdminDashboard = lazy(() => import('./pages/AdminDashboard'))
+const Developers = lazy(() => import('./pages/Developers'))
 
 const ADMIN_EMAIL = 'vermaaadityaff123@gmail.com'
 
@@ -217,24 +217,26 @@ export default function App() {
   return (
     <>
       {appLoading && <LoadingScreen onFinished={() => setAppLoading(false)} />}
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/events" element={<EventsPage />} />
-        <Route path="/code-of-conduct" element={<CodeOfConductPage />} />
-        <Route path="/batch-2025" element={<BatchPage />} />
-        <Route path="/team" element={<TeamPage />} />
-        <Route path="/contact-us" element={<ContactPage />} />
-        <Route path="/login" element={<StudentLogin />} />
-        <Route path="/pdf-viewer" element={<PdfViewer />} />
-        <Route path="/placement-brochure" element={<PlacementBrochure />} />
-        <Route path="/guidelines" element={<GuidelinesViewer />} />
-        <Route path="/inquiry-form" element={<Form />} />
-        <Route path="/dashboard" element={<StudentDashboard />} />
-        <Route path="/student/dashboard" element={<StudentDashboard />} />
-        <Route path="/student-form" element={<StudentProfileForm />} />
-        <Route path="/developers" element={<Developers />} />
-        <Route path="/admin" element={<AdminGate />} />
-      </Routes>
+      <Suspense fallback={<div className="portal-loading">Loading...</div>}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/events" element={<EventsPage />} />
+          <Route path="/code-of-conduct" element={<CodeOfConductPage />} />
+          <Route path="/batch-2025" element={<BatchPage />} />
+          <Route path="/team" element={<TeamPage />} />
+          <Route path="/contact-us" element={<ContactPage />} />
+          <Route path="/login" element={<StudentLogin />} />
+          <Route path="/pdf-viewer" element={<PdfViewer />} />
+          <Route path="/placement-brochure" element={<PlacementBrochure />} />
+          <Route path="/guidelines" element={<GuidelinesViewer />} />
+          <Route path="/inquiry-form" element={<Form />} />
+          <Route path="/dashboard" element={<StudentDashboard />} />
+          <Route path="/student/dashboard" element={<StudentDashboard />} />
+          <Route path="/student-form" element={<StudentProfileForm />} />
+          <Route path="/developers" element={<Developers />} />
+          <Route path="/admin" element={<AdminGate />} />
+        </Routes>
+      </Suspense>
     </>
   )
 }

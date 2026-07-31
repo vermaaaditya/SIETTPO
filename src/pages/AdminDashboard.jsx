@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { Download, Users, Activity, CheckCircle, Search, Trash2, ExternalLink, FileSpreadsheet, LogOut, Building2, Briefcase, Code, Filter, Mail, Phone, Calendar, Layers, Eye, FileText, ImagePlus, X, ShieldCheck, FileCheck } from 'lucide-react'
 import { collection, getDocs, deleteDoc, updateDoc, doc, query, orderBy, serverTimestamp } from 'firebase/firestore'
 import { db, firebaseEnvError } from '../lib/firebase'
@@ -14,16 +14,13 @@ export default function AdminDashboard({ handleLogout }) {
 
   // Students state
   const [students, setStudents] = useState([])
-  const [filteredStudents, setFilteredStudents] = useState([])
   const [searchTerm, setSearchTerm] = useState("")
   const [branchFilter, setBranchFilter] = useState("")
-  const [stats, setStats] = useState({ total: 0, placed: 0, pending: 0, eligible: 0 })
   const [inspectingStudent, setInspectingStudent] = useState(null)
   const [vaultDocuments, setVaultDocuments] = useState([])
 
   // Company Inquiries state
   const [inquiries, setInquiries] = useState([])
-  const [filteredInquiries, setFilteredInquiries] = useState([])
   const [inquirySearchTerm, setInquirySearchTerm] = useState("")
   const [industryFilter, setIndustryFilter] = useState("")
 
@@ -123,16 +120,7 @@ export default function AdminDashboard({ handleLogout }) {
         }
 
         setStudents(finalStudents)
-        setFilteredStudents(finalStudents)
-
-        const total = finalStudents.length
-        const placed = finalStudents.filter(s => s.verification_status === "placed").length
-        const eligible = finalStudents.filter(s => s.verification_status === "eligible").length
-        const pending = finalStudents.filter(s => s.verification_status === "seeking" || !s.verification_status).length
-        setStats({ total, placed, pending, eligible })
-
         setInquiries(finalInquiries)
-        setFilteredInquiries(finalInquiries)
       } catch (err) {
         setError(err.message || "Unable to load administrative data.")
       } finally {
@@ -143,7 +131,7 @@ export default function AdminDashboard({ handleLogout }) {
   }, [])
 
   // Handle Search and Branch Filter for Students
-  useEffect(() => {
+  const filteredStudents = useMemo(() => {
     let result = students
     if (searchTerm.trim() !== "") {
       const q = searchTerm.toLowerCase()
@@ -158,11 +146,19 @@ export default function AdminDashboard({ handleLogout }) {
     if (branchFilter !== "") {
       result = result.filter(s => s.branch === branchFilter)
     }
-    setFilteredStudents(result)
+    return result
   }, [searchTerm, branchFilter, students])
 
+  const stats = useMemo(() => {
+    const total = students.length
+    const placed = students.filter(s => s.verification_status === "placed").length
+    const eligible = students.filter(s => s.verification_status === "eligible").length
+    const pending = students.filter(s => s.verification_status === "seeking" || !s.verification_status).length
+    return { total, placed, pending, eligible }
+  }, [students])
+
   // Handle Search and Industry Filter for Company Inquiries
-  useEffect(() => {
+  const filteredInquiries = useMemo(() => {
     let result = inquiries
     if (inquirySearchTerm.trim() !== "") {
       const q = inquirySearchTerm.toLowerCase()
@@ -178,7 +174,7 @@ export default function AdminDashboard({ handleLogout }) {
     if (industryFilter !== "") {
       result = result.filter(i => i.industry === industryFilter)
     }
-    setFilteredInquiries(result)
+    return result
   }, [inquirySearchTerm, industryFilter, inquiries])
 
   const handleUpdateStudentStatus = async (studentId, newStatus) => {
