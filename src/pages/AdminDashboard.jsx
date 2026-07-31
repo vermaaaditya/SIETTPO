@@ -1,13 +1,12 @@
 import { useState, useEffect, useMemo } from 'react'
 import { Download, Users, Activity, CheckCircle, Search, Trash2, ExternalLink, FileSpreadsheet, LogOut, Building2, Briefcase, Code, Filter, Mail, Phone, Calendar, Layers, Eye, FileText, ImagePlus, X, ShieldCheck, FileCheck } from 'lucide-react'
-import { collection, getDocs, deleteDoc, updateDoc, doc, query, orderBy, serverTimestamp } from 'firebase/firestore'
-import { db, firebaseEnvError } from '../lib/firebase'
+import { collection, getDocs, deleteDoc, updateDoc, doc, serverTimestamp } from 'firebase/firestore'
+import { db } from '../lib/firebase'
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from 'recharts'
 import * as XLSX from 'xlsx'
 
 export default function AdminDashboard({ handleLogout }) {
   const [loading, setLoading] = useState(false)
-  const [error, setError] = useState(null)
   
   // Navigation tab state: 'students' | 'inquiries'
   const [activeTab, setActiveTab] = useState('students')
@@ -115,14 +114,14 @@ export default function AdminDashboard({ handleLogout }) {
             }
           } catch (fsErr) {
             console.error("Firestore admin fetch error:", fsErr)
-            setError(fsErr.message || "Failed to fetch records. Please check your Firestore security rules.")
+            console.error(fsErr.message || "Failed to fetch records. Please check your Firestore security rules.")
           }
         }
 
         setStudents(finalStudents)
         setInquiries(finalInquiries)
       } catch (err) {
-        setError(err.message || "Unable to load administrative data.")
+        console.error(err.message || "Unable to load administrative data.")
       } finally {
         setLoading(false)
       }

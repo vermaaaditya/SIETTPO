@@ -84,8 +84,8 @@ export default function StudentDashboard() {
     return fields.filter(Boolean).length * 20
   }, [profile])
 
-  const currentEvents = events.filter(event => !event.type || event.type === "upcoming")
-  const pastEvents = events.filter(event => event.type === "past")
+  const currentEvents = useMemo(() => events.filter(event => !event.type || event.type === "upcoming"), [events])
+  const pastEvents = useMemo(() => events.filter(event => event.type === "past"), [events])
 
   async function apply(event) {
     if (!db || !user) return

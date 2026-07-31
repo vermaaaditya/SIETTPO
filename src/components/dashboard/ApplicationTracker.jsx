@@ -2,7 +2,7 @@ import { Activity, CheckCircle2 } from "lucide-react"
 
 const stages = ["Applied", "Shortlisted", "Interview", "Result"]
 
-export default function ApplicationTracker({ applications, events, expanded }) { 
+export default function ApplicationTracker({ applications, events }) { 
   return (
     <div className="db-card">
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
@@ -41,7 +41,6 @@ export default function ApplicationTracker({ applications, events, expanded }) {
 
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '0.5rem', position: 'relative' }}>
                 {stages.map((stage, index) => {
-                  const isCurrent = app.status === stage
                   const isDone = stages.indexOf(app.status) >= index
                   
                   return (
