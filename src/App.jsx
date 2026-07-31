@@ -24,13 +24,13 @@ const StudentProfileForm = lazy(() => import('./pages/StudentProfileForm'))
 const AdminDashboard = lazy(() => import('./pages/AdminDashboard'))
 const Developers = lazy(() => import('./pages/Developers'))
 
-const ADMIN_EMAIL = 'vermaaadityaff123@gmail.com'
+const ADMIN_EMAILS = ['vermaaadityaff123@gmail.com', 'tpo@sietpanchkula.ac.in']
 
 function AdminGate() {
   const [allowed, setAllowed] = useState(null)
   const navigate = useNavigate()
   useEffect(() => onAuthStateChanged(auth, user => {
-    if (user?.email?.toLowerCase() === ADMIN_EMAIL) setAllowed(true)
+    if (user?.email && ADMIN_EMAILS.includes(user.email.toLowerCase())) setAllowed(true)
     else { setAllowed(false); navigate('/login', { replace: true }) }
   }), [navigate])
   if (allowed !== true) return <div className="portal-loading">Checking administrator access...</div>
