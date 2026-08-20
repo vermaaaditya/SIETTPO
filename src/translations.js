@@ -184,6 +184,14 @@ export const translations = {
       photosLabel: 'photos',
       events: [
         {
+          title: 'Code Quotient Bootcamp and Internship Drive',
+          subtitle: 'Technical Bootcamp for Final Year Cohort',
+          description:
+            'Final year engineering students attending Day 1 of CodeQuotient\'s intensive coding bootcamp, embarking on full-stack software development upskilling and corporate placement readiness.',
+          date: '2026',
+          location: 'Computer Labs, SIET Panchkula',
+        },
+        {
           title: 'EDWise Overseas Education Seminar',
           subtitle: 'Overseas Education Consultants',
           description:
@@ -262,14 +270,6 @@ export const translations = {
             'An orientation session introducing the Training & Placement Cell to freshly admitted students, opening their gates to career opportunities, professional upskilling, and institutional support.',
           date: '2026',
           location: 'Auditorium, SIET Panchkula',
-        },
-        {
-          title: 'CodeQuotient Bootcamp — Day 1',
-          subtitle: 'Technical Bootcamp for Final Year Cohort',
-          description:
-            'Final year engineering students attending Day 1 of CodeQuotient\'s intensive coding bootcamp, embarking on full-stack software development upskilling and corporate placement readiness.',
-          date: '2026',
-          location: 'Computer Labs, SIET Panchkula',
         },
       ],
     },
@@ -689,6 +689,14 @@ export const translations = {
       photosLabel: 'फ़ोटो',
       events: [
         {
+          title: 'Code Quotient बूटकैंप और इंटर्नशिप ड्राइव',
+          subtitle: 'अंतिम वर्ष के छात्रों के लिए तकनीकी बूटकैंप',
+          description:
+            'CodeQuotient के गहन कोडिंग बूटकैंप के पहले दिन में भाग लेते अंतिम वर्ष के इंजीनियरिंग छात्र, फुल-स्टैक सॉफ्टवेयर डेवलपमेंट कौशल और प्लेसमेंट तैयारी की शुरुआत करते हुए।',
+          date: '2026',
+          location: 'कंप्यूटर लैब, SIET पंचकुला',
+        },
+        {
           title: 'EDWise विदेश शिक्षा सेमिनार',
           subtitle: 'ओवरसीज एजुकेशन कंसल्टेंट्स',
           description:
@@ -767,14 +775,6 @@ export const translations = {
             'नवागंतुक छात्रों को प्रशिक्षण एवं प्लेसमेंट सेल से परिचित कराने वाला ओरिएंटेशन सत्र, जो उन्हें करियर के अवसरों, पेशेवर कौशल विकास और संस्थागत सहायता के द्वार खोलता है।',
           date: '2026',
           location: 'ऑडिटोरियम, SIET पंचकुला',
-        },
-        {
-          title: 'CodeQuotient बूटकैंप — डे 1',
-          subtitle: 'अंतिम वर्ष के छात्रों के लिए तकनीकी बूटकैंप',
-          description:
-            'CodeQuotient के गहन कोडिंग बूटकैंप के पहले दिन में भाग लेते अंतिम वर्ष के इंजीनियरिंग छात्र, फुल-स्टैक सॉफ्टवेयर डेवलपमेंट कौशल और प्लेसमेंट तैयारी की शुरुआत करते हुए।',
-          date: '2026',
-          location: 'कंप्यूटर लैब, SIET पंचकुला',
         },
       ],
     },
