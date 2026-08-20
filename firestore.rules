@@ -14,7 +14,9 @@ service cloud.firestore {
     function isAdmin() {
       return signedIn() && 
         (request.auth.token.email.lower() == 'vermaaadityaff123@gmail.com' ||
-         request.auth.token.email.lower() == 'tpo@sietpanchkula.ac.in');
+         request.auth.token.email.lower() == 'tpo@sietpanchkula.ac.in' ||
+         (exists(/databases/$(database)/documents/students/$(request.auth.uid)) &&
+          get(/databases/$(database)/documents/students/$(request.auth.uid)).data.role == 'admin'));
     }
 
     // Student Profiles (StudentProfileForm.jsx & StudentDashboard.jsx)

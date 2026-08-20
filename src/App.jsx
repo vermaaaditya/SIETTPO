@@ -1,6 +1,7 @@
-import { useEffect, useState, lazy, Suspense } from 'react'
+import { Component, useEffect, useState, lazy, Suspense } from 'react'
 import { onAuthStateChanged } from 'firebase/auth'
-import { auth } from './lib/firebase'
+import { doc, getDoc } from 'firebase/firestore'
+import { auth, db } from './lib/firebase'
 import { Routes, Route, useLocation, useNavigate } from 'react-router-dom'
 import { Navbar } from './components/navbar'
 import Chatbot from './components/Chatbot'
@@ -12,6 +13,7 @@ import { BatchSection } from './components/batch-section'
 import { GallerySection } from './components/gallery-section'
 import { CtaSection } from './components/cta-section'
 import { TeamSection } from './components/team-section'
+import { EventsMarqueeSection } from './components/events-marquee-section'
 import { Footer } from './components/footer'
 const StudentLogin = lazy(() => import('./pages/StudentLogin'))
 const PdfViewer = lazy(() => import('./pages/PdfViewer'))
@@ -25,6 +27,48 @@ const AdminDashboard = lazy(() => import('./pages/AdminDashboard'))
 const Developers = lazy(() => import('./pages/Developers'))
 
 const ADMIN_EMAILS = ['vermaaadityaff123@gmail.com', 'tpo@sietpanchkula.ac.in']
+
+class ErrorBoundary extends Component {
+  constructor(props) {
+    super(props)
+    this.state = { hasError: false }
+  }
+
+  static getDerivedStateFromError() {
+    return { hasError: true }
+  }
+
+  componentDidCatch(error, errorInfo) {
+    console.error("App boundary caught an error:", error, errorInfo)
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div style={{ padding: "3rem", textAlign: "center", fontFamily: "sans-serif" }}>
+          <h2>Something went wrong loading this page.</h2>
+          <p style={{ color: "#666", marginBottom: "1.5rem" }}>
+            This might be due to a cached version of the portal.
+          </p>
+          <button 
+            onClick={() => window.location.reload()}
+            style={{
+              padding: "0.6rem 1.2rem",
+              background: "#0A1628",
+              color: "#fff",
+              border: "none",
+              borderRadius: "4px",
+              cursor: "pointer"
+            }}
+          >
+            Reload Portal
+          </button>
+        </div>
+      )
+    }
+    return this.props.children
+  }
+}
 
 function AdminGate() {
   const [allowed, setAllowed] = useState(null)
@@ -63,6 +107,7 @@ function Home() {
       <SkillsMarquee />
       <MessageSection />
       <WhyRecruitSection />
+      <EventsMarqueeSection />
       <CtaSection />
       <Footer />
       <Chatbot />
@@ -215,7 +260,7 @@ export default function App() {
   const [appLoading, setAppLoading] = useState(true)
 
   return (
-    <>
+    <ErrorBoundary>
       {appLoading && <LoadingScreen onFinished={() => setAppLoading(false)} />}
       <Suspense fallback={<div className="portal-loading">Loading...</div>}>
         <Routes>
@@ -237,6 +282,6 @@ export default function App() {
           <Route path="/admin" element={<AdminGate />} />
         </Routes>
       </Suspense>
-    </>
+    </ErrorBoundary>
   )
 }

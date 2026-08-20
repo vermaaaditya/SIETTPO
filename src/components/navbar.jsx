@@ -1,33 +1,24 @@
 import { useState, useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { Menu, X } from 'lucide-react'
+import { Menu, X, LayoutDashboard, LogOut } from 'lucide-react'
 import { GradientButton } from './ui/gradient-button'
 import { useLanguage } from '../contexts/LanguageContext'
 import { translations } from '../translations'
 import { auth, db } from '../lib/firebase'
-import { onAuthStateChanged } from 'firebase/auth'
+import { onAuthStateChanged, signOut } from 'firebase/auth'
 import { doc, getDoc } from 'firebase/firestore'
 import { NewsMarquee } from './news-marquee'
+
+const ADMIN_EMAIL = 'vermaaadityaff123@gmail.com'
 
 function scrollTo(id) {
   document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
 }
 
-const visuallyHiddenTextStyle = {
-  position: 'absolute',
-  width: '1px',
-  height: '1px',
-  padding: 10,
-  margin: '-1px',
-  overflow: 'hidden',
-  clip: 'rect(0, 0, 0, 0)',
-  whiteSpace: 'nowrap',
-  border: 0,
-}
-
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [studentDisplayName, setStudentDisplayName] = useState('')
+  const [userRole, setUserRole] = useState('')
   const navigate = useNavigate()
   const location = useLocation()
   const { lang, toggleLang } = useLanguage()
@@ -41,11 +32,17 @@ export function Navbar() {
     { label: t.links[4], type: 'route', value: '/batch-2025' },
     { label: t.links[5], type: 'route', value: '/team' },
     { label: t.links[6], type: 'route', value: '/contact-us' },
+    ...(studentDisplayName ? [{
+      label: userRole === 'admin' ? 'Admin Portal' : 'My Dashboard',
+      type: 'route',
+      value: userRole === 'admin' ? '/admin' : '/dashboard'
+    }] : [])
   ]
 
   useEffect(() => {
     if (!auth) {
       setStudentDisplayName('')
+      setUserRole('')
       return
     }
 
@@ -53,16 +50,23 @@ export function Navbar() {
 
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       if (!currentUser) {
-        if (active) setStudentDisplayName('')
+        if (active) {
+          setStudentDisplayName('')
+          setUserRole('')
+        }
         return
       }
 
       let displayName = currentUser.displayName || ''
-      if (!displayName && db) {
+      let role = currentUser.email?.toLowerCase() === ADMIN_EMAIL ? 'admin' : 'student'
+
+      if (db) {
         try {
           const studentDoc = await getDoc(doc(db, "students", currentUser.uid))
-          if (studentDoc.exists() && studentDoc.data().fullName) {
-            displayName = studentDoc.data().fullName
+          if (studentDoc.exists()) {
+            const data = studentDoc.data()
+            if (data.fullName) displayName = data.fullName
+            if (data.role === 'admin') role = 'admin'
           }
         } catch (err) {
           console.error("Unable to fetch student profile for navbar:", err)
@@ -72,6 +76,7 @@ export function Navbar() {
       const fallbackName = (currentUser.email || '').split('@')[0]
       if (active) {
         setStudentDisplayName(displayName || fallbackName)
+        setUserRole(role)
       }
     })
 
@@ -80,6 +85,17 @@ export function Navbar() {
       unsubscribe()
     }
   }, [])
+
+  const handleLogout = async () => {
+    try {
+      if (auth) await signOut(auth)
+      setStudentDisplayName('')
+      setUserRole('')
+      navigate('/')
+    } catch (err) {
+      console.error('Logout error:', err)
+    }
+  }
 
   const navigateToLink = (link) => {
     navigate(link.value)
@@ -99,9 +115,7 @@ export function Navbar() {
 
   return (
     <>
-      {/* Institutional header — normal flow, scrolls away */}
       <header className="navbar-header-banner">
-        {/* Top utility bar — language toggle */}
         <div className="navbar-topbar">
           <div className="lang-toggle" role="group" aria-label="Language toggle">
             <button
@@ -168,7 +182,6 @@ export function Navbar() {
         </div>
       </header>
 
-      {/* Sticky navigation bar — pins to top on scroll */}
       <nav className="navbar-nav">
         <div className="navbar-nav-inner">
           <button type="button" className="md:hidden" onClick={() => navigate('/')}>
@@ -192,14 +205,25 @@ export function Navbar() {
           <div className="navbar-buttons">
             <GradientButton className="px-5 py-2.5 text-sm" onClick={handleRecruiterClick}>{t.forRecruiters}</GradientButton>
             {studentDisplayName ? (
-              <span
-                className="px-5 py-2.5 text-sm font-semibold"
-                style={{ color: 'var(--ink)' }}
-                title={`${t.loggedInAs} ${studentDisplayName}`}
-              >
-                <span style={visuallyHiddenTextStyle}>{t.loggedInAs} </span>
-                {studentDisplayName}
-              </span>
+              <div className="navbar-user-controls">
+                <button
+                  type="button"
+                  className="navbar-dashboard-btn"
+                  onClick={() => navigate(userRole === 'admin' ? '/admin' : '/dashboard')}
+                  title={`Go to ${userRole === 'admin' ? 'Admin Portal' : 'Student Dashboard'}`}
+                >
+                  <LayoutDashboard className="w-4 h-4 text-[var(--gold)]" />
+                  <span>{studentDisplayName}</span>
+                </button>
+                <button
+                  type="button"
+                  className="navbar-logout-icon-btn"
+                  onClick={handleLogout}
+                  title="Log Out"
+                >
+                  <LogOut className="w-4 h-4" />
+                </button>
+              </div>
             ) : (
               <GradientButton variant="variant" className="px-5 py-2.5 text-sm" onClick={() => navigate('/login')}>{t.studentLogin}</GradientButton>
             )}
@@ -213,7 +237,6 @@ export function Navbar() {
           </button>
         </div>
 
-        {/* Mobile dropdown menu */}
         {mobileOpen && (
           <div className="navbar-mobile-menu">
             {navLinks.map((link) => (
@@ -245,13 +268,29 @@ export function Navbar() {
               </div>
               <GradientButton className="w-full" onClick={() => { handleRecruiterClick(); setMobileOpen(false) }}>{t.forRecruiters}</GradientButton>
               {studentDisplayName ? (
-                <div
-                  className="w-full text-center py-2.5 font-semibold"
-                  style={{ color: 'var(--ink)' }}
-                  title={`${t.loggedInAs} ${studentDisplayName}`}
-                >
-                  <span style={visuallyHiddenTextStyle}>{t.loggedInAs} </span>
-                  {studentDisplayName}
+                <div className="flex flex-col gap-2 w-full mt-2">
+                  <button
+                    type="button"
+                    className="navbar-dashboard-btn w-full justify-center"
+                    onClick={() => {
+                      navigate(userRole === 'admin' ? '/admin' : '/dashboard')
+                      setMobileOpen(false)
+                    }}
+                  >
+                    <LayoutDashboard className="w-4 h-4 text-[var(--gold)]" />
+                    <span>{studentDisplayName} ({userRole === 'admin' ? 'Admin' : 'Dashboard'})</span>
+                  </button>
+                  <button
+                    type="button"
+                    className="navbar-logout-btn w-full justify-center"
+                    onClick={() => {
+                      handleLogout()
+                      setMobileOpen(false)
+                    }}
+                  >
+                    <LogOut className="w-4 h-4" />
+                    <span>Log Out</span>
+                  </button>
                 </div>
               ) : (
                 <GradientButton variant="variant" className="w-full" onClick={() => { navigate('/login'); setMobileOpen(false) }}>{t.studentLogin}</GradientButton>
@@ -265,4 +304,3 @@ export function Navbar() {
     </>
   )
 }
-

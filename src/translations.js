@@ -255,6 +255,22 @@ export const translations = {
           date: '2026',
           location: 'SIET Panchkula',
         },
+        {
+          title: 'Training & Placement Cell Orientation',
+          subtitle: 'Introduction to T&P Cell for Freshmen',
+          description:
+            'An orientation session introducing the Training & Placement Cell to freshly admitted students, opening their gates to career opportunities, professional upskilling, and institutional support.',
+          date: '2026',
+          location: 'Auditorium, SIET Panchkula',
+        },
+        {
+          title: 'CodeQuotient Bootcamp — Day 1',
+          subtitle: 'Technical Bootcamp for Final Year Cohort',
+          description:
+            'Final year engineering students attending Day 1 of CodeQuotient\'s intensive coding bootcamp, embarking on full-stack software development upskilling and corporate placement readiness.',
+          date: '2026',
+          location: 'Computer Labs, SIET Panchkula',
+        },
       ],
     },
     updatesPanel: {
@@ -743,6 +759,22 @@ export const translations = {
             'SIET पंचकुला के छात्रों को Future Finders से इंटर्नशिप ऑफर लेटर प्राप्त हुए, जो उनकी व्यावसायिक यात्रा में एक महत्वपूर्ण उपलब्धि है और संस्थान के मजबूत उद्योग संबंध को दर्शाता है।',
           date: '2026',
           location: 'SIET पंचकुला',
+        },
+        {
+          title: 'प्रशिक्षण एवं प्लेसमेंट सेल ओरिएंटेशन',
+          subtitle: 'प्रथम वर्ष के छात्रों के लिए टी एवं पी परिचय',
+          description:
+            'नवागंतुक छात्रों को प्रशिक्षण एवं प्लेसमेंट सेल से परिचित कराने वाला ओरिएंटेशन सत्र, जो उन्हें करियर के अवसरों, पेशेवर कौशल विकास और संस्थागत सहायता के द्वार खोलता है।',
+          date: '2026',
+          location: 'ऑडिटोरियम, SIET पंचकुला',
+        },
+        {
+          title: 'CodeQuotient बूटकैंप — डे 1',
+          subtitle: 'अंतिम वर्ष के छात्रों के लिए तकनीकी बूटकैंप',
+          description:
+            'CodeQuotient के गहन कोडिंग बूटकैंप के पहले दिन में भाग लेते अंतिम वर्ष के इंजीनियरिंग छात्र, फुल-स्टैक सॉफ्टवेयर डेवलपमेंट कौशल और प्लेसमेंट तैयारी की शुरुआत करते हुए।',
+          date: '2026',
+          location: 'कंप्यूटर लैब, SIET पंचकुला',
         },
       ],
     },

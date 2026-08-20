@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth"
-import { doc, serverTimestamp, setDoc } from "firebase/firestore"
+import { doc, getDoc, serverTimestamp, setDoc } from "firebase/firestore"
 import { ArrowLeft, ArrowRight, Eye, EyeOff, AlertCircle, CheckCircle2 } from "lucide-react"
 import { auth, db, firebaseEnvError } from "../lib/firebase"
 
@@ -62,9 +62,11 @@ export default function StudentLogin() {
       if (mode === "register") {
         const credential = await createUserWithEmailAndPassword(auth, email.trim().toLowerCase(), password)
         await updateProfile(credential.user, { displayName: fullName.trim() })
+        const initialRole = email.trim().toLowerCase() === ADMIN_EMAIL ? "admin" : "student"
         await setDoc(doc(db, "students", credential.user.uid), {
           fullName: fullName.trim(), 
           email: email.trim().toLowerCase(), 
+          role: initialRole,
           branch: "", 
           batch: "",
           skills: [], 
@@ -76,14 +78,25 @@ export default function StudentLogin() {
           createdAt: serverTimestamp(), 
           updatedAt: serverTimestamp(),
         })
-        setStatusMessage("Registration successful! Redirecting to complete your profile form...")
+        setStatusMessage("Registration successful! Redirecting...")
         setStatus("success")
-        setTimeout(() => navigate(email.trim().toLowerCase() === ADMIN_EMAIL ? "/admin" : "/student-form"), 700)
+        setTimeout(() => navigate(initialRole === "admin" ? "/admin" : "/student-form"), 700)
       } else {
-        await signInWithEmailAndPassword(auth, email.trim().toLowerCase(), password)
+        const credential = await signInWithEmailAndPassword(auth, email.trim().toLowerCase(), password)
+        let isUserAdmin = email.trim().toLowerCase() === ADMIN_EMAIL
+        if (!isUserAdmin && credential.user && db) {
+          try {
+            const userSnap = await getDoc(doc(db, "students", credential.user.uid))
+            if (userSnap.exists() && userSnap.data()?.role === "admin") {
+              isUserAdmin = true
+            }
+          } catch (e) {
+            console.error("Failed to fetch user role:", e)
+          }
+        }
         setStatusMessage("Login successful. Redirecting to your dashboard...")
         setStatus("success")
-        setTimeout(() => navigate(email.trim().toLowerCase() === ADMIN_EMAIL ? "/admin" : "/dashboard"), 700)
+        setTimeout(() => navigate(isUserAdmin ? "/admin" : "/dashboard"), 700)
       }
     } catch (error) {
       setStatus("error")
